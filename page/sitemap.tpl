@@ -1,5 +1,5 @@
-<hr class="invisible">
 {block name='page-sitemap'}
+<hr class="invisible">
     {if $Einstellungen.sitemap.sitemap_seiten_anzeigen === 'Y'}
         {block name='sitemap-pages'}
             {include file="snippets/zonen.tpl" id="opc_before_pages"}

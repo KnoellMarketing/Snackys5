@@ -1,3 +1,4 @@
+{block name='layout-header-maintainance'}
 {assign var="tDir" value=$currentTemplateDir}
 {if isset($parentTemplateDir)}
 	{if !file_exists('{$currentTemplateDir}/layout/header.tpl')}
@@ -44,4 +45,5 @@
 
 {block name="content-starttag"}
     <div id="content" class="col-12">
+{/block}
 {/block}

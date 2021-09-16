@@ -384,17 +384,6 @@ function addValidationListener() {
         }, true);
     }
 	
-	//Modal Configuratror
-	$('#cfg-container select, #cfg-container input').on('change',function(){
-		var cfg = $(this).closest('#cfg-container');
-		var elements = $(cfg).find('select[required],input[required]');
-		var errors = false;
-		for (var i = 0; i < elements.length; i++) {
-			if(!elements[i].checkValidity()) errors = true;
-		}
-		
-		$(cfg).closest('form').find('input[type=submit],button[type=submit]').prop('disabled', errors);
-	});
 
     for (var i = 0; i < inputs.length; i++) {
         inputs[i].addEventListener('blur', function (event) {

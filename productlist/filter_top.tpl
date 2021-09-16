@@ -1,3 +1,4 @@
+{block name='productlist-filter-top'}
 {assign var=ismobile value=false}
 {if $isMobile && !$isTablet}
     {assign var=ismobile value=true}
@@ -113,3 +114,4 @@
         </div>
     {/if}
 {/if}
+{/block}

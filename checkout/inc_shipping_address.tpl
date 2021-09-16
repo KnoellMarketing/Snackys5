@@ -27,8 +27,8 @@
                         <div class="radio">
                             <label class="btn-block" for="delivery{$adresse->kLieferadresse}" data-toggle="collapse" data-target="#register_shipping_address.in">
                                 <input class="radio-checkbox" type="radio" name="kLieferadresse" value="{$adresse->kLieferadresse}" id="delivery{$adresse->kLieferadresse}" {if $kLieferadresse == $adresse->kLieferadresse}checked{/if}>
-                                <span class="control-label label-default">{if $adresse->cFirma}{$adresse->cFirma},{/if} {$adresse->cVorname} {$adresse->cNachname}
-                                , {$adresse->cStrasse} {$adresse->cHausnummer}, {$adresse->cPLZ} {$adresse->cOrt}
+                                <span class="control-label label-default">{if $adresse->cFirma}{$adresse->cFirma|entferneFehlerzeichen},{/if} {$adresse->cVorname} {$adresse->cNachname|entferneFehlerzeichen}
+                                , {$adresse->cStrasse|entferneFehlerzeichen} {$adresse->cHausnummer}, {$adresse->cPLZ} {$adresse->cOrt}
                                     , {$adresse->angezeigtesLand}</span></label>
                         </div>
                     </li>

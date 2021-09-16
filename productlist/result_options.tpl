@@ -1,8 +1,8 @@
+{block name='productlist-result-options'}
 {assign var=ismobile value=false}
 {if $isMobile && !$isTablet}
     {assign var=ismobile value=true}
 {/if}
-{block name='productlist-result-options'}
 {assign var=contentFilters value=$NaviFilter->getAvailableContentFilters()}
 {assign var=show_filters value=$Einstellungen.artikeluebersicht.suchfilter_anzeigen_ab == 0
         || $NaviFilter->getSearchResults()->getProductCount() >= $Einstellungen.artikeluebersicht.suchfilter_anzeigen_ab

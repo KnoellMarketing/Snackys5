@@ -1,3 +1,4 @@
+{block name='productlist-improve-search'}
 {assign var=ismobile value=false}
 {if $isMobile && !$isTablet}
     {assign var=ismobile value=true}
@@ -49,3 +50,4 @@
         {include file='productlist/result_options.tpl'}
     {/if}
 </div>
+{/block}

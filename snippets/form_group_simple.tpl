@@ -1,3 +1,4 @@
+{block name='snippets-form-group-simple'}
 {if !empty($options)}
     {assign var='inputType' value=$options[0]}
     {assign var='inputId' value=$options[1]}
@@ -35,3 +36,4 @@
         <div class="form-error-msg text-danger">{$invalidReason}</div>
     {/if}
 </div>
+{/block}

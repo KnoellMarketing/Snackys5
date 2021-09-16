@@ -1,3 +1,4 @@
+{block name='layout-header-usps'}
 {if $snackyConfig.headerUsps == 1}
 {assign "uspsCol" "12"}
 {elseif $snackyConfig.headerUsps == 2}
@@ -29,3 +30,4 @@
 		{/if}
 	</div>
 </div>
+{/block}

@@ -1,3 +1,4 @@
+{block name='account-order-item-wrapper'}
 {foreach $Bestellung->Positionen as $oPosition}
     {if !(is_string($oPosition->cUnique) && !empty($oPosition->cUnique) && (int)$oPosition->kKonfigitem > 0)}
         <div class="type-{$oPosition->nPosTyp} c-it">
@@ -251,4 +252,5 @@
         {/row}
         {/block}
     </div>
+{/block}
 {/block}

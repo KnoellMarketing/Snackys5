@@ -50,10 +50,6 @@
     position: relative;
     margin: .2rem 0;
 }
-
-.mgm .img-ct:hover{
-	box-shadow: 0 0 17px 0 rgba(0,0,0,0.2)
-}
 .mgm .dropdown-menu{
     right: 0;
 	left: 0;
@@ -92,10 +88,13 @@
     border-radius: 0 0 1rem 1rem;
 }
 
-.mega-categories .img-ct{
+.mega-categories .img-ct,
+.info-col a .img-ct
+{
     transition: .3s ease;
 }
-.mega-categories a:hover > .img-ct{
+.mega-categories a:hover > .img-ct,
+.info-col a:hover > .img-ct{
     box-shadow: 0 16px 16px rgba(0,0,0,.1);
     transform: translateY(-4px);
 }

@@ -1,6 +1,6 @@
+{block name='boxes-box-new-in-stock'}
 {if $isMobile && $oBox->position == 'left'}
 {else}
-{block name='boxes-box-new-in-stock'}
     {lang key='newProducts' assign='slidertitle'}
     {assign var=moreLink value=$oBox->getURL()}
     {lang key='showAllNewProducts' assign='moreTitle'}
@@ -14,5 +14,5 @@
             moreTitle=$moreTitle
         }
     {/block}
-{/block}
 {/if}
+{/block}

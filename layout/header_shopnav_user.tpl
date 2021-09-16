@@ -1,3 +1,4 @@
+{block name='layout-header-shopnav-user'}
 <div class="modal modal-dialog blanklist" tabindex="-1" id="login-popup">
 	<div class="modal-content">
 		<div class="modal-header">
@@ -5,7 +6,7 @@
 				{if empty($smarty.session.Kunde->kKunde)}
 					{lang key="login" section="global"}
 				{else}
-					{lang key='hello'} {$smarty.session.Kunde->cVorname} {$smarty.session.Kunde->cNachname}
+					{lang key='hello'} {$smarty.session.Kunde->cVorname} {$smarty.session.Kunde->cNachname|entferneFehlerzeichen}
 				{/if}
 			</span>
 			<button type="button" class="close-btn" data-dismiss="modal" aria-label="Close">
@@ -110,3 +111,4 @@
         {/if}
 	</div>
 </div>
+{/block}

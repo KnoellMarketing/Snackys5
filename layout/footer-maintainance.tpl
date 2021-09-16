@@ -1,3 +1,4 @@
+{block name='layout-footer-maintainance'}
 {assign var="tDir" value=$currentTemplateDir}
 {if isset($parentTemplateDir)}
 	{if !file_exists('{$currentTemplateDir}/layout/footer.tpl')}
@@ -28,4 +29,5 @@
 
 
 {block name="footer-copyright"}
+{/block}
 {/block}

@@ -1,3 +1,4 @@
+{block name='layout-header-category-nav'}
 {* desktop navigation (> screen-min-sm) *}
 {strip}
 {assign var=ismobile value=false}
@@ -40,3 +41,4 @@
 </div>
 {*</div>*}
 {/strip}
+{/block}

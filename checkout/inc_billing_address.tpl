@@ -1,14 +1,14 @@
 {block name='checkout-inc-billing-address'}
 {if $Kunde->cFirma}
-    {$Kunde->cFirma}
+    {$Kunde->cFirma|entferneFehlerzeichen}
     <br />
 {/if}
 {if $Kunde->cZusatz}
-    {$Kunde->cZusatz}
+    {$Kunde->cZusatz|entferneFehlerzeichen}
     <br />
 {/if}
-{$Kunde->cTitel} {$Kunde->cVorname} {$Kunde->cNachname}
-<br />{$Kunde->cStrasse} {$Kunde->cHausnummer}<br />{if $Kunde->cAdressZusatz}{$Kunde->cAdressZusatz}<br />{/if}
+{$Kunde->cTitel} {$Kunde->cVorname} {$Kunde->cNachname|entferneFehlerzeichen}
+<br />{$Kunde->cStrasse|entferneFehlerzeichen} {$Kunde->cHausnummer}<br />{if $Kunde->cAdressZusatz}{$Kunde->cAdressZusatz}<br />{/if}
 {$Kunde->cPLZ} {$Kunde->cOrt}<br />{if $Kunde->cBundesland}{$Kunde->cBundesland}<br />{/if}
 {if $Kunde->angezeigtesLand}{$Kunde->angezeigtesLand}{else}{$Kunde->cLand}{/if}<br />
 <br />{if $Kunde->cUSTID}{lang key="ustid" section="account data"}: {$Kunde->cUSTID}<br />{/if}

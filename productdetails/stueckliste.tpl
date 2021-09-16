@@ -1,3 +1,4 @@
+{block name='productdetails-stueckliste'}
 <section class="panel-slider panel-default mb-spacer"{if isset($id) && $id|strlen > 0} id="{$id}"{/if}>
     <div class="panel-heading">
         <div class="panel-title dpflex-a-center dpflex-j-between mb-spacer mb-xs">
@@ -40,3 +41,4 @@
 		</div>
 	</div>
 </section>
+{/block}

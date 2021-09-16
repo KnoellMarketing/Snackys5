@@ -1,10 +1,10 @@
+{block name='boxes-box-login'}
 {if $isMobile && $oBox->position == 'left'}
 {else}
-{block name='boxes-box-login'}
     <section id="sidebox{$oBox->getID()}" class="box box-login box-normal panel">
         {block name='boxes-box-login-title'}
             <div class="h5 panel-heading dpflex-a-c">
-                {if empty($smarty.session.Kunde)}{lang key='login'}{else}{lang key='hello'} {$smarty.session.Kunde->cVorname} {$smarty.session.Kunde->cNachname}{/if}
+                {if empty($smarty.session.Kunde)}{lang key='login'}{else}{lang key='hello'} {$smarty.session.Kunde->cVorname} {$smarty.session.Kunde->cNachname|entferneFehlerzeichen}{/if}
                 {if ($snackyConfig.filterOpen == 1 && $oBox->position == 'left') || ($oBox->position == 'bottom' && $snackyConfig.footerBoxesOpen === '0')}<span class="caret"></span>{/if}
             </div>
         {/block}
@@ -125,5 +125,5 @@
             </div>
         {/block}
     </section>
-{/block}
 {/if}
+{/block}

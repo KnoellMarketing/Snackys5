@@ -1,3 +1,4 @@
+{block name='snippets-maintenance'}
 {block name="header"}
     {include file='layout/header-maintainance.tpl'}
 {/block}
@@ -35,4 +36,5 @@
 
 {block name="footer"}
     {include file='layout/footer-maintainance.tpl'}
+{/block}
 {/block}

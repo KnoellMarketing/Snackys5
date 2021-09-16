@@ -1,3 +1,4 @@
+{block name="account-order-details-info"}
 {if isset($Kunde) && $Kunde->kKunde > 0}
     {block name="order-details-billing-address"}
         <div class="panel-title h6 mb-xxs">{block name="order-details-billing-address-title"}{lang key="billingAdress" section="checkout"}{/block}</div>
@@ -171,3 +172,4 @@
         </div>
     {/block}
 {/if}
+{/block}

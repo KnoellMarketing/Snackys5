@@ -1,8 +1,8 @@
+{block name='productlist-header'}
 {assign var=ismobile value=false}
 {if $isMobile && !$isTablet}
     {assign var=ismobile value=true}
 {/if}
-{block name='productlist-header'}
 {block name='productlist-header-navinfo'}
 {if (!isset($oNavigationsinfo)
     || (!$oNavigationsinfo->getManufacturer() && !$oNavigationsinfo->getCharacteristicValue() && !$oNavigationsinfo->getCategory()))
@@ -50,7 +50,7 @@
 		<div class="desc text-lg clearfix mb-spacer mb-small{if $oNavigationsinfo->getImageURL()|strpos:'gfx/keinBild.gif' === false && $oNavigationsinfo->getImageURL()|strpos:'gfx/keinBild_kl.gif' === false} row{/if}">
 			{if $oNavigationsinfo->getImageURL() && $oNavigationsinfo->getImageURL()|strpos:'gfx/keinBild.gif' === false && $oNavigationsinfo->getImageURL()|strpos:'gfx/keinBild_kl.gif' === false}
 			<div class="col-6 col-sm-3 col-md-4 col-lg-2 product-border">
-			  <div class="img-ct{if $snackyConfig.imageratioCategory == '43'}  rt4x3{/if} contain">
+			  <div class="img-ct{if $snackyConfig.imageratioCategory == '43'}  rt4x3{/if}">
 				{image src=$oNavigationsinfo->getImageURL()
 					webp=true
 					lazy=true
@@ -92,7 +92,7 @@
                 <div class="thumbnail">
                     {if $Einstellungen.navigationsfilter.artikeluebersicht_bild_anzeigen !== 'Y' && $Unterkat->getImageURL()|strpos:'gfx/keinBild.gif' === false && $Unterkat->getImageURL()|strpos:'gfx/keinBild_kl.gif' === false}
                     <a href="{$Unterkat->getURL()}" class="block img-w">
-                            <div class="img-ct{if $snackyConfig.imageratioCategory == '43'}  rt4x3{/if} contain">
+                            <div class="img-ct{if $snackyConfig.imageratioCategory == '43'}  rt4x3{/if}">
 							{if $viewportImages < 4}
 								{image fluid=true lazy=false webp=true
 									src=$Unterkat->getImage(\JTL\Media\Image::SIZE_MD)

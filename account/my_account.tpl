@@ -1,4 +1,5 @@
-<h1 class="mb-spacer mb-small">{lang key="hello"} {$smarty.session.Kunde->cVorname} {$smarty.session.Kunde->cNachname}</h1>
+{block name='account-my-account'}
+<h1 class="mb-spacer mb-small">{lang key="hello"} {$smarty.session.Kunde->cVorname} {$smarty.session.Kunde->cNachname|entferneFehlerzeichen}</h1>
 {if isset($smarty.get.reg)}
     <div class="alert alert-success">{lang key='accountCreated' section='global'}</div>
 {/if}
@@ -18,6 +19,7 @@
         {if count($Bestellungen) > 0}
             {block name='account-my-account-orders-body'}
                 {foreach $Bestellungen as $order}
+                {if $order@index === 5}{break}{/if}
                 <a href="{$cCanonicalURL}?bestellung={$order->kBestellung}" class="dpflex-a-center item" title="{lang key='showOrder' section='login'}: {lang key='orderNo' section='login'} {$order->cBestellNr}">
                     <span class="w100">
                         <span class="row dpflex-a-center">
@@ -61,7 +63,7 @@
         <a href="{$cCanonicalURL}?editRechnungsadresse=1" class="dpflex-a-center item">
             <span class="w100">
                 <strong class="block">{lang key='billingAdress' section='account data'}</strong>
-                <small class="text-muted">{$Kunde->cStrasse} {$Kunde->cHausnummer}, {$Kunde->cPLZ} {$Kunde->cOrt}, {$Kunde->cLand}</small>
+                <small class="text-muted">{$Kunde->cStrasse|entferneFehlerzeichen} {$Kunde->cHausnummer}, {$Kunde->cPLZ} {$Kunde->cOrt}, {$Kunde->cLand}</small>
             </span>
             <span class="img-ct icon icon-wt">
                 <svg>
@@ -101,3 +103,4 @@
     </a>
 </div>
 {include file="snippets/zonen.tpl" id="after_account_page" title="after_account_page"}
+{/block}

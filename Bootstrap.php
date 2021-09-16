@@ -37,7 +37,7 @@ class Bootstrap extends Bootstrapper
 		$this->getSmarty()->assign('snackyConfig',$return);
 		
 		//$additionalHeadTags
-		$headtags = Shop::DB()->select('km_snackys_csshtml', 'nKey', 'head');
+		$headtags = Shop::Container()->getDB()->select('km_snackys_csshtml', 'nKey', 'head');
 		$this->getSmarty()->assign('additionalHeadTags',$headtags->nValue);
 	}
 
@@ -65,6 +65,7 @@ class Bootstrap extends Bootstrapper
 			->registerPlugin(Smarty::PLUGIN_FUNCTION, 'getZahlungsarten', [$plugins,'getZahlungsarten'])
 			->registerPlugin(Smarty::PLUGIN_MODIFIER, 'checkCopyfree', [$plugins,'checkCopyfree'])
 			->registerPlugin(Smarty::PLUGIN_MODIFIER, 'optimize', [$plugins,'optimize'])
+			->registerPlugin(Smarty::PLUGIN_MODIFIER, 'entferneFehlerzeichen', [$plugins,'entferneFehlerzeichen'])
 			->registerPlugin(Smarty::PLUGIN_FUNCTION, 'snackys_content', [$plugins,'snackys_content'])
 			->registerPlugin(Smarty::PLUGIN_FUNCTION, 'getLink', [$plugins,'getLink'])
 			->registerPlugin(Smarty::PLUGIN_FUNCTION, 'getActiveOPCItems', [$plugins,'getActiveOPCItems'])

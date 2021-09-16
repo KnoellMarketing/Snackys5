@@ -1,6 +1,6 @@
+{block name='boxes-box-comparelist'}
 {if $isMobile && $oBox->position == 'left'}
 {else}
-{block name='boxes-box-comparelist'}
 	{if $Einstellungen.vergleichsliste.vergleichsliste_anzeigen === 'Y'}
     {assign var=maxItems value=$oBox->getItemCount()}
     {assign var=itemCount value=count($oBox->getProducts())}
@@ -72,5 +72,5 @@
         {/block}
     {/if}
     {/if}
-{/block}
 {/if}
+{/block}

@@ -1,6 +1,6 @@
+{block name='boxes-box-last-seen'}
 {if $isMobile && $oBox->position == 'left'}
 {else}
-{block name='boxes-box-last-seen'}
     {lang key='lastViewed' assign='boxtitle'}
     <section class="box box-last-seen box-normal panel" id="sidebox{$oBox->getID()}"}>
         {block name='boxes-box-last-seen-content'}
@@ -31,5 +31,5 @@
             {/block}
         {/block}
     </section>
-{/block}
 {/if}
+{/block}

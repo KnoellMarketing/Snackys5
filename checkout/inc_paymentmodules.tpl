@@ -14,8 +14,8 @@
                 <div class="panel-title h6 mb-xxs">
                     {lang key="billingAdress" section="checkout"}
                 </div>
-                {$Bestellung->oRechnungsadresse->cVorname} {$Bestellung->oRechnungsadresse->cNachname}
-                <br>{$Bestellung->oRechnungsadresse->cStrasse} {$Bestellung->oRechnungsadresse->cHausnummer}
+                {$Bestellung->oRechnungsadresse->cVorname} {$Bestellung->oRechnungsadresse->cNachname|entferneFehlerzeichen}
+                <br>{$Bestellung->oRechnungsadresse->cStrasse|entferneFehlerzeichen} {$Bestellung->oRechnungsadresse->cHausnummer}
                 <br>{$Bestellung->oRechnungsadresse->cPLZ} {$Bestellung->oRechnungsadresse->cOrt}
                 <br>{$Bestellung->oRechnungsadresse->angezeigtesLand}
                 <br>
@@ -24,8 +24,8 @@
                 <div class="panel-title h6 mb-xxs">
                     {lang key="shippingAdress" section="checkout"}
                 </div>
-                {$Bestellung->Lieferadresse->cVorname} {$Bestellung->Lieferadresse->cNachname}
-                <br>{$Bestellung->Lieferadresse->cStrasse} {$Bestellung->Lieferadresse->cHausnummer}
+                {$Bestellung->Lieferadresse->cVorname} {$Bestellung->Lieferadresse->cNachname|entferneFehlerzeichen}
+                <br>{$Bestellung->Lieferadresse->cStrasse|entferneFehlerzeichen} {$Bestellung->Lieferadresse->cHausnummer}
                 <br>{$Bestellung->Lieferadresse->cPLZ} {$Bestellung->Lieferadresse->cOrt}
                 <br>{$Bestellung->Lieferadresse->angezeigtesLand}
                 <br>

@@ -1,6 +1,6 @@
+{block name='boxes-box-wishlist'}
 {if $isMobile && $oBox->position == 'left'}
 {else}
-{block name='boxes-box-wishlist'}
     {if $oBox->getItems()|count > 0}
         <section class="box box-wishlist box-normal panel small" id="sidebox{$oBox->getID()}">
             {block name='boxes-box-wishlist-content'}
@@ -69,5 +69,5 @@
         {block name='boxes-box-wishlist-no-items'}
         {/block}
     {/if}
-{/block}
 {/if}
+{/block}

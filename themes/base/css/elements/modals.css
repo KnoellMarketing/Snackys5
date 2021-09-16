@@ -1,5 +1,6 @@
 /* Modal Popup */
-.modal[tabindex]{
+.modal[tabindex],
+.reCaptchaModal{
 	display:none;
 	position: fixed;
 	z-index: 999;
@@ -24,6 +25,10 @@ body .modal .modal-dialog{
 	min-width: 25rem;
     width: 100%;
 }
+.reCaptchaModal .modal-content{
+    min-width: 0;
+    width: auto;
+}
 .modal-header{
     display: flex;
     align-items: center;
@@ -40,6 +45,9 @@ body .modal .modal-dialog{
     overflow: auto;
     overflow-x: hidden;
 	overscroll-behavior: contain;
+}
+.reCaptchaModal .modal-body{
+    overflow: visible;
 }
 .modal-footer{
     padding-top: 1rem;

@@ -1,14 +1,14 @@
 {block name='checkout-inc-delivery-address'}
 {if $Lieferadresse->cFirma}
-    {$Lieferadresse->cFirma}
+    {$Lieferadresse->cFirma|entferneFehlerzeichen}
     <br />
 {/if}
 {if $Lieferadresse->cZusatz}
-    {$Lieferadresse->cZusatz}
+    {$Lieferadresse->cZusatz|entferneFehlerzeichen}
     <br />
 {/if}
-{$Lieferadresse->cTitel} {$Lieferadresse->cVorname} {$Lieferadresse->cNachname}
-<br />{$Lieferadresse->cStrasse} {$Lieferadresse->cHausnummer}
+{$Lieferadresse->cTitel} {$Lieferadresse->cVorname} {$Lieferadresse->cNachname|entferneFehlerzeichen}
+<br />{$Lieferadresse->cStrasse|entferneFehlerzeichen} {$Lieferadresse->cHausnummer}
 <br />{if $Lieferadresse->cAdressZusatz}{$Lieferadresse->cAdressZusatz}<br />{/if}
 {$Lieferadresse->cPLZ} {$Lieferadresse->cOrt}<br />{if $Lieferadresse->cBundesland}{$Lieferadresse->cBundesland}
     <br />

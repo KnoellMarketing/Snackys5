@@ -1,3 +1,4 @@
+{block name="km-header-default"}
 {block name="header-branding-content"}
 <header class="hidden-print" id="shop-nav">
 	<div class="mw-container dpflex-a-center dpflex-wrap">
@@ -34,3 +35,4 @@
     <div class="overlay-bg" id="cls-catw"></div>
 	{include file='layout/breadcrumb.tpl'}
 {/if}
+{/block}

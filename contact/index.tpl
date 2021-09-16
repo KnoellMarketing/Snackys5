@@ -36,7 +36,7 @@
 					<div class="row">
 						{if $Einstellungen.kontakt.kontakt_abfragen_anrede !== 'N'}
 							<div class="col-12 col-md-6">
-								<div class="form-group float-label-control">
+								<div class="form-group float-label-control{if $Einstellungen.kontakt.kontakt_abfragen_anrede === 'Y'} required{/if}">
 									<label for="salutation" class="control-label">{lang key="salutation" section="account data"}</label>
 									<select name="anrede" id="salutation" class="form-control" {if $Einstellungen.kontakt.kontakt_abfragen_anrede === 'Y'}required{/if}>
                                         <option value="" selected="selected" {if $Einstellungen.kontakt.kontakt_abfragen_anrede === 'Y'}disabled{/if}>
@@ -67,7 +67,7 @@
 											{lang assign="invalidReason" key="lastNameNotNumeric" section="account data"}
 										{/if}
 									{/if}
-									{include file="snippets/form_group_simple.tpl" options=["text" , "lastName", "nachname", {$Vorgaben->cNachname}, {lang key="lastName" section="account data"}, {$Einstellungen.kontakt.kontakt_abfragen_nachname}, {$invalidReason}]}
+									{include file="snippets/form_group_simple.tpl" options=["text" , "lastName", "nachname", {$Vorgaben->cNachname|entferneFehlerzeichen}, {lang key="lastName" section="account data"}, {$Einstellungen.kontakt.kontakt_abfragen_nachname}, {$invalidReason}]}
 								</div>
 							{/if}
 						</div>
@@ -77,7 +77,7 @@
 						<div class="row">
 							<div class="col-12 col-md-6">
 								{include    file="snippets/form_group_simple.tpl"
-									options=[ "text" , "firm", "firma", {$Vorgaben->cFirma}, {lang key="firm" section="account data"}, {$Einstellungen.kontakt.kontakt_abfragen_firma}]}
+									options=[ "text" , "firm", "firma", {$Vorgaben->cFirma|entferneFehlerzeichen}, {lang key="firm" section="account data"}, {$Einstellungen.kontakt.kontakt_abfragen_firma}]}
 							</div>
 						</div>
 					{/if}

@@ -1,4 +1,4 @@
-{block name='productlist-item-box'}
+{block name='productlist-item-list'}
 {if $snackyConfig.variation_select_productlist === 'N' || $snackyConfig.hover_productlist !== 'Y'}
 {assign var="hasOnlyListableVariations" value=0}
 {else}

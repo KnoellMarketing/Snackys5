@@ -1,3 +1,4 @@
+{block name='snippets-newscategories-recursive'}
 {**
  * @copyright (c) JTL-Software-GmbH
  * @license https://jtl-url.de/jtlshoplicense
@@ -18,3 +19,4 @@
         {include file='snippets/newscategories_recursive.tpl' i=$i+1 oNewsKategorie_arr=$oNewsKategorie->getChildren() selectedCat=$selectedCat}
     {/if}
 {/foreach}
+{/block}

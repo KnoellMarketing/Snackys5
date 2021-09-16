@@ -1,6 +1,6 @@
+{block name='boxes-box-basket'}
 {if $isMobile && $oBox->position == 'left'}
 {else}
-{block name='boxes-box-basket'}
 {if $smarty.session.Warenkorb->PositionenArr|@count > 0}
 <section class="panel small" id="sidebox{$oBox->getID()}">
     {block name='boxes-box-basket-content'}
@@ -30,5 +30,5 @@
     {/block}
 </section>
 {/if}
-{/block}
 {/if}
+{/block}

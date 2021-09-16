@@ -50,7 +50,7 @@
     <div class="col-12 col-md-6">
         <div class="form-group float-label-control{if !empty($fehlendeAngaben.nachname)} has-error{/if} required">
             <label for="{$prefix}-{$name}-lastName" class="control-label">{lang key="lastName" section="account data"}</label>
-            <input type="text" name="{$prefix}[{$name}][nachname]" value="{if isset($Lieferadresse->cNachname)}{$Lieferadresse->cNachname}{/if}" id="{$prefix}-{$name}-lastName" class="form-control" placeholder="{lang key="lastName" section="account data"}" required {if $snackyConfig.formvalidActive === '0' && isset($snackyConfig.patternNachname)}pattern="{$snackyConfig.patternNachname}"{/if} spellcheck="false"  autocorrect="off"/>
+            <input type="text" name="{$prefix}[{$name}][nachname]" value="{if isset($Lieferadresse->cNachname)}{$Lieferadresse->cNachname|entferneFehlerzeichen}{/if}" id="{$prefix}-{$name}-lastName" class="form-control" placeholder="{lang key="lastName" section="account data"}" required {if $snackyConfig.formvalidActive === '0' && isset($snackyConfig.patternNachname)}pattern="{$snackyConfig.patternNachname}"{/if} spellcheck="false"  autocorrect="off"/>
             {if !empty($fehlendeAngaben.nachname)}
                 {if $fehlendeAngaben.nachname == 1}
                     <div class="alert alert-danger">{lang key="fillOut" section="global"}</div>
@@ -68,7 +68,7 @@
         <div class="col-12 col-md-6">
             <div class="form-group float-label-control{if !empty($fehlendeAngaben.firma)} has-error{/if}{if $Einstellungen.kunden.kundenregistrierung_abfragen_firma === 'Y'} required{/if}">
                 <label for="{$prefix}-{$name}-firm" class="control-label">{lang key="firm" section="account data"}</label>
-                <input type="text" name="{$prefix}[{$name}][firma]" value="{if isset($Lieferadresse->cFirma)}{$Lieferadresse->cFirma}{/if}" id="{$prefix}-{$name}-firm" class="form-control" placeholder="{lang key="firm" section="account data"}"{if $Einstellungen.kunden.kundenregistrierung_abfragen_firma === 'Y'} required{/if} spellcheck="false"  autocorrect="off">
+                <input type="text" name="{$prefix}[{$name}][firma]" value="{if isset($Lieferadresse->cFirma)}{$Lieferadresse->cFirma|entferneFehlerzeichen}{/if}" id="{$prefix}-{$name}-firm" class="form-control" placeholder="{lang key="firm" section="account data"}"{if $Einstellungen.kunden.kundenregistrierung_abfragen_firma === 'Y'} required{/if} spellcheck="false"  autocorrect="off">
                 {if !empty($fehlendeAngaben.firma)}
                     <div class="alert alert-danger">{lang key="fillOut" section="global"}</div>
                 {/if}
@@ -79,7 +79,7 @@
         <div class="col-12 col-md-6">
             <div class="form-group float-label-control{if !empty($fehlendeAngaben.firmazusatz)} has-error{/if}{if $Einstellungen.kunden.kundenregistrierung_abfragen_firmazusatz === 'Y'} required{/if}">
                 <label for="{$prefix}-{$name}-firmext" class="control-label">{lang key="firmext" section="account data"}</label>
-                <input type="text" name="{$prefix}[{$name}][firmazusatz]" value="{if isset($Lieferadresse->cZusatz)}{$Lieferadresse->cZusatz}{/if}" id="{$prefix}-{$name}-firmext" class="form-control" placeholder="{lang key="firmext" section="account data"}"{if $Einstellungen.kunden.kundenregistrierung_abfragen_firmazusatz === 'Y'} required{/if} spellcheck="false"  autocorrect="off">
+                <input type="text" name="{$prefix}[{$name}][firmazusatz]" value="{if isset($Lieferadresse->cZusatz)}{$Lieferadresse->cZusatz|entferneFehlerzeichen}{/if}" id="{$prefix}-{$name}-firmext" class="form-control" placeholder="{lang key="firmext" section="account data"}"{if $Einstellungen.kunden.kundenregistrierung_abfragen_firmazusatz === 'Y'} required{/if} spellcheck="false"  autocorrect="off">
                 {if !empty($fehlendeAngaben.firmazusatz)}
                     <div class="alert alert-danger">{lang key="fillOut" section="global"}</div>
                 {/if}
@@ -93,7 +93,7 @@
     <div class="col-12 col-md-6">
         <div class="form-group float-label-control{if !empty($fehlendeAngaben.strasse)} has-error{/if} required">
             <label class="control-label" for="{$prefix}-{$name}-street">{lang key="street" section="account data"}</label>
-            <input type="text" name="{$prefix}[{$name}][strasse]" value="{if isset($Lieferadresse->cStrasse)}{$Lieferadresse->cStrasse}{/if}" id="{$prefix}-{$name}-street" class="form-control" placeholder="{lang key="street" section="account data"}*" required	{if $snackyConfig.formvalidActive === '0' && isset($snackyConfig.patternStrasse)}pattern="{$snackyConfig.patternStrasse}"{/if} spellcheck="false"  autocorrect="off">
+            <input type="text" name="{$prefix}[{$name}][strasse]" value="{if isset($Lieferadresse->cStrasse)}{$Lieferadresse->cStrasse|entferneFehlerzeichen}{/if}" id="{$prefix}-{$name}-street" class="form-control" placeholder="{lang key="street" section="account data"}*" required	{if $snackyConfig.formvalidActive === '0' && isset($snackyConfig.patternStrasse)}pattern="{$snackyConfig.patternStrasse}"{/if} spellcheck="false"  autocorrect="off">
             {if !empty($fehlendeAngaben.strasse)}
                 <div class="alert alert-danger">{lang key="fillOut" section="global"}</div>
             {/if}

@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="form-group float-label-control">
                                     <label for="lastName" class="control-label">{lang key="newsletterlastname" section="newsletter"}</label>
-                                    <input type="text" name="cNachname" class="form-control" value="{if !empty($oPlausi->cPost_arr.cNachname)}{$oPlausi->cPost_arr.cNachname}{elseif !empty($oKunde->cNachname)}{$oKunde->cNachname}{/if}" id="lastName" />
+                                    <input type="text" name="cNachname" class="form-control" value="{if !empty($oPlausi->cPost_arr.cNachname)}{$oPlausi->cPost_arr.cNachname}{elseif !empty($oKunde->cNachname)}{$oKunde->cNachname|entferneFehlerzeichen}{/if}" id="lastName" />
                                     {if !empty($oPlausi->nPlausi_arr.cNachname)}
                                         <div class="form-error-msg text-danger"> {lang key="fillOut" section="global"}</div>
                                     {/if}

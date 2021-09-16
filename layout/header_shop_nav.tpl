@@ -1,3 +1,4 @@
+{block name='layout-header-shop-nav'}
 {strip}
 <div class="hdr-nav dpflex-a-center dpflex-j-end">
 {if $snackyConfig.headerType == 1 || $snackyConfig.headerType == 2 || $snackyConfig.headerType == 3 || $snackyConfig.headerType == 4 || $snackyConfig.headerType == 5 || $snackyConfig.headerType == 6 || $snackyConfig.headerType == 4.5 || $snackyConfig.headerType == 5.5 || $snackyConfig.headerType == 7}
@@ -47,3 +48,4 @@
 {/block}{* /navbar-top-user *}
 </div>{* /shop-nav *}
 {/strip}
+{/block}

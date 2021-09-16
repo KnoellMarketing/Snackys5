@@ -34,7 +34,7 @@
                         <label for="article_availability{$Artikel->kArtikel}_lastName" class="control-label">
                             {lang key="lastName" section="account data"}
                         </label>
-                        <input type="text" class="form-control" name="nachname" value="{if isset($Benachrichtigung->cNachname)}{$Benachrichtigung->cNachname}{/if}" id="article_availability{$Artikel->kArtikel}_lastName"{if $Einstellungen.$tplscope.benachrichtigung_abfragen_nachname === 'Y'} required{/if}>
+                        <input type="text" class="form-control" name="nachname" value="{if isset($Benachrichtigung->cNachname)}{$Benachrichtigung->cNachname|entferneFehlerzeichen}{/if}" id="article_availability{$Artikel->kArtikel}_lastName"{if $Einstellungen.$tplscope.benachrichtigung_abfragen_nachname === 'Y'} required{/if}>
                         {if !empty($fehlendeAngaben_benachrichtigung.nachname)}
                             <div class="form-error-msg text-danger">
                                 {lang key="fillOut" section="global"}

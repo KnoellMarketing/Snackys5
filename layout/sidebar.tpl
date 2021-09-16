@@ -1,3 +1,4 @@
+{block name='layout-sidebar'}
 {assign var=ismobile value=false}
 {if $isMobile && !$isTablet}
     {assign var=ismobile value=true}
@@ -22,4 +23,5 @@
 			<div class="visible-xs visible-sm close-sidebar close-btn"></div>
 		{/if}
 	</aside>
+{/block}
 {/block}

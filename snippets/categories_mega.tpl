@@ -180,7 +180,7 @@
 							<div class="col-12 col-sm-3 col-md-3{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-2{/if}{if isset($NaviFilter->Hersteller) && $NaviFilter->Hersteller->kHersteller == $hst->kHersteller} active{/if}">
 								{if isset($snackyConfig.show_category_images) && $snackyConfig.show_category_images !== 'N'}
 									<a class="block hidden-xs img-w" href="{$hst->cURLFull}">
-										<span class="img-ct contain">
+										<span class="img-ct">
 											{include file='snippets/image.tpl'
 												class='submenu-headline-image'
 												item=$hst

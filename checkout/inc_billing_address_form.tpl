@@ -97,7 +97,7 @@
             {if isset($cPost_var['nachname'])}
                 {assign var='inputVal_lastName' value=$cPost_var['nachname']}
             {elseif isset($Kunde->cNachname)}
-                {assign var='inputVal_lastName' value=$Kunde->cNachname}
+                {assign var='inputVal_lastName' value=$Kunde->cNachname|entferneFehlerzeichen}
             {/if}
             <div class="form-group float-label-control{if isset($fehlendeAngaben.nachname)} has-error{/if} required">
                 <label for="lastName" class="control-label">{lang key="lastName" section="account data"}</label>
@@ -132,7 +132,7 @@
             {if isset($cPost_var['firma'])}
                 {assign var='inputVal_firm' value=$cPost_var['firma']}
             {elseif isset($Kunde->cFirma)}
-                {assign var='inputVal_firm' value=$Kunde->cFirma}
+                {assign var='inputVal_firm' value=$Kunde->cFirma|entferneFehlerzeichen}
             {/if}
             <div class="form-group float-label-control{if isset($fehlendeAngaben.firma)} has-error{/if}{if $Einstellungen.kunden.kundenregistrierung_abfragen_firma === 'Y'} required{/if}">
                 <label for="firm" class="control-label">{lang key="firm" section="account data"}</label>
@@ -161,7 +161,7 @@
             {if isset($cPost_var['firmazusatz'])}
                 {assign var='inputVal_firmext' value=$cPost_var['firmazusatz']}
             {elseif isset($Kunde->cZusatz)}
-                {assign var='inputVal_firmext' value=$Kunde->cZusatz}
+                {assign var='inputVal_firmext' value=$Kunde->cZusatz|entferneFehlerzeichen}
             {/if}
             <div class="form-group float-label-control{if isset($fehlendeAngaben.firmazusatz)} has-error{/if}{if $Einstellungen.kunden.kundenregistrierung_abfragen_firmazusatz === 'Y'} required{/if}">
                 <label for="firmext" class="control-label">{lang key="firmext" section="account data"}</label>
@@ -191,7 +191,7 @@
             {if isset($cPost_var['strasse'])}
                 {assign var='inputVal_street' value=$cPost_var['strasse']}
             {elseif isset($Kunde->cStrasse)}
-                {assign var='inputVal_street' value=$Kunde->cStrasse}
+                {assign var='inputVal_street' value=$Kunde->cStrasse|entferneFehlerzeichen}
             {/if}
             <div class="form-group float-label-control{if isset($fehlendeAngaben.strasse)} has-error{/if} required">
                 <label class="control-label" for="street">{lang key="street" section="account data"}</label>

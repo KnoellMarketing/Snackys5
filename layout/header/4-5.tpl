@@ -1,3 +1,4 @@
+{block name="km-header-4-5"}
 {block name="header-branding-content"}
 	<header class="hidden-print" id="shop-nav">
 		<div class="mw-container dpflex-a-center dpflex-wrap">
@@ -36,3 +37,4 @@
 {if $nSeitenTyp !== 11}
 	{include file='layout/breadcrumb.tpl'}
 {/if}
+{/block}

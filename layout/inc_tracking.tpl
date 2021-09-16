@@ -1,3 +1,4 @@
+{block name='layout-inc-tracking'}
 <script type="text/javascript">
 
 {* Add this data to GTM - by Knoell Marketing *}
@@ -195,3 +196,4 @@ dataLayer.push({ldelim}
 		});
 	{/if}
 </script>
+{/block}

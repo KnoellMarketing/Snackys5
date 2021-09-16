@@ -1,3 +1,4 @@
+{block name='snippets-social-profiles'}
 <ul class="social-icons list-inline">
 {if !empty($snackyConfig.facebook)}
 	<li>
@@ -90,3 +91,4 @@
 	</li>
 {/if}
 </ul>
+{/block}

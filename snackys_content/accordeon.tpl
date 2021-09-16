@@ -1,3 +1,4 @@
+{block name='snackys-content-accordeon'}
 <div class="accordeon  {$entry->cClass}" id="accordeon-{$entry-id}">
 	{foreach from=$entry->subs item="sub" name="accordeon"}
 	<div class="card">
@@ -19,3 +20,4 @@
 	</div>
 	{/foreach}
 </div>
+{/block}

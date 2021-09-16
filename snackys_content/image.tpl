@@ -1,3 +1,4 @@
+{block name='snackys-content-image'}
 <div class="image  {$entry->cClass}">
 	{if $entry->cLink != ""}<a href="{$entry->cLink}">{/if}
 	<span class="img-ct">
@@ -8,3 +9,4 @@
 	{/if}
 	{if $entry->cLink != ""}</a>{/if}
 </div>
+{/block}

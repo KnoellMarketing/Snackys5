@@ -1,7 +1,7 @@
 {block name='snippets-slider'}
 {if isset($oSlider) && count($oSlider->getSlides()) > 0}
 	{include file="snippets/zonen.tpl" id="opc_before_slider"}
-    <div class="sl-w panel-slider">
+    <div class="sl-w panel-slider t-{$oSlider->theme}">
 		{if isset($oSlider) && count($oSlider->getSlides()) > 1 && !$isMobile && $oSlider->nPauseTime<=300}
 			<span class="sl-ar sl-pr btn inactive">
 				<span class="ar ar-l"></span>
@@ -14,17 +14,17 @@
                     {assign var="slideTitle" value="#slide_caption_{$oSlide->getID()}"}
                 {/if}
                 {if !empty($oSlide->getLink())}
-                    <a href="{$oSlide->getLink()}" class="slide">
+                    <a href="{$oSlide->getLink()}" class="slide" id="slide-{$oSlide->getID()}">
                 {else}
-                    <div class="slide">
+                    <div class="slide" id="slide-{$oSlide->getID()}">
                 {/if}
 				<div class="img-ct">
 					{image src=$oSlide->getAbsoluteImage() lazy=true alt="{if !empty($oSlide->getTitle())}{$oSlide->getTitle()}{else}Slide{/if}"}
                 </div>
                     {if !empty($oSlide->getText()) || !empty($oSlide->getTitle())}
                         <div id="slide_caption_{$oSlide->getID()}" class="htmlcaption">
-                            {if isset($oSlide->getTitle())}<strong class="title h4">{$oSlide->getTitle()}</strong>{/if}
-                            <p class="desc">{$oSlide->getText()}</p>
+                            {if isset($oSlide->getTitle())}<strong class="title block">{$oSlide->getTitle()}</strong>{/if}
+                            <p class="desc m0">{$oSlide->getText()}</p>
                         </div>
                     {/if}
 

@@ -920,9 +920,15 @@ a.tag:hover{
 }
 /* Dropper Zones */
 .dropper-box{
-	background: #eee;
-	text-align: center;
-	padding: 6px;
+    padding: 13px;
+    margin: 5px 0;
+    border: 1px dashed #f96058;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(249, 96, 88, 0.15);
+    flex-wrap: wrap;
 }
 
 
@@ -963,4 +969,7 @@ body .dropdown-backdrop{
 
 body .jtl_search_results{
     min-width: 0;
+}
+#opc #opcDeleteModal .modal-dialog{
+    max-width: none !important;
 }

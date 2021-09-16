@@ -62,7 +62,7 @@
                                         {assign var=hasInfoColumn value=true}
                                         <div class="visible-lg mega-info-lg top15 pr hiden-xs">
                                                 {if $category->cBildURL !== 'gfx/keinBild.gif' && !$isMobile}
-                                                    <a class="img-ct" href="{$category->getURL()}">
+                                                    <a class="img-ct{if $snackyConfig.imageratioCategory == '43'}  rt4x3{/if}" href="{$category->getURL()}">
 													{include file='snippets/image.tpl'
 																		class='img-responsive'
 																		item=$category
@@ -85,7 +85,7 @@
                                                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 category-wrapper top15{if $sub->getID() == $activeId || (isset($activeParents[1]) && $activeParents[1]->getID() == $sub->getID())} active{/if}">
                                                             {if isset($snackyConfig.show_category_images) && $snackyConfig.show_category_images !== 'N' && !$isMobile}
                                                                     <a class="img text-center pr block hidden-xs" href="{$sub->getURL()}">
-                                                                        <span class="img-ct">
+                                                                        <span class="img-ct{if $snackyConfig.imageratioCategory == '43'}  rt4x3{/if}">
 																			{include file='snippets/image.tpl'
 																								class='image'
 																								item=$sub
@@ -178,7 +178,7 @@
 							{foreach name=hersteller from=$manufacturers item=hst}
 								<div class="col-12 col-sm-6 col-md-4 col-lg-3 category-wrapper manufacturer top15{if isset($NaviFilter->Hersteller) && $NaviFilter->Hersteller->kHersteller == $hst->kHersteller} active{/if}">
 										{if isset($snackyConfig.show_category_images) && $snackyConfig.show_category_images !== 'N' && !$isMobile}
-												<a class="img text-center pr block hidden-xs" href="{$hst->cURLFull}"><span class="img-ct">
+												<a class="img text-center pr block hidden-xs" href="{$hst->cURLFull}"><span class="img-ct{if $snackyConfig.imageratioCategory == '43'}  rt4x3{/if}">
 													{include file='snippets/image.tpl'
 														class='submenu-headline-image'
 														item=$hst

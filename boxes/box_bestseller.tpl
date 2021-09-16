@@ -1,6 +1,6 @@
+{block name='boxes-box-bestseller'}
 {if $isMobile && $oBox->position == 'left'}
 {else}
-{block name='boxes-box-bestseller'}
     {lang key='showAllBestsellers' assign='moreTitle'}
     {lang key='bestsellers' assign='slidertitle'}
     {block name='boxes-box-bestseller-include-product-slider'}
@@ -13,5 +13,5 @@
             moreTitle=$moreTitle
         }
     {/block}
-{/block}
 {/if}
+{/block}

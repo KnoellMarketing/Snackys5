@@ -1,3 +1,4 @@
+{block name='layout-header-shopnav-wish'}
 {if !empty($smarty.session.Wunschliste->CWunschlistePos_arr)}
 <div class="wish-list-menu hidden-xs">
     <a href="{get_static_route id='wunschliste.php'}" title="{lang key="Wishlist" sektion="global"}" class="link_to_wishlist popup">
@@ -10,3 +11,4 @@
     </a>
 </div>
 {/if}
+{/block}

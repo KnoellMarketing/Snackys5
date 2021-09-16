@@ -1,3 +1,4 @@
+{block name='layout-header-top-bar'}
 {strip}
 {if isset($smarty.session.Waehrungen) && $smarty.session.Waehrungen|@count > 1 || isset($smarty.session.Sprachen) && $smarty.session.Sprachen|@count > 1 || $snackyConfig.headerSocial == 0}
     {block name="top-bar-user-settings"}
@@ -64,3 +65,4 @@
 </ul>
 {/if}
 {/strip}
+{/block}

@@ -10,7 +10,7 @@
             {if $Einstellungen.artikeldetails.produktfrage_abfragen_anrede !== 'N'}
                 <div class="row">
                     <div class="col-12 col-md-6">
-                        <div class="form-group float-label-control">
+                        <div class="form-group float-label-control{if $Einstellungen.artikeldetails.produktfrage_abfragen_anrede === 'Y'} required{/if}">
                             <label for="salutation" class="control-label">{lang key="salutation" section="account data"}</label>
                             <select name="anrede" id="salutation" class="form-control" autocomplete="honorific-prefix" {if $Einstellungen.artikeldetails.produktfrage_abfragen_anrede === 'Y'}required{/if}>
                                 <option value="" {if $Einstellungen.artikeldetails.produktfrage_abfragen_anrede === 'Y'}disabled{/if} selected>
@@ -43,7 +43,7 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group float-label-control{if isset($fehlendeAngaben_fragezumprodukt.nachname) && $fehlendeAngaben_fragezumprodukt.nachname > 0} has-error{/if}{if $Einstellungen.artikeldetails.produktfrage_abfragen_nachname === 'Y'} required{/if}">
                                 <label class="control-label" for="lastName">{lang key="lastName" section="account data"}</label>
-                                <input class="form-control" type="text" name="nachname" value="{if isset($Anfrage)}{$Anfrage->cNachname}{/if}" id="lastName"{if $Einstellungen.artikeldetails.produktfrage_abfragen_nachname === 'Y'} required{/if}>
+                                <input class="form-control" type="text" name="nachname" value="{if isset($Anfrage)}{$Anfrage->cNachname|entferneFehlerzeichen}{/if}" id="lastName"{if $Einstellungen.artikeldetails.produktfrage_abfragen_nachname === 'Y'} required{/if}>
                                 {if isset($fehlendeAngaben_fragezumprodukt.nachname) && $fehlendeAngaben_fragezumprodukt.nachname > 0}
                                     <div class="form-error-msg text-danger"> {lang key="fillOut" section="global"}</div>
                                 {/if}
@@ -60,7 +60,7 @@
 					<div class="col-12 col-md-6">
 						<div class="form-group float-label-control {if isset($fehlendeAngaben_fragezumprodukt.firma) && $fehlendeAngaben_fragezumprodukt.firma > 0}has-error{/if}{if $Einstellungen.artikeldetails.produktfrage_abfragen_firma === 'Y'} required{/if}">
 							<label class="control-label" for="company">{lang key="firm" section="account data"}</label>
-							<input class="form-control" type="text" name="firma" value="{if isset($Anfrage)}{$Anfrage->cFirma}{/if}" id="company"{if $Einstellungen.artikeldetails.produktfrage_abfragen_firma === 'Y'} required{/if}>
+							<input class="form-control" type="text" name="firma" value="{if isset($Anfrage)}{$Anfrage->cFirma|entferneFehlerzeichen}{/if}" id="company"{if $Einstellungen.artikeldetails.produktfrage_abfragen_firma === 'Y'} required{/if}>
 							{if isset($fehlendeAngaben_fragezumprodukt.firma) && $fehlendeAngaben_fragezumprodukt.firma > 0}
 								<div class="form-error-msg text-danger"> {lang key="fillOut" section="global"}</div>
 							{/if}
