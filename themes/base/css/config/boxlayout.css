@@ -1,0 +1,28 @@
+#bxt-w .mw-container{
+	max-width: none;
+}
+body{
+    background: white;
+}
+@media screen and (min-width: @maxPageWidthpx){
+	body{
+		background: @bgBoxed;
+	}
+	#bxt-w .mw-container{
+		padding-left: 50px;
+		padding-right: 50px;
+	}
+	#bxt-w{
+		max-width: @maxPageWidthpx;
+		margin: 2rem auto;
+		border: 2px solid @defaultborder;
+		position: relative;
+		background: white;
+	}
+	.bxt-nm #bxt-w{
+		margin: 0 auto;	
+	}
+	.bxt-nb #bxt-w{
+		border: 0;	
+	}
+}

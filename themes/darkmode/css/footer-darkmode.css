@@ -1,0 +1,17 @@
+#footer,
+#footer .dropdown-menu{
+    background: @blackbg;
+}
+#footer,
+#footer .panel-heading{
+    color: white;
+}
+#footer a:not(.btn):not(:hover){
+    color: @lightbg;
+}
+#footer-boxes{
+    border-color: @darkbg;
+}
+#footer svg{
+    fill: white;
+}

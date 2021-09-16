@@ -1,0 +1,21 @@
+#content a.title{
+    color: @darktext;
+}
+#content a.title:hover{
+    text-decoration: underline;
+}
+.tdu, .td-u{
+    text-decoration: underline;
+}
+.status-0,
+.text-danger{
+    color: @danger;
+}
+.status-1,
+.text-warning{
+    color: @warning;
+}
+.status-2,
+.text-success{
+    color: @success;
+}

@@ -1,0 +1,20 @@
+#bc-w{
+    margin-bottom: 0;
+}
+.pl-heading{
+    padding: 2rem 0 1px 0;
+    background: #f6f6f6;
+}
+.pl-heading .desc .img-ct{
+    border: 1px solid @lightborder;
+}
+@media screen and (max-width: 991px){
+    .pl-heading{
+        padding-top: 1.5rem;
+    }
+}
+@media screen and (max-width: 767px){
+    .pl-heading{
+        padding-top: 1.2rem;
+    }
+}

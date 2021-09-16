@@ -1,0 +1,50 @@
+/* Prev/Next */
+#prevNextRow .button{
+	background: @darkbg;
+	height: 5rem;
+	width: 2rem;
+	position: relative;
+	z-index: 1;
+	transition: .3s ease;
+}
+#prevNextRow .next .button,
+#prevNextRow .previous .img-ct,
+#prevNextRow .previous img{
+	border-radius: 0 .5rem .5rem 0;
+}
+#prevNextRow .previous .button,
+#prevNextRow .next .img-ct,
+#prevNextRow .next img{
+	border-radius: .5rem 0 0 .5rem;
+}
+#prevNextRow .previous a:not(:hover) .img-ct{
+	transform: translateX(-1rem);
+	opacity: .5;
+}
+#prevNextRow .next a:not(:hover) .img-ct{
+	transform: translateX(1rem);
+	opacity: .5;
+}
+#prevNextRow .img-ct{
+	width: 5rem;
+	transition: transform .2s ease, opacity .2s ease;
+}
+#prevNextRow .ar{
+	border-color: white;
+}
+#prevNextRow h1{
+	max-width: calc(100% - 16rem);
+}
+@media screen and (max-width: 991px){
+	#prevNextRow{
+		display: block;
+	}
+	#prevNextRow h1{
+		max-width: none;
+	}	
+}
+@media screen and (max-width: 767px){
+	#prevNextRow{
+		display: none;
+	}
+}

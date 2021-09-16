@@ -1,0 +1,28 @@
+.cpr-f{
+    flex-wrap: nowrap;
+}
+.cpr-f > .col-{
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 20rem;
+    overflow: hidden;
+}
+.cpr-f.title > .col-{
+    overflow: visible;
+    white-space: nowrap;
+}
+.cpr-f.title > .col-{
+    padding-bottom: .7rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid @lightborder;
+}
+.cpr-f.in{
+    display: flex;
+}
+.cpr-f .price-row{
+    margin-bottom: 0.3rem;
+    font-size: 1.5rem;
+}
+.cpr-f .is{
+    position: relative;
+}

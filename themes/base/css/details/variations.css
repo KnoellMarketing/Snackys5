@@ -1,0 +1,118 @@
+.var-it{
+    margin-bottom: .8rem
+}
+.var-head{
+    font-weight: bold;
+    margin-bottom: .3rem
+}
+.var-head .swatches-selected:not(:empty):before{
+    content: ':';
+    margin-right: .2rem;
+}
+.var-head .swatches-selected{
+    font-weight: 400;
+    color: @defaulttext;
+}
+.var-it .control-hidden{
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+    height: 0;
+    width: 0;
+}
+.var-it label{
+    font-weight: 400;
+    cursor: pointer;
+}
+.var-it label[data-type="radio"]{
+    display: flex;
+    align-items: center;
+    padding: .2rem 0;
+    transition: color .2s ease;
+}
+.var-it label[data-type="radio"]:hover{
+    color: @brand;
+}
+.var-it label[data-type="radio"] input{
+    margin-right: .5rem;
+}
+.var-it .swatches .btn-default{
+    margin: 0 .5rem .5rem 0;
+}
+.var-it .swatches .btn-default:not(.active):not(.btn-img){
+    background: none;
+    box-shadow: inset 0 0 0 1px @defaultborder;
+}
+.var-it .swatches .btn-default:not(.active):not(.btn-img):hover{
+    background: none;
+    box-shadow: inset 0 0 0 1px @brand;
+}
+.var-it .swatches .btn-default:hover{
+    border-color: @brand;
+}
+.var-it .swatches .btn-default .label-info{
+    display: block;
+    font-size: .8rem;
+    margin-top: .5rem;
+}
+.var-it .swatches .btn-default.btn-img{
+    background: none;
+    padding: .25rem;
+    width: 12.5%;
+    margin: 0;
+    display: inline-block;
+}
+.var-it .tag{
+    margin-left: .4rem;
+}
+.var-it .btn-img .tag{
+    margin-top: .3rem;
+    margin-left: 0;
+    font-size: .7rem;
+    text-align: center;
+}
+.var-it .swatches .btn-img:hover .img-ct,
+.var-it .swatches .btn-img.active .img-ct{
+    box-shadow: 0 0 0 1px @brand;    
+}
+.var-it .textswatches .btn-default .label-info{
+    display: block;
+    font-size: .8rem;
+    margin-left: .5rem;
+    margin-top: 0;
+}
+.var-it .btn-group{
+    margin: 0;
+    flex-wrap: wrap;
+}
+.var-it [data-stock="out-of-stock"]{
+    opacity: .5;
+    cursor: not-allowed;
+}
+.swatches .btn:not(.btn-img) .tag{
+    display: inline;
+    vertical-align: inherit;
+}
+@media screen and (max-width: 1800px){
+    .var-it .swatches .btn-img.btn-default{
+        width: 16.66%;
+    }    
+}
+@media screen and (max-width: 1200px){
+    .var-it .swatches .btn-img.btn-default{
+        width: 20%;
+    }    
+}
+@media screen and (max-width: 1000px) and (min-width: 768px){
+    .var-it .swatches .btn-img.btn-default{
+        width: 25%;
+    }    
+}
+@media screen and (max-width: 550px){
+    .var-it .swatches .btn-img.btn-default{
+        width: 25%;
+    }    
+    .var-it .swatches .btn-img.btn-default{
+        padding: .15rem;
+    }
+}

@@ -1,0 +1,40 @@
+#sp-l .filter-item,
+.box .nav li a,
+#account-list li a{
+    display: flex;
+    padding: 0;
+}
+#sp-l li.dpflex-a-c,
+#sp-l li.dpflex-a-center{
+    display: flex;
+}
+#product-offer li a{
+    display: inline;
+    padding: 0;
+}
+#basket-shipping-estimate-form select{
+    width: 100%;
+}
+.input-group-addon, .input-group-btn{
+    width: auto;
+}
+.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"]{
+    position: relative;
+    margin: 0;
+}
+.label-default{
+    background: none;
+}
+.label{
+    color: @defaulttext;
+}
+@media screen and (max-width: 767px){
+    #cat-w .mm-mainlink .fa-caret-down.visible-xs, #cat-w .fa-caret-down.visible-xs{
+        display: flex !important;
+    }
+}
+@media screen and (max-width: 991px){
+    body:not(.show-sidebar) #sp-l .close-btn{
+        display: none !important;
+    }
+}

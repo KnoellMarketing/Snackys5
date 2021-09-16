@@ -1,0 +1,104 @@
+/* Fixing this horrible mess */
+h1{
+    text-align: center;
+}
+.lpa-checkout-wrapper{
+    max-width: 60rem;
+    margin: 4rem auto 0 auto;
+}
+.lpa-checkout-wrapper > .row,
+#lpa-shipping-methods-container .panel-wrap{
+    margin-bottom: 2.5rem;
+}
+#lpaChangeAddressButton,
+#lpaChangePaymentButton,
+.lpa-cancel a{    
+    display: inline-flex;
+	align-items: center;
+    padding: .7rem 1.2rem;
+    border-radius: .5rem;
+    line-height: 1.2;
+    font-weight: 600;
+    background: @lightfocusbg;
+    position: relative;
+    transition: .3s ease;
+    color: @darktext;
+    border: 0;
+    cursor: pointer;
+    margin: 0;
+}
+.lpa-checkout-wrapper .custom-radio,
+.lpa-checkout-wrapper .custom-checkbox{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid @lightborder;
+    padding: .7rem;
+}
+.lpa-checkout-wrapper .custom-radio input,
+.lpa-checkout-wrapper .custom-checkbox input{
+    margin-right: .7rem;
+}
+.lpa-checkout-wrapper img{
+    max-width: 3rem;
+}
+.lpa-checkout-wrapper .order-submit img{
+    max-width: 100%;
+}
+.lpa-checkout-wrapper .custom-radio .col-xs-8{
+    display: flex;
+    align-items: center;
+}
+.lpa-checkout-wrapper .custom-radio .col-xs-8 img{
+    order: -1;
+    margin-right: .5rem;
+}
+.lpa-checkout-wrapper .col-xs-3,
+.lpa-checkout-wrapper .col-xs-4{
+    display: flex;
+    align-items: center;
+}
+.lpa-checkout-wrapper .custom-checkbox label{
+    display: flex;
+}
+.lpa-checkout-wrapper .custom-checkbox .btn-block:not(label){
+    width: auto;
+}
+.lpa-checkout-wrapper .custom-checkbox .pull-right{
+    order: 1;
+    margin-left: auto;
+}
+#lpa-shipping-payment-submit .btn-primary,
+.lpa-cancel a{
+    width: 100%;
+    justify-content: center;
+}
+.lpa-checkout-wrapper .lpa-cancel{
+    margin: 0;
+}
+.lpa-checkout-wrapper .mb-0{
+    margin-bottom: 0;
+}
+.lpa-checkout-wrapper .order-submit{
+    margin: 2rem 0;
+}
+@media screen and (max-width: 767px){
+    .lpa-checkout-wrapper > .row, #lpa-shipping-methods-container .panel-wrap {
+        margin-bottom: 1.5rem;
+    }
+    .lpa-checkout-wrapper > .row > .col-12{
+        margin-bottom: 1.5rem;
+    }
+    .lpa-checkout-wrapper .custom-radio .row,
+    .lpa-checkout-wrapper .custom-checkbox.row,
+    .lpa-checkout-wrapper .custom-checkbox label{
+        display: block;
+    }
+    .lpa-checkout-wrapper .col-xs-3,
+    .lpa-checkout-wrapper .col-xs-4,
+    .lpa-checkout-wrapper .custom-radio .col-xs-8{
+        width: 100%;
+    }
+    .lpa-checkout-wrapper .custom-checkbox label .btn-block{
+        text-align: left;
+    }
+}

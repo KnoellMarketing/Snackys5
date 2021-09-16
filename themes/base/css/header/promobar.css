@@ -1,0 +1,18 @@
+#header-promo{
+	color: white;
+	padding: .5rem 3rem;
+	font-weight: 400;
+	position: relative;
+	font-size: .9rem;
+	background: @headerPromoStyle;
+}
+#header-promo-close{
+	position: absolute;
+	right: 1rem;
+	top: 0;
+	font-size: 1.3rem;
+	bottom: 0;
+	width: 1.5rem;
+	cursor: pointer;
+	font-family:  "Courier New", Courier, 'Arial';
+}

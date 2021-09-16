@@ -1,0 +1,73 @@
+#article-tab-nav{
+	margin-bottom: 2rem;
+	overflow: auto;
+    border-bottom: 1px solid @lightborder;
+}
+#article-tab-nav a,
+#article-tab-nav span{
+	font-size: 1.1rem;
+	font-weight: 700;
+	padding: .65rem 1.4rem;
+	display: block;
+    color: currentColor;
+    white-space: nowrap;
+}
+#article-tab-nav li{
+    background: @lightbg;
+    opacity: .7;
+	transition: opacity .3s ease;
+	cursor: pointer;
+}
+#article-tab-nav li:first-child{
+    border-top-left-radius: .3rem;
+}
+#article-tab-nav li:last-child{
+    border-top-right-radius: .3rem;
+}
+#article-tab-nav li:hover,
+#article-tab-nav li.active{
+	opacity: 1;
+}
+#article-tab-nav li.active{
+	color: white;
+    background: @brand;
+}
+#article-tabs > .tab-ct{
+	display: block;
+	height: auto;
+	opacity: 1;
+	transition: .3s ease;
+}
+#article-tabs > .tab-ct:not(.active){
+	opacity: 0;
+	height: 0;
+	overflow: hidden;
+}
+@media screen and (min-width: 768px){
+    #article-tabs .tab-ct > .panel-heading{
+        display: none;
+    }
+}
+@media screen and (max-width: 1400px){
+	#article-tab-nav a,
+	#article-tab-nav span{
+		padding: .5rem 1rem;
+	}
+}
+@media screen and (max-width: 767px){
+	#article-tab-nav{
+		display: none;
+	}
+    .tab-ct > .panel-body{
+        display: block;
+        height: auto;
+        opacity: 1;
+        transition: .3s ease;
+    }
+    .tab-ct:not(.open-show) > .panel-body{
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+        margin: 0;
+    }
+}

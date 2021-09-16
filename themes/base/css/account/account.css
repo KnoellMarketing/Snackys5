@@ -1,0 +1,37 @@
+#account-list .blanklist{
+    margin: 1.6rem 0;
+}
+#log{
+    max-width: 40rem;
+    margin: auto;
+}
+.item .icon.active svg{
+    fill: @success;
+}
+.item .icon.inactive svg{
+    fill: @danger;
+}
+@media screen and (min-width: 992px){
+    .al-wp > .panel{
+        margin-right: 2rem;
+    }  
+    #account{
+        max-width: 90rem;
+        margin: 1rem auto 0 auto;
+    }
+}
+@media screen and (max-width: 991px){
+    .al-wp,
+    .new-ct{
+        order: 1;
+        margin-top: 2rem;
+    }
+    .al-wp{
+        display: flex;
+        flex-direction: column;
+    }
+    #account-list{
+        order: 1;
+        margin-top: 2rem;
+    }
+}

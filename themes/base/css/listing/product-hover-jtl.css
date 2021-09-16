@@ -1,0 +1,164 @@
+.p-w.hv-e:hover{
+	position: relative;
+	z-index: 9;
+	background: white;
+    box-shadow: 0 0 0 .4rem white, 0 0 0 300vw rgba(0,0,0,.3);
+    border-radius: .6rem .6rem 0 0;
+}
+.p-w:hover .p-c.hv-e:after{
+	content: '';
+	position: absolute;
+	top: -15px;
+	right: -15px;
+	left: -15px;
+	bottom: 0;
+    border-radius: .6rem .6rem 0 0;
+	pointer-events: none;
+	z-index: -1;
+}
+.p-c.hv-e .exp{
+	position: absolute;
+	z-index: 2;
+    display: none;
+	opacity: 0;
+	box-shadow: 0 0 0 .4rem white;
+}
+.p-c.hv-e .exp .btn-primary{
+	white-space: normal;
+}
+.p-c.hv-e .img-w:hover .img-ct{
+	box-shadow: none;
+}
+.p-w:hover .hv-e .exp{
+	display: block;
+	opacity: 1;
+	left: -15px;
+	right: -15px;
+	padding: 15px;
+	background: white;
+    border-radius: 0 0 .6rem .6rem;
+}
+.hv-e .exp .var-it{
+    margin: .4rem 0;
+    font-size: .9rem;
+}
+.hv-e .exp .var-it label{
+    display: block;
+    font-weight: 400;
+}
+.hv-e .exp .swatches input{
+    position: absolute;
+    height: 0;
+    width: 0;
+    opacity: 0;
+}
+.var-it{
+    margin-bottom: .8rem
+}
+.var-head{
+    font-weight: bold;
+    margin-bottom: .3rem
+}
+.var-head .swatches-selected:not(:empty):before{
+    content: ':';
+    margin-right: .2rem;
+}
+.var-head .swatches-selected{
+    font-weight: 400;
+}
+.var-it .control-hidden{
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+    height: 0;
+    width: 0;
+}
+.var-it .control-hidden:checked + label{
+    border-color: @brand;
+}
+.var-it label{
+    font-weight: 400;
+    cursor: pointer;
+}
+.var-it label[data-type="radio"]{
+    display: flex;
+    align-items: center;
+    padding: .1rem 0;
+    transition: color .2s ease;
+}
+.var-it label[data-type="radio"]:hover{
+    color: @brand;
+}
+.var-it label[data-type="radio"] input{
+    margin-right: .5rem;
+}
+.var-it .swatches .btn-default{
+    margin: 0 .2rem .2rem 0;
+    display: inline-block;
+    text-align: center;
+}
+.var-it .swatches .btn-default:not(.active){
+    background: none;
+    box-shadow: inset 0 0 0 1px @defaultborder;
+}
+.var-it .swatches .btn-default:hover{
+    border-color: @brand;
+}
+.var-it .swatches .btn-default .label-info{
+    display: block;
+    font-size: .8rem;
+    margin-top: .5rem;
+}
+.var-it .swatches .btn-img.btn-default{
+    background: none;
+    padding: .25rem;
+    width: 33.33%;
+    margin: 0;
+    box-shadow: none;
+}
+.var-it .btn-img .tag{
+    margin-top: .3rem;
+}
+.var-it .swatches .btn-img:hover .img-ct,
+.var-it .swatches .btn-img.active .img-ct{
+    box-shadow: 0 0 0 1px @brand;    
+}
+.var-it .textswatches .btn-default .label-info{
+    display: block;
+    font-size: .8rem;
+    margin-left: .5rem;
+    margin-top: 0;
+}
+.var-it .btn-group{
+    margin: 0;
+    flex-wrap: wrap;
+}
+.var-it [data-stock="out-of-stock"]{
+    opacity: .5;
+    cursor: not-allowed;
+}
+.var-it .tag{
+    font-size: .7rem;
+}
+.var-it .bootstrap-select > .btn.dropdown-toggle{
+    padding: 0.7rem .8rem;
+    font-size: .9rem;
+}
+.var-it .label-variation + .tag{
+    margin-left: .2rem;
+}
+@media screen and (max-width: 767px){
+    .var-it .swatches .btn-img.btn-default{
+        width: 50%;
+    }
+    .p-c.hv-e .exp .btn-primary{
+        width: 100%;
+        border-radius: .3rem;
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 575px){
+    .p-c.hv-e .exp{
+        box-shadow: none;
+    }
+}

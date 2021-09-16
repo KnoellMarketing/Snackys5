@@ -1,0 +1,6 @@
+@media screen and (min-width: 992px){
+    #new_customer{
+        max-width: 60rem;
+        margin: auto;
+    }
+}

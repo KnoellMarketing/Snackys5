@@ -1,0 +1,121 @@
+.c-it{
+    padding: 1rem 0;
+    border-top: 1px solid @lightborder;
+    overflow: hidden;
+}
+.c-it .row.first{
+    margin-top: .3rem;
+    height: 100%;
+}
+@media screen and (min-width: 992px){
+    .basket_wrapper{
+        padding-right: 1rem;
+    }
+}
+.c-it .droppos{
+    margin: 0 0 0 auto;
+    border: 0;
+    padding: 0 .5rem;
+    background: none;
+    opacity: .5;
+}
+.choose_quantity button:hover .img-ct{
+    transform: rotate(360deg);
+    transition: 1s ease;
+}
+.choose_quantity .img-ct{
+    opacity: .7;
+}
+.right-boxes{
+    max-width: 28rem;
+}
+#fileupload-wrapper:empty,
+fileupload-wrapper:blank{
+    display: none;
+}
+.c-it input.quantity{
+    min-width: 5rem;
+}
+.cart-sum .total{
+    padding-top: .5rem;
+    margin-top: .5rem;
+    border-top: 1px solid @defaultborder;
+}
+.c-it strong:not(.title):not(.price),
+.c-it .text-muted{
+    font-weight: 400;
+    color: @defaulttext;
+}
+.c-it .info-ul{
+    margin: .8rem 0;
+}
+.c-it .info-ul li{
+    padding: .1rem 0
+}
+/* PayPal Finanzierung*/
+.add-pays .ppc-message{
+    margin-top: 1rem;
+}
+@media screen and (max-width: 991px){
+    .basket_wrapper>.panel-slider{
+        display: none;
+    }
+    .right-boxes{
+        max-width: none;
+    }
+}
+@media screen and (max-width: 767px){
+    #content .price {
+        font-size: 1rem;
+    }
+    .c-it .price-block{
+        margin: .5rem 0;
+    }
+    .c-it .info-ul {
+        margin: 0.5rem 0;
+    }
+    .c-it input.quantity {
+        min-width: 4rem;
+        padding: 0.5rem 0.4rem;
+    }
+    .choose_quantity .img-ct.icon{
+        width: .8rem;
+    }
+    .c-it .single-price{
+        display: none;
+    }
+    .c-it .row.first{
+        margin-top: 0;
+    }
+}
+@media screen and (max-width: 575px){
+    .c-it .icon-wt{
+        margin-right: 0;
+    }
+    .c-it .row.first > div{
+        width: 100%;
+    }
+    .c-it .row.first > .text-right{
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+    .c-it .price-block{
+        margin-left: auto;
+    }
+    .c-it .info-ul{
+        margin: .2rem 0;
+    }
+    .c-it .droppos{
+        margin-left: .2rem;
+    }
+}
+@media screen and (max-width: 400px){
+    .c-it .inf-col{
+        width: 100%;
+        margin-top: .3rem;
+    }
+    .c-it .img-col{
+        width: 8rem;
+    }
+}

@@ -1,0 +1,296 @@
+@media screen and (min-width: 1401px){
+    #product-offer > .product-info{
+        padding-left: 4rem;
+    }
+}
+@media screen and (max-width: 1400px) and (min-width: 768px){
+    #product-offer > .product-info{
+        padding-left: 2rem;
+    }
+}
+/* Gefahrengut Tabelle */
+.adr-table{
+    border: 4px solid black;
+}
+.adr-table .block{
+    background: #f59400;
+    padding: .5rem;
+    color: black;
+}
+.adr-table .first{
+    border-bottom: 4px solid black;
+}
+
+/* Preisanzeige */
+.product-offer .price_wrapper .price{
+    font-size: 2.2rem;
+    line-height: 1;
+    display: block;
+    margin-bottom: .25rem;
+}
+.product-offer .price_wrapper .price .old-price{
+	font-weight: 400;
+}
+.product-offer .price_wrapper .price .old-price + span{
+	color: @brand;
+}
+
+/* In den Warenkorb */
+#quantity-grp > input{
+    margin-right: .5rem;
+	min-width: 5rem;
+    width: 5rem;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+#buy_form .input-group-addon.unit {
+    padding: .75rem .5rem;
+    margin-right: .5rem;
+    margin-left: -.5rem;
+}
+
+/* Tab Beschreibung */
+#tab-description .desc a{
+    text-decoration: underline;
+    color: @brand;
+}
+#tab-description img{
+    max-width: 100%;
+    height: auto;
+}
+
+/* Tab Bewertung */
+#tab-votes .progress,
+#tab-votes .progress-bar{
+    border-radius: 1rem;
+    font-size: 0;
+    height: .5rem;
+    background: @lightfocusbg;
+}
+#tab-votes .progress-bar{
+    background: @darkbg;
+}
+#article_votes .text{
+    width: 6rem;
+}
+#article_votes .progress{
+    flex-grow: 1;
+}
+.add-review:not(.m0){
+    margin-top: 1rem;
+}
+.review p{
+    margin: .5rem 0;
+}
+#tab-votes .pagination-wrapper{
+    margin-bottom: 1rem;
+}
+#tab-votes .pagination-wrapper .form-group:not(:first-child){
+    margin-left: .5rem;
+}
+#reviews-overview{
+    min-width: 25rem;
+    order: 1;
+}
+#rv-wp{
+    flex-grow: 1;
+    margin-right: 4rem;
+}
+.card.answer{
+    margin: 1rem 0;
+    background: @defaultborder;
+}
+.not_helpful .img-ct{
+    transform: rotate(180deg);
+}
+@media screen and (max-width: 1600px){
+    #rv-wp{
+        margin-right: 2.5rem;
+    }
+    #reviews-overview{
+        min-width: 22rem;
+    }
+}
+@media screen and (max-width: 1199px){
+    #reviews-overview{
+        min-width: 20rem;
+    }
+}
+@media screen and (max-width: 991px){
+    #tab-votes > .dpflex{
+        flex-wrap: wrap;
+    }
+    #reviews-overview{
+        min-width: 100%;
+        order: 0;
+    }
+    #rv-wp{
+        margin-right: 0;
+    }
+}
+
+/* Ähnliche Artikel */
+.item-related .row{
+    flex-direction: row;
+    align-items: center;
+}
+.item-related .row .img-w{
+    margin: 0;
+    max-width: 5rem;
+}
+.item-related .p-c .price{
+    font-size: 1.1rem;
+}
+.item-related .row h4.title{
+    margin-bottom: .5rem;
+}
+.recommendations > section{
+    margin-top: 4rem;
+}
+#result-wrapper > .alert{
+    margin-bottom: 4rem;
+    display: flex;
+    align-items: center;
+	justify-content: space-between;
+}
+#result-wrapper > .alert.hidden{
+    display: none
+}
+#result-wrapper > .alert > button{
+    font-size: 1rem;
+}
+
+
+.updatingStockInfo{
+    position: absolute;
+    opacity: 0;
+}
+
+/* payPal */
+.ppf-container{
+	margin: 1rem 0;
+	border-radius: .3rem;
+	border-color: @defaultborder
+}
+.ppf-container p:first-child{
+	margin-top: 0;
+}
+
+
+/* PayPal Finanzierung*/
+.ppf-container{
+	position: relative;
+	background: @info;
+	border: 0;
+	color: #fff;
+}
+.ppf-container p{
+	margin: 0;
+}
+.ppf-container p:after{
+	content: '\203A';
+	display: inline-block;
+	font-weight: bold;
+	margin-left: .25rem;
+}
+.ppf-container a.show-details{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0;
+	font-size: 0;
+	text-indent: -999em;
+}
+/* Bundle-Preis */
+.bundle-price{
+	margin: 0 1.5rem 0 0 ;
+}
+.bundle-price .label-warning{
+	margin-top: .25rem;
+	font-size: smaller;
+}
+/* Amazon pay Button */
+#add-to-cart .lpa-pay-button.lpa-pay-button-express{
+	margin: .5rem 0 0 0;
+	display: block;
+}
+/* PayPal Express Button */
+.add-pays .paypalexpress.btn-ppe-article{
+	margin-top: .5rem;
+    margin-bottom: 0;
+}
+/* Mediendateien */
+#tab-musik audio{
+	width: 100%;
+}
+/* Maxwidth Priceflow */
+#priceFlowContainer{
+	max-width: 50rem;
+} 
+/* Basket Animation on "basked-Added" */
+.basked-added .dropdown.open .c-dp>.inside{
+	animation: .4s ease .5s 1 both slide-in;
+}
+/* Mediafiles */
+.needs-consent.youtube,
+.give-consent.hidden{
+    display: none;
+}
+/* Ratenzahlung */
+.ppc-message{
+    margin-top: .5rem;
+}
+@keyframes slide-in{
+	from{
+		transform: translateX(110%);
+	}
+	to{
+		transform: translateX(0);
+	}
+}
+@media screen and (max-width: 1599px){  
+    .buy-col{
+        margin-top: 1rem;
+    }
+}
+@media screen and (max-width: 1199px){
+    #result-wrapper>.alert{
+        margin-bottom: 3rem;
+    }
+}
+@media screen and (max-width: 767px){
+	#shop-nav{
+		margin-bottom: 0;
+	}
+	h1, .h1{
+		margin-top: 1.5rem;
+	}
+	#article-tab-nav{
+		margin-bottom: 1rem;
+	}
+    #product-offer > div{
+        width: 100%;
+    }
+    #product-actions .btn.pr{
+        width: 50%;
+        justify-content: center;
+    }
+    #tab-tags .row{
+        margin-top: .5rem;
+    }
+    #tab-votes .pagination-wrapper{
+        display: none;
+    }
+    #reviews-overview{
+        margin-bottom: 1.6rem;
+    }
+    #reviews-overview .rating {
+        min-width: 6rem;
+        justify-content: flex-end;
+    }
+    #result-wrapper>.alert{
+        margin: 0 0 1.5rem 0;
+    }
+}

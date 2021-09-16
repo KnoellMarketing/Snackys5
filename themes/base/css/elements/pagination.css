@@ -1,0 +1,19 @@
+.pagination{
+    margin: 2rem 0;
+    font-weight: 600;
+}
+.pagination-group > span{
+    order: 1;
+}
+.pagination .btn:not(.dropdown-toggle){
+    line-height: 2rem;
+    min-width: 2rem;
+    padding: 0 .5rem;
+    border-radius: 5rem;
+   justify-content: center;
+}
+.pagination .active .btn{
+    background: @brand;
+    @gradientbrand;
+    color: @backgroundtext;
+}

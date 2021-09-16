@@ -1,0 +1,21 @@
+.sc-sum .card{
+    margin: .5rem 0;
+}
+.sc-sum .panel{
+    background: white;
+}
+.sc-item .small strong{
+    font-weight: 500;
+    color: @lighttext;
+    display: inline-block;
+    width: 30%;
+}
+.sc-item .small{
+    font-size: .8rem;
+}
+.sc-item li{
+    padding: .1rem 0;
+}
+.sc-item .shortdesc p{
+    margin: .25rem 0;
+}

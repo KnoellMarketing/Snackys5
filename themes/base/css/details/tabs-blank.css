@@ -1,0 +1,12 @@
+.tab-ct > .panel-body{
+	display: block;
+	height: auto;
+	opacity: 1;
+	transition: .3s ease;
+}
+.tab-ct:not(.open-show) > .panel-body{
+	opacity: 0;
+	height: 0;
+	overflow: hidden;
+    margin: 0;
+}

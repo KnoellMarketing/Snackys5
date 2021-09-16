@@ -1,0 +1,11 @@
+@media screen and (min-width: 992px){
+    .al-wp > .panel{
+        margin-right: 2rem;
+    }    
+}
+@media screen and (max-width: 991px){
+    .al-wp{
+        order: 1;
+        margin-top: 2rem;
+    }
+}

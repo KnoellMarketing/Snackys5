@@ -1,0 +1,113 @@
+/* Modal Popup */
+.modal[tabindex]{
+	display:none;
+	position: fixed;
+	z-index: 999;
+}
+body .modal .modal-dialog{
+	width: 100%;
+}
+.modal-dialog{
+    align-items: center;
+    justify-content: center;
+    z-index: 11;
+	display: flex;
+}
+.modal-dialog[style*="block"]{
+	display: flex !important;
+}
+.modal-content{
+    background: white;
+    padding: 0 2rem 2rem 2rem;
+    border-radius: 1rem;
+    max-width: 60rem;
+	min-width: 25rem;
+    width: 100%;
+}
+.modal-header{
+    display: flex;
+    align-items: center;
+	justify-content: space-between;
+    border-bottom: 1px solid @lightborder;
+    margin-bottom: 1rem;
+	top: 0;
+	background: white;
+    padding: 1.5rem 0 1rem 0;
+	z-index: 2;
+}
+.modal-body{
+    max-height: 65vh;
+    overflow: auto;
+    overflow-x: hidden;
+	overscroll-behavior: contain;
+}
+.modal-footer{
+    padding-top: 1rem;
+}
+.modal-dialog .modal-header .modal-title{
+    margin: 0;
+	width: calc(100% - 3rem);
+}
+.modal-dialog .modal-content .modal-body .answer{
+    text-align: center;
+    max-width: 11rem;
+    margin-top: 1rem;
+}
+.modal-dialog .modal-body > *:only-child{
+    margin: 0;
+}
+#main-wrapper .modal-dialog.modal-lg,
+#content-wrapper .modal-dialog.modal-lg{
+    width: 100%;
+}
+.modal #account .al-wp{
+    display: none;
+}
+.modal #account .col-lg-9{
+    width: 100%;
+}
+.modal #account .wl-it{
+    width: 33.33%;
+}
+.modal .tmp-modal-content .panel{
+    padding: 0;
+    background: none;
+    box-shadow: none;
+}
+.modal .panel{
+    padding: 0;
+    background: none;
+    box-shadow: none;
+}
+@media screen and (max-width: 767px){
+    .modal-dialog .modal-content{
+        max-width: 90vw;
+		width: 100%;
+		min-width: 0;
+    }
+    .modal #account .row .wl-it{
+        width: 50%;
+    }
+    .modal #account .wl-ac{
+        flex-wrap: wrap;
+    }
+    .modal #account .wl-ac .btn{
+        width: 100%;
+        margin: .2rem 0;
+        border-radius: .3rem;
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 400px){
+    .modal #account .row .wl-it{
+        width: 100%;
+    }
+}
+
+/* Wishlist Modal */
+.wl-wp .caption p{
+    margin: .5rem 0;
+}
+.wl-wp .p-c textarea{
+    margin-top: auto;
+}

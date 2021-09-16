@@ -1,0 +1,12 @@
+#sp-l .panel-body{
+	scrollbar-width: thin;
+}
+#sp-l .panel-body::-webkit-scrollbar{
+	width: 6px;
+    height: 6px;
+}
+#sp-l .panel-body{
+	max-height: 70vh;
+	overflow: auto;
+	overflow-x: hidden;
+}

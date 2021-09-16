@@ -1,0 +1,41 @@
+.qty-btns input::-webkit-outer-spin-button,
+.qty-btns input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.qty-btns input {
+  -moz-appearance: textfield;
+}
+.qty-btns .btn{
+    border: 1px solid @defaultborder;
+}
+.qty-btns .icon{
+    width: .8rem;
+    min-width: .8rem;
+}
+.qty-btns input{
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+}
+#buy_form .qty-btns .input-group-addon.unit{
+    margin: 0;
+    border: 1px solid @defaultborder;
+}
+.p-c .qty-btns .btn,
+.p-c .qty-btns input{
+    padding: .6rem .8rem;
+}
+.exp .qty-btns input.quantity{
+    display: block;
+}
+#add-to-cart .submit,
+.exp .btn-primary,
+.qty-btns input,
+.qty-btns .unit,
+.product-info{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+}

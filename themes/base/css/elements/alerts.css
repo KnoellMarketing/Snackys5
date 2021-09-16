@@ -1,0 +1,63 @@
+/* Alerts */
+#alert-list .alert{
+    padding: 1rem 2rem;
+    margin-bottom: 1rem;
+}
+.alert ul{
+    padding-left: 1.2rem;
+    margin: .5rem 0;
+}
+.alert p{
+    margin: .5rem 0;
+}
+.alert{
+    padding: .75rem 1rem;
+    border-radius: .25rem;
+    color: @alertTxt;
+    background: @alertBg;
+    font-size: .95em;
+    position: relative;
+}
+.alert .close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    color: @darktext;
+}
+.alert:not(:first-child){
+    margin-top: 1rem;
+}
+.alert:not(:last-child){
+    margin-bottom: 1rem;
+}
+.alert a:not(.btn){
+    text-decoration: underline;
+    color: @darktext;
+}
+.alert > *:first-child{
+    margin-top: 0;
+}
+.alert > *:last-child{
+    margin-bottom: 0;
+}
+.alert-info{
+    background: @alertInfoBg;
+    color: @alertInfoTxt;
+}
+.alert-warning{
+    background: @alertWarningBg;
+    color: @alertWarningTxt;
+}
+.alert-danger{
+    background: @alertDangerBg;
+    color: @alertDangerTxt;
+}
+.alert-success{
+    background: @alertSuccessBg;
+    color: @alertSuccessTxt;
+}
+.alert-hotstock{
+    background: @alertHotstockBg;
+    color: @alertHotstockTxt;
+}

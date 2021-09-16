@@ -1,0 +1,33 @@
+/* 404 */
+.error404 #bc-w,
+.error404 #alert-list{
+    display: none;
+}
+.error404 #footer{
+	margin: 0;
+}
+.error404 #content-wrapper{
+	padding: 0;
+	max-width: none;
+	margin: 0;
+	overflow: hidden;
+}
+#pnf{
+	height: 60vh;
+	position: relative;
+}
+#pnf h1{
+	font-size: 9rem;
+	margin: 0;
+}
+#pnf h1,
+#pnf h2{
+	color: white;
+}
+#pnf .btn:first-letter{
+	text-transform: uppercase;
+}
+#pnf .btn{
+	padding-left: 2rem;
+	padding-right: 2rem;
+}

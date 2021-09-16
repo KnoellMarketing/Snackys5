@@ -1,0 +1,56 @@
+/* Endles Scrolling Spinner */
+.el-sc:last-child{
+    height: 3.4rem;
+    z-index: 11;
+    position: relative;
+}
+.el-sc:last-child button{
+	position: absolute;
+	bottom: 0;
+    width: 2.1rem;
+    height: 2.1rem;
+    border: 5px solid @darkbg;
+    border-radius: 50%;
+    padding: 0;
+    border-top-color: @brand;
+	animation: 1.2s ease-in-out 0s infinite both spin;
+    box-shadow: none;
+    background: none;
+}
+.sidecart-open .dropdown.open .c-dp>.inside{
+	animation: .4s ease .1s 1 both slide-in;
+}
+@keyframes slide-in{
+	from{transform: translateX(110%);}
+    to{transform: translateX(0);}
+}
+@keyframes spin{
+	from{transform: rotate(0);}
+	to{transform: rotate(360deg)}
+}
+/* Endless Scrolling Back top Top */
+#nfity-scroll{
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    background: @blackbg;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    z-index: 4;
+}
+#nfity-scroll .ar{
+    border-color: white;
+}
+/* Active Filters */
+.active-filters .btn:not(.btn-block){
+    margin: 0 .2rem .2rem 0;
+}
+.active-filters .btn-block{
+    margin: .2rem 0;
+    display: flex;
+}
+.active-filters .btn-block .img-ct{
+    margin: 0 0 0 auto;
+    order: 1;
+}

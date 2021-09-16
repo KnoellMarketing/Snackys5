@@ -1,0 +1,14 @@
+.p-att li{
+    padding: .5rem;
+}
+.p-att li:nth-child(even){
+    background: #f6f6f6;
+}
+.p-att .first{
+    width: 20rem;
+}
+@media screen and (max-width: 767px){
+    .p-att .first{
+        width: 40%;
+    }    
+}

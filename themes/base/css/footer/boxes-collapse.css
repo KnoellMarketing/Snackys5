@@ -1,0 +1,21 @@
+#footer-boxes .panel-heading .caret{
+    margin-left: auto;
+}
+@media screen and (min-width: 768px){
+    #footer-boxes .panel-heading .caret{
+        display: none;
+    }
+}
+@media screen and (max-width: 767px){
+    #footer-boxes .col-6:not(.open-show) .panel-body{
+        display: none;
+    }
+    #footer-boxes .col-6:not(.open-show) .panel-heading{
+        margin: 0;
+    }
+}
+@media screen and (max-width: 550px){
+    #footer-boxes .col-6{
+        width: 100%;
+    }    
+}

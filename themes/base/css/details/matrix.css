@@ -1,0 +1,27 @@
+.mtrx td{
+    width: 1%;
+    display: table-cell;
+}
+.mtrx .form-control{
+	min-width: 3rem;
+}
+.mtrx .add{
+    background: @defaultborder;
+    padding: 0 .7rem;
+    border-radius: 0 .3rem .3rem 0;
+    font-size: .9rem;
+}
+.mtrx .input-group input:only-child{
+    border-radius: .3rem;
+}
+.mtrx .img-ct{
+    width: 4rem;
+}
+.mtrx .status{
+    font-size: .8rem;
+    display: block;
+    line-height: normal;
+}
+.mtrx-l .status{
+    width: 100%;
+}

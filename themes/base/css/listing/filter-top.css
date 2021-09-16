@@ -1,0 +1,53 @@
+#nav-ft{
+    font-size: .92rem;
+}
+#nav-ft .no-dropdown li{
+    margin: 0;
+}
+#nav-ft .dropdown:not(.open) > .nav{
+    display: none;
+}
+#nav-ft .btn{
+    background: #f6f6f6;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 400;
+    border: 1px solid @defaultborder;
+}
+#nav-ft .form-group{
+    margin: .25rem 0;
+}
+#improve_search > .form-group{
+    margin: 0 0 0 .5rem
+}
+#filter-collapsible .name{
+    white-space: nowrap;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#nav-ft > .row{
+    margin: -.25rem;
+}
+#nav-ft .col-12{
+    padding: 0 .25rem;
+}
+#nav-ft .dropdown > .nav{
+    padding: 1rem;
+    background: #f6f6f6;
+    border-radius: 0 0 .5rem .5rem;
+    box-shadow: 0 -.5rem 0 0 #f6f6f6;
+}
+@media screen and (min-width: 992px){
+    #filter-collapsible{
+        display: block;
+        height: auto !important;
+    }
+    #nav-ft .dropdown > .nav{
+        position: absolute;
+        z-index: 1;
+        top: 100%;
+        left: 1px;
+        right: 1px;
+    }
+}
