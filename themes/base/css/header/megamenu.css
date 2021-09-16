@@ -97,7 +97,7 @@
     transform: translateY(-100%);
     opacity: 0;
     transition: .1s ease;
-	max-height: 60vh;
+	max-height: calc(100vh - 14rem);
 	overflow: auto;
 	padding-top: 3rem;
 	padding-bottom: 3rem;

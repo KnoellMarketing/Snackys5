@@ -242,6 +242,9 @@
 .ppc-message{
     margin-top: .5rem;
 }
+.buy-col{
+    margin-top: 1rem;
+}
 @keyframes slide-in{
 	from{
 		transform: translateX(110%);
@@ -249,11 +252,6 @@
 	to{
 		transform: translateX(0);
 	}
-}
-@media screen and (max-width: 1599px){  
-    .buy-col{
-        margin-top: 1rem;
-    }
 }
 @media screen and (max-width: 1199px){
     #result-wrapper>.alert{

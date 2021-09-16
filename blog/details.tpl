@@ -53,7 +53,7 @@
         {if isset($Einstellungen.news.news_kommentare_nutzen) && $Einstellungen.news.news_kommentare_nutzen === 'Y'}
         <div id="nw-cmt">
             {if $comments|@count > 0}
-                {if !empty($oNewsArchiv->cSeo)}
+                {if !empty($oNewsArchiv->getSeo())}
                     {assign var=articleURL value=$oNewsArchiv->getURL()}
                     {assign var=cParam_arr value=[]}
                 {else}

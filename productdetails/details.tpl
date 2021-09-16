@@ -8,43 +8,40 @@
     {/if}
 
     {block name="product-pagination"}
-        {if isset($NavigationBlaettern->naechsterArtikel->kArtikel) || isset($NavigationBlaettern->vorherigerArtikel->kArtikel)}
-            <div id="prevNextRow" class="dpflex-a-center dpflex-j-between dpflex-wrap mb-spacer mb-small hidden-xs">
-                <div class="visible-lg visible-md product-pagination previous">
-                    {if isset($NavigationBlaettern->vorherigerArtikel) && $NavigationBlaettern->vorherigerArtikel->kArtikel}
-                        <a href="{$NavigationBlaettern->vorherigerArtikel->cURLFull}" title="{$NavigationBlaettern->vorherigerArtikel->cName}" class="dpflex">
-                            <span class="button dpflex-a-center dpflex-j-center">
-                                <span class="ar ar-l"></span>
-                            </span>
-                            <span class="img-ct">
-                                {include file='snippets/image.tpl' item=$NavigationBlaettern->vorherigerArtikel square=false srcSize='sm'}
-                            </span>	
-                        </a>
-                    {/if}
-                </div>
-                <h1 class="fn product-title text-center" itemprop="name">{$Artikel->cName}</h1>
-                <div class="visible-lg visible-md product-pagination next">
-                    {if isset($NavigationBlaettern->naechsterArtikel) && $NavigationBlaettern->naechsterArtikel->kArtikel}
-                        <a href="{$NavigationBlaettern->naechsterArtikel->cURLFull}" title="{$NavigationBlaettern->naechsterArtikel->cName}" class="dpflex">
-                            <span class="img-ct">
-                                {include file='snippets/image.tpl' item=$NavigationBlaettern->naechsterArtikel square=false srcSize='sm'}
-                            </span>
-                            <span class="button dpflex-a-center dpflex-j-center">
-                                <span class="ar ar-r"></span>
-                            </span>
-                        </a>
-                    {/if}
-                </div>
+        <div id="prevNextRow" class="dpflex-a-center dpflex-j-between dpflex-wrap mb-spacer mb-small hidden-xs">
+            <div class="visible-lg visible-md product-pagination previous">
+                {if isset($NavigationBlaettern->vorherigerArtikel) && $NavigationBlaettern->vorherigerArtikel->kArtikel}
+                    <a href="{$NavigationBlaettern->vorherigerArtikel->cURLFull}" title="{$NavigationBlaettern->vorherigerArtikel->cName}" class="dpflex">
+                        <span class="button dpflex-a-center dpflex-j-center">
+                            <span class="ar ar-l"></span>
+                        </span>
+                        <span class="img-ct">
+                            {include file='snippets/image.tpl' item=$NavigationBlaettern->vorherigerArtikel square=false srcSize='sm'}
+                        </span>	
+                    </a>
+                {/if}
             </div>
-        {/if}
+            <h1 class="fn product-title text-center" itemprop="name">{$Artikel->cName}</h1>
+            <div class="visible-lg visible-md product-pagination next">
+                {if isset($NavigationBlaettern->naechsterArtikel) && $NavigationBlaettern->naechsterArtikel->kArtikel}
+                    <a href="{$NavigationBlaettern->naechsterArtikel->cURLFull}" title="{$NavigationBlaettern->naechsterArtikel->cName}" class="dpflex">
+                        <span class="img-ct">
+                            {include file='snippets/image.tpl' item=$NavigationBlaettern->naechsterArtikel square=false srcSize='sm'}
+                        </span>
+                        <span class="button dpflex-a-center dpflex-j-center">
+                            <span class="ar ar-r"></span>
+                        </span>
+                    </a>
+                {/if}
+            </div>
+        </div>
     {/block}
 
     {foreach name=navi from=$Brotnavi item=oItem}
         {if $smarty.foreach.navi.total-1 == $smarty.foreach.navi.iteration}
-            {assign var=cate value=$oItem->name}
+            {assign var=cate value=$oItem->getName()}
         {/if}
     {/foreach}
-
     {include file="snippets/zonen.tpl" id="opc_before_buy_form"}
     {block name="buyform-block"}
     <form id="buy_form" method="post" action="{$Artikel->cURLFull}" class="evo-validate mb-lg" data-track-type="start" data-track-event="view_item" data-track-p-items='[{ldelim}"id":"{if $snackyConfig.artnr == "id"}{$Artikel->kArtikel}{else}{$Artikel->cArtNr}{/if}","category":"{$cate|escape}","name":"{$Artikel->cName|escape}","price":"{$Artikel->Preise->fVKNetto}"{rdelim}]'>
@@ -429,6 +426,11 @@
 					{lang key='customerWhoBoughtXBoughtAlsoY' section='productDetails' assign='slidertitle'}
 					{include file='snippets/product_slider.tpl' class='x-sell' id='slider-xsell' productlist=$Xselling->Kauf->Artikel title=$slidertitle desc=$Gruppe->Beschreibung}
 				{/if}
+                
+                {if isset($oAehnlicheArtikel_arr) && count($oAehnlicheArtikel_arr) > 0}
+                    {lang key='RelatedProducts' section='productDetails' assign='slidertitle'}
+                    {include file='snippets/product_slider.tpl' class='x-related' id='slider-related' productlist=$oAehnlicheArtikel_arr title=$slidertitle}
+                {/if}                
             {/block}
             </div>
         {/if}

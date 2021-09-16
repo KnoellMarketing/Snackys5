@@ -19,8 +19,9 @@ body .modal .modal-dialog{
 }
 .modal-content{
     background: white;
-    padding: 0 2rem 2rem 2rem;
+    padding: 0;
     border-radius: 1rem;
+    overflow: hidden;
     max-width: 60rem;
 	min-width: 25rem;
     width: 100%;
@@ -33,11 +34,9 @@ body .modal .modal-dialog{
     display: flex;
     align-items: center;
 	justify-content: space-between;
-    border-bottom: 1px solid @lightborder;
-    margin-bottom: 1rem;
-	top: 0;
 	background: white;
-    padding: 1.5rem 0 1rem 0;
+    padding: 1.2rem 2rem;
+    background: @lightbg;
 	z-index: 2;
 }
 .modal-body{
@@ -45,12 +44,13 @@ body .modal .modal-dialog{
     overflow: auto;
     overflow-x: hidden;
 	overscroll-behavior: contain;
+    padding: 2rem;
 }
 .reCaptchaModal .modal-body{
     overflow: visible;
 }
 .modal-footer{
-    padding-top: 1rem;
+    padding: 0 2rem 2rem 2rem;
 }
 .modal-dialog .modal-header .modal-title{
     margin: 0;
@@ -87,6 +87,15 @@ body .modal .modal-dialog{
     background: none;
     box-shadow: none;
 }
+.modal-header button[data-dismiss="modal"] {
+    transform: translateX(0.3rem);
+    filter: invert();
+    opacity: 0.3;
+}
+.modal-header button[data-dismiss="modal"]:hover{
+    background-color: #fff;
+    opacity: .5;
+}
 @media screen and (max-width: 767px){
     .modal-dialog .modal-content{
         max-width: 90vw;
@@ -104,6 +113,15 @@ body .modal .modal-dialog{
         margin: .2rem 0;
         border-radius: .3rem;
         justify-content: center;
+    }
+    .modal-body{
+        padding: 1.5rem;
+    }
+    .modal-header{
+        padding: 1rem 1.5rem;
+    }
+    .modal-footer{
+        padding: 0 1.5rem 1.5rem 1.5rem;
     }
 }
 @media screen and (max-width: 400px){

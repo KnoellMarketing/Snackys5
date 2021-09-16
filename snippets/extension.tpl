@@ -11,7 +11,7 @@
 	{else}
 		{assign "fwHeader" "false"}
 	{/if}
-    {if count($oSlider->oSlide_arr) > 0 || isset($oImageMap)}
+    {if (isset($oSlider) && count($oSlider->getSlides()) > 0) || isset($oImageMap)}
         <div id="extension-container">
         {if (($snackyConfig.fullscreenElement != 1 && $fwHeader == 'true') || $fwHeader == 'false') && (isset($oSlider) && count($oSlider->getSlides()) > 0)}
             <div class="{if ($fwSlider == 'false' || $fwHeader == 'true') && $nSeitenTyp === 18}mw-container {/if}mb-spacer">

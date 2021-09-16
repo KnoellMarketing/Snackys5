@@ -19,7 +19,9 @@
 {/if}
 
 {block name="megamenu-categories"}
-{include file='snippets/categories_recursive_mobile.tpl' i=0 categoryId=0 limit={$snackyConfig.mmenu_subcats} caret='right'}
+    {if isset($snackyConfig.show_categories) && $snackyConfig.show_categories !== 'N' && isset($Einstellungen.global.global_sichtbarkeit) && ($Einstellungen.global.global_sichtbarkeit != 3 || isset($smarty.session.Kunde->kKunde) && $smarty.session.Kunde->kKunde != 0)}
+        {include file='snippets/categories_recursive_mobile.tpl' i=0 categoryId=0 limit={$snackyConfig.mmenu_subcats} caret='right'}
+    {/if}
 {/block}{* /megamenu-categories*}
 
 {block name="megamenu-pages"}

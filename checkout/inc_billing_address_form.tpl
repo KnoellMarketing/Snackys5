@@ -678,7 +678,7 @@
         </div>
     {/if}
 </fieldset>
-{if $Einstellungen.kundenfeld.kundenfeld_anzeigen === 'Y' && !empty($oKundenfeld_arr)}
+{if $Einstellungen.kundenfeld.kundenfeld_anzeigen === 'Y' && $oKundenfeld_arr->count() > 0}
 <fieldset class="panel">
     <div class="row">
         <div class="col-12 col-md-6">

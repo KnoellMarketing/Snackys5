@@ -1,5 +1,5 @@
 {block name='boxes-box-special-offer'}
-{if $isMobile && $oBox->position == 'left'}
+{if $isMobile && $oBox->getPosition() == 'left'}
 {else}
     {assign var=moreLink value=$oBox->getURL()}
     {lang key='showAllSpecialOffers' assign='moreTitle'}

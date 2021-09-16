@@ -1,6 +1,7 @@
 #article-tab-nav{
 	margin-bottom: 2rem;
 	overflow: auto;
+    overflow-y: hidden;
     border-bottom: 1px solid @lightborder;
 }
 #article-tab-nav a,
@@ -38,14 +39,14 @@
 	opacity: 1;
 	transition: .3s ease;
 }
-#article-tabs > .tab-ct:not(.active){
-	opacity: 0;
-	height: 0;
-	overflow: hidden;
-}
 @media screen and (min-width: 768px){
     #article-tabs .tab-ct > .panel-heading{
         display: none;
+    }
+    #article-tabs > .tab-ct:not(.active){
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
     }
 }
 @media screen and (max-width: 1400px){

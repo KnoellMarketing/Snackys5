@@ -29,9 +29,9 @@
 		height: 100%;
         background: none;
         padding-top: 0;
-        position: static;
         display: block;
         overflow: auto;
+        position: relative;
 	}
 	#cat-w .mgm > ul.blanklist > li{
         width: 25%;
@@ -39,12 +39,12 @@
 		position: static;
 	}
 	#cat-w .dropdown-menu{
-        left: calc(25% + 40px);
+        left: 25%;
         right: 100px;
 		top: 0;
 		bottom: 0;
 		padding: 0;
-        width: auto;
+        width: 75%;
 		box-shadow: 0 0 20px 0 rgba(0,0,0,.15);
 		border-radius: 0;
         min-width: 0;
@@ -137,6 +137,55 @@
 		font-size: 1.1rem;
 		font-weight: 600;
 	}
+    #cat-w .dropdown-style > .dropdown-menu{
+        background: #fff;
+        align-content: flex-start;
+        padding: 3rem;
+        border-top: 2px solid @brand;
+    }
+    @media screen and (max-width: 1450px){
+        #cat-w .mgm > ul.blanklist > li,
+        .fullscreen-title{
+            width: 30%;
+        }
+        #cat-w .dropdown-menu{
+            left: 30%;
+            width: 70%;
+        }
+    }
+    @media screen and (max-width: 1250px){
+        #cat-w .mgm > ul.blanklist > li,
+        .fullscreen-title{
+            width: 35%;
+        }
+        #cat-w .dropdown-menu{
+            left: 35%;
+            width: 65%;
+        }
+        #cat-w .dropdown-style > .dropdown-menu{
+            padding: 2rem;
+        }
+    }
+    @media screen and (max-width: 1050px){
+        #cat-w .mgm > ul.blanklist > li,
+        .fullscreen-title{
+            width: 40%;
+        }
+        #cat-w .dropdown-menu{
+            left: 40%;
+            width: 60%;
+        }
+    }
+    @media screen and (max-width: 850px){
+        #cat-w .mgm > ul.blanklist > li,
+        .fullscreen-title{
+            width: 45%;
+        }
+        #cat-w .dropdown-menu{
+            left: 45%;
+            width: 55%;
+        }
+    }
 }
 @media screen and (min-width: 1600px){
 	#cat-w .info-col{
@@ -145,9 +194,12 @@
 	#cat-w .row-multi.hasInfoColumn{
 		width: 75%
 	}
-	#cat-w .row-multi.hasInfoColumn > .col-lg-3{
+	#cat-w .row-multi > .col-lg-3{
 		width: 25%;
 	}
+    #cat-w .row-multi.hasInfoColumn > .col-lg-3{
+        width: 33.33%;
+    }
 }
 @media screen and (min-width: 1201px) and (max-width: 1400px){
 	#cat-w .row-multi.hasInfoColumn > .col-lg-3{

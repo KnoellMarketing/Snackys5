@@ -1,5 +1,5 @@
 {block name='boxes-box-comparelist'}
-{if $isMobile && $oBox->position == 'left'}
+{if $isMobile && $oBox->getPosition() == 'left'}
 {else}
 	{if $Einstellungen.vergleichsliste.vergleichsliste_anzeigen === 'Y'}
     {assign var=maxItems value=$oBox->getItemCount()}
@@ -10,7 +10,7 @@
                 {block name='boxes-box-comparelist-title'}
                     <div class="h5 panel-heading dpflex-a-center">
                         {lang key='compare'}
-                        {if ($snackyConfig.filterOpen == 1 && $oBox->position == 'left') || ($oBox->position == 'bottom' && $snackyConfig.footerBoxesOpen === '0')}<span class="caret"></span>{/if}
+                        {if ($snackyConfig.filterOpen == 1 && $oBox->getPosition() == 'left') || ($oBox->getPosition() == 'bottom' && $snackyConfig.footerBoxesOpen === '0')}<span class="caret"></span>{/if}
                     </div>
                 {/block}
                 {block name='boxes-box-comparelist-collapse'}

@@ -32,8 +32,16 @@
 #prevNextRow .ar{
 	border-color: white;
 }
+#prevNextRow .product-pagination{
+    width: 7.5rem;
+}
 #prevNextRow h1{
-	max-width: calc(100% - 16rem);
+	max-width: calc(100% - 15rem);
+}
+@media screen and (min-width: 992px){
+    #prevNextRow h1{
+        margin: 0;
+    }
 }
 @media screen and (max-width: 991px){
 	#prevNextRow{

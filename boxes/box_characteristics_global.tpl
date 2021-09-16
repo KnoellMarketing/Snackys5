@@ -8,7 +8,7 @@
                 <img src="{$oMerkmal->cBildURLKlein}" alt="" class="vmiddle" />
             {/if}
             {$oMerkmal->cName}
-            {if ($snackyConfig.filterOpen == 1 && $oBox->position == 'left') || $oBox->position == 'bottom'}<span class="caret"></span>{/if}
+            {if ($snackyConfig.filterOpen == 1 && $oBox->getPosition() == 'left') || $oBox->getPosition() == 'bottom'}<span class="caret"></span>{/if}
         </div>
         <div class="box-body">
             {if ($oMerkmal->cTyp === 'SELECTBOX') && $oMerkmal->oMerkmalWert_arr|@count > 1}

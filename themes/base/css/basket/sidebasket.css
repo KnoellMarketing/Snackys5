@@ -60,6 +60,9 @@
 .sc-item .cols-name{
 	margin: 0 .75rem;
 }
+.sc-item .cols-name.noimg{
+    margin-left: 0;
+}
 .sc-sum{
 	padding: 1rem 0;
 }

@@ -8,11 +8,12 @@
     || (!$oNavigationsinfo->getManufacturer() && !$oNavigationsinfo->getCharacteristicValue() && !$oNavigationsinfo->getCategory()))
 	|| $oNavigationsinfo->getName()}
     {include file="snippets/zonen.tpl" id="opc_before_heading"}
+    
     <div class="title dpflex-a-center dpflex-j-between mb-spacer mb-small">
 		{if !isset($oNavigationsinfo)
 		|| (!$oNavigationsinfo->getManufacturer() && !$oNavigationsinfo->getCharacteristicValue() && !$oNavigationsinfo->getCategory())}
 			<h1 class="m0">{$Suchergebnisse->getSearchTermWrite()}</h1>
-		{elseif isset($oNavigationsinfo->oKategorie->categoryAttributes.seo_name)}
+		{elseif $oNavigationsinfo->getCategory() && !empty($oNavigationsinfo->getCategory()->categoryAttributes) && isset($oNavigationsinfo->getCategory()->categoryAttributes.seo_name)}
 			<h1>{$oNavigationsinfo->oKategorie->categoryAttributes.seo_name->cWert}</h1>
         {elseif $oNavigationsinfo->getName()}
 			<h1 class="m0">{$oNavigationsinfo->getName()}</h1>
@@ -90,7 +91,7 @@
         {foreach $oUnterKategorien_arr as $Unterkat}
             <div class="col-6 col-sm-4 col-md-4 col-lg-3{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-2{/if}">
                 <div class="thumbnail">
-                    {if $Einstellungen.navigationsfilter.artikeluebersicht_bild_anzeigen !== 'Y' && $Unterkat->getImageURL()|strpos:'gfx/keinBild.gif' === false && $Unterkat->getImageURL()|strpos:'gfx/keinBild_kl.gif' === false}
+                    {if $Einstellungen.navigationsfilter.artikeluebersicht_bild_anzeigen !== 'Y'}
                     <a href="{$Unterkat->getURL()}" class="block img-w">
                             <div class="img-ct{if $snackyConfig.imageratioCategory == '43'}  rt4x3{/if}">
 							{if $viewportImages < 4}
@@ -133,9 +134,9 @@
 {/if}
 {/block}
 
-
-{include file="snippets/extension.tpl"}
-
+{block name="productlist-header-extension"}
+    {include file="snippets/extension.tpl"}
+{/block}
 
 {if $Suchergebnisse->getSearchUnsuccessful() == true}
 	{include file="snippets/zonen.tpl" id="opc_before_no_results"}

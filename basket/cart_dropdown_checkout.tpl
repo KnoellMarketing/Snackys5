@@ -23,6 +23,7 @@
                     {if $oPosition->nPosTyp == C_WARENKORBPOS_TYP_ARTIKEL}
             			<div class="sc-item dropdown">
 							<div class="dpflex-a-center">
+                            {if $Einstellungen.kaufabwicklung.warenkorb_produktbilder_anzeigen === 'Y'}
                             <div class="cols-img">
 								<span class="img-ct">
 									{include file='snippets/image.tpl'
@@ -34,7 +35,8 @@
 										class='img-sm'}
 								</span>
                             </div>
-                            <div class="cols-name">
+                            {/if}
+                            <div class="cols-name{if $Einstellungen.kaufabwicklung.warenkorb_produktbilder_anzeigen != 'Y'} noimg{/if}">
                                 {$oPosition->nAnzahl|replace_delim}{if $oPosition->Artikel->cEinheit}{$oPosition->Artikel->cEinheit}{else}&times;{/if}
                                 <a href="{$oPosition->Artikel->cURLFull}" title="{$oPosition->cName|trans|escape:"html"}">
                                     {$oPosition->cName|trans}

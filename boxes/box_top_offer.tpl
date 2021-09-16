@@ -1,5 +1,5 @@
 {block name='boxes-box-top-offer'}
-{if $isMobile && $oBox->position == 'left'}
+{if $isMobile && $oBox->getPosition() == 'left'}
 {else}
     {lang key='topOffer' assign='slidertitle'}
     {assign var=moreLink value=$oBox->getURL()}

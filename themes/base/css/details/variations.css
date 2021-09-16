@@ -71,6 +71,9 @@
     font-size: .7rem;
     text-align: center;
 }
+.var-it .swatches .btn-img .img-ct{
+    box-shadow: 0 0 0 1px @lightborder;       
+}
 .var-it .swatches .btn-img:hover .img-ct,
 .var-it .swatches .btn-img.active .img-ct{
     box-shadow: 0 0 0 1px @brand;    
@@ -92,6 +95,9 @@
 .swatches .btn:not(.btn-img) .tag{
     display: inline;
     vertical-align: inherit;
+}
+.var-it .dropdown-menu .fa{
+    display: none;
 }
 @media screen and (max-width: 1800px){
     .var-it .swatches .btn-img.btn-default{

@@ -41,7 +41,7 @@
                     {assign var='activeParent' value=$activeParents[$i]}
                 {/if}
                 <li class="nav-it{if $category->getID() == $activeId || ((isset($activeParent) && isset($activeParent->getID())) && $activeParent->getID() == $category->getID())} active open{/if}{if is_array($category->categoryFunctionAttributes) && !empty($category->categoryFunctionAttributes["css_klasse"])} {$category->categoryFunctionAttributes["css_klasse"]}{/if}">
-                    <a href="{$category->cURL}"{if $hasItems} class="nav-sub dpflex"{/if} data-ref="{$category->getID()}">
+                    <a href="{$category->cURL}"{if $hasItems} class="nav-sub dpflex{if $category->getID() == $activeId || ((isset($activeParent) && isset($activeParent->getID())) && $activeParent->getID() == $category->getID())} active open{/if}"{/if} data-ref="{$category->getID()}">
                         {$category->getShortName()}
                         {if $hasItems}<i class="fa fa-caret-{$caret} nav-toggle"></i>{/if}
                     </a>

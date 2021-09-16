@@ -80,7 +80,7 @@
                                 </div>
                                 {if !$isMobile}
                                     <a href="{$hst->cSeo}" class="caption text-center block">
-                                        <strong>{$hst->cName}</strong>
+                                        <strong>{$hst->getName()}</strong>
                                 </a>
                                 {/if}
                             </div>{* /category-wrapper *}

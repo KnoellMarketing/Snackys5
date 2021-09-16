@@ -12,7 +12,7 @@
 
 	{if !isset($smarty.get.sidebar)}
 		{block name="content"}
-			{if !empty($Link->getTitle())}
+			{if !empty($Link->getTitle()) && $Link->getLinkType() != $smarty.const.LINKTYP_404}
 				{include file="snippets/zonen.tpl" id="opc_before_heading"}
 				<h1>{$Link->getTitle()}</h1>
 			{elseif isset($bAjaxRequest) && $bAjaxRequest}
@@ -24,7 +24,7 @@
 				{include file="snippets/extension.tpl"}
 			{/if}
 
-			{if !empty($Link->getContent()) && $Link->getLinkType() != $smarty.const.LINKTYP_STARTSEITE}
+			{if !empty($Link->getContent()) && $Link->getLinkType() != $smarty.const.LINKTYP_STARTSEITE && $Link->getLinkType() != $smarty.const.LINKTYP_404}
 				{if $snackyConfig.optimize_content == "Y"}{$Link->getContent()|optimize}{else}{$Link->getContent()}{/if}
 			{/if}
 

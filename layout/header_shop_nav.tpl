@@ -18,33 +18,32 @@
 {/block}
 {/if}
 {block name="navbar-top-user"}
-	
-	{*  ACCOUNT *}
-	<div class="dropdown">
-		<a href="#" data-toggle="modal" data-target="#login-popup" {if empty($smarty.session.Kunde->kKunde)}title="{lang key='login'}"{else}title="{lang key='hello'}"{/if}>
-			<span class="img-ct icon icon-xl">
-				<svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-				  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-user"></use>
-				</svg>
-			</span>
-		</a>
-		{include file='layout/header_shopnav_user.tpl'}
-	</div>
-	{*  ACCOUNT END *}
+    {block name="navbar-top-user-account"}
+    <div class="dropdown">
+        <a href="#" data-toggle="modal" data-target="#login-popup" {if empty($smarty.session.Kunde->kKunde)}title="{lang key='login'}"{else}title="{lang key='hello'}"{/if}>
+            <span class="img-ct icon icon-xl">
+                <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
+                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-user"></use>
+                </svg>
+            </span>
+        </a>
+        {include file='layout/header_shopnav_user.tpl'}
+    </div>
+    {/block}
 
-{*  COMPARE LIST *}
-{include file='layout/header_shop_nav_compare.tpl'}
-{*  COMPARE LIST *}
+    {block name="navbar-top-user-compare"}
+        {include file='layout/header_shop_nav_compare.tpl'}
+    {/block}
 
-{*  WISH LIST *}
-{include file='layout/header_shop_nav_wish.tpl'}
-{*  WISH LIST *}
+    {block name="navbar-top-user-wish"}
+        {include file='layout/header_shop_nav_wish.tpl'}
+    {/block}
 
-{*  CART *}
-<div class="cart-menu dropdown{if $WarenkorbArtikelPositionenanzahl >= 1} items{/if}{if $nSeitenTyp == 3} current{/if}{if isset($bWarenkorbHinzugefuegt) && $bWarenkorbHinzugefuegt} open{/if}" data-toggle="basket-items">
-    {include file='basket/cart_dropdown_label.tpl'}
-</div>
-{*  CART END *}
+    {block name="navbar-top-user-cart"}
+    <div class="cart-menu dropdown{if $WarenkorbArtikelPositionenanzahl >= 1} items{/if}{if $nSeitenTyp == 3} current{/if}{if isset($bWarenkorbHinzugefuegt) && $bWarenkorbHinzugefuegt} open{/if}" data-toggle="basket-items">
+        {include file='basket/cart_dropdown_label.tpl'}
+    </div>
+    {/block}
 {/block}{* /navbar-top-user *}
 </div>{* /shop-nav *}
 {/strip}

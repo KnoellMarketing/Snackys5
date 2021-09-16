@@ -13,15 +13,22 @@
 	overflow: hidden;
 }
 #pnf{
-	height: 60vh;
+	min-height: 60vh;
 	position: relative;
+    padding: 2rem;
 }
-#pnf h1{
+#pnf h1.xl{
 	font-size: 9rem;
-	margin: 0;
+}
+#pnf h1.lg{
+	font-size: 5rem;
+}
+#pnf p{
+    font-size: 1.3rem;
 }
 #pnf h1,
-#pnf h2{
+#pnf h2,
+#pnf p{
 	color: white;
 }
 #pnf .btn:first-letter{
@@ -30,4 +37,20 @@
 #pnf .btn{
 	padding-left: 2rem;
 	padding-right: 2rem;
+}
+@media screen and (max-width: 991px){
+    #pnf h1.xl{
+        font-size: 7rem;
+    }
+    #pnf h1.lg{
+        font-size: 3rem;
+    }
+    #pnf p{
+        font-size: 1.1rem;
+    }   
+}
+@media screen and (max-width: 767px){
+    #shop-nav{
+        margin-bottom: 0;
+    }
 }

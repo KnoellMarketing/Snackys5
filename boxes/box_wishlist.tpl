@@ -1,5 +1,5 @@
 {block name='boxes-box-wishlist'}
-{if $isMobile && $oBox->position == 'left'}
+{if $isMobile && $oBox->getPosition() == 'left'}
 {else}
     {if $oBox->getItems()|count > 0}
         <section class="box box-wishlist box-normal panel small" id="sidebox{$oBox->getID()}">
@@ -7,7 +7,7 @@
                 {block name='boxes-box-wishlist-title'}
                     <div class="h5 panel-heading dpflex-a-center">
                         {lang key='wishlist'}
-                        {if ($snackyConfig.filterOpen == 1 && $oBox->position == 'left') || ($oBox->position == 'bottom' && $snackyConfig.footerBoxesOpen === '0')}<span class="caret"></span>{/if}
+                        {if ($snackyConfig.filterOpen == 1 && $oBox->getPosition() == 'left') || ($oBox->getPosition() == 'bottom' && $snackyConfig.footerBoxesOpen === '0')}<span class="caret"></span>{/if}
                     </div>
                 {/block}
                 {block name='boxes-box-wishlist-collapse'}

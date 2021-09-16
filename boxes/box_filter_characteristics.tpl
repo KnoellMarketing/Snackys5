@@ -20,7 +20,7 @@
                     {if $Einstellungen.navigationsfilter.merkmal_anzeigen_als !== 'B'}
                         {$characteristic->cName}
                     {/if}
-                    {if ($snackyConfig.filterOpen == 1 && $oBox->position == 'left') || ($oBox->position == 'bottom' && $snackyConfig.footerBoxesOpen === '0')}<span class="caret"></span>{/if}
+                    {if ($snackyConfig.filterOpen == 1 && $oBox->getPosition() == 'left') || ($oBox->getPosition() == 'bottom' && $snackyConfig.footerBoxesOpen === '0')}<span class="caret"></span>{/if}
                 </div>
                 <div class="panel-body">
                     {block name='boxes-box-filter-characteristics-characteristics'}

@@ -556,7 +556,6 @@ body.lightbox-shown{
     height: 100%;
     overflow: hidden;
     width: 100%;
-    position: fixed;
 }
 body.show-sidebar #evo-nav-wrapper{
     z-index: -1;
@@ -661,13 +660,10 @@ a.tag:hover{
     	max-width: calc(@maxPageWidthpx + 100px);
 	}
     h1, .h1{
-        font-size: 2.9rem;
+        font-size: 2.4rem;
     }
 }
 @media screen and (max-width: 1199px){
-    h1, .h1{
-        font-size: 2.75rem;
-    }
     h2, .h2 {
         font-size: 2rem;
     }
@@ -680,7 +676,7 @@ a.tag:hover{
 }
 @media screen and (max-width: 991px){
     h1, .h1{
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
     h2, .h2 {
         font-size: 1.9rem;

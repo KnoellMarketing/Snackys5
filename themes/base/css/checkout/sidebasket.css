@@ -3,6 +3,7 @@
 }
 .sc-sum .panel{
     background: white;
+    width: 100%;
 }
 .sc-item .small strong{
     font-weight: 500;

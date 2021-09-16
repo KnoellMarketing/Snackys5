@@ -14,6 +14,7 @@
 		</div>
 		<div class="modal-body">
 		{if empty($smarty.session.Kunde->kKunde)}
+            {block name='layout-header-shopnav-user-offline'}
 			<form action="{get_static_route id='jtl.php' secure=true}" method="post" class="form evo-validate">
 				{$jtl_token}
 				<div class="form-group">
@@ -47,8 +48,11 @@
 			<hr>
 			<span class="text-center block h4">{lang key='newHere'}</span>
 			<a href="{get_static_route id='registrieren.php'}" title="{lang key='registerNow'}" class="btn btn-block btn-lg">{lang key='registerNow'}</a>
-    {else}
+            {/block}
+        {else}
+            {block name='layout-header-shopnav-user-online'}
 			<div class="nav blanklist">
+                {block name='layout-header-shopnav-user-user'}
 				<a href="{get_static_route id='jtl.php' secure=true}" title="{lang key='myAccount'}" class="dpflex-a-center dpflex-j-between nav-it defaultlink">
 					{lang key='myAccount'}
 					<span class="img-ct icon icon-wt ic-md">
@@ -57,6 +61,8 @@
 						</svg>
 					</span>
 				</a>
+                {/block}
+                {block name='layout-header-shopnav-user-orders'}
 				<a href="{get_static_route id='jtl.php' params=['bestellungen' => 1]}" class="dpflex-a-center dpflex-j-between nav-it defaultlink">
 					{lang key="orders" section="account data"}
 					<span class="img-ct icon icon icon-wt ic-md">
@@ -65,6 +71,8 @@
 						</svg>
 					</span>
 				</a>
+                {/block}
+                {block name='layout-header-shopnav-user-adress'}
 				<a href="{get_static_route id='jtl.php' params=['editRechnungsadresse' => 1]}" class="dpflex-a-center dpflex-j-between nav-it defaultlink">
 					{lang key="addresses" section="account data"}
 					<span class="img-ct icon icon icon-wt ic-md">
@@ -73,6 +81,8 @@
 						</svg>
 					</span>
 				</a>
+                {/block}
+                {block name='layout-header-shopnav-user-wishlist'}
 				{if $Einstellungen.global.global_wunschliste_anzeigen === 'Y'}
 					<a href="{get_static_route id='jtl.php' params=['wllist' => 1]}" class="dpflex-a-center dpflex-j-between nav-it defaultlink">
 						{lang key="wishlists" section="account data"}
@@ -83,6 +93,8 @@
 						</span>
 					</a>
 				{/if}
+                {/block}
+                {block name='layout-header-shopnav-user-compare'}
 				{if $Einstellungen.vergleichsliste.vergleichsliste_anzeigen === 'Y' && !empty($smarty.session.Vergleichsliste->oArtikel_arr) && $smarty.session.Vergleichsliste->oArtikel_arr|count > 0}
 					<a href="{get_static_route id='vergleichsliste.php'}" class="dpflex-a-center dpflex-j-between nav-it defaultlink">
 						{lang key="compare" sektion="global"}
@@ -93,6 +105,8 @@
 						</span>
 					</a>
 				{/if}
+                {/block}
+                {block name='layout-header-shopnav-user-reviews'}
                 <a href="{get_static_route id='jtl.php' params=['bewertungen' => 1]}" class="dpflex-a-center dpflex-j-between nav-it defaultlink">
                     {lang key='allRatings'}
                     <span class="img-ct icon icon icon-wt ic-md">
@@ -101,7 +115,9 @@
                         </svg>
                     </span>
                 </a>
+                {/block}
 			</div>
+            {/block}
     	{/if}
 		</div>
         {if !empty($smarty.session.Kunde->kKunde)}

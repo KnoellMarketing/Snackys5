@@ -71,7 +71,6 @@
                             max="{$Artikel->FunktionsAttribute[$smarty.const.FKT_ATTRIBUT_MAXBESTELLMENGE]|default:''}"
                             {if $Artikel->fAbnahmeintervall > 0}step="{$Artikel->fAbnahmeintervall}"{/if}
                             size="2"
-                            id="quantity{$Artikel->kArtikel}"
                             class="quantity form-control text-right"
                             name="anzahl""
                             autocomplete="off"

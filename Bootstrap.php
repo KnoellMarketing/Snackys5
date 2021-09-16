@@ -69,7 +69,8 @@ class Bootstrap extends Bootstrapper
 			->registerPlugin(Smarty::PLUGIN_FUNCTION, 'snackys_content', [$plugins,'snackys_content'])
 			->registerPlugin(Smarty::PLUGIN_FUNCTION, 'getLink', [$plugins,'getLink'])
 			->registerPlugin(Smarty::PLUGIN_FUNCTION, 'getActiveOPCItems', [$plugins,'getActiveOPCItems'])
-			->registerPlugin(Smarty::PLUGIN_FUNCTION, 'getDeliveryDate', [$plugins,'getDeliveryDate']);
+			->registerPlugin(Smarty::PLUGIN_FUNCTION, 'getDeliveryDate', [$plugins,'getDeliveryDate'])
+			->registerPlugin(Smarty::PLUGIN_FUNCTION, 'consentActiveClass', [$plugins,'consentSeen']);
 
 		//Alte Evo Funktionen, ggf. mal ersetzen??
 		$smarty->registerPlugin(Smarty::PLUGIN_FUNCTION, 'load_boxes',[$plugins, 'load_boxes'])

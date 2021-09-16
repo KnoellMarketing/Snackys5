@@ -353,7 +353,6 @@ function addValidationListener() {
         $body      = $('body');
 
     for (var i = 0; i < forms.length; i++) {
-		console.log(forms[i]);
         forms[i].addEventListener('invalid', function (event) {
             event.preventDefault();
             $(event.target).closest('.form-group').find('div.form-error-msg').remove();

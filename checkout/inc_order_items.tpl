@@ -28,7 +28,7 @@
     {if !$oPosition->istKonfigKind()}
         <div class="type-{$oPosition->nPosTyp} c-it{if isset($isSidebar)} sb-it{/if}{if isset($isCheckout)} sb-it{/if}">
             <div class="row">
-                {* if $Einstellungen.kaufabwicklung.warenkorb_produktbilder_anzeigen === 'Y' *}
+                {if $Einstellungen.kaufabwicklung.warenkorb_produktbilder_anzeigen === 'Y'}
                     <div class="img-col col-3 col-sm-2 col-md-2">
                         {if !empty($oPosition->Artikel->cVorschaubild)}
                         <a href="{$oPosition->Artikel->cURLFull}" title="{$oPosition->cName|trans}" class="img-ct w100">
@@ -49,8 +49,8 @@
                         </a>
                         {/if}
                     </div>
-                {* /if *}
-                <div class="inf-col col-9 col-sm-10 col-md-10">
+                {/if}
+                <div class="inf-col{if $Einstellungen.kaufabwicklung.warenkorb_produktbilder_anzeigen === 'Y'} col-9 col-sm-10 col-md-10{else} col-12{/if}">
                     <div class="row first">
                         <div class="col-8 col-md-8 col-lg-9">
                              {if $oPosition->nPosTyp == $C_WARENKORBPOS_TYP_ARTIKEL || $oPosition->nPosTyp == $C_WARENKORBPOS_TYP_GRATISGESCHENK}

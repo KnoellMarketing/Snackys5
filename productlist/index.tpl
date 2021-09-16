@@ -26,7 +26,7 @@
 	{assign var="viewportImages" value=0 scope="global"}
 	{foreach name=navi from=$Brotnavi item=oItem}
 		{if $smarty.foreach.navi.total == $smarty.foreach.navi.iteration}
-			{assign var=cate value=$oItem->name}
+			{assign var=cate value=$oItem->getName()}
 		{/if}
 	{/foreach}
 
@@ -95,7 +95,7 @@
         
                     
         {block name="top-top-scroller"}
-        {if $Suchergebnisse->GesamtanzahlArtikel >= 20}
+        {if $Suchergebnisse->getProducts()|@count >= 20}
                 <a href="#top" id="nfity-scroll" class="dpflex-a-c dpflex-j-c">
                     <span class="ar ar-u"></span>
                 </a>
@@ -105,7 +105,6 @@
         {block name="productlist-results"}
 			{if $Suchergebnisse->getProducts()|@count > 0}
 				{include file="snippets/zonen.tpl" id="opc_before_products"}
-				
 				<div class="row row-multi mb-spacer {$style}" id="p-l" itemprop="mainEntity" itemscope itemtype="http://schema.org/ItemList">
 					{if $Suchergebnisse->Seitenzahlen->AktuelleSeite > 1 && !isset($smarty.post.isAjax) && $snackyConfig.useEndlessScrolling == 'Y'}
 						<div class="el-sc endless-scrolling text-center block w100 form-group"><button id="view-prev" class="btn" data-url="{$oNaviSeite_arr.zurueck->cURL}">{lang key="loadPrev" section="custom"}</button></div>

@@ -6,7 +6,7 @@
         {assign var="VariationsSource" value="VariationenOhneFreifeld"}
     {/if}
     {assign var="oVariationKombi_arr" value=$Artikel->getChildVariations()}
-    <div class="updatingStockInfo col-12 text-center"><i class="fa fa-spinner fa-spin" title="{lang key='updatingStockInformation' section='productDetails'}"></i></div>
+    <div class="updatingStockInfo col-12 text-center"></div>
 
     <div class="variations {if $simple}simple{else}switch{/if}-variations {if !isset($smallView) || !$smallView}mb-sm{else}mb-xxs{/if}">
         {foreach name=Variationen from=$Artikel->$VariationsSource key=i item=Variation}

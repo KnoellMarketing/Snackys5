@@ -4,14 +4,14 @@
     <Author>Knoell Marketing</Author>
     <URL>https://www.knoell-marketing.de</URL>
     <MinShopVersion>5.0.3</MinShopVersion>
-    <Version>5.0.3</Version>
+    <Version>5.0.5</Version>
     <Preview>preview-snackys.png</Preview>
     <Description>Ultraschnelles responsive JTL Template von Knoell Marketing</Description>
     <Framework>Bootstrap4</Framework>
 	<ExsID>31fe34e5-f40d-4a6d-864e-2d2ec94c10fb</ExsID>
 	<Settings>
 		<Section Name="Allgemein" Key="general">
-            <Setting Description="Komprimierung von JavaScript- und CSS-Dateien" Key="use_minify" Type="select" Value="N">
+            <Setting Description="Komprimierung von JavaScript- und CSS-Dateien" Key="use_minify" Type="select" Value="Y">
                 <Option Value="Y">Ja</Option>
                 <Option Value="static">Ja, statisch</Option>
                 <Option Value="N">Nein</Option>
@@ -23,6 +23,10 @@
             <Setting Description="Aufgabenplaner-Blindgrafik aktivieren?" Key="use_cron" Type="select" Value="N">
                 <Option Value="N">Nein</Option>
                 <Option Value="Y">Ja (Nicht empfohlen, besser Cronjobs)</Option>
+            </Setting>
+            <Setting Description="Typeahead Bundle" Key="use_typehead" Type="select" Value="N">
+                <Option Value="N">Nein (nur Fallback)</Option>
+                <Option Value="Y">Ja (performancelastig, nur aktivieren wenn Plugins das brauchen)</Option>
             </Setting>
 		</Section>
 		<Section Name="Theme" Key="theme">
@@ -143,6 +147,10 @@
 				<File Path="js/Chart.js" DependsOnSettingGroup="CONF_PREISVERLAUF" DependsOnSetting="preisverlauf.preisverlauf_anzeigen" DependsOnSettingValue="Y"/>
 				<File Path="js/nouislider.min.js" />
 				<File Path="js/slick-lightbox.min.js" />
+				
+				
+				<File Path="js/typeahead.bundle.js" DependsOnSettingGroup="CONF_TEMPLATE" DependsOnSetting="template.general.use_typehead" DependsOnSettingValue="Y"/>
+				<File Path="js/typeahead.fallback.js" DependsOnSettingGroup="CONF_TEMPLATE" DependsOnSetting="template.general.use_typehead" DependsOnSettingValue="N"/>
 					
 				<!-- New -->
 				<File Path="js/consent.js"/>

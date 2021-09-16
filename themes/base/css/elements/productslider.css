@@ -36,7 +36,10 @@
     margin-left: auto;
 }
 .panel-slider .btn-group.ar-ct{
-    margin: 0 .5rem 0 0;
+    margin: 0;
+}
+.panel-slider .right .btn-primary{
+    margin-left: .5rem;
 }
 .panel-slider .panel-heading .ar-ct .sl-nx,
 #gallery .sl-pr{

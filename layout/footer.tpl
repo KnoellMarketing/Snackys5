@@ -6,40 +6,6 @@
     </div>{* /content *}
 	{if $smallversion && !($isMobile && !$isTablet)}
 		<div class="col-md-4 col-lg-3" id="checkout-cart">
-			{*<div class="items-list">
-			{include file="checkout/inc_order_items.tpl" isCheckout="1"}</div>
-			<div id="checkout-total-sum">
-				{if $NettoPreise}
-					<div class="total-net">
-						<span class="price_label"><strong>{lang key="totalSum" section="global"} ({lang key="net" section="global"}):</strong></span>
-						<strong class="price total-sum">{$WarensummeLocalized[$NettoPreise]}</strong>
-					</div>
-				{/if}
-
-				{if $Einstellungen.global.global_steuerpos_anzeigen !== 'N' && $Steuerpositionen|@count > 0}
-					{foreach name=steuerpositionen from=$Steuerpositionen item=Steuerposition}
-						<div class="tax">
-							{if $Einstellungen.kaufabwicklung.warenkorb_produktbilder_anzeigen === 'Y'}
-								<td class="hidden-xs"></td>
-							{/if}
-							<span class="tax_label">{$Steuerposition->cName}:</span>
-							<span class="tax_label">{$Steuerposition->cPreisLocalized}</span>
-						</div>
-					{/foreach}
-				{/if}
-
-				{if isset($smarty.session.Bestellung->GuthabenNutzen) && $smarty.session.Bestellung->GuthabenNutzen == 1}
-					 <div class="customer-credit">
-						 <span>{lang key="useCredit" section="account data"}</span>
-						  <span>{$smarty.session.Bestellung->GutscheinLocalized}</span>
-					 </div>
-				{/if}
-
-				<div class="total info">
-					<span class="price_label"><strong>{lang key="totalSum" section="global"}:</strong></span>
-					<strong class="price total-sum">{$WarensummeLocalized[0]}</strong>
-				</div>
-			</div>*}
 			{include file="basket/cart_dropdown_checkout.tpl"}
 		</div>
 	{/if}
@@ -80,6 +46,7 @@
 	{if $snackyConfig.paymentWall != 0 && $nSeitenTyp!=11 && !$isMobile}
 		{getZahlungsarten cAssign="zahlungsartenFooter"}
 		{if $zahlungsartenFooter}
+        {assign var="zahlungsartPre" value="0"}
 			<div id="pay-f" class="hidden-xs mt-md">
 				<div class="mw-container">
                     <ul class="blanklist dpflex-a-c dpflex-j-c dpflex-wrap">
@@ -202,7 +169,7 @@
 											{if isset($smarty.session.Waehrungen) && $smarty.session.Waehrungen|@count > 1}
 											<div class="dropdown">
 												<a href="#" class="dropdown-toggle btn btn-primary btn-block btn-sm" data-toggle="dropdown" title="{lang key='selectCurrency'}">
-													{$smarty.session.Waehrung->cName}
+													{$smarty.session.Waehrung->getName()}
 													<span class="caret"></span></a>
 												<ul id="currency-dropdown" class="dropdown-menu dropdown-menu-left">
 												{foreach from=$smarty.session.Waehrungen item=oWaehrung}

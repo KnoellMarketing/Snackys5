@@ -1,5 +1,5 @@
 {block name='boxes-box-basket'}
-{if $isMobile && $oBox->position == 'left'}
+{if $isMobile && $oBox->getPosition() == 'left'}
 {else}
 {if $smarty.session.Warenkorb->PositionenArr|@count > 0}
 <section class="panel small" id="sidebox{$oBox->getID()}">
@@ -7,7 +7,7 @@
         {block name='boxes-box-basket-title'}
             <div class="h5 panel-heading dpflex-a-center">
                 {lang key='yourBasket'}
-                {if ($snackyConfig.filterOpen == 1 && $oBox->position == 'left') || ($oBox->position == 'bottom' && $snackyConfig.footerBoxesOpen === '0')}<span class="caret"></span>{/if}
+                {if ($snackyConfig.filterOpen == 1 && $oBox->getPosition() == 'left') || ($oBox->getPosition() == 'bottom' && $snackyConfig.footerBoxesOpen === '0')}<span class="caret"></span>{/if}
             </div>
         {/block}
         {block name='boxes-box-basket-body'}

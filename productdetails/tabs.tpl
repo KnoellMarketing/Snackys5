@@ -137,15 +137,6 @@
                     </span>
                 </li>
             {/foreach}
-        {/if}
-
-        {if isset($oAehnlicheArtikel_arr) && count($oAehnlicheArtikel_arr) > 0}
-            <li role="presentation">
-                <span aria-controls="p-slider-related" role="tab" data-toggle="tab">
-                    {lang key='RelatedProducts' section='productDetails'}
-                </span>
-            </li>
-
         {/if}	
     </ul>
     {/if}
@@ -321,28 +312,6 @@
                             </div>
                         {/if}
                     {/foreach}
-                {/if}
-            {/block}
-            {block name="tabs-aehnliches"}
-                {if isset($oAehnlicheArtikel_arr) && count($oAehnlicheArtikel_arr) > 0}
-                <div class="tab-ct panel-default" id='p-slider-related'>
-                    <div class="panel-heading dpflex-a-center dpflex-j-between">
-                        <h2 class="panel-title h3 m0">{lang key='RelatedProducts' section='productDetails'}</h2>
-                        <span class="img-ct icon">
-                            <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-caret"></use>
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="panel-body{if !$tabanzeige} mb-md{/if}">
-                        {lang key='RelatedProducts' section='productDetails' assign='slidertitle'}
-                        {if $tabanzeige}
-                            {include file='snippets/product_slider.tpl' class='x-related' id='slider-related' productlist=$oAehnlicheArtikel_arr title=$slidertitle}
-                        {else}
-                            {include file='snippets/product_slider.tpl' class='x-related' id='slider-related' productlist=$oAehnlicheArtikel_arr}
-                        {/if}
-                    </div>
-                </div>
                 {/if}
             {/block}
         {/block}

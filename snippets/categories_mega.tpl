@@ -41,12 +41,16 @@
         {if !isset($activeParents) && ($nSeitenTyp == 1 || $nSeitenTyp == 2)}
             {get_category_parents categoryId=$activeId assign='activeParents'}
         {/if}
+
+        {assign var="noImgUrl" value="{$ShopURL}/gfx/keinBild.gif"}
         {foreach name='categories' from=$categories item='category'}
             {assign var='isDropdown' value=false}
             {if isset($category->hasChildren()) && $category->hasChildren()}
                 {assign var='isDropdown' value=true}
             {/if}
-            <li class="{if $isDropdown}mgm-fw{/if}{if $category->getID() == $activeId || (isset($activeParents[0]) && $activeParents[0]->getID() == $category->getID())} active{/if}{if is_array($category->KategorieAttribute) && !empty($category->KategorieAttribute["css_klasse"])} {$category->KategorieAttribute["css_klasse"]}{/if}">
+
+            {assign var="catFunctions" value=$category->getFunctionalAttributes()}
+            <li class="{if $isDropdown}mgm-fw{/if}{if $category->getID() == $activeId || (isset($activeParents[0]) && $activeParents[0]->getID() == $category->getID())} active{/if}{if !empty($catFunctions["css_klasse"])} {$catFunctions["css_klasse"]}{/if}">
                 <a href="{$category->getURL()}" class="mm-mainlink">
                     {$category->getShortName()}
                     {if $isDropdown}<span class="caret hidden-xs"></span>{include file='snippets/mobile-menu-arrow.tpl'}{/if}
@@ -56,10 +60,10 @@
                         <li class="mgm-c mw-container">
                                 <div class="row dpflex-a-start">
                                     {assign var=hasInfoColumn value=false}
-                                    {if isset($snackyConfig.show_maincategory_info) && $snackyConfig.show_maincategory_info !== 'N' && ($category->cBildURL !== 'gfx/keinBild.gif' || !empty($category->cBeschreibung))}
+                                    {if isset($snackyConfig.show_maincategory_info) && $snackyConfig.show_maincategory_info !== 'N' && ($category->getImageUrl() !== $noImgUrl || !empty($category->getDescription()))}
                                         {assign var=hasInfoColumn value=true}
                                         <div class="col-md-4 col-lg-3 hidden-xs hidden-sm info-col">
-											{if $category->cBildURL !== 'gfx/keinBild.gif' && isset($snackyConfig.show_category_images) && $snackyConfig.show_category_images !== 'N'}
+											{if $category->getImageUrl() !== $noImgUrl && isset($snackyConfig.show_category_images) && $snackyConfig.show_category_images !== 'N'}
 												<a href="{$category->getURL()}" class="block">
 													<span class="img-ct{if $snackyConfig.imageratioCategory == '43'} rt4x3{/if}">
 													{include file='snippets/image.tpl'
@@ -72,7 +76,7 @@
 											{/if}
 											<div class="description">
 												<a class="h4 block m0" href="{$category->getURL()}">
-													{$category->cName}
+													{$category->getShortName()}
 												</a>
 												<p>
 													{$category->getDescription()|strip_tags|escape:"html"|truncate:200}

@@ -20,7 +20,7 @@
             <div class="card-body">
                 <div class="dpflex-j-between mb-xs">
                     {$Bewertung->cText}
-                    <div class="right">
+                    {*<div class="right">
                         <a href="{$ShopURL}/bewertung.php?a={$Bewertung->kArtikel}&bfa=1" class="btn btn-ic">
                             
                         <span class="img-ct icon">
@@ -29,7 +29,7 @@
                             </svg>
                         </span>
                         </a>
-                    </div>
+                    </div>*}
                 </div>
                     {if !empty($Bewertung->cAntwort)}
                         <div class="review card mb-xs">
@@ -45,7 +45,7 @@
                     {/if}
                 <div class="small">
                     {if !empty($Bewertung->fGuthabenBonus)}
-                        {lang key='balance bonus' section='product rating'}: {$Bewertung->fGuthabenBonus|gibPreisStringLocalized}
+                        {lang key='balance bonus' section='product rating'}: {$Bewertung->fGuthabenBonus} | 
                     {/if}
                     {if $Bewertung->nAktiv == 1}
                         {lang key='feedback activated' section='product rating'}
@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-<hr class="invisible hr-sm">
+        <hr class="invisible hr-sm">
         {/foreach}
 {/if}
 {/block}

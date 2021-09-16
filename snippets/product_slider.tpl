@@ -41,7 +41,7 @@
                     {/if}
                 </div>
                 {else}
-                {if ($snackyConfig.filterOpen == 1 && $oBox->position == 'left') || ($oBox->position == 'bottom' && $snackyConfig.footerBoxesOpen === '0')}<span class="caret"></span>{/if}
+                {if ($snackyConfig.filterOpen == 1 && $oBox->getPosition() == 'left') || ($oBox->getPosition() == 'bottom' && $snackyConfig.footerBoxesOpen === '0')}<span class="caret"></span>{/if}
                 {/if}
             </div>
             {if !empty($desc)}<div class="desc mb-spacer mb-xs">{$desc}</div>{/if}
