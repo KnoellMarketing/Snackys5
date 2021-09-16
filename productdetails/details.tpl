@@ -8,6 +8,7 @@
     {/if}
 
     {block name="product-pagination"}
+    {if $Einstellungen.artikeldetails.artikeldetails_navi_blaettern == 'Y' && isset($NavigationBlaettern)}
         <div id="prevNextRow" class="dpflex-a-center dpflex-j-between dpflex-wrap mb-spacer mb-small hidden-xs">
             <div class="visible-lg visible-md product-pagination previous">
                 {if isset($NavigationBlaettern->vorherigerArtikel) && $NavigationBlaettern->vorherigerArtikel->kArtikel}
@@ -35,6 +36,9 @@
                 {/if}
             </div>
         </div>
+    {else}
+    <hr class="invisible hr-sm hidden-xs">
+    {/if}
     {/block}
 
     {foreach name=navi from=$Brotnavi item=oItem}
