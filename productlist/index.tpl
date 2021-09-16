@@ -12,9 +12,10 @@
         {include file='layout/header.tpl'}
     {/if}
 {/block}
-
+{if !isset($smarty.get.sidebar)}
 {include file="productwizard/index.tpl"}
-{if !$ismobile}
+{/if}
+{if !$ismobile && !isset($smarty.get.sidebar)}
     {include file="productlist/filter_top.tpl"}
 {/if}
 {include file="snippets/zonen.tpl" id="opc_before_result_options"}

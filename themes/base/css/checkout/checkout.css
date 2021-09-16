@@ -157,7 +157,7 @@ form-register > .panel-wrap > fieldset:first-of-type legend{
 }
 #choose-way .step-box:hover,
 #choose-way .step-box.active{
-	background: #f2f2f2;
+    background: @defaultborder;
 }
 #choose-way .step-box.first{
 	right: -1px;

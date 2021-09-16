@@ -57,6 +57,7 @@
             </div>
             <div class="product-info col-12 col-sm-6">
             {block name="productdetails-info"}
+            {block name="productdetails-details-info"}
                 
 				{block name="product-headline-block"}
                 {if $Einstellungen.artikeldetails.artikeldetails_navi_blaettern !== 'Y' && !isset($NavigationBlaettern)}
@@ -342,6 +343,7 @@
                     <script id="varKombiArr" type="application/json">{$varKombiJSON}</script>
                     {/if}
                 </div>
+            {/block}{* productdetails-detail-info *}
             {/block}{* productdetails-info *}
 			{include file="snippets/zonen.tpl" id="after_product_info" title="after_product_info"}
 			

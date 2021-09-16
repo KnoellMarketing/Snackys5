@@ -82,11 +82,6 @@
                     </fieldset>
                 </div>
                 {/if}
-				{if isset($bAjaxRequest) && $bAjaxRequest}
-				<div class="hidden" id="checkout-cart-ajaxversand">
-					{include file="basket/cart_dropdown_checkout.tpl"}
-				</div>
-				{/if}
                 <div class="panel-wrap">
                     <fieldset id="fieldset-payment">
                         <legend>{lang section='global' key='paymentOptions'}</legend>
@@ -97,10 +92,15 @@
                 <div class="text-right">
                     <input type="hidden" name="versandartwahl" value="1" />
                     <input type="hidden" name="zahlungsartwahl" value="1" />
-                    <input type="submit" value="{lang key="continueOrder" section="account data"}" class="submit btn btn-lg submit_once btn-primary hidden" />
+                    <input type="submit" value="{lang key="continueOrder" section="account data"}" class="submit btn btn-lg submit_once btn-primary" />
                 </div>
                 {/if}
             </form>
+			{if isset($bAjaxRequest) && $bAjaxRequest}
+			<div class="hidden" id="checkout-cart-ajaxversand">
+				{include file="basket/cart_dropdown_checkout.tpl"}
+			</div>
+			{/if}
         {/if}
     </div>
 </div>

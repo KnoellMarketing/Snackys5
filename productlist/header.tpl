@@ -7,8 +7,8 @@
 {if (!isset($oNavigationsinfo)
     || (!$oNavigationsinfo->getManufacturer() && !$oNavigationsinfo->getCharacteristicValue() && !$oNavigationsinfo->getCategory()))
 	|| $oNavigationsinfo->getName()}
+    {include file="snippets/zonen.tpl" id="opc_before_heading"}
     <div class="title dpflex-a-center dpflex-j-between mb-spacer mb-small">
-		{include file="snippets/zonen.tpl" id="opc_before_heading"}
 		{if !isset($oNavigationsinfo)
 		|| (!$oNavigationsinfo->getManufacturer() && !$oNavigationsinfo->getCharacteristicValue() && !$oNavigationsinfo->getCategory())}
 			<h1 class="m0">{$Suchergebnisse->getSearchTermWrite()}</h1>
@@ -37,7 +37,7 @@
                 {/if}
             </div>
         {elseif count($Suchergebnisse->getProducts()) > 0}
-            <div class="visible-xs visible-sm ml-xs c-pt" id="ftr-tg">
+            <div id="ftr-tg">
                 <div class="img-ct icon ic-lg">
                     <svg class="">
                         <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-filter"></use>

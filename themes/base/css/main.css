@@ -973,3 +973,7 @@ body .jtl_search_results{
 #opc #opcDeleteModal .modal-dialog{
     max-width: none !important;
 }
+/* Trustami */
+#trustami_jtl_footer{
+    margin-bottom: 2rem;
+}

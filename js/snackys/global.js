@@ -506,6 +506,9 @@ function snackys()
 						for(t = document.querySelectorAll("#sp-l .overlay-bg,#sp-l .close-sidebar"), e = 0; e < t.length; e++) t[e].addEventListener("click", function(e) {
 							e.preventDefault(), document.body.classList.remove("show-sidebar")
 						});
+						//Set Price Range Slider
+						if( $('.js-price-range-box').length )
+							$.evo.initPriceSlider($('.js-price-range-box'), $('#js-price-redirect').val() != 1);
 					},false,false,'#sp-l');
 					$('#sp-l').removeClass('lazy');
 				}

@@ -2,35 +2,33 @@
     margin-bottom: 3rem;
 }
 .accordeon .card{
-    padding-left: 2.5rem;
+    border-radius: 0;
+    border-bottom-width: 0;
 }
-.accordeon .card:not(:last-child){
-    padding-bottom: 1.3rem;
-    margin-bottom: 1.3rem;
-    border-bottom: 1px solid @lightborder;
+.accordeon .card:first-child{
+    border-radius: .5rem .5rem 0 0;
+}
+.accordeon .card:last-child{
+    border-radius: 0 0 .5rem .5rem;
+    border-bottom-width: 1px;
 }
 .accordeon .card-link{
-    font-weight: bold;
-    font-size: 1.5rem;
-    color: @darktext;
     position: relative;
+    padding-left: 2.6rem;
 }
-.accordeon .card-link:before{
-    content: '\00d7';
+.accordeon .toggle{
+    width: 0.8rem;
+    height: 0.8rem;
+    transition: transform .2s ease;
     position: absolute;
-    left: -2.2rem;
-    top: -0.1rem;
-    font-size: 1.5rem;
-    line-height: 1;
-    transform: scale(1.4);
-    font-weight: 400;
+    left: 1.2rem;
+    background-color: transparent;
+    background-size: 90%;
+    top: calc(50% - .4rem);
 }
-.accordeon .card .card-link[aria-expanded="false"]:before,
-.accordeon .card:not(:first-child) .card-link:not([aria-expanded="true"]):before{
-    transform: scale(1.4) rotate(45deg);
-}
-.accordeon .card-body{
-    margin-top: 1rem;
+.accordeon .card .card-link[aria-expanded="false"] .toggle,
+.accordeon .card:not(:first-child) .card-link:not([aria-expanded="true"]) .toggle{
+    transform: rotate(45deg);
 }
 .collapse:not(.in){
     display: none;

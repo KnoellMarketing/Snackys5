@@ -1,6 +1,6 @@
 {block name='snippets-maintenance'}
 {block name="header"}
-    {include file='layout/header-maintainance.tpl'}
+    {include file='layout/header.tpl' maintenance=true}
 {/block}
 
 {assign var="tDir" value=$currentTemplateDir}
@@ -35,6 +35,6 @@
 {/block}
 
 {block name="footer"}
-    {include file='layout/footer-maintainance.tpl'}
+    {include file='layout/footer.tpl' maintenance=true}
 {/block}
 {/block}

@@ -6,6 +6,9 @@
     font-size: .92rem;
     line-height: 1.1;
 }
+#sp-l:empty{
+    display: none;
+}
 #sp-l .dark-bg{
     position: fixed;
     bottom: 0;

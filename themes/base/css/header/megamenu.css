@@ -25,6 +25,22 @@
     color: @backgroundtext;
 	cursor: pointer;
 }
+@media screen and (min-width: 768px){
+    #cat-w li li .mm-mainlink{
+        color: @defaulttext;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .blanklist > .mgm-fw > .mm-mainlink > .ar-r{
+        transform: rotate(45deg);
+        border-color: white;
+        margin-left: 0.4rem;
+        position: relative;
+        top: -3px;
+        padding: 2px;
+    }
+}
 #cat-w li.active .mm-mainlink{
     background: rgba(255,255,255,.2);
 }

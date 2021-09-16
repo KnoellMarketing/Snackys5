@@ -46,7 +46,7 @@
     {/block}
     
     {block name="aside"}
-	{if !$smallversion}
+	{if !$smallversion && !$maintenance}
 		{has_boxes position='left' assign='hasLeftBox'}
 		{if !$bExclusive && $hasLeftBox && !empty($boxes.left|strip_tags|trim)}
 			{assign var="hasFilters" value="true"}	
@@ -102,11 +102,12 @@
     <footer id="footer" class="mt-md">
 
 		{block name="footer-boxes"}
-			{if !$smallversion}
+			{if !$smallversion && !$maintenance}
 				{getBoxesByPosition position='bottom' assign='footerBoxes'}
 				{if isset($footerBoxes) && count($footerBoxes) > 0}
 					<div id="footer-boxes">
 					<div class="mw-container">
+                    {block name="layout-footer-boxes"}
 						<div class="row row-multi{if $snackyConfig.footerBoxesDirection == "C"} dpflex-j-c{elseif $snackyConfig.footerBoxesDirection == "R"} dpflex-j-e{/if}">
 							 {if $snackyConfig.logoFooter == 0 && isset($ShopLogoURL)}
 								<div class="col-6 col-sm-4 col-md-3 col-lg-2 hidden-xs" id="logo-footer">  
@@ -219,21 +220,22 @@
 								</div>
 							{/if}
 						</div>
+                    {/block}
 					</div>
 					</div>
-                    <div class="visible-xs mt-sm">
-                        {getLink nLinkart=12 cAssign="linkdatenschutz"}
-                        {getLink nLinkart=27 cAssign="linkimpressum"}
-                        {if $linkimpressum || $linkdatenschutz}
-                            <div class="mw-container text-center small">
-                                {if $linkdatenschutz}<a href="{$linkdatenschutz->getURL()}" rel="nofollow">{$linkdatenschutz->getTitle()}</a>{/if}
-                                {if $linkimpressum && $linkdatenschutz} • {/if}
-                                {if $linkimpressum}<a href="{$linkimpressum->getURL()}" rel="nofollow">{$linkimpressum->getTitle()}</a>{/if}
-                            </div>
-                        {/if}
-                    </div>
+                    {getLink nLinkart=12 cAssign="linkdatenschutz"}
+                    {getLink nLinkart=27 cAssign="linkimpressum"}
+                    {if ($linkimpressum || $linkdatenschutz) && $snackyConfig.footerBoxesOpen === '0'}
+                        <div class="visible-xs mt-sm">
+                                <div class="mw-container text-center small">
+                                    {if $linkdatenschutz}<a href="{$linkdatenschutz->getURL()}" rel="nofollow">{$linkdatenschutz->getTitle()}</a>{/if}
+                                    {if $linkimpressum && $linkdatenschutz} • {/if}
+                                    {if $linkimpressum}<a href="{$linkimpressum->getURL()}" rel="nofollow">{$linkimpressum->getTitle()}</a>{/if}
+                                </div>
+                        </div>
+                    {/if}
 				{/if}
-			{else}
+			{elseif $smallversion}
 				{getLink nLinkart=12 cAssign="linkdatenschutz"}
 				{getLink nLinkart=27 cAssign="linkimpressum"}
 				{if $linkimpressum || $linkdatenschutz}

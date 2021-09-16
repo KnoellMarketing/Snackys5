@@ -236,6 +236,9 @@
         {elseif $nSeitenTyp === 2}
             {append var='css3' value='/templates/Snackys/themes/base/css/sidepanel.css'}
         {/if}
+        {if $ismobile}
+            {append var='css3' value='/templates/Snackys/themes/base/css/sidepanel-m.css'}
+        {/if}
         {if (!empty($oUploadSchema_arr) && $nSeitenTyp === 3) || (!empty($oUploadSchema_arr) && $nSeitenTyp === 1)}
             {append var='css3' value='/templates/Snackys/themes/base/css/details/fileupload.css'}
         {/if}
@@ -355,9 +358,7 @@ body-offcanvas{if isset($bSeiteNichtGefunden) && $bSeiteNichtGefunden} error404{
 {if $isMobile && $snackyConfig.fullscreenElement == 1 && $hasMobileSlider == 'false'} no-mb-sl{/if}
 {if $snackyConfig.mmenu_link_clickable == 'N'} mmlca-n{/if}
 "
-
-
-
+{if $maintenance && !empty($snackyConfig.maintenanceBG)} style="background: url({$snackyConfig.maintenanceBG})no-repeat center center/cover;"{/if}
 {if isset($Link) && !empty($Link->getIdentifier())} id="{$Link->getIdentifier()}"{/if}
 {if !empty($snackyConfig.boxedImg) && $snackyConfig.designWidth == 1} style="background: url({$snackyConfig.boxedImg})no-repeat center center/cover;{if !$isMobile} background-attachment: fixed{/if}"{/if}
 >
@@ -408,7 +409,7 @@ body-offcanvas{if isset($bSeiteNichtGefunden) && $bSeiteNichtGefunden} error404{
     {include file="layout/header_usps.tpl"}
 	{/if}
 	{block name="header-branding-top-bar"}
-		{if !$smallversion}
+		{if !$smallversion && !$maintenance}
 			{if $snackyConfig.headerTopbar == 0 && !$isMobile}
 				<div id="top-bar-wrapper" class="hidden-xs">
 					<div id="top-bar" class="dpflex-j-between dpflex-a-center small mw-container">
@@ -428,7 +429,7 @@ body-offcanvas{if isset($bSeiteNichtGefunden) && $bSeiteNichtGefunden} error404{
          </div>
     {/if}
     {block name="header"}
-		{if !$smallversion}
+		{if !$smallversion && !$maintenance}
 			{if $snackyConfig.headerType == 1  && $nSeitenTyp !== 11}
 				{include file="layout/header/1.tpl"}
 			{else if $snackyConfig.headerType == 2 || $snackyConfig.headerType == 3 && $nSeitenTyp !== 11}
@@ -442,7 +443,7 @@ body-offcanvas{if isset($bSeiteNichtGefunden) && $bSeiteNichtGefunden} error404{
 			{else}
 				{include file="layout/header/default.tpl"}
 			{/if}
-		{else}
+		{elseif $smallversion}
 			<div id="shop-nav">
 				<div class="mw-container dpflex-a-center dpflex-wrap">
 					<div class="col-6 col-lg-4 xs-order-1">
@@ -479,6 +480,7 @@ body-offcanvas{if isset($bSeiteNichtGefunden) && $bSeiteNichtGefunden} error404{
 			</div>
 		{/if}
     {/block}
+	{include file="snippets/zonen.tpl" id="after_mainmenu"}
 	
 	{if ($snackyConfig.headerType == 4 || $snackyConfig.headerType == 4.5 || $snackyConfig.headerType == 5 || $snackyConfig.headerType == 5.5) && $nSeitenTyp === 18}
 		{if !$isMobile || ($isMobile && $snackyConfig.fullscreenElement != 1) || ($isMobile && $snackyConfig.fullscreenElement == 1 && $hasMobileSlider == 'true')}

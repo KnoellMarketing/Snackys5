@@ -1,17 +1,22 @@
 /* Wartungsmodus Hinweis Admin */
 html,
 body,
-#main-wrapper{
+#content-wrapper,
+#content-wrapper > .row{
 	height: 100%;
 	padding: 0;
+    margin: 0;
 }
 body.body-offcanvas{
 	background: @lightbg;
 }
-#main-wrapper{
+#content{
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+#content > *:not(#maintenance-notice){
+    display: none;
 }
 #logo-wrapper #logo{
     text-align: left;
