@@ -166,11 +166,13 @@
                                         {if $Artikel->cBeschreibung|strlen > 0}
                                             <hr>
                                         {/if}
+	                                    {include file="snippets/zonen.tpl" id="opc_before_desc_media"}
                                         {foreach $Artikel->getMediaTypes() as $mediaType}
                                             <div class="media">
                                                 {include file='productdetails/mediafile.tpl'}
                                             </div>
                                         {/foreach}
+	                                    {include file="snippets/zonen.tpl" id="opc_after_desc_media"}
                                     {/if}
                                 </div>
                                 {include file="snippets/zonen.tpl" id="opc_after_desc"}
@@ -179,9 +181,11 @@
                                 {if (!empty($Artikel->cBeschreibung) || $useDescriptionWithMediaGroup) && $showAttributesTable}
                                     <hr>
                                 {/if}
+                               {include file="snippets/zonen.tpl" id="opc_before_desc_attributes"}
                                 {include file='productdetails/attributes.tpl' tplscope='details'
                                     showProductWeight=$showProductWeight showShippingWeight=$showShippingWeight
                                     dimension=$dimension showAttributesTable=$showAttributesTable}
+                                {include file="snippets/zonen.tpl" id="opc_after_desc_attributes"}
                             {/block}
                         </div>
                     </div>
@@ -200,7 +204,9 @@
                         </span>
                     </div>
                     <div class="panel-body{if !$tabanzeige} mb-md{/if}">
-                    {include file="productdetails/download.tpl"}
+                        {include file="snippets/zonen.tpl" id="opc_before_downloads"}
+                        {include file="productdetails/download.tpl"}
+                        {include file="snippets/zonen.tpl" id="opc_after_downloads"}
                     </div>
                 </div>
                 {/if}
@@ -218,7 +224,9 @@
                             </span>
                         </div>
                         <div class="panel-body{if !$tabanzeige} mb-md{/if}">
-                        {$separatedTab.content}
+                            {include file="snippets/zonen.tpl" id='opc_before_separated_'|cat:$separatedTab.id}
+                            {$separatedTab.content}
+                            {include file="snippets/zonen.tpl" id='opc_after_separated_'|cat:$separatedTab.id}
                         </div>
                     </div>
                     {/foreach}
@@ -236,7 +244,9 @@
                         </span>
                     </div>
                     <div class="panel-body{if !$tabanzeige} mb-md{/if}">
+                        {include file="snippets/zonen.tpl" id='opc_before_tab_reviews'}
                         {include file="productdetails/reviews.tpl" stars=$Artikel->Bewertungen->oBewertungGesamt->fDurchschnitt}
+                        {include file="snippets/zonen.tpl" id='opc_after_tab_reviews'}
                     </div>
                 </div>
                 {/if}
@@ -253,7 +263,9 @@
                         </span>
                     </div>
                     <div class="panel-body{if !$tabanzeige} mb-md{/if}">
-                    {include file="productdetails/question_on_item.tpl"}
+                        {include file="snippets/zonen.tpl" id='opc_before_tab_question'}
+                        {include file="productdetails/question_on_item.tpl"}
+                        {include file="snippets/zonen.tpl" id='opc_after_tab_question'}
                     </div>
                 </div>
                 {/if}
@@ -270,7 +282,9 @@
                         </span>
                     </div>
                     <div class="panel-body{if !$tabanzeige} mb-md{/if}">
-                    {include file="productdetails/price_history.tpl"}
+                        {include file="snippets/zonen.tpl" id='opc_before_tab_history'}
+                        {include file="productdetails/price_history.tpl"}
+                        {include file="snippets/zonen.tpl" id='opc_after_tab_history'}
                     </div>
                 </div>
                 {/if}
@@ -287,7 +301,9 @@
                         </span>
                     </div>
                     <div class="panel-body{if !$tabanzeige} mb-md{/if}">
-                    {include file="productdetails/availability_notification_form.tpl" position="tab" tplscope="artikeldetails"}
+                        {include file="snippets/zonen.tpl" id='opc_before_tab_notification'}
+                        {include file="productdetails/availability_notification_form.tpl" position="tab" tplscope="artikeldetails"}
+                        {include file="snippets/zonen.tpl" id='opc_after_tab_notification'}
                     </div>
                 </div>
                 {/if}

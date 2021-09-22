@@ -31,7 +31,7 @@
 				<li class="{if $li->getChildLinks()->count() > 0 && isset($dropdownSupport)}mgm-fw dropdown-style{/if}{if $li->getIsActive() || (isset($activeParent) && $activeParent == $li->getID())} active{/if}">
 					<a href="{$li->cURLFull}" class="mm-mainlink"{if $li->getNoFollow()} rel="nofollow"{/if}{if !empty($li->getTitle())} title="{$li->getTitle()}"{/if} data-ref="{$li->getID()}">
 						{$li->getName()}
-						{if $li->getChildLinks()->count() > 0 && isset($dropdownSupport)}<span class="caret hidden-xs"></span>{include file='snippets/mobile-menu-arrow.tpl'}{/if}
+						{if $li->getChildLinks()->count() > 0 && isset($dropdownSupport) && $hasItems}<span class="caret hidden-xs"></span>{include file='snippets/mobile-menu-arrow.tpl'}{/if}
 					</a>
 					{if $hasItems}
 						<ul class="dropdown-menu keepopen">

@@ -47,20 +47,9 @@
             {/if}
             {block name='searchspecial-overlay'}
                 {if isset($Artikel->oSuchspecialBild)}
-                    {if isset($Artikel->oSuchspecialBild->cSuchspecial)}
-                        {assign var="cSpecialCheck" value=$Artikel->oSuchspecialBild->cSuchspecial|replace:'ü':''}
-                        {if $Artikel->oSuchspecialBild->cSuchspecial == 'Sonderangebote' && $snackyConfig.saleprozent == 'Y'}
-                            {assign var="rabatt" value=($Artikel->Preise->alterVKNetto-$Artikel->Preise->fVKNetto)/$Artikel->Preise->alterVKNetto*100}
-                            <span class="ov-t {$Artikel->oSuchspecialBild->cSuchspecial|lower|strip:''}">- {$rabatt|round:0}%</span>
-                        {elseif isset($oSuchspecial[$cSpecialCheck])}
-                            <span class="ov-t {$Artikel->oSuchspecialBild->cSuchspecial|lower|strip:''}">{$oSuchspecial[$cSpecialCheck]}</span>
-                        {*Workaround for damn ü !*}
-                        {elseif $Artikel->oSuchspecialBild->cSuchspecial|substr:0:4|lower == 'in k'}
-                            <span class="ov-t bald-verfuegbar">{$oSuchspecial['bald-verfuegbar']}</span>
-                        {else}
-                            <span class="ov-t {$Artikel->oSuchspecialBild->cSuchspecial|lower|strip:''}">#{$Artikel->oSuchspecialBild->cSuchspecial}</span>
-                        {/if}
-                    {/if}
+                    {block name='productlist-item-box-include-ribbon'}
+                        {include file='snippets/ribbon.tpl'}
+                    {/block}
                 {/if}
             {/block}
         </div>
@@ -72,8 +61,7 @@
         <div class="col-12 col-sm-8 col-md-7 col-lg-7{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-8{/if} col-left">
             {block name='product-title'}
             <div class="title h4">
-                <a href="{$Artikel->cURLFull}" class="block" itemprop="name">{$Artikel->cName}</a>
-                <meta itemprop="url" content="{$Artikel->cURLFull}">
+                <a href="{$Artikel->cURLFull}" class="block">{$Artikel->cName}</a>
             {if $Einstellungen.bewertung.bewertung_anzeigen === 'Y'}
                 <a href="{$Artikel->cURLFull}#tab-votes" class="hidden-print block">
                 {include file='productdetails/rating.tpl' stars=$Artikel->fDurchschnittsBewertung}
@@ -85,13 +73,13 @@
             <div class="product-info hidden-xs">
                 {block name='product-info'}
                     {if $Einstellungen.artikeluebersicht.artikeluebersicht_kurzbeschreibung_anzeigen === 'Y' && $Artikel->cKurzBeschreibung}
-                        <div class="shortdesc mb-xxs" itemprop="description">
+                        <div class="shortdesc mb-xxs">
                             {$Artikel->cKurzBeschreibung|strip_tags|truncate:500:"...":true}
                         </div>
                     {/if}
                     <ul class="blanklist info hidden-xs">
                         <li class="attr-sku">
-                            <strong>{lang key='productNo'}: </strong> <span itemprop="sku">{$Artikel->cArtNr}</span>
+                            <strong>{lang key='productNo'}: </strong> <span>{$Artikel->cArtNr}</span>
                         </li>
                         {if !empty($Artikel->cBarcode)
                             && ($Einstellungen.artikeldetails.gtin_display === 'lists'
@@ -148,7 +136,7 @@
                         
                         {block name='product-manufacturer'}
                             {if $Einstellungen.artikeluebersicht.artikeluebersicht_hersteller_anzeigen !== 'N'}
-                                <li class="hidden-xs" itemprop="manufacturer" itemscope itemtype="http://schema.org/Organization">
+                                <li class="hidden-xs">
                                     <strong>{lang key="manufacturers"}: </strong>
                                     {if ($Einstellungen.artikeluebersicht.artikeluebersicht_hersteller_anzeigen === 'BT'
                                         || $Einstellungen.artikeluebersicht.artikeluebersicht_hersteller_anzeigen === 'B')
@@ -157,14 +145,13 @@
                                                 <span class="img-ct icon icon-xl icon-wt">
                                                     <img src="{$Artikel->cHerstellerBildKlein}" alt="{$Artikel->cHersteller}">
                                                 </span>
-                                                <meta itemprop="image" content="{$ShopURL}/{$Artikel->cHerstellerBildKlein}">
                                             {if !empty($Artikel->cHerstellerHomepage)}</a>{/if}
                                     {/if}
                                     {if ($Einstellungen.artikeluebersicht.artikeluebersicht_hersteller_anzeigen === 'BT'
                                         || $Einstellungen.artikeluebersicht.artikeluebersicht_hersteller_anzeigen === 'Y')
                                         && !empty($Artikel->cHersteller)}
-                                                {if !empty($Artikel->cHerstellerHomepage)}<a href="{$Artikel->cHerstellerHomepage}" itemprop="url">{/if}
-                                                    <span itemprop="name">{$Artikel->cHersteller}</span>
+                                                {if !empty($Artikel->cHerstellerHomepage)}<a href="{$Artikel->cHerstellerHomepage}">{/if}
+                                                    <span>{$Artikel->cHersteller}</span>
                                                 {if !empty($Artikel->cHerstellerHomepage)}</a>{/if}
                                     {/if}
                                 </li>
@@ -177,7 +164,7 @@
         {/block}
     {block name="list-right-wrapper"}
     <div class="col-12 col-sm-4 col-md-5 col-lg-5{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-4{/if} text-right col-right">
-    <form id="buy_form_{$Artikel->kArtikel}" action="{$ShopURL}/" method="post" class="form form-basket evo-validate right" data-toggle="basket-add">
+    <form id="buy_form_{$Artikel->kArtikel}" action="{$ShopURL}/" method="post" class="form form-basket jtl-validate right" data-toggle="basket-add">
     {include file="productdetails/price.tpl" Artikel=$Artikel tplscope=$tplscope}
         {$jtl_token}
         {block name="productlist-delivery-status"}

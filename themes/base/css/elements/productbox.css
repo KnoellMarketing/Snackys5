@@ -58,17 +58,21 @@
     color: @backgroundtext;
     background: @darkbg;
 }
-.ov-t.lagerbestand0,
-.ov-t.sonderangebote{
+.ov-t.ov-t-7,
+.ov-t.ov-t-2{
     background: @danger;
 }
-.ov-t.topangebote{
+.ov-t.ov-t-4,
+.ov-t.ov-t-6{
     background: @success;
 }
-.ov-t.bestseller{
+.ov-t.ov-t-1,
+.ov-t.ov-t-5,
+.ov-t.ov-t-8,
+.ov-t.ov-t-9{
 	background: @info;
 }
-.ov-t.neuimsortiment{
+.ov-t.ov-t-3{
 	background: @warning;
 }
 #product-offer .price_label,

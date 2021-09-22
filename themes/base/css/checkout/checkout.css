@@ -343,6 +343,17 @@ label[data-target="#create_account_data"]{
 .c-it .price-block{
     margin-top: 0;
 }
+/* Kreditkarte */
+#payment_creditcard .flex-column-reverse{
+    display: flex;
+    flex-direction: column-reverse;
+}
+#payment_creditcard label{
+    padding: 0;
+}
+.card-primary{
+    border: 2px solid @brand;
+}
 @media screen and (max-width: 1600px){
     #checkout-cart{
         max-width: 25rem;

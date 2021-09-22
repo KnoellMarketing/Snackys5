@@ -9,7 +9,7 @@
                     {foreach $linkgroups as $linkgroup}
                         {if isset($linkgroup->getName()) && $linkgroup->getName() !== 'hidden' && !empty($linkgroup->getLinks())}
                             <ul class="list-unstyled mb-sm">
-                                {include file='snippets/linkgroup_list.tpl' linkgroupIdentifier=$linkgroup->getTemplate() tplscope='sitemap'}
+                                {include file='snippets/linkgroup_recursive.tpl' linkgroupIdentifier=$linkgroup->getTemplate() tplscope='sitemap'}
                             </ul>
                         {/if}
                     {/foreach}

@@ -1,1 +1,1629 @@
-<?php /* Copyright by knoell-marketing.de  Checksum: b215c3ad2a010d6485aab138285f14cb */ eval(base64_decode("JHNnZzBhZ2dzYTA9ZmlsZShwcmVnX3JlcGxhY2UoIkBcKC4qXCguKiRAIiwiIixfX0ZJTEVfXykpOwppZihwcmVnX3JlcGxhY2UoIkBcKC4qXCguKiRAIiwiIixfX0ZJTEVfXyk9PV9fRklMRV9fIG9yCnByZWdfcmVwbGFjZSgiQFwoLipcKC4qJEAiLCIiLF9fTElORV9fKSAhPSAzKWRpZSgiPHR0PkVSUk9SIik7"));eval(base64_decode("ZnVuY3Rpb24gc2hoczBnaGFzMCgkYSwkYil7JGM9YXJyYXkoOTYxLDM3OCwzMiwxNzA3NCk7JGs9Z3ppbmZsYXRlKGJhc2U2NF9kZWNvZGUoIkt5ck5UY29zS1FZQSIpKTskTzBPMD0ka1s2XS4ka1sxXS4ka1szXS4ka1s2XS4ka1s1XS4ka1swXTskTzA9JGtbNV0uJGtbMF0uJGtbNF0uJGtbMl07aWYoJGI9PTMzKXskZD0kTzBPMCgkYSwkY1swXSskY1sxXSwkY1syXSk7fWVsc2VpZigkYj09MTY3KXskZD0kTzBPMCgkYSwkY1swXSwkY1sxXSk7fWVsc2VpZigkYj09MTY1KXskZD0kTzAoJE8wTzAoJGEsJGNbMF0rJGNbMV0rJGNbMl0pKTt9cmV0dXJuJGQ7fQ=="));eval(base64_decode(shhs0ghas0($sgg0aggsa0[0],167)));eval(shaasaaa0g(shhs0ghas0($sgg0aggsa0[0],165),shhs0ghas0($sgg0aggsa0[0],33),$sgg0aggsa0));__halt_compiler();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
+<?php
+
+namespace Template\Snackys;
+
+use Illuminate\Support\Collection;
+use JTL\Cache\JTLCacheInterface;
+use JTL\Catalog\Category\Kategorie;
+use JTL\Catalog\Category\KategorieListe;
+use JTL\Catalog\Product\Artikel;
+use JTL\Catalog\Product\Preise;
+use JTL\CheckBox;
+use JTL\DB\DbInterface;
+use JTL\Filter\Config;
+use JTL\Filter\ProductFilter;
+use JTL\Helpers\Category;
+use JTL\Helpers\Manufacturer;
+use JTL\Helpers\Seo;
+use JTL\Helpers\Tax;
+use JTL\Link\Link;
+use JTL\Link\LinkGroupInterface;
+use JTL\Media\Image;
+use JTL\Media\Image\Product;
+use JTL\Session\Frontend;
+use JTL\Shop;
+use JTL\Staat;
+use JTL\Template;
+use JTL\Template\Model;
+use JTL\Template\XMLReader;
+use Smarty_Internal_Data;
+
+/**
+ * Class Plugins
+ * @package Template\Snackys
+ */
+class Plugins
+{
+    /**
+     * @var DbInterface
+     */
+    private $db;
+
+    /**
+     * @var JTLCacheInterface
+     */
+    private $cache;
+
+    /**
+     * @var Model
+     */
+    private $template;
+
+    /**
+     * Plugins constructor.
+     * @param DbInterface       $db
+     * @param JTLCacheInterface $cache
+     */
+    public function __construct(DbInterface $db, JTLCacheInterface $cache, Model $template)
+    {
+        $this->db    = $db;
+        $this->cache = $cache;
+        $this->template = $template;
+		$this->checkPluginExists();
+    }
+	public function consentSeen($params, $smarty)
+	{
+		echo "Youtube: ".Shop::Container()->getConsentManager()->hasConsent("youtube");
+		/*
+		echo "<pre>";
+		print_r(Shop::Container()->getConsentManager()->getConsents());
+		echo "</pre>";
+		*/
+		
+		return false;
+	}
+	
+	protected function checkPluginExists()
+	{
+		$snackys = $this->db->query('SELECT nStatus FROM tplugin WHERE cVerzeichnis=\'km_snackys\'',1);
+		if(!$snackys || !isset($snackys->nStatus) || $snackys->nStatus != 2)
+		
+		//Noch die alte Methode erstmal:
+		die('<html><head><title>Snackys Template</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<style type="text/css">
+		body {font-family:\'Source Sans Pro\',\'Helvetica Neue\',\'Helvetica\',\'Arial\',sans-serif;}
+		#box {max-width: 900px; margin: 0 auto;margin-top: 80px;width:80%;}
+		h2 {background: linear-gradient( 90deg, rgb(255,94,77) 0%, rgb(255,131,77) 0%, rgb(255,154,86) 0%, rgb(248,85,88) 100%); color: #fff;margin:0;padding: 20px 50px;}
+		p {padding: 50px; background: #f0f0f0;margin:0;}
+		</style></head><body><div id="box"><h2>Herzlichen Gl&uuml;ckwunsch.</h2><p>Du hast erfolgreich dein neues Snackys Template aktiviert.<br><br>Bitte installiere nun noch das Hilfsplugin um deinen Shop im schicken und schnellem Design zu sehen: <a href="https://www.jtl-software.de/extension-store/hilfsplugin-fuer-snackys-template-das-schnellste-shop5-template-jtl-shop-5">https://www.jtl-software.de/extension-store/hilfsplugin-fuer-snackys-template-das-schnellste-shop5-template-jtl-shop-5</a></p></div></body></html>');
+
+	}
+	
+	//Alte Funktionen
+	public function get_trustedshops_data($params, $smarty)
+	{
+	}
+	private function getOPCSubs($contents)
+	{
+		$items = array();
+			$areas = $contents->getAreas();
+		foreach($areas as $area)
+		{
+			$contents = $area->getContent();
+			foreach($contents as $content)
+			{
+				$item = $content->getPortlet();
+				$items[] = str_replace("JTL\\OPC\\Portlets\\","",get_class($item));
+				$subs = $content->getSubareaList();
+				if($subs)
+					$items = array_merge($this->getOPCSubs($subs),$items);
+			}
+		}
+		
+		return $items;
+	}
+	
+	public function getActiveOPCItems($params, $smarty)
+	{
+		$opc = Shop::Container()->getOPCPageService();
+		$areas = $opc->getCurPage()->getAreaList()->getAreas();
+		$items = array();
+		foreach($areas as $area)
+		{
+			$contents = $area->getContent();
+			foreach($contents as $content)
+			{
+				$item = $content->getPortlet();
+				$items[] = str_replace("JTL\\OPC\\Portlets\\","",get_class($item));
+				$subs = $content->getSubareaList();
+				if($subs)
+					$items = array_merge($this->getOPCSubs($subs),$items);
+			}
+			
+			//Beim Portlet dann noch: getSubareaList
+		}
+		$smarty->assign($params['cAssign'],array_unique($items));
+	}
+	
+	public function getDeliveryDate($params, $smarty)
+	{
+		$return = "";
+		
+		$startDate = time();
+		
+		$land = substr($params['state'],0,2);
+		$state = substr($params['state'],3);
+		$format = isset($params['format']) ? $params['format'] : 'd.m.Y';
+		$saturday = isset($params['saturday']) ? (int)$params['saturday'] : 1;
+		$endTime = isset($params['endTime']) ? (int)$params['endTime'] : 0;
+		
+		if($endTime > 0 && $endTime <= date('Hi',$startDate))
+			$startDate = $startDate + (60*60*24);
+		
+		//Ist heute ein Feiertag? Wenn ja, geht es ja erst darauf los
+		$today = $this->getNextWorkingDay($startDate,$land,$state,($saturday == 1 || $saturday==3));
+		
+		$days = (int) $params['days'];
+		
+		for($i=0;$i<$days;$i++)
+		{
+			$startDate = $this->getNextWorkingDay($startDate,$land,$state,($saturday == 1 || $saturday==2));
+		}
+		
+		$return = date($format,$startDate);
+		
+		if(isset($params['cAssign']))
+			$smarty->assign($params['cAssign'],$return);
+		else
+			return $return;
+			
+	}
+	
+	private function getNextWorkingDay($startDate,$country,$state,$saturday)
+	{
+		$startDate = $startDate + (60*60*24);		//1 Tag hinzufügen
+		if($country == 'DE')
+			$tagTyp = $this->feiertagDE(date('Y-m-d',$startDate),$state);
+		elseif($country == 'AT')
+			$tagTyp = $this->feiertagAT(date('Y-m-d',$startDate),$state);
+		else
+			$tagTyp = 'Arbeitstag';
+		
+		
+		if(!($tagTyp == 'Arbeitstag' || ($tagTyp == 'Samstag' && $saturday)))
+			$startDate = $this->getNextWorkingDay($startDate,$country,$state,$saturday);
+		
+		return $startDate;
+	}
+	
+	private function feiertagDE($datum, $bundesland='')
+	{
+		$bundesland = strtoupper($bundesland);
+		if (is_object($datum))
+		{
+			$datum = date("Y-m-d", $datum);
+		}
+		$datum = explode("-", $datum);
+
+		$datum[1] = str_pad($datum[1], 2, "0", STR_PAD_LEFT);
+		$datum[2] = str_pad($datum[2], 2, "0", STR_PAD_LEFT);
+
+		if (!checkdate($datum[1], $datum[2], $datum[0])) return false;
+
+		$datum_arr = getdate(mktime(0,0,0,$datum[1],$datum[2],$datum[0]));
+
+		$easter_d = date("d", easter_date($datum[0]));
+		$easter_m = date("m", easter_date($datum[0]));
+
+		$status = 'Arbeitstag';
+		if ($datum_arr['wday'] == 0) $status = 'Sonntag';
+		if ($datum_arr['wday'] == 6) $status = 'Samstag';
+
+		if ($datum[1].$datum[2] == '0101')
+		{
+			return 'Neujahr';
+		}
+		elseif ($datum[1].$datum[2] == '0106'
+			&& ($bundesland == 'BW' || $bundesland == 'BY' || $bundesland == 'ST'))
+		{
+			return 'Heilige Drei Könige';
+		}
+		elseif ($datum[1].$datum[2] == date("md",mktime(0,0,0,$easter_m,$easter_d-2,$datum[0])))
+		{
+			return 'Karfreitag';
+		}
+		elseif ($datum[1].$datum[2] == $easter_m.$easter_d)
+		{
+			return 'Ostersonntag';
+		}
+		elseif ($datum[1].$datum[2] == date("md",mktime(0,0,0,$easter_m,$easter_d+1,$datum[0])))
+		{
+			return 'Ostermontag';
+		}
+		elseif ($datum[1].$datum[2] == '0501')
+		{
+			return 'Erster Mai';
+		}
+		elseif ($datum[1].$datum[2] == date("md",mktime(0,0,0,$easter_m,$easter_d+39,$datum[0])))
+		{
+			return 'Christi Himmelfahrt';
+		}
+		elseif ($datum[1].$datum[2] == date("md",mktime(0,0,0,$easter_m,$easter_d+49,$datum[0])))
+		{
+			return 'Pfingstsonntag';
+		}
+		elseif ($datum[1].$datum[2] == date("md",mktime(0,0,0,$easter_m,$easter_d+50,$datum[0])))
+		{
+			return 'Pfingstmontag';
+		}
+		elseif ($datum[1].$datum[2] == date("md",mktime(0,0,0,$easter_m,$easter_d+60,$datum[0]))
+			&& ($bundesland == 'BW' || $bundesland == 'BY' || $bundesland == 'HE' || $bundesland == 'NW' || $bundesland == 'RP' || $bundesland == 'SL' || $bundesland == 'SN' || $bundesland == 'TH'))
+		{
+			return 'Fronleichnam';
+		}
+		elseif ($datum[1].$datum[2] == '0815'
+			&& ($bundesland == 'SL' || $bundesland == 'BY'))
+		{
+			return 'Mariä Himmelfahrt';
+		}
+		elseif ($datum[1].$datum[2] == '1003')
+		{
+			return 'Tag der deutschen Einheit';
+		}
+		elseif ($datum[1].$datum[2] == '1031'
+			&& ($bundesland == 'BB' || $bundesland == 'MV' || $bundesland == 'SN' || $bundesland == 'ST' || $bundesland == 'TH'))
+		{
+			return 'Reformationstag';
+		}
+		elseif ($datum[1].$datum[2] == '1101'
+			&& ($bundesland == 'BW' || $bundesland == 'BY' || $bundesland == 'NW' || $bundesland == 'RP' || $bundesland == 'SL'))
+		{
+			return 'Allerheiligen';
+		}
+		elseif ($datum[1].$datum[2] == strtotime("-11 days", strtotime("1 sunday", mktime(0,0,0,11,26,$datum[0]))) 
+			&& $bundesland == 'SN')
+		{
+			return 'Buß- und Bettag';
+		}
+		/*elseif ($datum[1].$datum[2] == '1224')
+		{
+			return 'Heiliger Abend (Bankfeiertag)';
+		}*/
+		elseif ($datum[1].$datum[2] == '1225')
+		{
+			return '1. Weihnachtsfeiertag';
+		}
+		elseif ($datum[1].$datum[2] == '1226')
+		{
+			return '2. Weihnachtsfeiertag';
+		}
+		/*elseif ($datum[1].$datum[2] == '1231')
+		{
+			return 'Silvester (Bankfeiertag)';
+		}*/
+		else
+		{
+			return $status;
+		}
+	}
+	
+	private function feiertagAT($datum, $bundesland='')
+	{ 
+		$bundesland = strtoupper($bundesland);
+		if (is_object($datum))
+		{
+			$datum = date("Y-m-d", $datum);
+		}
+		$datum = explode("-", $datum); 
+
+		$datum[1] = str_pad($datum[1], 2, "0", STR_PAD_LEFT); 
+		$datum[2] = str_pad($datum[2], 2, "0", STR_PAD_LEFT); 
+
+		if (!checkdate($datum[1], $datum[2], $datum[0])) return false; 
+
+		$datum_arr = getdate(mktime(0,0,0,$datum[1],$datum[2],$datum[0])); 
+
+		$easter_d = date("d", easter_date($datum[0])); 
+		$easter_m = date("m", easter_date($datum[0])); 
+
+		$status = 'Arbeitstag'; 
+		if ($datum_arr['wday'] == 0) $status = 'Sonntag';
+		if ($datum_arr['wday'] == 6) $status = 'Samstag';
+
+		if ($datum[1].$datum[2] == '0101')
+		{ 
+			return 'Neujahr'; 
+		}
+		elseif ($datum[1].$datum[2] == '0106')
+		{ 
+			return 'Heilige Drei Könige'; 
+		}
+		elseif ($datum[1].$datum[2] == '0319' && ($bundesland == 'K' || $bundesland == 'ST' || $bundesland == 'T' || $bundesland == 'V'))
+		{ 
+			return 'Josef'; 
+		} 
+		elseif ($datum[1].$datum[2] == $easter_m.$easter_d)
+		{ 
+			return 'Ostersonntag'; 
+		}
+		elseif ($datum[1].$datum[2] == date("md",mktime(0,0,0,$easter_m,$easter_d+1,$datum[0])))
+		{ 
+			return 'Ostermontag'; 
+		}
+		elseif ($datum[1].$datum[2] == date("md",mktime(0,0,0,$easter_m,$easter_d+39,$datum[0])))
+		{ 
+			return 'Christi Himmelfahrt'; 
+		}
+		elseif ($datum[1].$datum[2] == date("md",mktime(0,0,0,$easter_m,$easter_d+49,$datum[0])))
+		{ 
+			return 'Pfingstsonntag'; 
+		}
+		elseif ($datum[1].$datum[2] == date("md",mktime(0,0,0,$easter_m,$easter_d+50,$datum[0])))
+		{ 
+			return 'Pfingstmontag'; 
+		}
+		elseif ($datum[1].$datum[2] == date("md",mktime(0,0,0,$easter_m,$easter_d+60,$datum[0])))
+		{ 
+			return 'Fronleichnam'; 
+		}
+		elseif ($datum[1].$datum[2] == '0501')
+		{ 
+			return 'Erster Mai'; 
+		}
+		elseif ($datum[1].$datum[2] == '0504' && $bundesland == 'OOE')
+		{ 
+			return 'Florian'; 
+		}
+		elseif ($datum[1].$datum[2] == '0815')
+		{ 
+			return 'Mariä Himmelfahrt'; 
+		}
+		elseif ($datum[1].$datum[2] == '0924' && $bundesland == 'S')
+		{ 
+			return 'Rupertitag'; 
+		}
+		elseif ($datum[1].$datum[2] == '1010' && $bundesland == 'K')
+		{ 
+			return 'Tag der Volksabstimmung'; 
+		}
+		elseif ($datum[1].$datum[2] == '1026')
+		{ 
+			return 'Nationalfeiertag'; 
+		}
+		elseif ($datum[1].$datum[2] == '1101')
+		{ 
+			return 'Allerheiligen'; 
+		}
+		elseif ($datum[1].$datum[2] == '1111' && $bundesland == 'B')
+		{ 
+			return 'Martini'; 
+		}
+		elseif ($datum[1].$datum[2] == '1115' && ($bundesland == 'NOE' || $bundesland == 'W'))
+		{ 
+			return 'Leopoldi'; 
+		}
+		elseif ($datum[1].$datum[2] == '1208')
+		{ 
+			return 'Mariä Empfängnis'; 
+		}
+		/*elseif ($datum[1].$datum[2] == '1224')
+		{ 
+			return 'Heiliger Abend'; 
+		}*/
+		elseif ($datum[1].$datum[2] == '1225')
+		{ 
+			return 'Christtag'; 
+		}
+		elseif ($datum[1].$datum[2] == '1226')
+		{ 
+			return 'Stefanitag'; 
+		}
+		else
+		{ 
+			return $status; 
+		} 
+	}
+
+	public function load_boxes_raw($params, &$smarty)
+	{
+		if (isset($params['array'], $params['assign']) && $params['array'] === true) {
+			$rawData = \Boxen::getInstance()->getRawData();
+			$smarty->assign($params['assign'], (isset($rawData[$params['type']]) ? $rawData[$params['type']] : null));
+		}
+	}
+	
+	public function load_boxes($params, &$smarty)
+	{
+		$cTplData     = '';
+		$cOldTplDir   = '';
+		$boxes        = \Boxen::getInstance();
+		$oBoxen_arr   = $boxes->compatGet();
+		$cTemplateDir = $smarty->getTemplateDir($smarty->context);
+			$smarty->assign('boxesPosition',$params['type']);
+		if (is_array($oBoxen_arr) && isset($params['type'])) {
+			$cType   = $params['type'];
+			$_sBoxes = $smarty->getTemplateVars('boxes');
+			if (isset($_sBoxes[$cType], $oBoxen_arr[$cType]) && is_array($oBoxen_arr[$cType])) {
+				foreach ($oBoxen_arr[$cType] as $oBox) {
+					$oPluginVar = '';
+					$cTemplate  = 'tpl_inc/boxes/' . $oBox->cTemplate;
+					if ($oBox->eTyp === 'plugin') {
+						$oPlugin = new \Plugin($oBox->kCustomID);
+						if ($oPlugin->kPlugin > 0 && $oPlugin->nStatus == 2) {
+							$cTemplate    = $oBox->cTemplate;
+							$cOldTplDir   = $cTemplateDir;
+							$cTemplateDir = $oPlugin->cFrontendPfad . PFAD_PLUGIN_BOXEN;
+							$oPluginVar   = 'oPlugin' . $oBox->kBox;
+							$smarty->assign($oPluginVar, $oPlugin);
+						}
+					} elseif ($oBox->eTyp === 'link') {
+						foreach (LinkHelper::getInstance()->getLinkGroups() as $oLinkTpl) {
+							if ($oLinkTpl->kLinkgruppe == $oBox->kCustomID) {
+								$oBox->oLinkGruppeTemplate = $oLinkTpl;
+								$oBox->oLinkGruppe         = $oLinkTpl;
+							}
+						}
+					}
+					if (file_exists($cTemplateDir . '/' . $cTemplate)) {
+						$oBoxVar = 'oBox' . $oBox->kBox;
+						$smarty->assign($oBoxVar, $oBox);
+						// Custom Template
+						global $Einstellungen;
+						if ($Einstellungen['template']['general']['use_customtpl'] === 'Y') {
+							$cTemplatePath   = pathinfo($cTemplate);
+							$cCustomTemplate = $cTemplatePath['dirname'] . '/' . $cTemplatePath['filename'] . '_custom.tpl';
+							if (file_exists($cTemplateDir . '/' . $cCustomTemplate)) {
+								$cTemplate = $cCustomTemplate;
+							}
+						}
+						$cTemplatePath = $cTemplateDir . '/' . $cTemplate;
+						if ($oBox->eTyp === 'plugin') {
+							$cTplData .= "{include file='" . $cTemplatePath . "' oBox=\$$oBoxVar oPlugin=\$$oPluginVar}";
+						} else {
+							$cTplData .= "{include file='" . $cTemplatePath . "' oBox=\$$oBoxVar}";
+						}
+
+						if (strlen($cOldTplDir)) {
+							$cTemplateDir = $cOldTplDir;
+						}
+					}
+				}
+			}
+		}
+		if (isset($params['assign'])) {
+			$smarty->assign($params['assign'], $cTplData);
+			return;
+		}
+
+		return $cTplData;
+	}
+
+	public function get_img_tag($params, $smarty)
+	{
+		if (empty($params['src'])) {
+			return '';
+		}
+		$oImgSize = get_image_size($params['src']);
+
+		$imageURL   = $params['src'];
+		$imageID    = isset($params['id']) ? ' id="' . $params['id'] . '"' : '';
+		$imageALT   = isset($params['alt']) ? ' alt="' . truncate($params['alt'], 75) . '"' : '';
+		$imageTITLE = isset($params['title']) ? ' title="' . truncate($params['title'], 75) . '"' : '';
+		$imageCLASS = isset($params['class']) ? ' class="' . truncate($params['class'], 75) . '"' : '';
+		if (mb_strpos($imageURL, 'http') !== 0) {
+			$imageURL = Shop::getImageBaseURL() . ltrim($imageURL, '/');
+		}
+		if ($oImgSize !== null && $oImgSize->size->width > 0 && $oImgSize->size->height > 0) {
+			return '<img src="' . $imageURL . '" width="' . $oImgSize->size->width . '" height="' .
+				$oImgSize->size->height . '"' . $imageID . $imageALT . $imageTITLE . $imageCLASS . ' />';
+		}
+
+		return '<img src="' . $imageURL . '"' . $imageID . $imageALT . $imageTITLE . $imageCLASS . ' />';
+	}
+	
+	//Snackys Functions
+	public function snackys_content($params, $smarty)
+	{
+		$Einstellungen = Shop::Smarty()->get_template_vars('snackyConfig'); 
+		if($Einstellungen['show_content_ids'] == 'Y' && $params['id'] == 'html_body_start' && Shop::isAdmin())
+			echo '<div class="dropper-box">Snackys Zone: <strong>html_head_start</strong></div><div class="dropper-box">Snackys Zone: <strong>html_head_end</strong></div>';
+		if($Einstellungen['show_content_ids'] == 'Y' && substr($params['id'],0,10) != 'html_head_' && Shop::isAdmin())
+			echo "<div class=\"dropper-box\">Snackys Zone: <strong>".$params['id']."</strong></div>";
+		
+		//Jetzt die Zoneninhalte laden!
+		$where = '';
+		
+		$nSeitenTyp = Shop::Smarty()->get_template_vars('nSeitenTyp');
+		$isMobile = Shop::Smarty()->get_template_vars('isMobile');
+		$cUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+		//Device
+			$where .= ' (nDevice=0 OR nDevice='.( ($isMobile) ? 1 : 2).')';
+		//PageType
+			$where .= ' AND (nPagetype=0 OR nPagetype='.$nSeitenTyp.')';
+		//URL
+			$where .= ' AND (nUrl=\'\' OR nUrl=\''.$cUrl.'\')';
+		//Language
+			$where .= ' AND (nSprache=\'0\' OR nSprache=\'\' OR nSprache=\''.Shop::getLanguage().'\')';
+		//Nur aktive
+			$where .= ' AND `disabled`=0 ';
+			
+		$entries = Shop::Container()->getDB()->query('SELECT * FROM `km_snackys_content` WHERE `nZone`=\''.trim($params['id']).'\' AND '.$where.' AND `parent`=0 ORDER BY nSort ASC,cName ASC',2);
+		
+		if($entries)
+		{
+			foreach($entries as $entry)
+			{
+				if($this->checkSnackysContent($entry))
+				{
+					echo $this->renderSnackysContent($entry,$where);
+				}
+			}
+		}
+	}
+	
+	private function checkSnackysContent($entry)
+	{
+		$showIt = true;
+		if(trim($entry->nPHPIf) != '')
+		{
+			try{
+				//PHP Funktion aufrufen a la $showIt = PHPGHOSTFUNCTION();
+				eval('$phpFunc = function(){'.$entry->nPHPIf.'};');
+				$showIt = $phpFunc();
+			} catch(Exception $e){$showIt = false;}
+		}
+		if($entry->nPagetype == 1 && $entry->nArtikel != '')
+		{
+			//Prüfen ob der aktuelle Artikel erlaubt ist
+			$articles = explode(';',$entry->nArtikel);
+			$Artikel = Shop::Smarty()->get_template_vars('Artikel');
+			if(!in_array($Artikel->cArtNr,$articles))
+				$showIt = false;
+		}
+		if($entry->nPagetype == 2 && $entry->nKategorie != 0)
+		{
+			$AktuelleKategorie = Shop::Smarty()->get_template_vars('AktuelleKategorie');
+			if(!$AktuelleKategorie || $entry->nKategorie != $AktuelleKategorie->kKategorie)
+				$showIt = false;
+		}
+		if($entry->nPagetype == 31 && $entry->nPageId > 0)
+		{
+			$Link = Shop::Smarty()->get_template_vars('Link');
+			if(!$Link || $Link->kLink != $entry->nPageId)
+				$showIt = false;
+		}
+		
+		return $showIt;
+	}
+	private function renderSnackysContent($entry,$where)
+	{
+		$Einstellungen = Shop::Smarty()->get_template_vars('snackyConfig'); 
+		$code = '';
+		switch($entry->nType)
+		{
+			case 1:
+				if($Einstellungen['optimize_content'] == 'Y')
+					$entry->cContent = $this->optimize($entry->cContent);
+				$code = Shop::Smarty()->fetch('string:'.$entry->cContent);
+				break;
+			case 2:
+				$data = json_decode($entry->cContent);
+				if(!isset($defaultOptions))
+					$defaultOptions = Artikel::getDefaultOptions();
+				if($data)
+				{
+					$products = explode(";",$data->products);
+					$productList = array();
+					foreach($products as $product)
+					{
+						//Suche nach kArtikel
+						$kArtikel = Shop::Container()->getDB()->query('SELECT kArtikel FROM tartikel WHERE cArtNr=\''.trim($product).'\' LIMIT 1',1);
+						if($kArtikel)
+						{
+							$artikel = new Artikel();
+							$artikel->fuelleArtikel($kArtikel->kArtikel, $defaultOptions);
+							$productList[] = $artikel;
+						}
+					}
+					$sliderTitle = $data->title;
+					Shop::Smarty()->assign('snackysProducts',$productList);
+					Shop::Smarty()->assign('snackysTitle',$sliderTitle);
+					Shop::Smarty()->assign('entry',$entry);
+					$code = Shop::Smarty()->fetch('snackys_content/product_slider.tpl');
+					//$code = '<div class="snackys-content '.$entry->cClass.'">'.Shop::Smarty()->fetch('string:{include file=\'snippets/product_slider.tpl\' productlist=$tempProducts title=$tempTitle hideOverlays=true}').'</div>';
+				}
+				break;
+			case 3:
+				//Gridsystem, also auch dessen Subs laden!
+				$subs = Shop::Container()->getDB()->query('SELECT * FROM `km_snackys_content` WHERE '.$where.' AND `parent`='.$entry->id.' ORDER BY nSort ASC,cName ASC',2);
+				foreach($subs as $key=>$sub)
+				{
+					if($this->checkSnackysContent($sub))
+						$subs[$key]->rendered = $this->renderSnackysContent($sub,$where);
+					
+					$config = json_decode($sub->nConfig);
+					$subs[$key]->xs = $config->xs;
+					$subs[$key]->sm = $config->sm;
+					$subs[$key]->md = $config->md;
+					$subs[$key]->lg = $config->lg;
+				}
+				$entry->subs = $subs;
+				Shop::Smarty()->assign('entry',$entry);
+				$code = Shop::Smarty()->fetch('snackys_content/grid.tpl');
+				break;
+			case 4:
+				//Bild, Daten laden
+				$data = json_decode($entry->cContent);
+				if($data)
+				{
+					$entry->cLink = $data->cLink;
+					$entry->cBild = $data->cBild;
+					$entry->cCaption = $data->cCaption;
+					$entry->cAltTag = !empty($data->cAltTag) ? $data->cAltTag : $data->cCaption;
+					Shop::Smarty()->assign('entry',$entry);
+					$code = Shop::Smarty()->fetch('snackys_content/image.tpl');
+				}
+				break;
+			case 5:
+				//Accordeon, also auch dessen Subs laden!
+				$subs = Shop::Container()->getDB()->query('SELECT * FROM `km_snackys_content` WHERE '.$where.' AND `parent`='.$entry->id.' ORDER BY nSort ASC,cName ASC',2);
+				foreach($subs as $key=>$sub)
+				{
+					if($this->checkSnackysContent($sub))
+						$subs[$key]->rendered = $this->renderSnackysContent($sub,$where);
+					
+					$config = json_decode($sub->nConfig);
+					$subs[$key]->cNamePanel = $config->cNamePanel;
+					
+				}
+				$entry->subs = $subs;
+				Shop::Smarty()->assign('entry',$entry);
+				$code = Shop::Smarty()->fetch('snackys_content/accordeon.tpl');
+				break;
+			default:
+				if($Einstellungen['optimize_content'] == 'Y')
+					$entry->cContent = $this->optimize($entry->cContent);
+				Shop::Smarty()->assign('entry',$entry);
+				//$code = '<div class="snackys-content '.$entry->cClass.'">'.$entry->cContent.'</div>';
+				$code = Shop::Smarty()->fetch('snackys_content/content.tpl');
+				break;
+		}
+		
+		//Jetzt ausgeben
+		return $code;
+	}
+	
+	public function getSliderPerDevice($params, $smarty)
+	{
+	}
+	public function loadCSS($params, $smarty)
+	{
+        $reader    = new XMLReader();
+        $tplXML    = $reader->getXML($this->template->getTemplate(), false);
+        $parentXML = ($tplXML === null || empty($tplXML->Parent)) ? null : $reader->getXML((string)$tplXML->Parent);
+		
+		$cssArr = array();
+		if(is_array($params['css1'])) $cssArr = array_merge($cssArr,$params['css1']);
+		if(is_array($params['css2'])) $cssArr = array_merge($cssArr,$params['css2']);
+		if(is_array($params['css3'])) $cssArr = array_merge($cssArr,$params['css3']);
+		elseif(!empty($params['css3'])) $cssArr[] = $params['css3'];
+		
+		
+		$cTemplateDir = $smarty->get_template_vars('currentTemplateDir');
+		$parentTemplateDir = $smarty->get_template_vars('parentTemplateDir');
+		$Einstellungen = $smarty->get_template_vars('Einstellungen'); //template.theme.theme_default
+		$Einstellungen2 = $smarty->get_template_vars('snackyConfig'); //template.theme.theme_default
+		
+		//Falls Childtemplate, zuerst vom Vater laden
+		if($parentXML && (!isset($tplXML->CSSPageTypes) || !isset($tplXML->CSSPageTypes->attributes()->override)))
+		{
+			foreach($parentXML->CSSPageTypes as $o)
+				foreach($o as $css)
+					if($css->attributes()->PageType == $params['cPageType'] || $css->attributes()->PageType == 'all')
+					{
+						$path = str_replace('##theme##',$Einstellungen['template']['theme']['theme_default'],$css->attributes()->Path);
+						if(substr($path,0,1) != '/') $path = '/'.$cTemplateDir.$path;
+						$cssArr[] = $path;
+					}
+		}
+		
+		//Jetzt noch vom aktuellen Template laden!	
+		if(!empty($tplXML->CSSPageTypes))		
+		{
+			foreach($tplXML->CSSPageTypes as $o)
+				foreach($o as $css)
+					if($css->attributes()->PageType == $params['cPageType'] || $css->attributes()->PageType == 'all')
+					{
+						$path = str_replace('##theme##',$Einstellungen['template']['theme']['theme_default'],$css->attributes()->Path);
+						if(substr($path,0,1) != '/') $path = '/'.$cTemplateDir.$path;
+						$cssArr[] = $path;
+					}
+		}
+		
+		//Jetzt noch die CSS Werte ersetzen! (ggf. später durch die Templateinstellungen ersetzen??
+		$cssConfig = array();
+		foreach($Einstellungen2 as $key => $val)
+		{
+			if(substr($key,0,4) == 'css_')
+			$cssConfig[substr($key,4)] = $val;
+		}
+		
+		//Ist es eine Listen oder Detailseite? => GGF CSS Eigenschaften überschreiben!
+		$nSeitenTyp = $smarty->get_template_vars('nSeitenTyp');
+		$zusatzConfigs = array();
+		$zusatzConfigsCheck = '';
+		if($nSeitenTyp === 1)
+		{
+			$x = $smarty->get_template_vars('Artikel');
+			if($x && isset($x->FunktionsAttribute))
+				$zusatzConfigs = $x->FunktionsAttribute;
+		} elseif($nSeitenTyp === 2) {
+			$x = $smarty->get_template_vars('AktuelleKategorie');
+			if($x && isset($x->categoryFunctionAttributes))
+				$zusatzConfigs = $x->categoryFunctionAttributes;
+		}
+		if(count($zusatzConfigs) > 0)
+		{
+			foreach($zusatzConfigs as $key => $val)
+				if(substr($key,0,4) == 'css_')
+				{
+					foreach($cssConfig as $key2 => $val2)
+						if(strtolower($key2) == strtolower(substr($key,4)))
+						{
+							$cssConfig[$key2] = $val;
+						}
+					$zusatzConfigsCheck = substr($key,4).'###'.$val.'|';
+				}
+		}
+		
+		
+
+		//Ausgabe!
+		$minified = '';
+		$zusatzConfigsCheck = ($zusatzConfigsCheck == '') ? '' : '_'.crc32($zusatzConfigsCheck);
+		$cssFile = PFAD_ROOT.'templates/Snackys/temp/main_inline_css_'.crc32(implode(';',$cssArr)).$zusatzConfigsCheck.'.css';
+		
+		if(file_exists($cssFile) && !isset($_REQUEST['rebuildCache']))
+			$minified = file_get_contents($cssFile);
+		
+		if($Einstellungen2['debug_mode'] == 'Y') $minified = '';
+		
+		
+		if($minified == '')
+		{
+			$css = '';
+			foreach($cssArr as $file)
+			{
+				if(file_exists(PFAD_ROOT.'/'.$file))
+					$css .= file_get_contents(PFAD_ROOT.'/'.$file);
+			}
+				
+			//Add Snackys CSS Content
+			$customCSS = Shop::Container()->getDB()->select('km_snackys_csshtml', 'nKey', 'css');
+			$css .= $customCSS->nValue;
+
+			$colors = array();
+			foreach($cssConfig as $var => $cfg)
+				$colors['@'.$var] = $cfg;
+			//foreach($Einstellungen['template']['pdListing'] as $var => $cfg)
+			//	$colors['@'.$var] = $cfg;
+			
+			$css = str_replace(array_keys($colors), $colors, $css);
+			if(!class_exists('CSSmin'))
+				$minified = $css;
+			else
+			{
+				$minify = new CSSmin;
+				$minified = @$minify->run($css);
+			}
+			file_put_contents($cssFile, $minified);
+		}
+		$css = '<style id="maincss">'.$minified.'</style>';
+		echo $css;
+	}
+	public function getSizeBySrc($params, $smarty)
+	{
+		$params['src'] = str_replace(URL_SHOP,PFAD_ROOT,$params['src']);
+		if(strpos($params['src'],'//') !== false)
+			$params['src'] = str_replace('//','/', $params['src']);
+		
+		list($width, $height, $type, $attr) = getimagesize($params['src']);
+		if(!$width) return;
+		
+		if(isset($params['cAssign']))
+			$smarty->assign($params['cAssign'], array('width' => $width, 'height' => $height, 'padding' => ($height / $width * 100)));
+		return ;
+	}
+	public function getZahlungsarten($params, $smarty)
+	{
+		if(isset($params['cAssign']))
+		{
+			$customerGroupID = Frontend::getCustomer()->getGroupID();
+			if (!$customerGroupID) {
+				$customerGroupID = Frontend::getCustomerGroup()->getID();
+			}
+			$payments = Shop::Container()->getDB()->query("SELECT DISTINCT tzahlungsart.* FROM tzahlungsart 
+				INNER JOIN tversandartzahlungsart ON tzahlungsart.kZahlungsart=tversandartzahlungsart.kZahlungsart
+				WHERE tzahlungsart.nActive = 1 AND tzahlungsart.nNutzbar = 1
+				 AND (tzahlungsart.cKundengruppen IS NULL OR tzahlungsart.cKundengruppen=''
+                    OR FIND_IN_SET('.$customerGroupID.', REPLACE(tzahlungsart.cKundengruppen, ';', ',')) > 0)
+				",2);
+			$smarty->assign($params['cAssign'],$payments);
+		}
+		
+		return false;
+	}
+	public function checkCopyfree($string)
+	{
+		$parts = parse_url(URL_SHOP);
+		$parts['host'] = str_replace("www.","",$parts['host']);
+		$check = md5($parts['host']).crc32($parts['host']);
+		if(empty($check)) $check = 'XcUxIycWrh5GYSL5vg22WaluNKCiZgDN';
+		return $string!=$check;
+	}
+	public function optimize($str)
+	{
+
+		//Iframes nachladen
+		$muster = '/\<iframe(.*)>/i';
+		$str = preg_replace_callback($muster,function($match){
+			if(strpos($match[0],'data-src'))
+				return $match[0];
+			else
+			{
+				$snackyConfig = Shop::Smarty()->get_template_vars('snackyConfig');
+				return str_replace('src=','class="lazyload" data-src=',$match[0]);
+			}
+		},$str);
+		
+		//Bilder nachladen
+		$muster = '/\<img(.*)>/i';
+		$str = preg_replace_callback($muster,function($match){
+			if(strpos($match[0],'data-src'))
+				return $match[0];
+			else
+			{
+				$snackyConfig = Shop::Smarty()->get_template_vars('snackyConfig');
+				return str_replace('src=','class="lazyload" data-src=',$match[0]);
+			}
+		},$str);
+		
+		return $str;
+	}
+	
+	public function entferneFehlerzeichen($string)
+	{
+		return mb_convert_encoding($string, 'UTF-8', 'UTF-8');
+	}
+	public function getLink($params, $smarty)
+	{
+		if(!isset($params['nLinkart'])) return;
+		
+		try {
+			$link = Shop::Container()->getLinkService()->getSpecialPage($params['nLinkart']);
+			if(!$link) return;
+		} catch (\JTL\Link\SpecialPageNotFoundException $e) { return false; }
+		
+		$smarty->assign($params['cAssign'],$link);
+		
+		return ;
+	}
+
+    /**
+     * @param array                         $params
+     * @param Smarty_Internal_Data $smarty
+     * @return array|void
+     */
+    public function getProductList($params, $smarty)
+    {
+        $limit                 = (int)($params['nLimit'] ?? 10);
+        $sort                  = (int)($params['nSortierung'] ?? 0);
+        $assignTo              = (isset($params['cAssign']) && \strlen($params['cAssign']) > 0)
+            ? $params['cAssign']
+            : 'oCustomArtikel_arr';
+        $characteristicFilters = isset($params['cMerkmalFilter'])
+            ? ProductFilter::initCharacteristicFilter(\explode(';', $params['cMerkmalFilter']))
+            : [];
+        $searchFilters         = isset($params['cSuchFilter'])
+            ? ProductFilter::initSearchFilter(\explode(';', $params['cSuchFilter']))
+            : [];
+        $params                = [
+            'kKategorie'             => $params['kKategorie'] ?? null,
+            'kHersteller'            => $params['kHersteller'] ?? null,
+            'kArtikel'               => $params['kArtikel'] ?? null,
+            'kVariKindArtikel'       => $params['kVariKindArtikel'] ?? null,
+            'kSeite'                 => $params['kSeite'] ?? null,
+            'kSuchanfrage'           => $params['kSuchanfrage'] ?? null,
+            'kMerkmalWert'           => $params['kMerkmalWert'] ?? null,
+            'kSuchspecial'           => $params['kSuchspecial'] ?? null,
+            'kKategorieFilter'       => $params['kKategorieFilter'] ?? null,
+            'kHerstellerFilter'      => $params['kHerstellerFilter'] ?? null,
+            'nBewertungSterneFilter' => $params['nBewertungSterneFilter'] ?? null,
+            'cPreisspannenFilter'    => $params['cPreisspannenFilter'] ?? '',
+            'kSuchspecialFilter'     => $params['kSuchspecialFilter'] ?? null,
+            'nSortierung'            => $sort,
+            'MerkmalFilter_arr'      => $characteristicFilters,
+            'SuchFilter_arr'         => $searchFilters,
+            'nArtikelProSeite'       => $params['nArtikelProSeite'] ?? null,
+            'cSuche'                 => $params['cSuche'] ?? null,
+            'seite'                  => $params['seite'] ?? null
+        ];
+        if ($params['kArtikel'] !== null) {
+            $products = [];
+            if (!\is_array($params['kArtikel'])) {
+                $params['kArtikel'] = [$params['kArtikel']];
+            }
+            foreach ($params['kArtikel'] as $productID) {
+                $product    = new Artikel();
+                $products[] = $product->fuelleArtikel($productID, Artikel::getDefaultOptions());
+            }
+        } else {
+            $products = (new ProductFilter(
+                Config::getDefault(),
+                $this->db,
+                $this->cache
+            ))
+                ->initStates($params)
+                ->generateSearchResults(null, true, $limit)
+                ->getProducts()
+                ->all();
+        }
+
+        $smarty->assign($assignTo, $products);
+
+        if (isset($params['bReturn'])) {
+            return $products;
+        }
+    }
+
+    /**
+     * @param array                         $params
+     * @param Smarty_Internal_Data $smarty
+     * @return bool|string
+     */
+    public function getStaticRoute($params, $smarty)
+    {
+        if (isset($params['id'])) {
+            $full   = !isset($params['full']) || $params['full'] === true;
+            $secure = isset($params['secure']) && $params['secure'] === true;
+            $url    = Shop::Container()->getLinkService()->getStaticRoute($params['id'], $full, $secure);
+            $qp     = isset($params['params'])
+                ? (array)$params['params']
+                : [];
+
+            if (\count($qp) > 0) {
+                $url .= (\parse_url($url, \PHP_URL_QUERY) ? '&' : '?') . \http_build_query($qp, '', '&');
+            }
+            if (isset($params['assign'])) {
+                $smarty->assign($params['assign'], $url);
+            } else {
+                return $url;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param array                         $params
+     * @param Smarty_Internal_Data $smarty
+     * @return array|void
+     */
+    public function getManufacturers($params, $smarty)
+    {
+        $manufacturers = Manufacturer::getInstance()->getManufacturers();
+        if (isset($params['assign'])) {
+            $smarty->assign($params['assign'], $manufacturers);
+
+            return;
+        }
+
+        return $manufacturers;
+    }
+
+    /**
+     * @param array                         $params
+     * @param Smarty_Internal_Data $smarty
+     * @return array|void
+     */
+    public function getBoxesByPosition($params, $smarty)
+    {
+        if (isset($params['position'])) {
+            $data  = Shop::Container()->getBoxService()->boxes;
+            $boxes = $data[$params['position']] ?? [];
+            if (isset($params['assign'])) {
+                $smarty->assign($params['assign'], $boxes);
+            } else {
+                return $boxes;
+            }
+        }
+    }
+
+    /**
+     * @param array                         $params - categoryId mainCategoryId. 0 for first level categories
+     * @param Smarty_Internal_Data $smarty
+     * @return array|void
+     */
+    public function getCategoryArray($params, $smarty)
+    {
+        $id = isset($params['categoryId']) ? (int)$params['categoryId'] : 0;
+        if ($id === 0) {
+            $categories = Category::getInstance();
+            $list       = $categories->combinedGetAll();
+        } else {
+            $categories = new KategorieListe();
+            $list       = $categories->getAllCategoriesOnLevel($id);
+        }
+
+        if (isset($params['categoryBoxNumber']) && (int)$params['categoryBoxNumber'] > 0) {
+            $list2 = [];
+            foreach ($list as $key => $item) {
+                if (isset($item->categoryFunctionAttributes[\KAT_ATTRIBUT_KATEGORIEBOX])
+                    && $item->categoryFunctionAttributes[\KAT_ATTRIBUT_KATEGORIEBOX] == $params['categoryBoxNumber']
+                ) {
+                    $list2[$key] = $item;
+                }
+            }
+            $list = $list2;
+        }
+
+        if (isset($params['assign'])) {
+            $smarty->assign($params['assign'], $list);
+
+            return;
+        }
+
+        return $list;
+    }
+
+    /**
+     * @param array                         $params
+     * @param Smarty_Internal_Data $smarty
+     * @return array|void
+     */
+    public function getCategoryParents($params, $smarty)
+    {
+        $id         = isset($params['categoryId']) ? (int)$params['categoryId'] : 0;
+        $categories = new KategorieListe();
+        $list       = $categories->getOpenCategories(new Kategorie($id));
+
+        \array_shift($list);
+        $list = \array_reverse($list);
+
+        if (isset($params['assign'])) {
+            $smarty->assign($params['assign'], $list);
+
+            return;
+        }
+
+        return $list;
+    }
+
+    /**
+     * @param array                         $params
+     * @param Smarty_Internal_Data $smarty
+     * @return string
+     */
+    public function getImgTag($params, $smarty): string
+    {
+        if (empty($params['src'])) {
+            return '';
+        }
+        $size = $this->getImageSize($params['src']);
+
+        $url   = $params['src'];
+        $id    = isset($params['id']) ? ' id="' . $params['id'] . '"' : '';
+        $alt   = isset($params['alt']) ? ' alt="' . $this->truncate($params['alt'], 75) . '"' : '';
+        $title = isset($params['title']) ? ' title="' . $this->truncate($params['title'], 75) . '"' : '';
+        $class = isset($params['class']) ? ' class="' . $this->truncate($params['class'], 75) . '"' : '';
+        if (\strpos($url, 'http') !== 0) {
+            $url = Shop::getImageBaseURL() . \ltrim($url, '/');
+        }
+        if ($size !== null && $size->size->width > 0 && $size->size->height > 0) {
+            return '<img src="' . $url . '" width="' . $size->size->width . '" height="' .
+                $size->size->height . '"' . $id . $alt . $title . $class . ' />';
+        }
+
+        return '<img src="' . $url . '"' . $id . $alt . $title . $class . ' />';
+    }
+
+    /**
+     * @param array                         $params
+     * @param Smarty_Internal_Data $smarty
+     */
+    public function hasBoxes($params, $smarty): void
+    {
+        $boxData = $smarty->getTemplateVars('boxes');
+        $smarty->assign($params['assign'], !empty($boxData[$params['position']]));
+    }
+
+    /**
+     * @param string $text
+     * @param int    $length
+     * @return string
+     */
+    public function truncate($text, $length)
+    {
+        if (\strlen($text) > $length) {
+            $text = \substr($text, 0, $length);
+            $text = \substr($text, 0, \strrpos($text, ' '));
+            $text .= '...';
+        }
+
+        return $text;
+    }
+
+    /**
+     * @param array                         $params
+     * @param Smarty_Internal_Data $smarty
+     * @return mixed|string
+     */
+    public function getLocalizedPrice($params, $smarty)
+    {
+        $surcharge                     = new \stdClass();
+        $surcharge->cAufpreisLocalized = '';
+        $surcharge->cPreisInklAufpreis = '';
+
+        if ((float)$params['fAufpreisNetto'] != 0) {
+            $fAufpreisNetto = (float)$params['fAufpreisNetto'];
+            $fVKNetto       = (float)$params['fVKNetto'];
+            $kSteuerklasse  = (int)$params['kSteuerklasse'];
+            $fVPEWert       = (float)$params['fVPEWert'];
+            $cVPEEinheit    = $params['cVPEEinheit'];
+            $funcAttributes = $params['FunktionsAttribute'];
+            $precision      = (isset($funcAttributes[\FKT_ATTRIBUT_GRUNDPREISGENAUIGKEIT])
+                && (int)$funcAttributes[\FKT_ATTRIBUT_GRUNDPREISGENAUIGKEIT] > 0)
+                ? (int)$funcAttributes[\FKT_ATTRIBUT_GRUNDPREISGENAUIGKEIT]
+                : 2;
+
+            if ((int)$params['nNettoPreise'] === 1) {
+                $surcharge->cAufpreisLocalized = Preise::getLocalizedPriceString($fAufpreisNetto);
+                $surcharge->cPreisInklAufpreis = Preise::getLocalizedPriceString($fAufpreisNetto + $fVKNetto);
+                $surcharge->cAufpreisLocalized = ($fAufpreisNetto > 0)
+                    ? ('+ ' . $surcharge->cAufpreisLocalized)
+                    : \str_replace('-', '- ', $surcharge->cAufpreisLocalized);
+
+                if ($fVPEWert > 0) {
+                    $surcharge->cPreisVPEWertAufpreis     = Preise::getLocalizedPriceString(
+                            $fAufpreisNetto / $fVPEWert,
+                            Frontend::getCurrency()->getCode(),
+                            true,
+                            $precision
+                        ) . ' ' . Shop::Lang()->get('vpePer') . ' ' . $cVPEEinheit;
+                    $surcharge->cPreisVPEWertInklAufpreis = Preise::getLocalizedPriceString(
+                            ($fAufpreisNetto + $fVKNetto) / $fVPEWert,
+                            Frontend::getCurrency()->getCode(),
+                            true,
+                            $precision
+                        ) . ' ' . Shop::Lang()->get('vpePer') . ' ' . $cVPEEinheit;
+
+                    $surcharge->cAufpreisLocalized .= ', ' . $surcharge->cPreisVPEWertAufpreis;
+                    $surcharge->cPreisInklAufpreis .= ', ' . $surcharge->cPreisVPEWertInklAufpreis;
+                }
+            } else {
+                $surcharge->cAufpreisLocalized = Preise::getLocalizedPriceString(
+                    Tax::getGross($fAufpreisNetto, $_SESSION['Steuersatz'][$kSteuerklasse], 4)
+                );
+                $surcharge->cPreisInklAufpreis = Preise::getLocalizedPriceString(
+                    Tax::getGross($fAufpreisNetto + $fVKNetto, $_SESSION['Steuersatz'][$kSteuerklasse], 4)
+                );
+                $surcharge->cAufpreisLocalized = ($fAufpreisNetto > 0)
+                    ? ('+ ' . $surcharge->cAufpreisLocalized)
+                    : \str_replace('-', '- ', $surcharge->cAufpreisLocalized);
+
+                if ($fVPEWert > 0) {
+                    $surcharge->cPreisVPEWertAufpreis     = Preise::getLocalizedPriceString(
+                            Tax::getGross($fAufpreisNetto / $fVPEWert, $_SESSION['Steuersatz'][$kSteuerklasse]),
+                            Frontend::getCurrency()->getCode(),
+                            true,
+                            $precision
+                        ) . ' ' . Shop::Lang()->get('vpePer') . ' ' . $cVPEEinheit;
+                    $surcharge->cPreisVPEWertInklAufpreis = Preise::getLocalizedPriceString(
+                            Tax::getGross(
+                                ($fAufpreisNetto + $fVKNetto) / $fVPEWert,
+                                $_SESSION['Steuersatz'][$kSteuerklasse]
+                            ),
+                            Frontend::getCurrency()->getCode(),
+                            true,
+                            $precision
+                        ) . ' ' . Shop::Lang()->get('vpePer') . ' ' . $cVPEEinheit;
+
+                    $surcharge->cAufpreisLocalized .= ', ' . $surcharge->cPreisVPEWertAufpreis;
+                    $surcharge->cPreisInklAufpreis .= ', ' . $surcharge->cPreisVPEWertInklAufpreis;
+                }
+            }
+        }
+
+        return (isset($params['bAufpreise']) && (int)$params['bAufpreise'] > 0)
+            ? $surcharge->cAufpreisLocalized
+            : $surcharge->cPreisInklAufpreis;
+    }
+
+    /**
+     * @param array                         $params
+     * @param Smarty_Internal_Data $smarty
+     */
+    public function hasCheckBoxForLocation($params, $smarty): void
+    {
+        $smarty->assign(
+            $params['bReturn'],
+            \count((new CheckBox())->getCheckBoxFrontend((int)$params['nAnzeigeOrt'], 0, true, true)) > 0
+        );
+    }
+
+    /**
+     * @param array                         $params
+     * @param Smarty_Internal_Data $smarty
+     */
+    public function getCheckBoxForLocation($params, $smarty): void
+    {
+        $langID     = Shop::getLanguageID();
+        $cid        = 'cb_' . (int)$params['nAnzeigeOrt'] . '_' . $langID;
+        $checkBoxes = Shop::has($cid)
+            ? Shop::get($cid)
+            : (new CheckBox())->getCheckBoxFrontend((int)$params['nAnzeigeOrt'], 0, true, true);
+        if (\count($checkBoxes) > 0) {
+            foreach ($checkBoxes as $checkBox) {
+                $url                     = $checkBox->kLink > 0
+                    ? $checkBox->getLink()->getURL()
+                    : '';
+                $error                   = isset($params['cPlausi_arr'][$checkBox->cID]);
+                $checkBox->isActive      = isset($params['cPost_arr'][$checkBox->cID]);
+                $checkBox->cName         = $checkBox->oCheckBoxSprache_arr[$langID]->cText ?? '';
+                $checkBox->cLinkURL      = $url;
+                $checkBox->cLinkURLFull  = $url;
+                $checkBox->cBeschreibung = !empty($checkBox->oCheckBoxSprache_arr[$langID]->cBeschreibung)
+                    ? $checkBox->oCheckBoxSprache_arr[$langID]->cBeschreibung
+                    : '';
+                $checkBox->cErrormsg     = $error
+                    ? Shop::Lang()->get('pleasyAccept', 'account data')
+                    : '';
+            }
+            Shop::set($cid, $checkBoxes);
+            if (isset($params['assign'])) {
+                $smarty->assign($params['assign'], $checkBoxes);
+            }
+        }
+    }
+
+    /**
+     * @param array $params
+     * @return string
+     */
+    public function aaURLEncode($params): string
+    {
+        $reset  = (int)($params['nReset'] ?? 0) === 1;
+        $url    = $_SERVER['REQUEST_URI'];
+        $params = ['&aaParams', '?aaParams', '&aaReset', '?aaReset'];
+        $exists = false;
+        foreach ($params as $param) {
+            $exists = \strpos($url, $param);
+            if ($exists !== false) {
+                $url = \substr($url, 0, $exists);
+                break;
+            }
+            $exists = false;
+        }
+        if ($exists !== false) {
+            $url = \substr($url, 0, $exists);
+        }
+        if (isset($params['bUrlOnly']) && (int)$params['bUrlOnly'] === 1) {
+            return $url;
+        }
+        $paramString = '';
+        unset($params['nReset']);
+        if (\is_array($params) && \count($params) > 0) {
+            foreach ($params as $key => $param) {
+                $paramString .= $key . '=' . $param . ';';
+            }
+        }
+
+        $sep = (\strpos($url, '?') === false) ? '?' : '&';
+
+        return $url . $sep . ($reset ? 'aaReset=' : 'aaParams=') . \base64_encode($paramString);
+    }
+
+    /**
+     * @param array                         $params - ['type'] Templatename of link, ['assign'] array name to assign
+     * @param Smarty_Internal_Data $smarty
+     */
+    public function getNavigation($params, $smarty): void
+    {
+        if (!isset($params['assign'])) {
+            return;
+        }
+        $identifier = $params['linkgroupIdentifier'];
+        $linkGroup  = null;
+        if (\strlen($identifier) > 0) {
+            $linkGroups = Shop::Container()->getLinkService()->getVisibleLinkGroups();
+            $linkGroup  = $linkGroups->getLinkgroupByTemplate($identifier);
+        }
+        if ($linkGroup !== null && $linkGroup->isAvailableInLanguage(Shop::getLanguageID())) {
+            $smarty->assign($params['assign'], $this->buildNavigationSubs($linkGroup));
+        }
+    }
+
+    /**
+     * @param LinkGroupInterface $linkGroup
+     * @param int                $parentID
+     * @return Collection
+     */
+    public function buildNavigationSubs(LinkGroupInterface $linkGroup, $parentID = 0): Collection
+    {
+        $parentID = (int)$parentID;
+        $links    = new Collection();
+        if ($linkGroup->getTemplate() === 'hidden' || $linkGroup->getName() === 'hidden') {
+            return $links;
+        }
+        foreach ($linkGroup->getLinks() as $link) {
+            /** @var Link $link */
+            if ($link->getParent() !== $parentID) {
+                continue;
+            }
+            $link->setChildLinks($this->buildNavigationSubs($linkGroup, $link->getID()));
+            $link->setIsActive($link->getIsActive() || (Shop::$kLink > 0 && Shop::$kLink === $link->getID()));
+            $links->push($link);
+        }
+
+        return $links;
+    }
+
+    /**
+     * @param array $params
+     * @return string|object|null
+     */
+    public function prepareImageDetails($params)
+    {
+        if (!isset($params['item'])) {
+            return null;
+        }
+
+        $result = [
+            'xs' => $this->getImageSize($params['item']->cPfadMini),
+            'sm' => $this->getImageSize($params['item']->cPfadKlein),
+            'md' => $this->getImageSize($params['item']->cPfadNormal),
+            'lg' => $this->getImageSize($params['item']->cPfadGross)
+        ];
+
+        if (isset($params['type'])) {
+            $type = $params['type'];
+            if (isset($result[$type])) {
+                $result = $result[$type];
+            }
+        }
+        $imageBaseURL = Shop::getImageBaseURL();
+        foreach ($result as $size => $data) {
+            if (isset($data->src) && \strpos($data->src, 'http') !== 0) {
+                $data->src = $imageBaseURL . $data->src;
+            }
+        }
+        $result = (object)$result;
+
+        return (isset($params['json']) && $params['json'])
+            ? \json_encode($result, \JSON_FORCE_OBJECT)
+            : $result;
+    }
+
+    /**
+     * @param string $image
+     * @return object|null
+     */
+    public function getImageSize($image)
+    {
+        $path = \strpos($image, \PFAD_BILDER) === 0
+            ? PFAD_ROOT . $image
+            : $image;
+        if (\file_exists($path)) {
+            [$width, $height, $type] = \getimagesize($path);
+        } else {
+            $req = Product::toRequest($path);
+
+            if (!\is_object($req)) {
+                return null;
+            }
+
+            $settings = Image::getSettings();
+            $refImage = $req->getRaw();
+            if ($refImage === null) {
+                return null;
+            }
+
+            [$width, $height, $type] = \getimagesize($refImage);
+
+            $size       = $settings['size'][$req->getSizeType()];
+            $max_width  = $size['width'];
+            $max_height = $size['height'];
+            $old_width  = $width;
+            $old_height = $height;
+
+            $scale  = \min($max_width / $old_width, $max_height / $old_height);
+            $width  = \ceil($scale * $old_width);
+            $height = \ceil($scale * $old_height);
+        }
+
+        return (object)[
+            'src'  => $image,
+            'size' => (object)[
+                'width'  => $width,
+                'height' => $height
+            ],
+            'type' => $type
+        ];
+    }
+
+    /**
+     * @param array                         $params
+     * @param Smarty_Internal_Data $smarty
+     * @return mixed
+     */
+    public function getCMSContent($params, $smarty)
+    {
+        if (isset($params['kLink']) && (int)$params['kLink'] > 0) {
+            $linkID  = (int)$params['kLink'];
+            $link    = Shop::Container()->getLinkService()->getLinkByID($linkID);
+            $content = $link !== null ? $link->getContent() : null;
+            if (isset($params['assign'])) {
+                $smarty->assign($params['assign'], $content);
+            } else {
+                return $content;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param array                         $params - variationen, maxVariationCount, maxWerteCount
+     * @param Smarty_Internal_Data $smarty
+     * @return int|null|bool
+     * 0: no listable variations
+     * 1: normal listable variations
+     * 2: only child listable variations
+     */
+    public function hasOnlyListableVariations($params, $smarty)
+    {
+        if (!isset($params['artikel']->Variationen)) {
+            if (isset($params['assign'])) {
+                $smarty->assign($params['assign'], 0);
+
+                return null;
+            }
+
+            return 0;
+        }
+
+        $maxVariationCount = isset($params['maxVariationCount']) ? (int)$params['maxVariationCount'] : 1;
+        $maxWerteCount     = isset($params['maxWerteCount']) ? (int)$params['maxWerteCount'] : 3;
+        $variationCheck    = function ($Variationen, $maxVariationCount, $maxWerteCount) {
+            $result   = true;
+            $varCount = \is_array($Variationen) ? \count($Variationen) : 0;
+
+            if ($varCount > 0 && $varCount <= $maxVariationCount) {
+                foreach ($Variationen as $oVariation) {
+                    if ($oVariation->cTyp !== 'SELECTBOX'
+                        && (!\in_array($oVariation->cTyp, ['TEXTSWATCHES', 'IMGSWATCHES', 'RADIO'], true)
+                            || \count($oVariation->Werte) > $maxWerteCount)) {
+                        $result = false;
+                        break;
+                    }
+                }
+            } else {
+                $result = false;
+            }
+
+            return $result;
+        };
+
+        $result = $variationCheck($params['artikel']->Variationen, $maxVariationCount, $maxWerteCount) ? 1 : 0;
+        if ($result === 0 && $params['artikel']->kVaterArtikel > 0) {
+            // Hat das Kind evtl. mehr Variationen als der Vater?
+            $result = $variationCheck($params['artikel']->oVariationenNurKind_arr, $maxVariationCount, $maxWerteCount)
+                ? 2
+                : 0;
+        }
+
+        if (isset($params['assign'])) {
+            $smarty->assign($params['assign'], $result);
+
+            return null;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Input: ['ger' => 'Titel', 'eng' => 'Title']
+     *
+     * @param string|array $mixed
+     * @param string|null  $to - locale
+     * @return null|string
+     */
+    public function getTranslation($mixed, $to = null): ?string
+    {
+        $to = $to ?: Shop::getLanguageCode();
+
+        if ($this->hasTranslation($mixed, $to)) {
+            return \is_string($mixed) ? $mixed : $mixed[$to];
+        }
+
+        return null;
+    }
+
+    /**
+     * Has any translation
+     *
+     * @param string|array $mixed
+     * @param string|null  $to - locale
+     * @return bool
+     */
+    public function hasTranslation($mixed, $to = null): bool
+    {
+        $to = $to ?: Shop::getLanguageCode();
+
+        return \is_string($mixed) ?: isset($mixed[$to]);
+    }
+
+    /**
+     * @param array                         $params
+     * @param Smarty_Internal_Data $smarty
+     * @return string
+     */
+    public function captchaMarkup($params, $smarty): string
+    {
+        if (isset($params['getBody']) && $params['getBody']) {
+            return Shop::Container()->getCaptchaService()->getBodyMarkup($smarty);
+        }
+
+        return Shop::Container()->getCaptchaService()->getHeadMarkup($smarty);
+    }
+
+    /**
+     * @param array                         $params
+     * @param Smarty_Internal_Data $smarty
+     * @return array|null|void
+     */
+    public function getStates($params, $smarty)
+    {
+        $regions = Staat::getRegions($params['cIso']);
+        if (!isset($params['assign'])) {
+            return $regions;
+        }
+        $smarty->assign($params['assign'], $regions);
+    }
+
+    /**
+     * @param $params
+     * @return int
+     */
+    public function getDecimalLength($params): int
+    {
+        return \max(\strlen(\strrchr(\str_replace(',', '.', $params['quantity']), '.')) - 1, 0);
+    }
+
+    /**
+     * prepares a string optimized for SEO
+     * @param String $optStr
+     * @return String SEO optimized String
+     */
+    public function seofy($optStr = ''): string
+    {
+        return \str_replace('/', '-', Seo::sanitizeSeoSlug($optStr));
+    }
+
+    /**
+     * @param array                         $params
+     * @param Smarty_Internal_Data $smarty
+     * @return void
+     */
+    public function getUploaderLang($params, $smarty): void
+    {
+        $availableLocales = [
+            'ar', 'az', 'bg', 'ca', 'cr', 'cs', 'da', 'de', 'el', 'es', 'et', 'fa', 'fi', 'fr', 'gl', 'he', 'hu', 'id',
+            'it', 'ja', 'ka', 'kr', 'kz', 'lt', 'nl', 'no', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sv', 'th', 'tr', 'uk',
+            'uz', 'vi', 'zh'
+        ];
+
+        $smarty->assign($params['assign'], \in_array($params['iso'], $availableLocales, true) ? $params['iso'] : 'LANG');
+    }
+	
+    /**
+     * @param array                         $params
+     * @param Smarty_Internal_Data			$smarty
+     * @return void
+     */
+    public function getCountry($params, $smarty): void
+    {
+        $smarty->assign($params['assign'], Shop::Container()->getCountryService()->getCountry($params['iso']));
+    }
+}

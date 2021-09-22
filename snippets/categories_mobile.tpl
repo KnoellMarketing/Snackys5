@@ -1,6 +1,22 @@
 {block name='snippets-categories-mobile'}
 {strip}
-{assign var=max_subsub_items value=5}
+{block name='snippets-categories-mega-assigns'}
+    {if !isset($i)}
+        {assign var=i value=0}
+    {/if}
+    {if !isset($activeId)}
+        {if $NaviFilter->hasCategory()}
+            {$activeId = $NaviFilter->getCategory()->getValue()}
+        {elseif $nSeitenTyp === $smarty.const.PAGE_ARTIKEL && isset($Artikel)}
+            {$activeId = $Artikel->gibKategorie()}
+        {elseif $nSeitenTyp === $smarty.const.PAGE_ARTIKEL && isset($smarty.session.LetzteKategorie)}
+            {$activeId = $smarty.session.LetzteKategorie}
+        {else}
+            {$activeId = 0}
+        {/if}
+    {/if}
+    {assign var=max_subsub_items value=5}
+{/block}
 {if $snackyConfig.megaHome == 0}
 <li class="is-lth{if $nSeitenTyp == 18} active{/if}">
 	<a href="{$ShopURL}" title="{$Einstellungen.global.global_shopname}" class="home-icon mm-mainlink">
@@ -15,7 +31,7 @@
 </li>
 {/if}
 {if isset($snackyConfig.show_pages) && $snackyConfig.show_pages !== 'N'}
-    {include file='snippets/linkgroup_recursive_mobile.tpl' linkgroupIdentifier='megamenu_start' dropdownSupport=true tplscope='megamenu_start'}
+    {include file='snippets/linkgroup_recursive_mobile.tpl' linkgroupIdentifier='megamenu_start' dropdownSupport=true tplscope='megamenu_start' limit={$snackyConfig.mmenu_subcats}}
 {/if}
 
 {block name="megamenu-categories"}
@@ -26,7 +42,7 @@
 
 {block name="megamenu-pages"}
 {if isset($snackyConfig.show_pages) && $snackyConfig.show_pages !== 'N'}
-    {include file='snippets/linkgroup_recursive_mobile.tpl' linkgroupIdentifier='megamenu' dropdownSupport=true tplscope='megamenu'}
+    {include file='snippets/linkgroup_recursive_mobile.tpl' linkgroupIdentifier='megamenu' dropdownSupport=true tplscope='megamenu' limit={$snackyConfig.mmenu_subcats}}
 {/if}
 {/block}{* megamenu-pages *}
 
@@ -51,7 +67,7 @@
                     <span class="caret hidden-xs"></span>{include file='snippets/mobile-menu-arrow.tpl'}
                 </span>
             {/if}
-            <ul class="dropdown-menu keepopen{if $manufacturers|@count > 40} items-threecol{else if $manufacturers|@count > 20} items-twocol{/if}">
+            <ul class="dropdown-menu keepopen">
 				{if isset($linkSEOHersteller) && $snackyConfig.mmenu_link_clickable == 'N'}
 					<li class="title{if $NaviFilter->hasManufacturer() || $nSeitenTyp == PAGE_HERSTELLER} active{/if}">
 						<a href="{$linkSEOHersteller->getURL()}" class="mm-mainlink">

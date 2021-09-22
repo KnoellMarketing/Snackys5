@@ -10,11 +10,20 @@
     <div class="{if ($Warenkorb->PositionenArr|@count > 0)}col-12 col-md-7 col-lg-8{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-9{/if}{else}col-12 col-md-8 col-lg-6{/if}">
     <h1 class="mb-spacer mb-small{if ($Warenkorb->PositionenArr|@count == 0)} text-center{/if}">{lang key="basket" section="global"} {if ($Warenkorb->PositionenArr|@count > 0)}<span class="text-muted">({$WarenkorbArtikelPositionenanzahl} {lang key="product" section="global"})</span>{/if}</h1>
     
-    {if !empty($WarenkorbVersandkostenfreiHinweis) && $Warenkorb->PositionenArr|@count > 0}
-        <div class="alert alert-info">
-            <span class="basket_notice">{$WarenkorbVersandkostenfreiHinweis}</span>
-        </div>
-    {/if}
+    {block name='basket-index-notice-shipping'}
+        {if !empty($WarenkorbVersandkostenfreiHinweis) && $Warenkorb->PositionenArr|@count > 0}
+            <div class="alert alert-info">
+                {$WarenkorbVersandkostenfreiHinweis}
+            </div>
+        {/if}
+    {/block}
+    {block name='basket-index-notice-weight'}
+        {if $Einstellungen.kaufabwicklung.warenkorb_gesamtgewicht_anzeigen === 'Y'}
+            <div class="alert alert-info">
+                {lang key='cartTotalWeight' section='basket' printf=$WarenkorbGesamtgewicht}
+            </div>
+        {/if}
+    {/block}
     
     {if ($Warenkorb->PositionenArr|@count > 0)}
         {block name="basket"}
@@ -71,7 +80,7 @@
                     <h2 class="h5 m0 panel-title">{lang key="useCoupon" section="checkout"}</h2>
                 </div>
                 <div class="apply-coupon panel-body mb-spacer mb-xs">
-                    <form class="form-inline evo-validate" id="basket-coupon-form" method="post" action="{get_static_route id='warenkorb.php'}">
+                    <form class="form-inline jtl-validate" id="basket-coupon-form" method="post" action="{get_static_route id='warenkorb.php'}">
                         {$jtl_token}
                         {block name="basket-coupon"}
                             <div class="form-group m0 w100{if !empty($invalidCouponCode)} has-error{/if}">

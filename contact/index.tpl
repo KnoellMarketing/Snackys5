@@ -29,7 +29,7 @@
 					{lang key="fillOut" section="global"}
 				</div>
 			{/if}
-			<form name="contact" action="{get_static_route id='kontakt.php'}" method="post" class="evo-validate">
+			<form name="contact" action="{get_static_route id='kontakt.php'}" method="post" class="jtl-validate">
 				{$jtl_token}
 				<fieldset class="panel">
 					<span class="block h4">{lang key="contact" section="global"}</span>
@@ -173,16 +173,11 @@
 				</fieldset>
                 {if (!isset($smarty.session.bAnti_spam_already_checked) || $smarty.session.bAnti_spam_already_checked !== true) &&
                     isset($Einstellungen.kontakt.kontakt_abfragen_captcha) && $Einstellungen.kontakt.kontakt_abfragen_captcha !== 'N' && empty($smarty.session.Kunde->kKunde)}
-					<hr>
-					<div class="row">
-						<div class="col-12 col-md-12">
-							{captchaMarkup getBody=true}
-							<hr>
-						</div>
-					</div>
+                    {captchaMarkup getBody=true}
 				{/if}
 				<input type="hidden" name="kontakt" value="1" />
                 {include file="snippets/zonen.tpl" id="opc_before_submit"}
+                <p class="small text-muted">(* = {lang key='mandatoryFields'})</p>
                 <p class="privacy text-muted">
                     <a href="{if isset($oSpezialseiten_arr[$smarty.const.LINKTYP_DATENSCHUTZ])}{$oSpezialseiten_arr[$smarty.const.LINKTYP_DATENSCHUTZ]->getURL()}{/if}" class="popup small tdu">
                         {lang key='privacyNotice'}

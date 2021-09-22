@@ -10,6 +10,7 @@
         {/block}
         <ul class="productlist-filter-accordion border-md-bottom border-lg-bottom-0">
         {block name='snippets-filter-mobile-sorting'}
+            {if count($Suchergebnisse->getSortingOptions()) > 0}
             <li class="snippets-filter-mobile-sorting">
                 {link class="snippets-filter-mobile-sorting-link filter-type-FilterItemSort"
                     data=["toggle"=> "collapse", "target"=>"#sorting-collapse"]}
@@ -31,6 +32,7 @@
                     {/foreach}
                 {/collapse}
             </li>
+            {/if}
         {/block}
         {if $show_filters}
             {if count($NaviFilter->getAvailableContentFilters()) > 0}

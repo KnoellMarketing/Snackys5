@@ -8,7 +8,7 @@
 
 <div class="mb-spacer mb-small">
 	{get_static_route id='news.php' assign=routeURL}
-    <form id="frm_filter" name="frm_filter" action="{$cCanonicalURL|default:$routeURL}" method="post" class="form-inline text-center">
+    <form id="frm_filter" name="frm_filter" action="{$routeURL}" method="post" class="form-inline text-center">
         {$jtl_token}
 
         <select name="nSort" onchange="this.form.submit();" class="form-control form-group" aria-label="{lang key='newsSort' section='news'}">
@@ -62,7 +62,7 @@
 {if $noarchiv === 1}
     <div class="alert alert-info">{lang key='noNewsArchiv' section='news'}.</div>
 {elseif !empty($newsItems)}
-    <div id="news-c" itemprop="mainEntity" itemscope itemtype="https://schema.org/Blog">
+    <div id="news-c">
         {if $oNewsCat->getID() > 0}
 			{include file="snippets/zonen.tpl" id="opc_before_news_category_heading"}
             {if !empty($oNewsCat->getName())}<h2>{$oNewsCat->getName()}</h2>{/if}

@@ -13,8 +13,8 @@
 	data-track-p-value="{$smarty.session.Warenkorb->gibGesamtsummeWaren()}" data-track-p-currency="{$smarty.session.Waehrung->cISO}" 
 	data-track-p-items='[{foreach name=artikel from=$smarty.session.Warenkorb->PositionenArr item=Artikel}
 		{if !$smarty.foreach.artikel.first},{/if}
-		{if $Artikel->nPosTyp == $C_WARENKORBPOS_TYP_ARTIKEL}{ldelim}"id":"{if $snackyConfig.artnr == "id"}{$Artikel->Artikel->kArtikel}{else}{$Artikel->Artikel->cArtNr}{/if}","name":"{$Artikel->Artikel->cName|escape}","price":"{$Artikel->Artikel->Preise->fVKNetto}","quantity":"{$Artikel->nAnzahl}"{rdelim}
-		{else}{if $Artikel->nPosTyp==3}{assign var="coupon" value=$Artikel->cName|trans|replace:'"':''}{/if}{ldelim}"id":"PosTyp_{$Artikel->nPosTyp}","name":"PosTyp{$Artikel->nPosTyp}:{$Artikel->cName|escape}","price":"{$Artikel->fPreis}","quantity":"{$Artikel->nAnzahl}"{rdelim}{/if}
+		{if $Artikel->nPosTyp == $C_WARENKORBPOS_TYP_ARTIKEL}{ldelim}"id":"{if $snackyConfig.artnr == "id"}{$Artikel->Artikel->kArtikel}{else}{$Artikel->Artikel->cArtNr}{/if}","name":"{$Artikel->Artikel->cName|trans|escape}","price":"{$Artikel->Artikel->Preise->fVKNetto}","quantity":"{$Artikel->nAnzahl}"{rdelim}
+		{else}{if $Artikel->nPosTyp==3}{assign var="coupon" value=$Artikel->cName|trans|replace:'"':''}{/if}{ldelim}"id":"PosTyp_{$Artikel->nPosTyp}","name":"PosTyp{$Artikel->nPosTyp}:{$Artikel->cName|trans|escape}","price":"{$Artikel->fPreis}","quantity":"{$Artikel->nAnzahl}"{rdelim}{/if}
 
 	{/foreach}]'
 	{if $coupon!=""}data-track-p-coupon="{$coupon}"{/if}

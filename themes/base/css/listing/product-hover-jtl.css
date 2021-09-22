@@ -147,6 +147,9 @@
 .var-it .label-variation + .tag{
     margin-left: .2rem;
 }
+.var-it .fa{
+    display: none;
+}
 @media screen and (max-width: 767px){
     .var-it .swatches .btn-img.btn-default{
         width: 50%;

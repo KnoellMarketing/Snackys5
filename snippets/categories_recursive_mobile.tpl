@@ -46,7 +46,7 @@
 						{/if}
                     </a>
                     {if $hasItems}
-                        <ul class="dropdown-menu keepopen">
+                        <ul class="dropdown-menu keepopen{if $i == 0} first {/if}">
 							{if $snackyConfig.mmenu_link_clickable == 'N'}
 							<li class="title{if $category->getID() == $activeId} active{/if}">
 								<a href="{$category->cURL}" class="mm-mainlink" data-ref="{$category->getID()}" title="{$category->getShortName()}">

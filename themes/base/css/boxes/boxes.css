@@ -78,6 +78,7 @@ html:not([dir=rtl]) .box .noUi-horizontal .noUi-handle {
     padding: 0;
     background: none;
     border: 0;
+    font-size: .85rem;
 }
 .box .unit{
     margin: 0 4px;
@@ -134,4 +135,10 @@ html:not([dir=rtl]) .box .noUi-horizontal .noUi-handle {
 }
 #sp-l .jslider-bg i{
     background: #ddd;
+}
+@media screen and (max-width: 991px){
+    .box .noUi-target,
+    html:not([dir=rtl]) .box .noUi-horizontal .noUi-handle{
+        height: 24px;
+    }
 }

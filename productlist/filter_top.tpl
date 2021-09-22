@@ -96,6 +96,7 @@
                                         {assign var=innerClass value='no-dropdown'}
                                         {assign var=itemClass value=''}
                                     {/if}
+                                    {if $filter->getOptions()|@count > 0}
                                     <div class="{$outerClass}">
                                         {if $filter->getInputType() === \JTL\Filter\InputType::SELECT}
                                             <a href="#" class="btn dropdown-toggle btn-block btn-default" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -104,6 +105,7 @@
                                         {/if}
                                         {include file='snippets/filter/genericFilterItem.tpl' class=$innerClass itemClass=$itemClass filter=$filter}
                                     </div>
+                                    {/if}
                                 </div>
                                 {/block}
                             {/if}

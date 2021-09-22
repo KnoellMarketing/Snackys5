@@ -1,7 +1,7 @@
 {block name='productdetails-bundle'}
 {if !empty($Products)}
     <hr class="invisible">
-    <form action="{if !empty($ProductMain->cURLFull)}{$ProductMain->cURLFull}{else}index.php{/if}" method="post" id="form_bundles" class="evo-validate">
+    <form action="{if !empty($ProductMain->cURLFull)}{$ProductMain->cURLFull}{else}{get_static_route id='index.php'}{/if}" method="post" id="form_bundles" class="jtl-validate">
         <div class="panel-default panel-slider">
             <input type="hidden" name="a" value="{$ProductMain->kArtikel}" />
             <input type="hidden" name="addproductbundle" value="1" />

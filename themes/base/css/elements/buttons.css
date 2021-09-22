@@ -1,7 +1,8 @@
 /* Buttons */
 .btn,
 .modal-dialog .answer > a,
-#amazonpayments .lpa-cancel a{
+#amazonpayments .lpa-cancel a,
+.consent-btn{
     display: inline-flex;
 	align-items: center;
     padding: .7rem 1.2rem;
@@ -31,7 +32,9 @@
 .btn.warning,
 .btn-warning,
 .btn-success,
-.btn-info{
+.btn-info,
+.consent-btn-tertiary,
+.consent-btn-primary{
     color: @backgroundtext;
 }
 .btn-block{
@@ -66,7 +69,9 @@ label.btn-block,
 .btn-danger{
     background: @danger;
 }
-.btn-success{
+.btn-success,
+.consent-btn-tertiary,
+.consent-btn-primary{
     background: @success;
 }
 
@@ -113,13 +118,14 @@ label.btn-block,
     justify-content: center
 }
 .btn:not(.btn-default):hover,
-.btn:not(.btn-default):focus{
+.btn:not(.btn-default):focus,
+.consent-btn:hover{
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
 }
 .close-btn,
 .modal-header button[data-dismiss="modal"],
 .alert .close,
-.accordeon .toggle{
+.accordion .toggle{
      background: @lightbg url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBkPSJNNjEuMiA1MC41bDMyLjEgMzIuMWMzIDMgMyA3LjcgMCAxMC43LTMgMy03LjcgMy0xMC43IDBMNTAuNSA2MS4yIDE4LjQgOTMuM2MtMyAzLTcuNyAzLTEwLjcgMC0zLTMtMy03LjcgMC0xMC43bDMyLjEtMzIuMUw3LjcgMTguNGMtMy0zLTMtNy43IDAtMTAuN3M3LjctMyAxMC43IDBsMzIuMSAzMi4xTDgyLjYgNy43YzMtMyA3LjctMyAxMC43IDAgMyAzIDMgNy43IDAgMTAuN0w2MS4yIDUwLjV6IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==')no-repeat center center/34%;
 }
 .close-btn,

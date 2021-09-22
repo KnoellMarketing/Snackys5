@@ -16,7 +16,7 @@
 			<div class="col-12 col-sm-4 inside dpflex-a-center dpflex-j-center" id="search">
 				{include file="snippets/header-search.tpl"}
 			</div>
-			<div class="col-4" id="logo" itemprop="publisher" itemscope itemtype="http://schema.org/Organization" itemid="">
+			<div class="col-4" id="logo">
 				{include file='layout/shoplogo.tpl'}
 			</div>
 			{block name="header-branding-shop-nav"}

@@ -40,7 +40,7 @@
 								</span>
                             </div>
                             <div class="cols-name">
-                                {$oPosition->nAnzahl|replace_delim}{if $oPosition->Artikel->cEinheit}{$oPosition->Artikel->cEinheit}{else}&times;{/if}
+                                {$oPosition->nAnzahl|replace_delim}{if $oPosition->Artikel->cEinheit} {$oPosition->Artikel->cEinheit}{else}&times;{/if}
                                 <a href="{$oPosition->Artikel->cURLFull}" title="{$oPosition->cName|trans|escape:"html"}">
                                     {$oPosition->cName|trans}
                                 </a>
@@ -169,14 +169,14 @@
                     {/if}
                         <hr class="invisible hr-xs">
 						<div class="card small text-muted shipping-costs dpflex-j-between cols-sums">
-							<div class="panel">
+							<div class="panel w100">
 								{lang|sprintf:$oSpezialseiten_arr[$smarty.const.LINKTYP_VERSAND]->getURL():$shippingCosts:$FavourableShipping->country->getName() key='shippingInformationSpecific' section='basket'}
 							</div>
 						</div>
                 {elseif empty($FavourableShipping) && empty($smarty.session.Versandart)}
                         <hr class="invisible hr-xs">
 						<div class="card small text-muted shipping-costs dpflex-j-between cols-sums">
-							<div class="panel">
+							<div class="panel w100">
 								{lang|sprintf:$oSpezialseiten_arr[$smarty.const.LINKTYP_VERSAND]->getURL() key='shippingInformation' section='basket'}
 							</div>
 						</div>

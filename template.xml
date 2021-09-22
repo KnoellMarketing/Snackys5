@@ -3,8 +3,8 @@
     <Name>Snackys</Name>
     <Author>Knoell Marketing</Author>
     <URL>https://www.knoell-marketing.de</URL>
-    <MinShopVersion>5.0.3</MinShopVersion>
-    <Version>5.0.7</Version>
+    <MinShopVersion>5.1.0</MinShopVersion>
+    <Version>5.1.0</Version>
     <Preview>preview-snackys.png</Preview>
     <Description>Ultraschnelles responsive JTL Template von Knoell Marketing</Description>
     <Framework>Bootstrap4</Framework>
@@ -61,8 +61,7 @@
                 <File Path="themes/base/css/elements/pagination.css"/>               
                 <File Path="themes/base/css/elements/bootstrap-select.css"/>               
 				<File Path="themes/base/css/basket/sidebasket.css"/>
-				<File Path="themes/base/css/boxes/boxes.css"/>
-                <File Path="themes/snackys/css/aspectratios.css"/>          
+				<File Path="themes/base/css/boxes/boxes.css"/>         
 				<File Path="themes/base/consent.css"/>
 				<File Path="themes/base/slick-lightbox.css"/>
                 <File Path="themes/base/css/elements/comparelist.css"/>
@@ -89,8 +88,7 @@
                 <File Path="themes/base/css/elements/pagination.css"/>               
                 <File Path="themes/base/css/elements/bootstrap-select.css"/>               
 				<File Path="themes/base/css/basket/sidebasket.css"/>
-				<File Path="themes/base/css/boxes/boxes.css"/>
-                <File Path="themes/snackys/css/aspectratios.css"/>          
+				<File Path="themes/base/css/boxes/boxes.css"/>         
 				<File Path="themes/base/consent.css"/>
 				<File Path="themes/base/slick-lightbox.css"/>
                 <File Path="themes/base/css/elements/comparelist.css"/>
@@ -117,8 +115,7 @@
                 <File Path="themes/base/css/elements/pagination.css"/>               
                 <File Path="themes/base/css/elements/bootstrap-select.css"/>               
 				<File Path="themes/base/css/basket/sidebasket.css"/>
-				<File Path="themes/base/css/boxes/boxes.css"/>
-                <File Path="themes/snackys/css/aspectratios.css"/>          
+				<File Path="themes/base/css/boxes/boxes.css"/>         
 				<File Path="themes/base/consent.css"/>
 				<File Path="themes/base/slick-lightbox.css"/>
                 <File Path="themes/base/css/elements/comparelist.css"/>  

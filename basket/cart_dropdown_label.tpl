@@ -24,6 +24,31 @@
                 <div class="amazon"></div>
             </div>
             <div class="payplan"></div>
+            {getLink nLinkart=12 cAssign="linkdatenschutz"}
+            {getLink nLinkart=27 cAssign="linkimpressum"}
+            {if $linkimpressum || $linkdatenschutz}
+            <div class="text-center small mt-xs">
+                {if $linkdatenschutz}
+                    <a href="{$linkdatenschutz->getURL()}" rel="nofollow">
+                        {if !empty($linkdatenschutz->getTitle())}
+                            {$linkdatenschutz->getTitle()}
+                        {else}
+                            {$linkdatenschutz->getName()}
+                        {/if}
+                    </a>
+                {/if}
+                {if $linkimpressum && $linkdatenschutz} • {/if}
+                {if $linkimpressum}
+                    <a href="{$linkimpressum->getURL()}" rel="nofollow">
+                        {if !empty($linkimpressum->getTitle())}
+                            {$linkimpressum->getTitle()}
+                        {else}
+                            {$linkimpressum->getName()}
+                        {/if}
+                    </a>
+                {/if}
+            </div>
+            {/if}
         </div>
     </li>
     <li class="overlay-bg"></li>

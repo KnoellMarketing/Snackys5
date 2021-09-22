@@ -48,40 +48,27 @@
         </div>
 		{block name='searchspecial-overlay'}
 			{if isset($Artikel->oSuchspecialBild)}
-				{if isset($Artikel->oSuchspecialBild->cSuchspecial)}
-					{assign var="cSpecialCheck" value=$Artikel->oSuchspecialBild->cSuchspecial|replace:'ü':''}
-					{if $Artikel->oSuchspecialBild->cSuchspecial == 'Sonderangebote' && $snackyConfig.saleprozent == 'Y'}
-						{assign var="rabatt" value=($Artikel->Preise->alterVKNetto-$Artikel->Preise->fVKNetto)/$Artikel->Preise->alterVKNetto*100}
-						<span class="ov-t {$Artikel->oSuchspecialBild->cSuchspecial|lower|strip:''}">- {$rabatt|round:0}%</span>
-					{elseif isset($oSuchspecial[$cSpecialCheck])}
-						<span class="ov-t {$Artikel->oSuchspecialBild->cSuchspecial|lower|strip:''}">{$oSuchspecial[$cSpecialCheck]}</span>
-					{*Workaround for damn ü !*}
-					{elseif $Artikel->oSuchspecialBild->cSuchspecial|substr:0:4|lower == 'in k'}
-						<span class="ov-t bald-verfuegbar">{$oSuchspecial['bald-verfuegbar']}</span>
-					{else}
-						<span class="ov-t {$Artikel->oSuchspecialBild->cSuchspecial|lower|strip:''}">#{$Artikel->oSuchspecialBild->cSuchspecial}</span>
-					{/if}
-				{/if}
-			{/if}
+                {block name='productlist-item-box-include-ribbon'}
+                    {include file='snippets/ribbon.tpl'}
+                {/block}
+            {/if}
 		{/block}
     </a>
     {/block}
     {block name="productlist-image-caption"}
     <div class="caption">
-        <a href="{$Artikel->cURLFull}" class="title block h4 m0" itemprop="name">{$Artikel->cKurzbezeichnung}</a>
-        {if $Artikel->cName !== $Artikel->cKurzbezeichnung}
-			<meta itemprop="alternateName" content="{$Artikel->cName}">
-		{/if}
-        <meta itemprop="url" content="{$Artikel->cURLFull}">
+        <a href="{$Artikel->cURLFull}" class="title block h4 m0">{$Artikel->cKurzbezeichnung}</a>
         {if $Einstellungen.bewertung.bewertung_anzeigen === 'Y' && $Artikel->fDurchschnittsBewertung > 0}
             <a href="{$Artikel->cURLFull}#tab-votes" class="hidden-print block">
 			{include file='productdetails/rating.tpl' stars=$Artikel->fDurchschnittsBewertung}
             </a>
         {/if}
-        {include file="productdetails/price.tpl" Artikel=$Artikel tplscope=$tplscope}
+        <div>
+            {include file="productdetails/price.tpl" Artikel=$Artikel tplscope=$tplscope}
+        </div>
     </div>{* /caption *}
     {/block}
-    <form id="buy_form_{$Artikel->kArtikel}" action="{$ShopURL}/" method="post" class="form form-basket evo-validate" data-toggle="basket-add">
+    <form id="buy_form_{$Artikel->kArtikel}" action="{$ShopURL}/" method="post" class="form form-basket jtl-validate" data-toggle="basket-add">
         {$jtl_token}
         {block name="productlist-delivery-status"}
         <div class="delivery-status">

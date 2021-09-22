@@ -162,7 +162,7 @@
             {/if}
         {/foreach}
     {else}
-        <div class="alert alert-info">{lang key="compareListNoItems"}</div>
+        <div class="alert alert-info text-center">{lang key='productNumberHint' section='comparelist'}</div>
     {/if}
     
     {if isset($bAjaxRequest) && $bAjaxRequest}
@@ -187,8 +187,10 @@
                 if (clCount > 1) {
                     $('section.box-compare .panel-body').removeClass('hidden');
                 } else {
+					{if !isset($bAjaxRequest) || !$bAjaxRequest}
                     $('.navbar-nav .compare-list-menu .link_to_comparelist').removeAttr('href').removeClass('popup');
                     eModal.close();
+					{/if}
                 }
             }();
         </script>

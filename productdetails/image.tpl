@@ -33,7 +33,6 @@
 		<div class="inner">
         {block name="product-image"}
         {foreach $Artikel->Bilder as $image name="gallery"}
-			{if $smarty.foreach.gallery.first}<meta itemprop="image" content="{$image->cPfadGross}">{/if}
             {strip}
 			{assign var=bildGroessen value=$image->galleryJSON|json_decode:1}
                 <a href="{$image->cPfadGross}"{if $smarty.foreach.gallery.first} class="active"{/if}>

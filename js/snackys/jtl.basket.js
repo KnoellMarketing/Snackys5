@@ -105,9 +105,17 @@
 			if (typeof mainEventListener !== 'undefined' && typeof mainEventListener === 'function') { 
 				window.setTimeout(function(){
 					mainEventListener();
+					/*
+					if(sImages)
+						sImages.rewatch();
+					*/
 				},500);
 				window.setTimeout(function(){
 					mainEventListener();
+					/*
+					if(sImages)
+						sImages.rewatch();
+					*/
 				},1500);
 			}
         },

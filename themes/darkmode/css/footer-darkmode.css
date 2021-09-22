@@ -3,7 +3,8 @@
     background: @blackbg;
 }
 #footer,
-#footer .panel-heading{
+#footer .panel-heading,
+#footer .panel-title{
     color: white;
 }
 #footer a:not(.btn):not(:hover){

@@ -10,9 +10,6 @@
 .exp.hide-qty input.quantity{
 	display: none;
 }
-.p-c .exp .hidden-xs{
-    padding-left: .4rem;
-}
 .exp.flo-bt{
 	position: absolute;
 	top: 0;

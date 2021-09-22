@@ -1,6 +1,23 @@
 {block name='snippets-categories-mega'}
 {strip}
-{assign var=max_subsub_items value=5}
+{block name='snippets-categories-mega-assigns'}
+    {if !isset($i)}
+        {assign var=i value=0}
+    {/if}
+    {if !isset($activeId)}
+        {if $NaviFilter->hasCategory()}
+            {$activeId = $NaviFilter->getCategory()->getValue()}
+        {elseif $nSeitenTyp === $smarty.const.PAGE_ARTIKEL && isset($Artikel)}
+            {$activeId = $Artikel->gibKategorie()}
+        {elseif $nSeitenTyp === $smarty.const.PAGE_ARTIKEL && isset($smarty.session.LetzteKategorie)}
+            {$activeId = $smarty.session.LetzteKategorie}
+        {else}
+            {$activeId = 0}
+        {/if}
+    {/if}
+    {assign var=max_subsub_items value=5}
+{/block}
+{block name='snippets-categories-mega-linkhome'}
 {if $snackyConfig.megaHome == 0}
 <li class="is-lth{if $nSeitenTyp == 18} active{/if}">
 	<a href="{$ShopURL}" title="{$Einstellungen.global.global_shopname}" class="home-icon mm-mainlink">
@@ -14,10 +31,12 @@
 	</a>
 </li>
 {/if}
+{/block}
+{block name='snippets-categories-mega-linkgroup-before'}
 {if isset($snackyConfig.show_pages) && $snackyConfig.show_pages !== 'N'}
     {include file='snippets/linkgroup_list.tpl' linkgroupIdentifier='megamenu_start' dropdownSupport=true tplscope='megamenu_start'}
 {/if}
-
+{/block}
 {block name="megamenu-categories"}
 {if isset($snackyConfig.show_categories) && $snackyConfig.show_categories !== 'N' && isset($Einstellungen.global.global_sichtbarkeit) && ($Einstellungen.global.global_sichtbarkeit != 3 || isset($smarty.session.Kunde->kKunde) && $smarty.session.Kunde->kKunde != 0)}
     {assign var='show_subcategories' value=false}
@@ -27,17 +46,6 @@
 
     {get_category_array categoryId=0 assign='categories'}
     {if !empty($categories)}
-        {if !isset($activeId)}
-            {if $NaviFilter->hasCategory()}
-                {$activeId = $NaviFilter->getCategory()->getValue()}
-            {elseif $nSeitenTyp === $smarty.const.PAGE_ARTIKEL && isset($Artikel)}
-                {assign var='activeId' value=$Artikel->gibKategorie()}
-            {elseif $nSeitenTyp === $smarty.const.PAGE_ARTIKEL && isset($smarty.session.LetzteKategorie)}
-                {$activeId = $smarty.session.LetzteKategorie}
-            {else}
-                {$activeId = 0}
-            {/if}
-        {/if}
         {if !isset($activeParents) && ($nSeitenTyp == 1 || $nSeitenTyp == 2)}
             {get_category_parents categoryId=$activeId assign='activeParents'}
         {/if}
@@ -51,7 +59,7 @@
 
             {assign var="catFunctions" value=$category->getFunctionalAttributes()}
             <li class="{if $isDropdown}mgm-fw{/if}{if $category->getID() == $activeId || (isset($activeParents[0]) && $activeParents[0]->getID() == $category->getID())} active{/if}{if !empty($catFunctions["css_klasse"])} {$catFunctions["css_klasse"]}{/if}">
-                <a href="{$category->getURL()}" class="mm-mainlink">
+                <a href="{$category->getURL()}" class="mm-mainlink" title="{$category->getName()|@seofy}">
                     {$category->getShortName()}
                     {if $isDropdown}<span class="caret hidden-xs"></span>{include file='snippets/mobile-menu-arrow.tpl'}{/if}
                 </a>
@@ -79,7 +87,7 @@
 													{$category->getShortName()}
 												</a>
 												<p>
-													{$category->getDescription()|strip_tags|escape:"html"|truncate:200}
+													{$category->getDescription()|strip_tags|strip_tags|truncate:200}
 												</p>
 											</div>
                                         </div>
@@ -92,7 +100,8 @@
                                                     {get_category_array categoryId=$category->getID() assign='sub_categories'}
                                                 {/if}
                                                 {foreach name='sub_categories' from=$sub_categories item='sub'}
-                                                    <div class="col-12 col-sm-3 col-lg-3{if $sub->getID() == $activeId || (isset($activeParents[1]) && $activeParents[1]->getID() == $sub->getID())} active{/if}{if is_array($sub->KategorieAttribute) && !empty($sub->KategorieAttribute["css_klasse"])} {$sub->KategorieAttribute["css_klasse"]}{/if}">
+                                                    {assign var="catFunctions" value=$sub->getFunctionalAttributes()}
+                                                    <div class="col-12 col-sm-3 col-lg-3{if $sub->getID() == $activeId || (isset($activeParents[1]) && $activeParents[1]->getID() == $sub->getID())} active{/if}{if !empty($catFunctions["css_klasse"])} {$catFunctions["css_klasse"]}{/if}">
                                                             {if isset($snackyConfig.show_category_images) && $snackyConfig.show_category_images !== 'N'}
                                                                 
 															<a href="{$sub->getURL()}" class="hidden-xs block">

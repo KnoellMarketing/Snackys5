@@ -1,6 +1,22 @@
 {block name='snippets-categories-mega-fullscreen'}
 {strip}
-{assign var=max_subsub_items value=5}
+{block name='snippets-categories-mega-assigns'}
+    {if !isset($i)}
+        {assign var=i value=0}
+    {/if}
+    {if !isset($activeId)}
+        {if $NaviFilter->hasCategory()}
+            {$activeId = $NaviFilter->getCategory()->getValue()}
+        {elseif $nSeitenTyp === $smarty.const.PAGE_ARTIKEL && isset($Artikel)}
+            {$activeId = $Artikel->gibKategorie()}
+        {elseif $nSeitenTyp === $smarty.const.PAGE_ARTIKEL && isset($smarty.session.LetzteKategorie)}
+            {$activeId = $smarty.session.LetzteKategorie}
+        {else}
+            {$activeId = 0}
+        {/if}
+    {/if}
+    {assign var=max_subsub_items value=5}
+{/block}
 {if $snackyConfig.megaHome == 0}
 <li class="is-lth{if $nSeitenTyp == 18} active{/if}">
 	<a href="{$ShopURL}" title="{$Einstellungen.global.global_shopname}" class="home-icon">
@@ -27,17 +43,6 @@
 
     {get_category_array categoryId=0 assign='categories'}
     {if !empty($categories)}
-        {if !isset($activeId)}
-            {if $NaviFilter->hasCategory()}
-                {$activeId = $NaviFilter->getCategory()->getValue()}
-            {elseif $nSeitenTyp === $smarty.const.PAGE_ARTIKEL && isset($Artikel)}
-                {assign var='activeId' value=$Artikel->gibKategorie()}
-            {elseif $nSeitenTyp === $smarty.const.PAGE_ARTIKEL && isset($smarty.session.LetzteKategorie)}
-                {$activeId = $smarty.session.LetzteKategorie}
-            {else}
-                {$activeId = 0}
-            {/if}
-        {/if}
         {if !isset($activeParents) && ($nSeitenTyp == 1 || $nSeitenTyp == 2)}
             {get_category_parents categoryId=$activeId assign='activeParents'}
         {/if}
@@ -71,7 +76,7 @@
                                                     </a>
                                                     <div class="clearall top15"></div>
                                                 {/if}
-                                                {if $category->cBildURL !== 'gfx/keinBild.gif'}<div class="description text-muted">{/if}{$category->getDescription()}{if $category->cBildURL !== 'gfx/keinBild.gif'}</div>{/if}
+                                                {if $category->cBildURL !== 'gfx/keinBild.gif'}<div class="description text-muted">{/if}{$category->getDescription()|strip_tags|strip_tags|truncate:200}{if $category->cBildURL !== 'gfx/keinBild.gif'}</div>{/if}
                                         </div>
                                     {/if}
                                         <div class="row row-eq-height row-eq-img-height {if $hasInfoColumn} hasInfoColumn{/if} subcat-list">

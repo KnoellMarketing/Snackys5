@@ -62,7 +62,8 @@
                 cache: !1
             }).done(function(e) {
 				html = $(e);
-				url = $('#endless-url',html).html().replaceAll('&amp;', '&');
+				url = $('#endless-url',html).html();
+				if(url) url = url.replaceAll('&amp;', '&');
                 1 == t ? ($("#view-prev").attr("data-url", $.trim(url)),
                 $("#view-prev").parent().after('<span class="pagination-url" data-url="' + a + '"></span>' + $('#p-l',html).html()))
 				: 

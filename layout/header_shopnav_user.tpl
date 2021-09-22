@@ -15,7 +15,7 @@
 		<div class="modal-body">
 		{if empty($smarty.session.Kunde->kKunde)}
             {block name='layout-header-shopnav-user-offline'}
-			<form action="{get_static_route id='jtl.php' secure=true}" method="post" class="form evo-validate">
+			<form action="{get_static_route id='jtl.php' secure=true}" method="post" class="form jtl-validate">
 				{$jtl_token}
 				<div class="form-group">
 					<label for="email_quick">{lang key='emailadress'}</label>

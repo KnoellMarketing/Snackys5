@@ -12,14 +12,14 @@
     {/block}
     
     {block name="aside"}
-	{if !$smallversion && !$maintenance}
+	{if !$smallversion && !$maintenance && $Link->getLinkType() != $smarty.const.LINKTYP_404}
 		{has_boxes position='left' assign='hasLeftBox'}
 		{if !$bExclusive && $hasLeftBox && !empty($boxes.left|strip_tags|trim)}
 			{assign var="hasFilters" value="true"}	
 		{else}
 			{assign var="hasFilters" value=false}	
 		{/if}
-		{if ($hasFilters == true && $nSeitenTyp === $smarty.const.PAGE_ARTIKELLISTE) || ($snackyConfig.sidepanelEverywhere == 'Y' && $hasFilters == true) || isset($smarty.get.sidebar)}
+		{if ($hasFilters == true && $nSeitenTyp === $smarty.const.PAGE_ARTIKELLISTE) || ($snackyConfig.sidepanelEverywhere == 'Y' && $hasFilters == true) || isset($smarty.get.sidebar) || (count($Suchergebnisse->getProducts()) > 0 && $nSeitenTyp === $smarty.const.PAGE_ARTIKELLISTE && $isMobile)}
 			{include file="layout/sidebar.tpl"}
 		{/if}
     {/if}
@@ -82,7 +82,7 @@
 								</div>
 							{/if}
 							{foreach name=bottomBoxes from=$footerBoxes  item=box}
-									{if $smarty.foreach.bottomBoxes.iteration < 10}
+									{if $smarty.foreach.bottomBoxes.iteration < 10 && $box->isActive() && !empty($box->getRenderedContent())}
 									   <div class="{block name="footer-boxes-class"}col-6 col-sm-4 col-md-3 col-lg-2{/block}">
 										{$box->getRenderedContent()}
 									   </div>
@@ -109,7 +109,11 @@
                                                         {$jtl_token}
                                                         <input type="hidden" name="abonnieren" value="2"/>
                                                         <input type="email" size="20" name="cEmail" id="newsletter_email" class="form-control" placeholder="{lang key='emailadress'}">
-                                                        <hr class="hr-xs invisible">
+                                                        <p class="privacy text-muted">
+                                                            <a href="{if isset($oSpezialseiten_arr[$smarty.const.LINKTYP_DATENSCHUTZ])}{$oSpezialseiten_arr[$smarty.const.LINKTYP_DATENSCHUTZ]->getURL()}{/if}" class="popup small tdu">
+                                                                {lang key='privacyNotice'}
+                                                            </a>
+                                                        </p>
                                                         <button type="submit" class="btn btn-primary submit btn-block btn-sm">
                                                             <span>{lang key='newsletterSendSubscribe' section='newsletter'}</span>
                                                         </button>
@@ -122,6 +126,7 @@
 							{/if}
                             {/block}
 							{if ((isset($smarty.session.Sprachen) && $smarty.session.Sprachen|@count > 1) || (isset($smarty.session.Waehrungen) && $smarty.session.Waehrungen|@count > 1)) && $snackyConfig.lgcu_footer != N}
+                                {assign var="isFooter" value=true}
 								<div class="col-6 col-sm-4 col-md-3 col-lg-2">
 									<section class="panel box box-lng-cur">
 										<div class="h5 panel-heading dpflex-a-center">
@@ -140,27 +145,7 @@
 										{block name="footer-language"}
 										{if !$smallversion}
 											{if isset($smarty.session.Sprachen) && $smarty.session.Sprachen|@count > 1}
-											<div class="language-dropdown dropdown mb-xxs">
-												<a href="#" class="dropdown-toggle btn btn-primary btn-block btn-sm" data-toggle="dropdown" itemprop="inLanguage" itemscope itemtype="http://schema.org/Language" title="{lang key='selectLang'}">
-													{foreach from=$smarty.session.Sprachen item=Sprache}
-														{if $Sprache->kSprache == $smarty.session.kSprache}
-															<span class="lang-{$lang}" itemprop="name">{$Sprache->displayLanguage}</span>
-														{/if}
-													{/foreach}
-													<span class="caret"></span>
-												</a>
-												<ul id="language-dropdown" class="dropdown-menu dropdown-menu-left">
-												{foreach from=$smarty.session.Sprachen item=oSprache}
-													{if $oSprache->kSprache != $smarty.session.kSprache}
-														<li>
-															<a href="{$oSprache->url}" class="link_lang {$oSprache->iso}" rel="nofollow">
-																<span>{$oSprache->displayLanguage}</span>
-															</a>
-														</li>
-													{/if}
-													{/foreach}
-												</ul>
-											</div>
+			                                     {include file="snippets/language_dropdown.tpl" isfooter=$isFooter}
 											{/if}
 										{/if}
 										{/block}
@@ -195,9 +180,25 @@
                     {if ($linkimpressum || $linkdatenschutz) && $snackyConfig.footerBoxesOpen === '0'}
                         <div class="visible-xs mt-sm">
                                 <div class="mw-container text-center small">
-                                    {if $linkdatenschutz}<a href="{$linkdatenschutz->getURL()}" rel="nofollow">{$linkdatenschutz->getTitle()}</a>{/if}
+                                    {if $linkdatenschutz}
+                                        <a href="{$linkdatenschutz->getURL()}" rel="nofollow">
+                                            {if !empty($linkdatenschutz->getTitle())}
+                                                {$linkdatenschutz->getTitle()}
+                                            {else}
+                                                {$linkdatenschutz->getName()}
+                                            {/if}
+                                        </a>
+                                    {/if}
                                     {if $linkimpressum && $linkdatenschutz} • {/if}
-                                    {if $linkimpressum}<a href="{$linkimpressum->getURL()}" rel="nofollow">{$linkimpressum->getTitle()}</a>{/if}
+                                    {if $linkimpressum}
+                                        <a href="{$linkimpressum->getURL()}" rel="nofollow">
+                                            {if !empty($linkimpressum->getTitle())}
+                                                {$linkimpressum->getTitle()}
+                                            {else}
+                                                {$linkimpressum->getName()}
+                                            {/if}
+                                        </a>
+                                    {/if}
                                 </div>
                         </div>
                     {/if}
@@ -205,11 +206,38 @@
 			{elseif $smallversion}
 				{getLink nLinkart=12 cAssign="linkdatenschutz"}
 				{getLink nLinkart=27 cAssign="linkimpressum"}
-				{if $linkimpressum || $linkdatenschutz}
+				{getLink nLinkart=24 cAssign="linkwrb"}
+				{if $linkimpressum || $linkdatenschutz || $linkwrb}
 					<div class="mw-container text-center small">
-						{if $linkdatenschutz}<a href="{$linkdatenschutz->getURL()}" rel="nofollow">{$linkdatenschutz->getTitle()}</a>{/if}
+						{if $linkdatenschutz}
+                            <a href="{$linkdatenschutz->getURL()}" rel="nofollow" class="popup">
+                                {if !empty($linkdatenschutz->getTitle())}
+                                    {$linkdatenschutz->getTitle()}
+                                {else}
+                                    {$linkdatenschutz->getName()}
+                                {/if}
+                            </a>
+                        {/if}
 						{if $linkimpressum && $linkdatenschutz} • {/if}
-						{if $linkimpressum}<a href="{$linkimpressum->getURL()}" rel="nofollow">{$linkimpressum->getTitle()}</a>{/if}
+						{if $linkimpressum}
+                            <a href="{$linkimpressum->getURL()}" rel="nofollow" class="popup">
+                                {if !empty($linkimpressum->getTitle())}
+                                    {$linkimpressum->getTitle()}
+                                {else}
+                                    {$linkimpressum->getName()}
+                                {/if}
+                            </a>
+                        {/if}
+						{if $linkdatenschutz && $linkwrb} • {/if}
+						{if $linkwrb}
+                            <a href="{$linkwrb->getURL()}" rel="nofollow" class="popup">
+                                {if !empty($linkwrb->getTitle())}
+                                    {$linkwrb->getTitle()}
+                                {else}
+                                    {$linkwrb->getName()}
+                                {/if}
+                            </a>
+                        {/if}
 					</div>
 				{/if}
 			{/if}
@@ -297,18 +325,14 @@
             {block name="footer-copyright"}
 				<ul class="blanklist{if $snackyConfig.footerCopyright == 1 && !$isMobile} list-inline{/if}">
 					{if $NettoPreise == 1}
-						<li>{lang key="footnoteExclusiveVat" section="global" assign="footnoteVat"}</li>
+						{lang key="footnoteExclusiveVat" section="global" assign="footnoteVat"}
 					{else}
-						<li>{lang key="footnoteInclusiveVat" section="global" assign="footnoteVat"}</li>
+						{lang key="footnoteInclusiveVat" section="global" assign="footnoteVat"}
 					{/if}
 					{if $Einstellungen.global.global_versandhinweis === 'zzgl'}
-						<li>
-							{lang key='footnoteExclusiveShipping' section='global' printf=$oSpezialseiten_arr[$smarty.const.LINKTYP_VERSAND]->getURL() assign='footnoteShipping'}
-						</li>
+						{lang key='footnoteExclusiveShipping' section='global' printf=$oSpezialseiten_arr[$smarty.const.LINKTYP_VERSAND]->getURL() assign='footnoteShipping'}
 					{elseif $Einstellungen.global.global_versandhinweis === 'inkl'}
-						<li>
-							{lang key='footnoteInclusiveShipping' section='global' printf=$oSpezialseiten_arr[$smarty.const.LINKTYP_VERSAND]->getURL() assign='footnoteShipping'}
-						</li>
+                        {lang key='footnoteInclusiveShipping' section='global' printf=$oSpezialseiten_arr[$smarty.const.LINKTYP_VERSAND]->getURL() assign='footnoteShipping'}
 					{/if}
 					{block name="footer-vat-notice"}
 						<li>
@@ -316,7 +340,7 @@
 						</li>
 					{/block}
 					{if !empty($meta_copyright)}
-						<li><span itemprop="copyrightHolder">&copy; {$meta_copyright}</span></li>
+						<li><span>&copy; {$meta_copyright}</span></li>
 					{/if}
 					{if $Einstellungen.global.global_zaehler_anzeigen === 'Y'}
 						<li>{lang key="counter" section="global"}: {$Besucherzaehler}</li>
@@ -369,7 +393,6 @@
 	{$dbgBarBody}
 	{captchaMarkup getBody=false}
 {/block}
-{block name='layout-footer-js'}{/block}
 
 <div class="overlay-bg"></div>
 <div id="bodyloader" class="text-center">
@@ -379,7 +402,7 @@
 		<script>
 			if ('serviceWorker' in navigator) {ldelim}
 			  window.addEventListener('load', () => {ldelim}
-				navigator.serviceWorker.register('{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/snackys/pwa.js?v={$nTemplateVersion}');
+				navigator.serviceWorker.register('{$ShopURL}/pwa.js?v={$nTemplateVersion}');
 			  {rdelim});
 			{rdelim}
 		</script>
@@ -396,28 +419,60 @@
 
 			{* Google Tag Manager *}
 			{if !empty($snackyConfig.gtag|trim)}
-			<script>
-				var tagmanagerloaded = false;
-				document.addEventListener('consent.ready', function(e) {
-					km_tagManager(e.detail);
-				});
-				document.addEventListener('consent.updated', function(e) {
-					km_tagManager(e.detail);
-				});
-				function km_tagManager(detail) {
-					if (detail !== null && typeof detail.km_tagmanager !== 'undefined' && tagmanagerloaded === false) {
-						if (detail.km_tagmanager === true) {
-							tagmanagerloaded = true;
-							(function(w,d,s,l,i){ldelim}w[l]=w[l]||[];w[l].push({ldelim}'gtm.start':
-							new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-							j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-							'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-							})(window,document,'script','dataLayer','{$snackyConfig.gtag|trim}');
-						} 
-					}
-				}
+				{if $snackyConfig.gtagAllways == 'N'}
+					<script>
+						var tagmanagerloaded = false;
+						document.addEventListener('consent.ready', function(e) {
+							console.log(e.detail);
+							km_tagManager(e.detail);
+						});
+						document.addEventListener('consent.updated', function(e) {
+							console.log(e.detail);
+							km_tagManager(e.detail);
+						});
+						function km_tagManager(detail) {
+							if (detail !== null && typeof detail.km_tagmanager !== 'undefined' && tagmanagerloaded === false) {
+								if (detail.km_tagmanager === true) {
+									tagmanagerloaded = true;
+									(function(w,d,s,l,i){ldelim}w[l]=w[l]||[];w[l].push({ldelim}'gtm.start':
+									new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+									j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+									'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+									})(window,document,'script','dataLayer','{$snackyConfig.gtag|trim}');
+								} 
+							}
+						}
 
-			</script>
+					</script>
+				{else}
+					<script>
+						tagmanagerloaded = true;
+						(function(w,d,s,l,i){ldelim}w[l]=w[l]||[];w[l].push({ldelim}'gtm.start':
+						new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+						j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+						'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+						})(window,document,'script','dataLayer','{$snackyConfig.gtag|trim}');
+						
+						document.addEventListener('consent.ready', function(e) {
+							km_tagManager_consent(e.detail);
+						});
+						document.addEventListener('consent.updated', function(e) {
+							km_tagManager_consent(e.detail);
+						});
+						
+						function km_tagManager_consent(detail)
+						{
+							if (detail !== null && typeof detail.km_tagmanager !== 'undefined') {
+								if (detail.km_tagmanager === true) {
+									gtag('consent', 'update', {
+										'ad_storage': 'granted',
+										'analytics_storage': 'granted'
+									});
+								} 
+							}
+						}
+					</script>
+				{/if}
 			{/if}
 			
 			<script>
@@ -440,21 +495,40 @@
 							});
 						}
 					}
+                    document.addEventListener('consent.updated', function(e) {
+                        $.post('{$ShopURLSSL}/', {
+                                'action': 'updateconsent',
+                                'jtl_token': '{$smarty.session.jtl_token}',
+                                'data': e.detail
+                            }
+                        );
+                    });
+                    {if !isset($smarty.session.consents)}
+                        document.addEventListener('consent.ready', function(e) {
+                            document.dispatchEvent(new CustomEvent('consent.updated', { detail: e.detail }));
+                        });
+                    {/if}
 					for (let i = 0; i < trigger.length; ++i) {
 						trigger[i].addEventListener('click', triggerCall)
 					}
-					document.addEventListener('consent.updated', function (e) {
-						$.post('{$ShopURLSSL}/', {
-								'action': 'updateconsent',
-								'jtl_token': '{$smarty.session.jtl_token}',
-								'data': e.detail
-							}
-						);
-					});
 				});
 			</script>
+		{else}
+		<script>
+			tagmanagerloaded = true;
+			(function(w,d,s,l,i){ldelim}w[l]=w[l]||[];w[l].push({ldelim}'gtm.start':
+			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayer','{$snackyConfig.gtag|trim}');
+		</script>
 		{/if}
 	{/block}
+	
+	{block name="rich-snippets"}
+		{include file='snippets/rich-snippets.tpl'}
+	{/block}
+	
 	{snackys_content id="html_body_end" title="html_body_end"}
 
 </body>

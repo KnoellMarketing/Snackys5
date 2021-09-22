@@ -105,7 +105,7 @@
 		</div>
 	</div>
     <div id="existing-customer" class="col-12{if $activeClass != 'login'} hidden{/if}">
-        <form method="post" action="{get_static_route id='bestellvorgang.php'}" class="form evo-validate" id="order_register_or_login">
+        <form method="post" action="{get_static_route id='bestellvorgang.php'}" class="form jtl-validate" id="order_register_or_login">
             {block name="checkout-login"}
                 <div class="panel">
                     {block name="checkout-login-body"}
@@ -125,7 +125,7 @@
     </div>
     <div id="customer" class="col-12{if $activeClass == 'login'} hidden{/if}">
         {include file="snippets/zonen.tpl" id="checkout-before-register" title="Checkout: Vor dem Registrieren-Formular"}
-        <form method="post" action="{get_static_route id='bestellvorgang.php'}" class="form evo-validate" id="form-register">
+        <form method="post" action="{get_static_route id='bestellvorgang.php'}" class="form jtl-validate" id="form-register">
             {block name="checkout-register"}
                 <div class="panel-wrap">
                     {block name="checkout-register-body"}

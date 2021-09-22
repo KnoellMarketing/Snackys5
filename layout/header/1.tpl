@@ -13,7 +13,7 @@
 					<span class="close close-btn"></span>
 				</div>
 			</div>
-			<div class="col-4 col-sm-6 col-md-6 col-lg-2" id="logo" itemprop="publisher" itemscope itemtype="http://schema.org/Organization" itemid="">
+			<div class="col-4 col-sm-6 col-md-6 col-lg-2" id="logo">
 				{include file='layout/shoplogo.tpl'}
 			</div>
 			{if $nSeitenTyp !== 11}

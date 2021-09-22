@@ -51,9 +51,11 @@
             {$Artikel->cKurzbezeichnung}
         </a>
         {* if $Einstellungen.bewertung.bewertung_anzeigen === 'Y' && $Artikel->fDurchschnittsBewertung > 0}<small>{include file='productdetails/rating.tpl' stars=$Artikel->fDurchschnittsBewertung}</small>{/if *}
-        {include file="productdetails/price.tpl" Artikel=$Artikel price_image=null tplscope=$tplscope}
+        <div class="item-slider-price">
+            {include file="productdetails/price.tpl" Artikel=$Artikel price_image=null tplscope=$tplscope}
+        </div>
     </div>
-	<form action="navi.php" method="post" class="buy_form_{$Artikel->kArtikel} form form-basket evo-validate" data-toggle="basket-add">
+	<form action="navi.php" method="post" class="buy_form_{$Artikel->kArtikel} form form-basket jtl-validate" data-toggle="basket-add">
         {$jtl_token}
 		{if $snackyConfig.listShowCart != 1}
         <div class="exp{if $snackyConfig.listShowCart == 2} flo-bt pr{/if} hide-qty">

@@ -36,7 +36,9 @@
     {/block}
 
     {block name="navbar-top-user-wish"}
-        {include file='layout/header_shop_nav_wish.tpl'}
+        {if $Einstellungen.global.global_wunschliste_anzeigen === 'Y'}
+            {include file='layout/header_shop_nav_wish.tpl'}
+        {/if}
     {/block}
 
     {block name="navbar-top-user-cart"}

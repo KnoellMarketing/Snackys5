@@ -168,8 +168,8 @@ function regionsToState() {
 		return ;
     }
 	
-    var title           = state.attr('title');
-    var stateIsRequired = state.attr('required') === 'required';
+	var stateIsRequired = result.response.required;
+	var data = result.response.states;
 
     $('#country').change(function() {
         var result = {};
@@ -203,8 +203,8 @@ function regionsToState() {
                     state.append('<option value="">' + title + '</option>');
                     $(data).each(function(idx, item) {
                         state.append(
-                            $('<option></option>').val(item.cCode).html(item.cName)
-                                .attr('selected', item.cCode == def || item.cName == def ? 'selected' : false)
+                            $('<option></option>').val(item.iso).html(item.name)
+                                .attr('selected', item.iso == def || item.name == def ? 'selected' : false)
                         );
                     });
                     $('#state').replaceWith(state);
@@ -231,6 +231,11 @@ function regionsToState() {
                     }
                     $('#state').replaceWith(state);
                 }
+				if (stateIsRequired){
+					state.parent().find('.state-optional').addClass('d-none');
+				} else {
+					state.parent().find('.state-optional').removeClass('d-none');
+				}
             }
         });
 		
@@ -346,10 +351,10 @@ function navigation()
 }
 
 function addValidationListener() {
-    var forms      = $('form.evo-validate'),
-        inputs     = $('form.evo-validate input, form.evo-validate textarea').not('[type="radio"],[type="checkbox"]'),
-        selects    = $('form.evo-validate select'),
-        checkables = $('form.evo-validate input[type="radio"], form.evo-validate input[type="checkbox"]'),
+    var forms      = $('form.jtl-validate'),
+        inputs     = $('form.jtl-validate input, form.jtl-validate textarea').not('[type="radio"],[type="checkbox"]'),
+        selects    = $('form.jtl-validate select'),
+        checkables = $('form.jtl-validate input[type="radio"], form.jtl-validate input[type="checkbox"]'),
         $body      = $('body');
 
     for (var i = 0; i < forms.length; i++) {
@@ -634,6 +639,15 @@ function snackys()
 
 function mainEventListener()
 {
+	//Click on available button tabs
+	$('a[href^="#tab-wp"').on('click', function(){
+		$('span[aria-controls=tab-availabilityNotification]').trigger('click');
+	});
+	//Click on available button no tabs
+	$('a[href^="#tab-availabilityNotification"').on('click', function(){
+		if(!$('#tab-availabilityNotification').hasClass('open-show'))
+			$('#tab-availabilityNotification .panel-title').trigger('click');
+	});
 	//Background from mobile menu
 	$(document).click(function(){
 		$('#cls-catw').click(function(e) {

@@ -3,3 +3,6 @@
 $('.consent-show-more').on('click', function(e) {
     e.preventDefault();
 });
+$('#consent-accept-banner-btn-close').on('click', function(e) {
+    CM.closeBanner();
+});

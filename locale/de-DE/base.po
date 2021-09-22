@@ -1,0 +1,32 @@
+msgid "Allgemein"
+msgstr "Allgemein"
+
+msgid "Theme"
+msgstr "Theme"
+
+msgid "Ja"
+msgstr "Ja"
+
+msgid "Ja, statisch"
+msgstr "Ja, statisch"
+
+msgid "Nein"
+msgstr "Nein"
+
+msgid "Komprimierung von JavaScript- und CSS-Dateien"
+msgstr "Komprimierung von JavaScript- und CSS-Dateien"
+
+msgid "Komprimierung von HTML"
+msgstr "Komprimierung von HTML"
+
+msgid "Ja (Empfohlen)"
+msgstr "Ja (Empfohlen)"
+
+msgid "Ja (Nicht empfohlen, besser Cronjobs)"
+msgstr "Ja (Nicht empfohlen, besser Cronjobs)"
+
+msgid "Nein (nur Fallback)"
+msgstr "Nein (nur Fallback)"
+
+msgid "Ja (performancelastig, nur aktivieren wenn Plugins das brauchen)"
+msgstr "Ja (performancelastig, nur aktivieren wenn Plugins das brauchen)"

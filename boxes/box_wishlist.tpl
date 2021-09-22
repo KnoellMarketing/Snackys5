@@ -32,7 +32,7 @@
                                         {/if}
                                         {block name='boxes-box-wishlist-dropdown-products-title'}
                                             {link href=$wishlistItem->Artikel->cURLFull title=$wishlistItem->cArtikelName|escape:'quotes' class=defaultlink}
-                                                {$wishlistItem->fAnzahl|replace_delim}&times; {$wishlistItem->cArtikelName|truncate:40:"..."}
+                                                {$wishlistItem->fAnzahl|replace_delim}&times; {$wishlistItem->cArtikelName|truncate:40:'...'}
                                             {/link}
                                         {/block}
                                 {/block}

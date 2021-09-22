@@ -82,9 +82,6 @@
                                         {/block}
                                     </div>
                                 {/link}
-                                {if !empty($Artikel->Bilder[0]->cURLNormal)}
-                                    <meta itemprop="image" content="{$Artikel->Bilder[0]->cURLNormal}">
-                                {/if}
                             </div>
                         {/block}
 
@@ -120,15 +117,14 @@
             {col md=''}
                 {block name='productlist-item-list-title'}
                     {block name='productlist-item-list-title-heading'}
-                        <div class="productbox-title" itemprop="name">
+                        <div class="productbox-title">
                             {link href=$Artikel->cURLFull}{$Artikel->cName}{/link}
                         </div>
                     {/block}
-                    <meta itemprop="url" content="{$Artikel->cURLFull}">
                     {if $Einstellungen.artikeluebersicht.artikeluebersicht_kurzbeschreibung_anzeigen === 'Y'
                             && $Artikel->cKurzBeschreibung}
                         {block name='productlist-item-list-description'}
-                            <div class="item-list-description" itemprop="description">
+                            <div class="item-list-description">
                                 {$Artikel->cKurzBeschreibung}
                             </div>
                         {/block}
@@ -156,8 +152,7 @@
                                 {/block}
                             {/if}
                         {/col}
-                        {col cols=12 xl=4 class='productbox-options' itemprop='offers' itemscope=true itemtype='http://schema.org/Offer'}
-                            <link itemprop="businessFunction" href="http://purl.org/goodrelations/v1#Sell" />
+                        {col cols=12 xl=4 class='productbox-options'}
                             {block name='productlist-item-list-form'}
                                 {block name='productlist-item-list-include-price'}
                                     <div class="item-list-price">

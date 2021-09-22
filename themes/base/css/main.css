@@ -364,6 +364,9 @@ video{
 .ml-xs{
     margin-left: 1rem;
 }
+.ml-a{
+    margin-left: auto;
+}
 .c-pt{
     cursor: pointer;
 }
@@ -384,7 +387,7 @@ video{
 small,
 .price-note{
     font-size: .85rem;
-    line-height: normal;
+    line-height: 1.3;
 }
 .text-muted,
 .label-not-available{
@@ -519,12 +522,12 @@ body.show-sidebar #sp-l .overlay-bg{
 .custom-content > *:last-child{
     margin-bottom: 0;
 }
-.custom_content a,
-.custom-content a,
-body[data-page="20"] #content a,
-body[data-page="21"] #content a,
-body[data-page="27"] #content a,
-body[data-page="31"] #content a{
+.custom_content a:not(.btn),
+.custom-content a:not(.btn),
+body[data-page="20"] #content a:not(.btn),
+body[data-page="21"] #content a:not(.btn),
+body[data-page="27"] #content a:not(.btn),
+body[data-page="31"] #content a:not(.btn){
     color: @brand;
 }
 
@@ -647,9 +650,13 @@ body.show-sidebar #evo-nav-wrapper{
     vertical-align: middle;
     transition: box-shadow .2s ease;
 }
-a.tag:hover{
+a.tag:hover,
+a.tag:visited{
     box-shadow: 0 0 0 .125rem @brand;  
     color: white;
+}
+.tag + .tag{
+    margin-left: .2rem;
 }
 
 /* Responsive */

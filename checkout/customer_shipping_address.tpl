@@ -64,22 +64,22 @@
 
 {* firm / firmtext *}
 <div class="row">
-    {if $Einstellungen.kunden.kundenregistrierung_abfragen_firma !== 'N'}
+    {if $Einstellungen.kunden.lieferadresse_abfragen_firma !== 'N'}
         <div class="col-12 col-md-6">
-            <div class="form-group float-label-control{if !empty($fehlendeAngaben.firma)} has-error{/if}{if $Einstellungen.kunden.kundenregistrierung_abfragen_firma === 'Y'} required{/if}">
+            <div class="form-group float-label-control{if !empty($fehlendeAngaben.firma)} has-error{/if}{if $Einstellungen.kunden.lieferadresse_abfragen_firma === 'Y'} required{/if}">
                 <label for="{$prefix}-{$name}-firm" class="control-label">{lang key="firm" section="account data"}</label>
-                <input type="text" name="{$prefix}[{$name}][firma]" value="{if isset($Lieferadresse->cFirma)}{$Lieferadresse->cFirma|entferneFehlerzeichen}{/if}" id="{$prefix}-{$name}-firm" class="form-control" placeholder="{lang key="firm" section="account data"}"{if $Einstellungen.kunden.kundenregistrierung_abfragen_firma === 'Y'} required{/if} spellcheck="false"  autocorrect="off">
+                <input type="text" name="{$prefix}[{$name}][firma]" value="{if isset($Lieferadresse->cFirma)}{$Lieferadresse->cFirma|entferneFehlerzeichen}{/if}" id="{$prefix}-{$name}-firm" class="form-control" placeholder="{lang key="firm" section="account data"}"{if $Einstellungen.kunden.lieferadresse_abfragen_firma === 'Y'} required{/if} spellcheck="false"  autocorrect="off">
                 {if !empty($fehlendeAngaben.firma)}
                     <div class="alert alert-danger">{lang key="fillOut" section="global"}</div>
                 {/if}
             </div>
         </div>
     {/if}
-    {if $Einstellungen.kunden.kundenregistrierung_abfragen_firmazusatz !== 'N'}
+    {if $Einstellungen.kunden.lieferadresse_abfragen_firmazusatz !== 'N'}
         <div class="col-12 col-md-6">
-            <div class="form-group float-label-control{if !empty($fehlendeAngaben.firmazusatz)} has-error{/if}{if $Einstellungen.kunden.kundenregistrierung_abfragen_firmazusatz === 'Y'} required{/if}">
+            <div class="form-group float-label-control{if !empty($fehlendeAngaben.firmazusatz)} has-error{/if}{if $Einstellungen.kunden.lieferadresse_abfragen_firmazusatz === 'Y'} required{/if}">
                 <label for="{$prefix}-{$name}-firmext" class="control-label">{lang key="firmext" section="account data"}</label>
-                <input type="text" name="{$prefix}[{$name}][firmazusatz]" value="{if isset($Lieferadresse->cZusatz)}{$Lieferadresse->cZusatz|entferneFehlerzeichen}{/if}" id="{$prefix}-{$name}-firmext" class="form-control" placeholder="{lang key="firmext" section="account data"}"{if $Einstellungen.kunden.kundenregistrierung_abfragen_firmazusatz === 'Y'} required{/if} spellcheck="false"  autocorrect="off">
+                <input type="text" name="{$prefix}[{$name}][firmazusatz]" value="{if isset($Lieferadresse->cZusatz)}{$Lieferadresse->cZusatz|entferneFehlerzeichen}{/if}" id="{$prefix}-{$name}-firmext" class="form-control" placeholder="{lang key="firmext" section="account data"}"{if $Einstellungen.kunden.lieferadresse_abfragen_firmazusatz === 'Y'} required{/if} spellcheck="false"  autocorrect="off">
                 {if !empty($fehlendeAngaben.firmazusatz)}
                     <div class="alert alert-danger">{lang key="fillOut" section="global"}</div>
                 {/if}
@@ -125,14 +125,16 @@
     </div>
 {/if}
 
-{* country *}
 {if isset($Lieferadresse->cLand)}
-    {assign var='cIso' value=$Lieferadresse->cLand}
+    {$countryISO=$Lieferadresse->cLand}
+{elseif !empty($smarty.session.preferredDeliveryCountryCode)}
+    {$countryISO=$smarty.session.preferredDeliveryCountryCode}
 {elseif !empty($Kunde->cLand)}
-    {assign var='cIso' value=$Kunde->cLand}
+    {$countryISO=$Kunde->cLand}
 {else}
-    {assign var='cIso' value=$shippingCountry}
+    {$countryISO=$shippingCountry}
 {/if}
+{getCountry iso=$countryISO assign='selectedCountry'}
 <div class="row">
     <div class="col-12 col-md-6">
         <div class="form-group float-label-control">
@@ -140,13 +142,15 @@
             <select name="{$prefix}[{$name}][land]" id="{$prefix}-{$name}-country" class="country_input form-control" autocomplete="shipping country">
                 <option value="" selected disabled>{lang key="country" section="account data"}*</option>
                 {foreach $LieferLaender as $land}
-                    <option value="{$land->getISO()}" {if $cIso == $land->getISO()}selected="selected"{/if}>{$land->getName()}</option>
+                    {if $land->isShippingAvailable()}
+                        <option value="{$land->getISO()}" {if $countryISO === $land->getISO()}selected="selected"{/if}>{$land->getName()}</option>
+                    {/if}
                 {/foreach}
             </select>
         </div>
     </div>
     {if $Einstellungen.kunden.lieferadresse_abfragen_bundesland !== 'N'}
-        {getStates cIso=$cIso assign='oShippingStates'}
+        {getStates cIso=$countryISO assign='oShippingStates'}
         {if isset($Lieferadresse->cBundesland)}
             {assign var='cState' value=$Lieferadresse->cBundesland}
         {elseif !empty($Kunde->cBundesland)}
@@ -158,7 +162,7 @@
             <div class="form-group float-label-control{if !empty($fehlendeAngaben.bundesland)} has-error{/if}{if $Einstellungen.kunden.lieferadresse_abfragen_bundesland === 'Y'} required{/if}">
                 <label class="control-label" for="{$prefix}-{$name}-state">{lang key='state' section='account data'}
                     {if $Einstellungen.kunden.lieferadresse_abfragen_bundesland !== 'Y'}
-                        <span class="optional"> - {lang key='optional'}</span>
+                        <span class="optional{if $Einstellungen.kunden.kundenregistrierung_abfragen_bundesland === 'Y' || $selectedCountry->isRequireStateDefinition()} hidden{/if}"> - {lang key='optional'}</span>
                     {/if}
                 </label>
                 {if !empty($oShippingStates)}
@@ -168,7 +172,7 @@
                             id="{$prefix}-{$name}-state"
                             class="form-control state-input"
                             autocomplete="shipping address-level1"
-                            {if $Einstellungen.kunden.lieferadresse_abfragen_bundesland === 'Y'} required{/if}
+                            {if $Einstellungen.kunden.lieferadresse_abfragen_bundesland === 'Y' || $selectedCountry->isRequireStateDefinition()} required{/if}
                     >
                         <option value="" selected disabled>{lang key='pleaseChoose' section='global'}</option>
                         {foreach $oShippingStates as $oState}

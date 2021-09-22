@@ -52,4 +52,6 @@
     {/block}
 </div>
 
+
+{include file='checkout/inc_conversion_tracking.tpl'}
 {/block}

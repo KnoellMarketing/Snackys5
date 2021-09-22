@@ -3,6 +3,22 @@
 
 {* Add this data to GTM - by Knoell Marketing *}
 window.dataLayer = window.dataLayer || [];
+function gtag(){
+	dataLayer.push(arguments);
+}
+
+{if $Einstellungen.consentmanager.consent_manager_active === 'Y' && $snackyConfig.gtagAllways == 'Y'}
+//Consent Data
+gtag('consent', 'default', {
+	'ad_storage': 'denied',
+	'analytics_storage': 'denied',
+	'wait_for_update': 500
+});
+dataLayer.push({
+	'event': 'default_consent'
+});
+{/if}
+
 window.dataLayer.push({
 	'gtm.start': new Date().getTime(),
 	event: 'gtm.js'
@@ -95,7 +111,7 @@ dataLayer.push({ldelim}
 	{/if}
 	{* Product Detail View *}
 	{if $nSeitenTyp == 1}
-		{assign var=cidx value=($Brotnavi|@count)-2}
+		{assign var=i_kat value=($Brotnavi|@count)-2}
 		dataLayer.push({
 		  'event': 'view_item',
 		  'ecommerce': {
@@ -106,7 +122,9 @@ dataLayer.push({ldelim}
 			  {if !empty($Artikel->cHersteller)}
 				'item_brand': '{$Artikel->cHersteller|escape}',
 			  {/if}
-			  'item_category': '{$Brotnavi[$cidx]->getName()|escape}',
+			  {if isset($Brotnavi[$i_kat])}
+				'item_category': '{$Brotnavi[$i_kat]->getName()|escape}',
+			  {/if}
 			  'quantity': '1'
 			}]
 		  }
@@ -119,7 +137,7 @@ dataLayer.push({ldelim}
         {else}
             {assign var=pushedArtikel value=$Artikel}
         {/if}
-		{assign var=cidx value=($Brotnavi|@count)-2}
+		{assign var=i_kat value=($Brotnavi|@count)-2}
 		dataLayer.push({
 		  'event': 'add_to_cart',
 		  'ecommerce': {
@@ -130,7 +148,9 @@ dataLayer.push({ldelim}
 			  {if !empty($pushedArtikel->cHersteller)}
 				'item_brand': '{$pushedArtikel->cHersteller|escape}',
 			  {/if}
-			  'item_category': '{$Brotnavi[$cidx]->getName()|escape}',
+			  {if isset($Brotnavi[$i_kat])}
+				'item_category': '{$Brotnavi[$i_kat]->getName()|escape}',
+			  {/if}
 			  'quantity': '{if $smarty.request.anzahl>0}{$smarty.request.anzahl}{else}1{/if}'
 			}]
 		  }

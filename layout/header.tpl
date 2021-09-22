@@ -1,8 +1,6 @@
 {block name='layout-header'}
 {block name='doctype'}<!DOCTYPE html>{/block}
-<html {block name='html-attributes'}lang="{$meta_language}" itemscope {if $nSeitenTyp === $smarty.const.URLART_ARTIKEL}itemtype="http://schema.org/ItemPage"
-      {elseif $nSeitenTyp === $smarty.const.URLART_KATEGORIE}itemtype="http://schema.org/CollectionPage"
-      {else}itemtype="http://schema.org/WebPage"{/if}{/block} id="snackys-tpl">
+<html {block name='html-attributes'}lang="{$meta_language}" id="snackys-tpl"{/block}>
 {block name="head"}
 <head>
     {block name='head-base'}{/block}
@@ -64,17 +62,16 @@
     {/block}
     {block name="head-meta"}
         <meta http-equiv="content-type" content="text/html; charset={$smarty.const.JTL_CHARSET}">
-        <meta name="description" itemprop="description" content={block name='head-meta-description'}"{$meta_description|truncate:1000:'':true}{/block}">
+        <meta name="description" content={block name='head-meta-description'}"{$meta_description|truncate:1000:'':true}{/block}">
         {* Keywords are deprecated! no use for search engines!
 		   {if !empty($meta_keywords)}
-				<meta name="keywords" itemprop="keywords" content="{block name='head-meta-keywords'}{$meta_keywords|truncate:255:'':true}{/block}">
+				<meta name="keywords" content="{block name='head-meta-keywords'}{$meta_keywords|truncate:255:'':true}{/block}">
 			{/if}
 		*}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="robots" content="{if $robotsContent}{$robotsContent}{elseif $bNoIndex === true  || (isset($Link) && $Link->getNoFollow() === true)}noindex{else}index, follow{/if}">
 		
-        <meta itemprop="url" content="{$cCanonicalURL}"/>
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="{$meta_title}" />
         <meta property="og:title" content="{$meta_title}" />
@@ -82,24 +79,20 @@
         <meta property="og:url" content="{$cCanonicalURL}"/>
 		
         {if $nSeitenTyp === $smarty.const.PAGE_ARTIKEL && !empty($Artikel->Bilder)}
-            <meta itemprop="image" content="{$Artikel->Bilder[0]->cURLGross}" />
             <meta property="og:image" content="{$Artikel->Bilder[0]->cURLGross}">
         {elseif $nSeitenTyp === $smarty.const.PAGE_ARTIKELLISTE
             && $oNavigationsinfo->getImageURL() !== 'gfx/keinBild.gif'
             && $oNavigationsinfo->getImageURL() !== 'gfx/keinBild_kl.gif'
         }
-            <meta itemprop="image" content="{$imageBaseURL}{$oNavigationsinfo->getImageURL()}" />
             <meta property="og:image" content="{$imageBaseURL}{$oNavigationsinfo->getImageURL()}" />
         {elseif $nSeitenTyp === $smarty.const.PAGE_NEWSDETAIL && !empty($oNewsArchiv->getPreviewImage())}
-            <meta itemprop="image" content="{$imageBaseURL}{$oNewsArchiv->getPreviewImage()}" />
             <meta property="og:image" content="{$imageBaseURL}{$oNewsArchiv->getPreviewImage()}" />
         {else}
-            <meta itemprop="image" content="{$ShopLogoURL}" />
             <meta property="og:image" content="{$ShopLogoURL}" />
         {/if}
     {/block}
 
-    <title itemprop="name">{block name="head-title"}{$meta_title}{/block}</title>
+    <title>{block name="head-title"}{$meta_title}{/block}</title>
 
     {if !empty($cCanonicalURL)}
         <link rel="canonical" href="{$cCanonicalURL}">
@@ -251,6 +244,9 @@
         {if $snackyConfig.headerTopbar == 0 && !$isMobile}
             {append var='css3' value='/templates/Snackys/themes/base/css/header/topbar.css'}
         {/if}
+        {if $snackyConfig.headerTopbar == 0 && $isMobile && $snackyConfig.show_topbar_mobile == 1}
+            {append var='css3' value='/templates/Snackys/themes/base/css/header/topbar.css'}
+        {/if}
         {if $snackyConfig.hover_productlist === 'Y' && !$isMobile && $nSeitenTyp == 2}
             {append var='css3' value='/templates/Snackys/themes/base/css/listing/product-hover-jtl.css'}
         {/if}
@@ -295,6 +291,9 @@
         {if isset($oImageMap) || "Banner\Banner"|in_array:$opcItems}
             {append var='css3' value='/templates/Snackys/themes/base/css/elements/banner.css'}
         {/if}
+        {if $snackyConfig.dropdown_plus != 0}
+            {append var='css3' value='/templates/Snackys/themes/base/css/header/dropdown-plus.css'}
+        {/if}
         {/block}
 
         {if $opc->isEditMode() === false && $opc->isPreviewMode() === false && \JTL\Shop::isAdmin(true)}
@@ -311,9 +310,11 @@
         {/if}
         {* Languages *}
         {if !empty($smarty.session.Sprachen) && count($smarty.session.Sprachen) > 1}
-            {foreach item=oSprache from=$smarty.session.Sprachen}
-                <link rel="alternate" hreflang="{$oSprache->cISO639}" href="{if $nSeitenTyp === $smarty.const.PAGE_STARTSEITE && $oSprache->cStandard === 'Y'}{$cCanonicalURL}{else}{$oSprache->cURLFull}{/if}">
-            {/foreach}
+			{foreach $smarty.session.Sprachen as $language}
+				<link rel="alternate"
+					  hreflang="{$language->getIso639()}"
+					  href="{if $language->getShopDefault() === 'Y' && isset($Link) && $Link->getLinkType() === $smarty.const.LINKTYP_STARTSEITE}{$ShopURL}/{else}{$language->getUrl()}{/if}">
+			{/foreach}
         {/if}
 
 
@@ -410,12 +411,15 @@ body-offcanvas{if isset($bSeiteNichtGefunden) && $bSeiteNichtGefunden} error404{
 	{/if}
 	{block name="header-branding-top-bar"}
 		{if !$smallversion && !$maintenance}
-			{if $snackyConfig.headerTopbar == 0 && !$isMobile}
-				<div id="top-bar-wrapper" class="hidden-xs">
-					<div id="top-bar" class="dpflex-j-between dpflex-a-center small mw-container">
-						{include file="layout/header_top_bar.tpl"}
-					</div>
-				</div>
+			{if $snackyConfig.headerTopbar == 0}
+                {if $isMobile && $snackyConfig.show_topbar_mobile == 0}
+                {else}
+                    <div id="top-bar-wrapper"{if $snackyConfig.show_topbar_mobile == 0} class="hidden-xs"{/if}>
+                        <div id="top-bar" class="dpflex-j-between dpflex-a-center small mw-container">
+                            {include file="layout/header_top_bar.tpl"}
+                        </div>
+                    </div>
+                {/if}
 			{/if}
 		{/if}
 	{/block}
@@ -456,11 +460,8 @@ body-offcanvas{if isset($bSeiteNichtGefunden) && $bSeiteNichtGefunden} error404{
 						</a>
 						<a href="{get_static_route id='warenkorb.php'}" title="{lang key="backToBasket" section="checkout"}" class="btn text-muted hidden-xs">{lang key="backToBasket" section="checkout"}</a>
 					</div>
-					<div class="col-6 col-lg-4" id="logo" itemprop="publisher" itemscope itemtype="http://schema.org/Organization" itemid="">
+					<div class="col-6 col-lg-4" id="logo">
 						{block name="logo"}
-						<span itemprop="name" class="hidden">{$meta_publisher}</span>
-						<meta itemprop="url" content="{$ShopURL}">
-						<meta itemprop="logo" content="{$ShopLogoURL}">
 						<a href="{$ShopURL}" title="{$Einstellungen.global.global_shopname}" class="pr">
 							{if !empty($snackyConfig.svgLogo)}
 								<img src="{$snackyConfig.svgLogo}" alt="{$Einstellungen.global.global_shopname}">

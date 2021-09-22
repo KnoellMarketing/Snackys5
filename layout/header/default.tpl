@@ -16,7 +16,7 @@
 		<div id="search" class="col-12 col-sm-4">
 			{include file="snippets/header-search.tpl"}
 		</div>
-		<div class="col-4" id="logo" itemprop="publisher" itemscope itemtype="http://schema.org/Organization" itemid="">
+		<div class="col-4" id="logo">
 			{include file='layout/shoplogo.tpl'}
 		</div>
 		{block name="header-branding-shop-nav"}

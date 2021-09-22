@@ -49,15 +49,15 @@
 {/if}
 
     <div id="result-wrapper" data-wrapper="true"
-	data-track-type="start" data-track-event="view_item_list" data-track-p-value="0" data-track-p-currency="{$smarty.session.Waehrung->cISO}" data-track-p-items='[{foreach name=artikel from=$Suchergebnisse->Artikel->elemente item=Artikel}{if !$smarty.foreach.artikel.first},{/if}{ldelim}"id":"{if $snackyConfig.artnr == "id"}{$Artikel->kArtikel}{else}{$Artikel->cArtNr}{/if}","category":"{$cate|escape}","name":"{$Artikel->cName|escape}","price":"{$Artikel->Preise->fVKNetto}"{rdelim}{/foreach}]'
+	data-track-type="start" data-track-event="view_item_list" data-track-p-value="0" data-track-p-currency="{$smarty.session.Waehrung->getName()}" data-track-p-items='[{foreach name=artikel from=$Suchergebnisse->getProducts() item=Artikel}{if !$smarty.foreach.artikel.first},{/if}{ldelim}"id":"{if $snackyConfig.artnr == "id"}{$Artikel->kArtikel}{else}{$Artikel->cArtNr}{/if}","category":"{$cate|escape}","name":"{$Artikel->cName|escape}","price":"{$Artikel->Preise->fVKNetto}"{rdelim}{/foreach}]'
 	>
-		
-		{* Endless Scrolling Stuff *}
+
+        {* Endless Scrolling Stuff *}
 		{if isset($smarty.post.isAjax)}
 			{if $smarty.post.paging=='prev'}
-				<span class="hidden" id="endless-url">{if $Suchergebnisse->Seitenzahlen->AktuelleSeite > 1}{$oNaviSeite_arr.zurueck->cURL}{else}false{/if}</span>
+				<span class="hidden" id="endless-url">{if $Suchergebnisse->getPages()->getCurrentPage() > 1}{$oNaviSeite_arr.zurueck->cURL}{else}false{/if}</span>
 			{else}
-				<span class="hidden" id="endless-url">{if $Suchergebnisse->Seitenzahlen->AktuelleSeite < $Suchergebnisse->Seitenzahlen->maxSeite}{$oNaviSeite_arr.vor->cURL}{else}false{/if}</span>
+				<span class="hidden" id="endless-url">{if $Suchergebnisse->getPages()->getCurrentPage() < $Suchergebnisse->getPages()->getMaxPage()}{$oNaviSeite_arr.vor->cURL}{else}false{/if}</span>
 			{/if}
 		{/if}
     
@@ -105,27 +105,26 @@
         {block name="productlist-results"}
 			{if $Suchergebnisse->getProducts()|@count > 0}
 				{include file="snippets/zonen.tpl" id="opc_before_products"}
-				<div class="row row-multi mb-spacer {$style}" id="p-l" itemprop="mainEntity" itemscope itemtype="http://schema.org/ItemList">
-					{if $Suchergebnisse->Seitenzahlen->AktuelleSeite > 1 && !isset($smarty.post.isAjax) && $snackyConfig.useEndlessScrolling == 'Y'}
+				<div class="row row-multi mb-spacer {$style}" id="p-l">
+					{if $Suchergebnisse->getPages()->getCurrentPage() > 1 && !isset($smarty.post.isAjax) && $snackyConfig.useEndlessScrolling == 'Y'}
 						<div class="el-sc endless-scrolling text-center block w100 form-group"><button id="view-prev" class="btn" data-url="{$oNaviSeite_arr.zurueck->cURL}">{lang key="loadPrev" section="custom"}</button></div>
 					{/if}
 					<span class="pagination-url" data-url="{$smarty.server.REQUEST_URI}"></span>
 					{foreach name=artikel from=$Suchergebnisse->getProducts() item=Artikel}
-						<div class="p-w col-12{if $snackyConfig.hover_productlist === 'Y' && !$ismobile && $style != 'list'} hv-e{/if}" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-							<meta itemprop="position" content="{$smarty.foreach.artikel.iteration}">
+						<div class="p-w col-12{if $snackyConfig.hover_productlist === 'Y' && !$ismobile && $style != 'list'} hv-e{/if}">
 							{assign var="stopLazy" value=false}
 							{if $snackyConfig.nolazyloadProductlist >= $smarty.foreach.artikel.iteration}
 								{assign var="stopLazy" value=true}
 							{/if}
-							{if $style === 'list'}
+							{if $style === 'list' && (!$isMobile || $isTablet)}
 								{include file='productlist/item_list.tpl' tplscope=$style stopLazy=$stopLazy}
 							{else}
 								{include file='productlist/item_box.tpl' tplscope=$style class='thumbnail' stopLazy=$stopLazy}
 							{/if}
 						</div>
-						{include file="snippets/zonen.tpl" id="after_product_s{$Suchergebnisse->Seitenzahlen->AktuelleSeite}_{$smarty.foreach.artikel.iteration}" title="after_product_s{$Suchergebnisse->Seitenzahlen->AktuelleSeite}_{$smarty.foreach.artikel.iteration}"}
+						{include file="snippets/zonen.tpl" id="after_product_s{$Suchergebnisse->getPages()->getCurrentPage()}_{$smarty.foreach.artikel.iteration}" title="after_product_s{$Suchergebnisse->getPages()->getCurrentPage()}_{$smarty.foreach.artikel.iteration}"}
 					{/foreach}
-					{if $Suchergebnisse->Seitenzahlen->AktuelleSeite < $Suchergebnisse->Seitenzahlen->maxSeite && !isset($smarty.post.isAjax) && $snackyConfig.useEndlessScrolling == 'Y'}
+					{if $Suchergebnisse->getPages()->getCurrentPage() < $Suchergebnisse->getPages()->getMaxPage() && !isset($smarty.post.isAjax) && $snackyConfig.useEndlessScrolling == 'Y'}
 						<div class="el-sc endless-scrolling text-center dpflex-a-center dpflex-j-center w100"><button id="view-next" class="btn btn-xs" data-url="{$oNaviSeite_arr.vor->cURL}"></button></div>
 					{/if}
 					

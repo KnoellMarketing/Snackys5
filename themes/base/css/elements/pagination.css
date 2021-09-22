@@ -17,3 +17,6 @@
     @gradientbrand;
     color: @backgroundtext;
 }
+.pagination .active .block{
+    color: @brand;
+}
