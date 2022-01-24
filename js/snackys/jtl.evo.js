@@ -30,46 +30,6 @@
 			if($('.evo-slider:not(.slick-initialized)').length)
 			{
 				/*
-				 * box product slider
-				 */
-				/*
-				$('.evo-box-slider:not(.slick-initialized)').slick({
-					//dots: true,
-					arrows: true,
-					lazyLoad: 'ondemand',
-					slidesToShow: 1
-				});
-				*/
-				/*
-				$('.evo-box-vertical:not(.slick-initialized)').slick({
-					//dots: true,
-					arrows:          true,
-					vertical:        true,
-					adaptiveHeight:  true,
-					verticalSwiping: true,
-					prevArrow:       '<button class="slick-up" aria-label="Previous" type="button"></button>',
-					nextArrow:       '<button class="slick-down" aria-label="Next" type="button"></button>',
-					lazyLoad:        'progressive',
-					slidesToShow:    1,
-				}).on('afterChange', function () {
-					var heights = [];
-					$('.evo-box-vertical:not(.eq-height) .product-wrapper').each(function (i, element) {
-						var $element       = $(element);
-						var elementHeight;
-						// Should we include the elements padding in it's height?
-						var includePadding = ($element.css('box-sizing') === 'border-box') || ($element.css('-moz-box-sizing') === 'border-box');
-						if (includePadding) {
-							elementHeight = $element.innerHeight();
-						} else {
-							elementHeight = $element.height();
-						}
-						heights.push(elementHeight);
-					});
-					$('.evo-box-vertical.evo-box-vertical:not(.eq-height) .product-wrapper').css('height', Math.max.apply(window, heights) + 'px');
-					$('.evo-box-vertical.evo-box-vertical:not(.eq-height)').addClass('eq-height');
-				});
-				*/
-				/*
 				 * responsive slider (content)
 				 */
 				let sliders = $('.evo-slider:not(.slick-initialized)').slick({
@@ -194,10 +154,10 @@
             if ($searchWrapper.length === 0) {
                 return;
             }
-            $searchWrapper.each((i, itemWrapper) => {
+            $searchWrapper.each(function(i, itemWrapper){
                 $(itemWrapper).find(searchInput).on('input', function () {
                     filterSearch($(itemWrapper));
-                }).on('keydown', e => {
+                }).on('keydown', function(e){
                     if (e.key === 'Escape') {
                         e.stopPropagation();
                     }
@@ -216,7 +176,7 @@
 
             function filterSearch (itemWrapper) {
                 let searchTerm = itemWrapper.find(searchInput).val().toLowerCase();
-                itemWrapper.find(itemValue).each((i, itemTMP) => {
+                itemWrapper.find(itemValue).each(function(i, itemTMP){
                     itemTMP = $(itemTMP);
                     let text = itemTMP.text().toLowerCase();
                     if (text.indexOf(searchTerm) === -1) {

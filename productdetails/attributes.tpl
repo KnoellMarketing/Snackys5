@@ -5,9 +5,10 @@
         {if $Einstellungen.artikeldetails.merkmale_anzeigen === 'Y'}
             {block name='productdetails-attributes-characteristics'}
                 {foreach $Artikel->oMerkmale_arr as $oMerkmal}
-                    <li class="dpflex-a-c">
+                    <li class="dpflex">
                         <strong class="first mr-xxs">{$oMerkmal->cName}: </strong>
                         {strip}
+                        <span class="right dpflex-a-c dpflex-wrap">
                             {foreach $oMerkmal->oMerkmalWert_arr as $oMerkmalWert}
                                 {if $oMerkmal->cTyp === 'TEXT' || $oMerkmal->cTyp === 'SELECTBOX' || $oMerkmal->cTyp === ''}
                                     <a href="{$oMerkmalWert->cURLFull}" class="tag">{$oMerkmalWert->cWert|escape:'html'}</a>
@@ -31,6 +32,7 @@
                                     </a>
                                 {/if}
                             {/foreach}
+                        </span>
                         {/strip}
                     </li>
                 {/foreach}
@@ -50,7 +52,7 @@
             {block name='productdetails-attributes-product-weight'}
                 <li class="dpflex-a-c">
                     <strong class="first mr-xxs">{lang key='productWeight' section='global'}: </strong>
-                    <span class="tag">$Artikel->cArtikelgewicht} {lang key='weightUnit' section='global'}</span>
+                    <span class="tag">{$Artikel->cArtikelgewicht} {lang key='weightUnit' section='global'}</span>
                 </li>
             {/block}
         {/if}
@@ -70,9 +72,9 @@
                 {if $dimensionArr|count > 0}
                     <li class="dpflex-a-c">
                         <strong class="first mr-xxs">{lang key='dimensions' section='productDetails'}
-                            ({foreach $dimensionArr as $dimkey => $dim}
+                            <br><small>({foreach $dimensionArr as $dimkey => $dim}
                             {$dimkey}{if $dim@last}{else} &times; {/if}
-                            {/foreach}):
+                            {/foreach}):</small>
                         </strong>
                         <span class="tag">
                         {foreach $dimensionArr as $dim}

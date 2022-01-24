@@ -1,4 +1,5 @@
 {block name='layout-index'}
+{if !isset($viewportImages)}{assign var="viewportImages" value=0}{/if}
 {if isset($nFullscreenTemplate) && $nFullscreenTemplate == 1}
     {include file=$cPluginTemplate}
 {else}

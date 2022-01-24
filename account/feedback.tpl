@@ -3,7 +3,7 @@
 
 {if empty($smarty.session.Kunde->kKunde)}
     <div class="alert alert-danger">{lang key='loginFirst' section='product rating'}</div>
-{elseif empty($bewertungen)}
+{elseif $bewertungen|count == 0}
     <div class="alert alert-danger">{lang key='no feedback' section='product rating'}</div>
 {else}
         {foreach $bewertungen as $Bewertung}
@@ -24,7 +24,7 @@
                         <a title="{lang key='edit' section='product rating'}" href="{get_static_route id='bewertung.php'}?a={$Bewertung->kArtikel}&bfa=1&token={$smarty.session.jtl_token}"} class="btn btn-ic">
                             <span class="img-ct icon">
                                 <svg>
-                                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-edit"></use>
+                                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-edit"></use>
                                 </svg>
                             </span>
                         </a>

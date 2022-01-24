@@ -11,7 +11,7 @@
 						<a href="{$oItem->getURLFull()}" title="{$oItem->getName()|escape:'html'}">
 							<span class="img-ct icon">
 								<svg>
-								  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-home"></use>
+								  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-home"></use>
 								</svg>
 							</span>
 						</a>

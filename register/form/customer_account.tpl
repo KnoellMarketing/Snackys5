@@ -21,7 +21,7 @@
 			<input type="hidden" name="unreg_form" value="0">
 		{/if}
 
-		<div id="create_account_data" class="collapse in collapse-non-validate" aria-expanded="true"
+		<div id="create_account_data" class="collapse show collapse-non-validate" aria-expanded="true"
 					{if empty($checkout)
                         || $smarty.session.Warenkorb->hasDigitalProducts()
                         || $Einstellungen.kaufabwicklung.bestellvorgang_unregistriert === 'N'

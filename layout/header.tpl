@@ -7,8 +7,17 @@
 	{snackys_content id="html_head_start" title="html_head_start"}
 	{if $snackyConfig.pwa == 'Y'}<link rel="manifest" href="manifest.json">{/if}
 	
+	{block name="head-ressources-polyfill"}
+		<script nomodule src="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/snackys/intersectionObserver.js"></script>
+		<script nomodule src="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/snackys/iefix.js"></script>
+		<script nomodule src="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/snackys/classList.js"></script>
+		<script nomodule src="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/snackys/object-keys-polyfill.js"></script>
+	{/block}
+	
     {block name="head-resources-jquery"}
-		<link rel="preload" href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/jquery-3.5.1.min.js" as="script">
+		<link rel="preload" href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/jquery36-lazysizes.min.js" as="script">
+		<link rel="preload" href="{$ShopLogoURL|getWebpURL}" as="image">
+		
         <script>
             window.lazySizesConfig = window.lazySizesConfig || {};
             window.lazySizesConfig.expand  = 50;
@@ -16,18 +25,11 @@
 		{if !empty($snackyConfig.gtag|trim)}
 			{include file="layout/inc_tracking.tpl"}
 		{/if}
-        <script src="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/jquery-3.5.1.min.js"></script>
-		<script src="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/lazysizes.min.js" async></script>
-		<script type="text/javascript">
-			if (!('IntersectionObserver' in window) ||
-				!('IntersectionObserverEntry' in window) ||
-				!('intersectionRatio' in window.IntersectionObserverEntry.prototype)) {
-				// load polyfill now
-					!function(e,s,t){
-						(t=e.createElement(s)).async=!0,t.src="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/snackys/intersectionObserver.js",(e=e.getElementsByTagName(s)[0]).parentNode.insertBefore(t,e)
-					}(document,"script");
-			}
-		</script>
+		
+        <script src="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/jquery36-lazysizes.min.js"></script>
+		{if $Einstellungen.consentmanager.consent_manager_active === 'Y' && !$isAjax && $consentItems->isNotEmpty()}
+			<link rel="preload" href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/consent.js" as="script">
+		{/if}
 		
         {if $Einstellungen.template.general.use_minify === 'N'}
             {if isset($cPluginJsHead_arr)}
@@ -38,12 +40,21 @@
             {foreach $cJS_arr as $cJS}
                 <script defer src="{$ShopURL}/{$cJS}?v={$nTemplateVersion}"></script>
             {/foreach}
-            {foreach $cPluginJsBody_arr as $cJS}
-                <script defer src="{$ShopURL}/{$cJS}?v={$nTemplateVersion}"></script>
-            {/foreach}
+			{* Ab in Footer damit (damit auch die Ressourcen erst später angefragt werden!
+				{foreach $cPluginJsBody_arr as $cJS}
+					<script defer src="{$ShopURL}/{$cJS}?v={$nTemplateVersion}"></script>
+				{/foreach}
+			*}
         {else}
-            {foreach $minifiedJS as $item}
-                <script defer src="{$ShopURL}/{$item}"></script>
+			{if "jtl3.js"|array_key_exists:$minifiedJS && "plugin_js_head"|array_key_exists:$minifiedJS}
+					<script defer src="{$ShopURL}/asset/jtl3.js,plugin_js_head?v={$nTemplateVersion}"></script>
+			{else if "jtl3.js"|array_key_exists:$minifiedJS}
+					<script defer src="{$ShopURL}/{$minifiedJS["jtl3.js"]}"></script>
+			{/if}
+            {foreach $minifiedJS as $key => $item}
+				{if $key != "plugin_js_body" && $key != "jtl3.js" && $key != "plugin_js_head"}
+					<script defer src="{$ShopURL}/{$item}" data-text="true"></script>
+				{/if}
             {/foreach}
         {/if}
 		
@@ -94,16 +105,25 @@
 
     <title>{block name="head-title"}{$meta_title}{/block}</title>
 
-    {if !empty($cCanonicalURL)}
-        <link rel="canonical" href="{$cCanonicalURL}">
-    {/if}
+	{block name="canonical"}
+		{if $snackyConfig.listingCanonicalToFirst == 'Y' && $nSeitenTyp == 2 && $filterPagination->getPrev()->getPageNumber() > 0}
+			{foreach $filterPagination->getPages() as $page}
+				{if $page->getPageNumber() == 1}
+					{assign var="cCanonicalURL" value=$page->getURL()|replace:"_s1":""}
+				{/if}
+			{/foreach}
+		{/if}
+		{if !empty($cCanonicalURL)}
+			<link rel="canonical" href="{$cCanonicalURL}">
+		{/if}
+    {/block}
 
     {block name="head-icons"}
         <link type="image/x-icon" href="{$shopFaviconURL}" rel="icon">
     {/block}
 
 		{php}
-		  Shop::Smarty()->assign("css3", array());
+		  Shop::Smarty()->assign("cssArray", array());
 		{/php}
     {block name="head-resources"}
 
@@ -127,195 +147,223 @@
 		{/block}
 		
 		{if $snackyConfig.fontawesome == 'Y' || ($opc->isEditMode() === false && $opc->isPreviewMode() === false && \JTL\Shop::isAdmin(true))}
-			<link rel="stylesheet" href="{$ShopURL}/templates/Snackys/themes/base/fontawesome.css?v={$nTemplateVersion}" type="text/css">
+			<link rel="preload" href="{$ShopURL}/templates/Snackys/themes/base/fontawesome.css?v={$nTemplateVersion}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 		{/if}
 		{if $snackyConfig.full_bootstrap == 'Y'}
-			<link rel="stylesheet" href="{$ShopURL}/templates/Snackys/themes/base/full_bootstrap.css?v={$nTemplateVersion}" type="text/css">
+			<link rel="preload" href="{$ShopURL}/templates/Snackys/themes/base/css/bootstrap/bootstrap_full.css?v={$nTemplateVersion}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+			<noscript>
+				<link href="{$ShopURL}/templates/Snackys/themes/base/css/bootstrap/bootstrap_full.css?v={$nTemplateVersion}" rel="stylesheet">
+			</noscript>
 		{/if}
 		
 		{assign var='hasMobileSlider' value='false'}
 		{if $snackyConfig.fullscreenElement == 1 && $isMobile}
-			{if isset($oSlider) && count($oSlider->oSlide_arr) > 0}
+			{if isset($oSlider) && count($oSlider->getSlides()) > 0}
 				{assign var='hasMobileSlider' value='true'}
 			{/if}
 		{/if}
+		
         {block name="css-per-settings"}
-		{if $snackyConfig.headerType == 1 && $nSeitenTyp !== 11}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-navcenter.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/search-toggle.css'}
-	
-		{else if $snackyConfig.headerType == 2 && $nSeitenTyp !== 11}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-light.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-light-mmenu.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/search-toggle.css'}
-	
-		{else if $snackyConfig.headerType == 3 && $nSeitenTyp !== 11}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-light.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/search-toggle.css'}
-	
-		{else if $snackyConfig.headerType == 4 && $nSeitenTyp !== 11}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-light.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-fullscreen.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/search-toggle.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/megamenu-fullscreen.css'}
-		{else if $snackyConfig.headerType == 4.5 && $nSeitenTyp !== 11}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-light.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-fullscreen.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/search-toggle.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/megamenu-fullscreen.css'}
-	
-		{else if $snackyConfig.headerType == 5 && $nSeitenTyp !== 11}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-fullscreen.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/search-toggle.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-navcenter.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-navcenter-fullscreen.css'}
-	
-		{else if $snackyConfig.headerType == 5.5 && $nSeitenTyp !== 11}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-fullscreen.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/search-toggle.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-navcenter.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-navcenter-fullscreen.css'}
-	
-		{else if $snackyConfig.headerType == 6 && $nSeitenTyp !== 11}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-light.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-fullscreen.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/search-toggle.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/megamenu-fullscreen.css'}
-	
-		{else if $snackyConfig.headerType == 7 && $nSeitenTyp !== 11}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header-navcenter.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header/ultralight.css'}
-			{append var='css3' value='/templates/Snackys/themes/base/css/search-toggle.css'}
-	
-		{else}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header_default.css'}
-		{/if}
-		{if $snackyConfig.headerType == 4 || $snackyConfig.headerType == 5 || $Einstellungen.template.theme.theme_default == 'darkmode' || ($isMobile && $snackyConfig.fullscreenElement == 1 && $hasMobileSlider == 'false' && ($snackyConfig.headerType == 4 || $snackyConfig.headerType == 5))}
-			{append var='css3' value='/templates/Snackys/themes/darkmode/css/header-darkmode.css'}
-		{/if}
-		{if $Einstellungen.template.theme.theme_default == 'darkmode'}
-			{append var='css3' value='/templates/Snackys/themes/darkmode/css/footer-darkmode.css'}
-		{/if}
-		{if $snackyConfig.designWidth == 1}
-			{append var='css3' value='/templates/Snackys/themes/base/css/config/boxlayout.css'}
-		{/if}
-		{if $snackyConfig.headerUsps != 0}
-			{append var='css3' value='/templates/Snackys/themes/base/css/usps-header.css'}
-		{/if}
-		{if $snackyConfig.headerPromo != 0 && !isset($smarty.session.km_promo)}
-			{append var='css3' value='/templates/Snackys/themes/base/css/header/promobar.css'}
-		{/if}
-        {if $snackyConfig.showTrusted == 0}
-			{append var='css3' value='/templates/Snackys/themes/base/css/config/trusted.css'}
-        {/if}
-		{if $snackyConfig.posTrusted == 0}
-			{append var='css3' value='/templates/Snackys/themes/base/css/config/trusted-left.css'}
-        {else}
-			{append var='css3' value='/templates/Snackys/themes/base/css/config/trusted-right.css'}
-		{/if}
-		{if $snackyConfig.paymentWall != 0 && !$isMobile}
-			{append var='css3' value='/templates/Snackys/themes/base/css/footer/payment-wall.css'}
-		{/if}
-		{if $isMobile}
-			{append var='css3' value='/templates/Snackys/themes/base/css/mobile.css'}
-		 {else}
-			{append var='css3' value='/templates/Snackys/themes/base/css/elements/scrollbars.css'}
-		{/if}
-        {if $snackyConfig.manSlider == 0}
-            {append var='css3' value='/templates/Snackys/themes/base/css/index/manuslider.css'}
-        {/if}
-        {if $snackyConfig.sidepanelEverywhere == 'Y'}
-            {append var='css3' value='/templates/Snackys/themes/base/css/sidepanel.css'}
-        {elseif $nSeitenTyp === 2}
-            {append var='css3' value='/templates/Snackys/themes/base/css/sidepanel.css'}
-        {/if}
-        {if $ismobile}
-            {append var='css3' value='/templates/Snackys/themes/base/css/sidepanel-m.css'}
-        {/if}
-        {if (!empty($oUploadSchema_arr) && $nSeitenTyp === 3) || (!empty($oUploadSchema_arr) && $nSeitenTyp === 1)}
-            {append var='css3' value='/templates/Snackys/themes/base/css/details/fileupload.css'}
-        {/if}
-        {if $nSeitenTyp === 25}
-            {append var='css3' value='/templates/Snackys/themes/base/css/page/404.css'}
-        {/if}
-        {if isset($oSlider) && count($oSlider->oSlide_arr) > 0}	
-            {append var='css3' value='/templates/Snackys/themes/base/css/elements/slider.css'}
-        {/if}
-        {if $snackyConfig.headerTopbar == 0 && !$isMobile}
-            {append var='css3' value='/templates/Snackys/themes/base/css/header/topbar.css'}
-        {/if}
-        {if $snackyConfig.headerTopbar == 0 && $isMobile && $snackyConfig.show_topbar_mobile == 1}
-            {append var='css3' value='/templates/Snackys/themes/base/css/header/topbar.css'}
-        {/if}
-        {if $snackyConfig.hover_productlist === 'Y' && !$isMobile && $nSeitenTyp == 2}
-            {append var='css3' value='/templates/Snackys/themes/base/css/listing/product-hover-jtl.css'}
-        {/if}
-        {if $snackyConfig.listShowCart != 1}
-            {append var='css3' value='/templates/Snackys/themes/base/css/listing/product-hover-km.css'}
-        {/if}
-        {if !empty($oAuswahlAssistent->kAuswahlAssistentGruppe) || isset($AWA)}
-            {append var='css3' value='/templates/Snackys/themes/base/css/selectionwizard.css'}
-        {/if}
-        {if $Einstellungen.artikeldetails.artikeldetails_navi_blaettern === 'Y' && isset($NavigationBlaettern) && $nSeitenTyp == 1}
-            {append var='css3' value='/templates/Snackys/themes/base/css/details/prevnext.css'}
-        {/if}
-        {if $nSeitenTyp == 1}
-            {append var='css3' value='/templates/Snackys/themes/base/css/details/configurator.css'}
-        {/if}
-        {if $Einstellungen.artikeldetails.artikeldetails_tabs_nutzen !== 'N'}
-            {append var='css3' value='/templates/Snackys/themes/base/css/details/tabs-nav.css'}
-        {else}
-            {append var='css3' value='/templates/Snackys/themes/base/css/details/tabs-blank.css'}
-        {/if}
-        {if $snackyConfig.filterOpen == 1}
-            {append var='css3' value='/templates/Snackys/themes/base/css/listing/filter-left-collapse.css'}
-        {/if}
-        {if $snackyConfig.scrollSidebox == 'Y'}
-            {append var='css3' value='/templates/Snackys/themes/base/css/listing/filter-left-scroll.css'}
-        {/if}
-        {if $snackyConfig.footerBoxesOpen === '0'}
-            {append var='css3' value='/templates/Snackys/themes/base/css/footer/boxes-collapse.css'}
-        {/if}
-        {if $snackyConfig.roundProductImages == 0}
-            {append var='css3' value='/templates/Snackys/themes/base/css/elements/images-not-round.css'}
-        {/if}
-        {if $snackyConfig.roundButtons == 0}
-            {append var='css3' value='/templates/Snackys/themes/base/css/elements/buttons-not-round.css'}
-        {/if}
-        {if $snackyConfig.quantityButtons == '1'}
-            {append var='css3' value='/templates/Snackys/themes/base/css/details/styled-quantity.css'}
-        {/if}
-        {if $snackyConfig.full_bootstrap == 'Y'}
-            {append var='css3' value='/templates/Snackys/themes/base/css/config/override-fullbootstrap.css'}
-        {/if}
-        {if isset($oImageMap) || "Banner\Banner"|in_array:$opcItems}
-            {append var='css3' value='/templates/Snackys/themes/base/css/elements/banner.css'}
-        {/if}
-        {if $snackyConfig.dropdown_plus != 0}
-            {append var='css3' value='/templates/Snackys/themes/base/css/header/dropdown-plus.css'}
-        {/if}
+			{if $snackyConfig.headerType == 1 && $nSeitenTyp !== 11}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-navcenter.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/search-toggle.css'}
+		
+			{else if $snackyConfig.headerType == 2 && $nSeitenTyp !== 11}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-light.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-light-mmenu.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/search-toggle.css'}
+		
+			{else if $snackyConfig.headerType == 3 && $nSeitenTyp !== 11}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-light.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/search-toggle.css'}
+		
+			{else if $snackyConfig.headerType == 4 && $nSeitenTyp !== 11}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-light.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-fullscreen.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/search-toggle.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/megamenu-fullscreen.css'}
+			{else if $snackyConfig.headerType == 4.5 && $nSeitenTyp !== 11}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-light.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-fullscreen.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/search-toggle.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/megamenu-fullscreen.css'}
+		
+			{else if $snackyConfig.headerType == 5 && $nSeitenTyp !== 11}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-fullscreen.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/search-toggle.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-navcenter.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-navcenter-fullscreen.css'}
+		
+			{else if $snackyConfig.headerType == 5.5 && $nSeitenTyp !== 11}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-fullscreen.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/search-toggle.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-navcenter.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-navcenter-fullscreen.css'}
+		
+			{else if $snackyConfig.headerType == 6 && $nSeitenTyp !== 11}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-light.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-fullscreen.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/search-toggle.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/megamenu-fullscreen.css'}
+		
+			{else if $snackyConfig.headerType == 7 && $nSeitenTyp !== 11}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-navcenter.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/layout-ultralight.css'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/search-toggle.css'}
+		
+			{else}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header_default.css'}
+			{/if}
+			{if $snackyConfig.headerType == 4 || $snackyConfig.headerType == 5 || $Einstellungen.template.theme.theme_default == 'darkmode' || ($isMobile && $snackyConfig.fullscreenElement == 1 && $hasMobileSlider == 'false' && ($snackyConfig.headerType == 4 || $snackyConfig.headerType == 5))}
+				{append var='cssArray' value='/templates/Snackys/themes/darkmode/css/header-darkmode.css'}
+			{/if}
+			{if $Einstellungen.template.theme.theme_default == 'darkmode'}
+				{append var='cssArray' value='/templates/Snackys/themes/darkmode/css/footer-darkmode.css'}
+			{/if}
+			{if $snackyConfig.designWidth == 1}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/config/boxlayout.css'}
+			{/if}
+			{if $snackyConfig.headerUsps != 0}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/usps.css'}
+			{/if}
+			{if $snackyConfig.headerPromo != 0 && !isset($smarty.session.km_promo)}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/promobar.css'}
+			{/if}
+			{if $snackyConfig.showTrusted == 0}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/config/trusted.css'}
+			{/if}
+			{if $snackyConfig.posTrusted == 0 && $snackyConfig.showTrusted == 0}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/config/trusted-left.css'}
+			{elseif $snackyConfig.posTrusted == 1 && $snackyConfig.showTrusted == 0}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/config/trusted-right.css'}
+			{/if}
+			{if $snackyConfig.paymentWall != 0 && !$isMobile}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/footer/payment-wall.css'}
+			{/if}
+			{if $isMobile}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/mobile.css'}
+			 {else}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/elements/scrollbars.css'}
+			{/if}
+			{if $snackyConfig.manSlider == 0}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/index/manuslider.css'}
+			{/if}
+			{if $snackyConfig.sidepanelEverywhere == 'Y'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/listing/sidepanel.css'}
+			{elseif $nSeitenTyp === 2}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/listing/sidepanel.css'}
+			{/if}
+			{if $isMobile}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/listing/sidepanel-m.css'}
+			{/if}
+			{if (!empty($oUploadSchema_arr) && $nSeitenTyp === 3) || (!empty($oUploadSchema_arr) && $nSeitenTyp === 1)}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/details/fileupload.css'}
+			{/if}
+			{if $nSeitenTyp === 25}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/page/404.css'}
+			{/if}
+			{if isset($oSlider) && count($oSlider->getSlides()) > 0}	
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/elements/slider.css'}
+			{/if}
+			{if $snackyConfig.headerTopbar == 0 && !$isMobile}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/topbar.css'}
+			{/if}
+			{if $snackyConfig.headerTopbar == 0 && $isMobile && $snackyConfig.show_topbar_mobile == 1}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/topbar.css'}
+			{/if}
+			{if $snackyConfig.hover_productlist === 'Y' && !$isMobile && $nSeitenTyp == 2}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/listing/product-hover-jtl.css'}
+			{/if}
+			{if $snackyConfig.listShowCart != 1}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/listing/product-hover-km.css'}
+			{/if}
+			{if !empty($oAuswahlAssistent->kAuswahlAssistentGruppe) || isset($AWA)}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/elements/selectionwizard.css'}
+			{/if}
+			{if $Einstellungen.artikeldetails.artikeldetails_navi_blaettern === 'Y' && isset($NavigationBlaettern) && $nSeitenTyp == 1 && !$isMobile}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/details/prevnext.css'}
+			{elseif $Einstellungen.artikeldetails.artikeldetails_navi_blaettern === 'Y' && isset($NavigationBlaettern) && $nSeitenTyp == 1 && $isMobile}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/details/prevnext_m.css'}
+			{/if}
+			{if $nSeitenTyp == 1}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/details/configurator.css'}
+			{/if}
+			{if $Einstellungen.artikeldetails.artikeldetails_tabs_nutzen == 'N' || $isMobile}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/details/tabs-blank.css'}
+			{else}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/details/tabs-nav.css'}
+			{/if}
+			{if $snackyConfig.filterOpen == 1}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/listing/filter-left-collapse.css'}
+			{/if}
+			{if $snackyConfig.scrollSidebox == 'Y'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/listing/filter-left-scroll.css'}
+			{/if}
+			{if $snackyConfig.footerBoxesOpen === '0'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/footer/boxes-collapse.css'}
+			{/if}
+			{if $snackyConfig.roundProductImages == 0}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/elements/images-not-round.css'}
+			{/if}
+			{if $snackyConfig.roundButtons == 0}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/elements/buttons-not-round.css'}
+			{/if}
+			{if $snackyConfig.quantityButtons == '1'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/details/styled-quantity.css'}
+			{/if}
+			{if $snackyConfig.full_bootstrap == 'Y'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/config/override-fullbootstrap.css'}
+			{/if}
+			{if isset($oImageMap) || "Banner\Banner"|in_array:$opcItems}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/elements/banner.css'}
+			{/if}
+			{if $snackyConfig.dropdown_plus != 0}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/header/dropdown-plus.css'}
+			{/if}
+            {if $Einstellungen.bilder.container_verwenden == 'N'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/elements/images-contain.css'}
+            {/if}
+            {if \JTL\Shop::isAdmin(true)}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/elements/admin.css'}
+            {/if}
+            {if ((!empty($AktuelleKategorie->categoryFunctionAttributes['darstellung'])
+                && $AktuelleKategorie->categoryFunctionAttributes['darstellung'] == 1)
+                || (empty($AktuelleKategorie->categoryFunctionAttributes['darstellung'])
+                    && ((!empty($oErweiterteDarstellung->nDarstellung) && $oErweiterteDarstellung->nDarstellung == 1)
+                        || (empty($oErweiterteDarstellung->nDarstellung)
+                            && isset($Einstellungen.artikeluebersicht.artikeluebersicht_erw_darstellung_stdansicht)
+                            && $Einstellungen.artikeluebersicht.artikeluebersicht_erw_darstellung_stdansicht == 1))
+            )) && !$isMobile && $nSeitenTyp == '2'}
+				{append var='cssArray' value='/templates/Snackys/themes/base/css/elements/productlist.css'}
+            {/if}
         {/block}
 
         {if $opc->isEditMode() === false && $opc->isPreviewMode() === false && \JTL\Shop::isAdmin(true)}
             <link type="text/css" href="{$ShopURL}/admin/opc/css/startmenu.css" rel="stylesheet">
         {/if}
         {foreach $opcPageService->getCurPage()->getCssList($opc->isEditMode()) as $cssFile => $cssTrue}
-            {append var='css3' value=$cssFile|replace:$ShopURL:''}
+            {append var='cssArray' value=$cssFile|replace:$ShopURL:''}
         {/foreach}
-		{loadCSS css1=$cCSS_arr css2=$cPluginCss_arr css3=$css3 cPageType=$nSeitenTyp}
+		
+		{block name="layout-header-head-css"}
+			{loadCSS css=$cssArray cPageType=$nSeitenTyp}
+			{* restliche CSS ans Seitenende gepackt layout/footer.tpl *}
+		{/block}
 
         {* RSS *}
         {if isset($Einstellungen.rss.rss_nutzen) && $Einstellungen.rss.rss_nutzen === 'Y'}
             <link rel="alternate" type="application/rss+xml" title="Newsfeed {$Einstellungen.global.global_shopname}" href="{$ShopURL}/rss.xml">
         {/if}
         {* Languages *}
-        {if !empty($smarty.session.Sprachen) && count($smarty.session.Sprachen) > 1}
-			{foreach $smarty.session.Sprachen as $language}
-				<link rel="alternate"
-					  hreflang="{$language->getIso639()}"
-					  href="{if $language->getShopDefault() === 'Y' && isset($Link) && $Link->getLinkType() === $smarty.const.LINKTYP_STARTSEITE}{$ShopURL}/{else}{$language->getUrl()}{/if}">
-			{/foreach}
-        {/if}
+		{block name="layout-header-hreflang"}
+			{if !empty($smarty.session.Sprachen) && count($smarty.session.Sprachen) > 1}
+				{foreach $smarty.session.Sprachen as $language}
+					<link rel="alternate"
+						  hreflang="{$language->getIso639()}"
+						  href="{if $language->getShopDefault() === 'Y' && isset($Link) && $Link->getLinkType() === $smarty.const.LINKTYP_STARTSEITE}{$ShopURL}/{else}{$language->getUrl()}{/if}">
+				{/foreach}
+			{/if}
+		{/block}
 
 
 
@@ -326,8 +374,9 @@
             body { background-color: {$snackyConfig.backgroundcolor}!important; }
         </style>
     {/if}
-	
+	{block name="layout-header-theme-color"}
 	<meta name="theme-color" content="{$snackyConfig.css_brand}">
+    {/block}
 	<link rel="apple-touch-icon" href="{if empty($snackyConfig.appleTouchIcon)}/templates/Snackys/img/icons/apple-touch-icon.png{else}{$snackyConfig.appleTouchIcon}{/if}"/>
 	{if !empty($snackyConfig.pwa_icon192) && $snackyConfig.pwa == 'Y'}<link rel="icon" sizes="192x192" href="{$snackyConfig.pwa_icon192}">{/if}
 	{if !empty($snackyConfig.pwa_icon512) && $snackyConfig.pwa == 'Y'}<link rel="icon" sizes="512x512" href="{$snackyConfig.pwa_icon512}">{/if}
@@ -339,6 +388,9 @@
 {/block}
 
 {assign var="isFluidContent" value=false}
+{if $nSeitenTyp == 11}
+    {assign var="step3_active" value=($bestellschritt[5] == 1)}
+{/if}
 {if isset($snackyConfig.pagelayout) && $snackyConfig.pagelayout === 'fluid' && isset($Link) && $Link->getIsFluid()}
     {assign var="isFluidContent" value=true}
 {/if}
@@ -356,32 +408,23 @@ body-offcanvas{if isset($bSeiteNichtGefunden) && $bSeiteNichtGefunden} error404{
 {if $isTablet} tablet{/if}
 {if !empty($hinweis)}{if isset($bWarenkorbHinzugefuegt) && $bWarenkorbHinzugefuegt} basked-added sidebasket-open{/if}{/if}
 {if $snackyConfig.sidepanelEverywhere == 'Y'} sidebar-overall{/if}
-{if $isMobile && $snackyConfig.fullscreenElement == 1 && $hasMobileSlider == 'false'} no-mb-sl{/if}
 {if $snackyConfig.mmenu_link_clickable == 'N'} mmlca-n{/if}
+{if  isset($step3_active) && $step3_active} no-pd{/if}
+{if $isMobile} mobile{/if}
 "
-{if $maintenance && !empty($snackyConfig.maintenanceBG)} style="background: url({$snackyConfig.maintenanceBG})no-repeat center center/cover;"{/if}
+{if isset($maintenance) && $maintenance && !empty($snackyConfig.maintenanceBG)} style="background: url({$snackyConfig.maintenanceBG})no-repeat center center/cover;"{/if}
 {if isset($Link) && !empty($Link->getIdentifier())} id="{$Link->getIdentifier()}"{/if}
 {if !empty($snackyConfig.boxedImg) && $snackyConfig.designWidth == 1} style="background: url({$snackyConfig.boxedImg})no-repeat center center/cover;{if !$isMobile} background-attachment: fixed{/if}"{/if}
 >
 {/strip}
 	{snackys_content id="html_body_start" title="html_body_start"}
 {/block}
-{if $snackyConfig.headerType == 4 || $snackyConfig.headerType == 5}
-	{assign "darkHead" "true"}
-{else}
-	{assign "darkHead" "false"}
-{/if}
-{if $Einstellungen.template.theme.theme_default == darkmode}
-	{assign "darkMode" "true"}
-{else}
-	{assign "darkMode" "false"}
-{/if}
 {if $snackyConfig.designWidth == 1}
 <div id="bxt-w">
 {/if}
 {include file=$opcDir|cat:'tpl/startmenu.tpl'}
 {block name="main-wrapper-starttag"}
-{if $smallversion}
+{if isset($smallversion) && $smallversion}
 <div id="main-wrapper" class="main-wrapper{if $bExclusive} exclusive{/if}{if isset($snackyConfig.pagelayout) && $snackyConfig.pagelayout === 'boxed'} boxed{else} fluid{/if}{if $hasLeftPanel} aside-active{/if}">
 {/if}
 {/block}
@@ -398,28 +441,29 @@ body-offcanvas{if isset($bSeiteNichtGefunden) && $bSeiteNichtGefunden} error404{
 	
 	{if ($snackyConfig.headerType == 4 || $snackyConfig.headerType == 4.5 || $snackyConfig.headerType == 5 || $snackyConfig.headerType == 5.5) && $nSeitenTyp === 18}
 		{if !$isMobile || ($isMobile && $snackyConfig.fullscreenElement != 1) || ($isMobile && $snackyConfig.fullscreenElement == 1 && $hasMobileSlider == 'true')}
-			<div id="km-fullscreen-wrapper">
+			<div id="km-fw" class="mb-lg">
 		{/if}
 	{/if}
 	
-	{if $snackyConfig.headerPromo != 0 && $nSeitenTyp !== 11 && !isset($smarty.session.km_promo)}
-    {include file="layout/header_promo.tpl"}
-	{/if}
+	{block name="header-promo"}
+		{if $snackyConfig.headerPromo != 0 && $nSeitenTyp !== 11 && !isset($smarty.session.km_promo)}
+			{include file="layout/header_promo.tpl"}
+		{/if}
+	{/block}
 	
-	{if $snackyConfig.headerUsps != 0 && $nSeitenTyp !== 11 && !$isMobile}
-    {include file="layout/header_usps.tpl"}
-	{/if}
+	{block name="header-usps"}
+		{if $snackyConfig.headerUsps != 0 && $nSeitenTyp !== 11 && !$isMobile}
+			{include file="layout/header_usps.tpl"}
+		{/if}
+	{/block}
 	{block name="header-branding-top-bar"}
-		{if !$smallversion && !$maintenance}
-			{if $snackyConfig.headerTopbar == 0}
-                {if $isMobile && $snackyConfig.show_topbar_mobile == 0}
-                {else}
-                    <div id="top-bar-wrapper"{if $snackyConfig.show_topbar_mobile == 0} class="hidden-xs"{/if}>
-                        <div id="top-bar" class="dpflex-j-between dpflex-a-center small mw-container">
-                            {include file="layout/header_top_bar.tpl"}
-                        </div>
+		{if (!isset($smallversion) || !$smallversion) && (!isset($maintenance) || !$maintenance)}
+			{if $snackyConfig.headerTopbar == 0 || ($isMobile && $snackyConfig.show_topbar_mobile == 1)}
+                <div id="top-bar-wrapper"{if $snackyConfig.show_topbar_mobile == 0} class="hidden-xs"{/if}>
+                    <div id="top-bar" class="dpflex-j-between dpflex-a-center small mw-container">
+                        {include file="layout/header_top_bar.tpl"}
                     </div>
-                {/if}
+                </div>
 			{/if}
 		{/if}
 	{/block}
@@ -433,7 +477,7 @@ body-offcanvas{if isset($bSeiteNichtGefunden) && $bSeiteNichtGefunden} error404{
          </div>
     {/if}
     {block name="header"}
-		{if !$smallversion && !$maintenance}
+		{if (!isset($smallversion) || !$smallversion) && (!isset($maintenance) || !$maintenance)}
 			{if $snackyConfig.headerType == 1  && $nSeitenTyp !== 11}
 				{include file="layout/header/1.tpl"}
 			{else if $snackyConfig.headerType == 2 || $snackyConfig.headerType == 3 && $nSeitenTyp !== 11}
@@ -447,14 +491,14 @@ body-offcanvas{if isset($bSeiteNichtGefunden) && $bSeiteNichtGefunden} error404{
 			{else}
 				{include file="layout/header/default.tpl"}
 			{/if}
-		{elseif $smallversion}
+		{elseif isset($smallversion) && $smallversion}
 			<div id="shop-nav">
 				<div class="mw-container dpflex-a-center dpflex-wrap">
 					<div class="col-6 col-lg-4 xs-order-1">
 						<a href="{get_static_route id='warenkorb.php'}" title="{lang key="backToBasket" section="checkout"}" class="visible-xs pr">
 							<span class="img-ct icon">
 								<svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-								  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-logout"></use>
+								  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-logout"></use>
 								</svg>
 							</span>
 						</a>
@@ -489,7 +533,7 @@ body-offcanvas{if isset($bSeiteNichtGefunden) && $bSeiteNichtGefunden} error404{
 			</div>
 		{/if}
 	{/if}
-	{if $nSeitenTyp === 18 && ((isset($oSlider) && count($oSlider->oSlide_arr) > 0) || isset($oImageMap) || !empty($snackyConfig.youtubeID))}
+	{if $nSeitenTyp === 18 && ((isset($oSlider) && count($oSlider->getSlides()) > 0) || isset($oImageMap) || !empty($snackyConfig.youtubeID))}
 		{include file="snippets/extension.tpl"}
 	{/if}
 {/if}
@@ -499,6 +543,7 @@ body-offcanvas{if isset($bSeiteNichtGefunden) && $bSeiteNichtGefunden} error404{
     <div class="pl-heading mb-md">
         <div class="mw-container">
         {block name="productlist-header"}
+			{if !isset($hasFilters)}{assign var="hasFilters" value=false}{/if}
             {include file='productlist/header.tpl' hasFilters=$hasFilters}
         {/block}
         </div>

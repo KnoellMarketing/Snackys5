@@ -8,8 +8,8 @@
     {/if}
 
     {block name="product-pagination"}
-    {if $Einstellungen.artikeldetails.artikeldetails_navi_blaettern == 'Y' && isset($NavigationBlaettern)}
-        <div id="prevNextRow" class="dpflex-a-center dpflex-j-between dpflex-wrap mb-spacer mb-small hidden-xs">
+    {if $Einstellungen.artikeldetails.artikeldetails_navi_blaettern == 'Y' && isset($NavigationBlaettern) && !$isMobile}
+        <div id="prevNextRow" class="dpflex-a-center dpflex-j-between dpflex-wrap mb-sm hidden-xs">
             <div class="visible-lg visible-md product-pagination previous">
                 {if isset($NavigationBlaettern->vorherigerArtikel) && $NavigationBlaettern->vorherigerArtikel->kArtikel}
                     <a href="{$NavigationBlaettern->vorherigerArtikel->cURLFull}" title="{$NavigationBlaettern->vorherigerArtikel->cName}" class="dpflex">
@@ -36,6 +36,24 @@
                 {/if}
             </div>
         </div>
+    {elseif $Einstellungen.artikeldetails.artikeldetails_navi_blaettern == 'Y' && isset($NavigationBlaettern) && $isMobile}
+        <div id="prevNextRow" class="dpflex-a-center dpflex-j-between small">
+            <div class="product-pagination previous">
+                {if isset($NavigationBlaettern->vorherigerArtikel) && $NavigationBlaettern->vorherigerArtikel->kArtikel}
+                    <a href="{$NavigationBlaettern->vorherigerArtikel->cURLFull}" title="{$NavigationBlaettern->vorherigerArtikel->cName}" class="dpflex-a-c">
+                        <span class="ar ar-l"></span> {lang key="previous"}
+                    </a>
+                {/if}
+            </div>
+            <div class="product-pagination next">
+                {if isset($NavigationBlaettern->naechsterArtikel) && $NavigationBlaettern->naechsterArtikel->kArtikel}
+                    <a href="{$NavigationBlaettern->naechsterArtikel->cURLFull}" title="{$NavigationBlaettern->naechsterArtikel->cName}" class="dpflex-a-c">
+                        {lang key="next"} <span class="ar ar-r"></span>
+                    </a>
+                {/if}
+            </div>
+        </div>
+        <div class="hidden-xs"><hr class="invisible"></div>
     {else}
     <hr class="invisible hr-sm hidden-xs">
     {/if}
@@ -48,7 +66,7 @@
     {/foreach}
     {include file="snippets/zonen.tpl" id="opc_before_buy_form"}
     {block name="buyform-block"}
-    <form id="buy_form" method="post" action="{$Artikel->cURLFull}" class="jtl-validate mb-lg" data-track-type="start" data-track-event="view_item" data-track-p-items='[{ldelim}"id":"{if $snackyConfig.artnr == "id"}{$Artikel->kArtikel}{else}{$Artikel->cArtNr}{/if}","category":"{$cate|escape}","name":"{$Artikel->cName|escape}","price":"{$Artikel->Preise->fVKNetto}"{rdelim}]'>
+    <form id="buy_form" method="post" action="{$Artikel->cURLFull}" class="jtl-validate mb-lg">
         {$jtl_token}
         <div class="row product-primary" id="product-offer">
             <div class="product-gallery col-12 col-sm-6">
@@ -61,7 +79,7 @@
             {block name="productdetails-details-info"}
                 
 				{block name="product-headline-block"}
-                {if $Einstellungen.artikeldetails.artikeldetails_navi_blaettern !== 'Y' && !isset($NavigationBlaettern)}
+                {if ($Einstellungen.artikeldetails.artikeldetails_navi_blaettern !== 'Y' && !isset($NavigationBlaettern)) || $isMobile}
                 <div class="product-headline">
                     {include file="snippets/zonen.tpl" id="opc_before_headline"}
                     <h1 class="product-title">{$Artikel->cName}</h1>
@@ -136,7 +154,7 @@
                                     {block name="productdetails-info-rating-wrapper"}
                                     <li class="rating-wrapper nav-it dpflex-a-center">
                                         <strong class="icon-wt">{lang key="rating" section="global"}:</strong>
-                                        <a href="{$Artikel->cURLFull}#tab-votes" id="jump-to-votes-tab" class="hidden-print">
+                                        <a id="jump-to-votes-tab" class="hidden-print"{if $Einstellungen.artikeldetails.artikeldetails_tabs_nutzen == 'N' || $isMobile} data-toggle="collapse" href="#tab-votes" role="button"{else} href="{$Artikel->cURLFull}#tab-votes" {/if}>
                                             {include file='productdetails/rating.tpl' stars=$Artikel->Bewertungen->oBewertungGesamt->fDurchschnitt total=$Artikel->Bewertungen->oBewertungGesamt->nAnzahl}
                                         </a>
                                     </li>
@@ -148,7 +166,7 @@
                                         {block name="product-info-manufacturer"}
                                             <strong class="block first icon-wt">{lang key='manufacturer' section='productDetails'}: </strong>
                                             {if $Einstellungen.artikeldetails.artikel_weitere_artikel_hersteller_anzeigen === 'Y'}
-                                                <a href="{if !empty($Artikel->cHerstellerHomepage)}{$Artikel->cHerstellerHomepage}{else}{$Artikel->cHerstellerSeo}{/if}" title="{$Artikel->cHersteller}" class="dpflex-a-center">
+                                                <a href="{if !empty($Artikel->cHerstellerHomepage)}{$Artikel->cHerstellerHomepage}{else}{$Artikel->cHerstellerSeo}{/if}" title="{$Artikel->cHersteller}" class="dpflex-a-c">
                                             {else}
                                                 <span class="dpflex-a-c">
                                             {/if}
@@ -271,9 +289,153 @@
                     {block name='productdetails-details-include-uploads'}
                         {include file="snippets/uploads.tpl" tplscope='product'}
                     {/block}
+                    {block name="km-sonderpreis-bis"}
+                        {if !empty($Artikel->dSonderpreisEnde_de) && $Artikel->dSonderpreisEnde_de|date_format:"%y%m%d" >= $smarty.now|date_format:"%y%m%d"  && $Artikel->dSonderpreisStart_de|date_format:"%y%m%d" <= $smarty.now|date_format:"%y%m%d"}
+                            {if $snackyConfig.specialpriceDate == "C"}
+                                {assign var="uid" value="art_c_{$Artikel->kArtikel}_{1|mt_rand:20}"}
+                                <div id="{$uid}" class="sale-wp mb-sm mt-sm text-center panel">
+                                    <div class="mb-xs h4">{lang key="sonderpreisBisDetail" section="custom"}</div>
+                                    <div class="dpflex-j-c">
+                                        <div class="ct-wp days">
+                                            <div class="ct-it">0</div>
+                                            <div class="ct-un">{lang key='days'}</div>
+                                        </div>
+                                        <div class="ct-wp hours">
+                                            <div class="ct-it">0</div>
+                                            <div class="ct-un">{lang key='hours'}</div>
+                                        </div>
+                                        <div class="ct-wp minutes">
+                                            <div class="ct-it">0</div>
+                                            <div class="ct-un">{lang key='minutes'}</div>
+                                        </div>
+                                        <div class="ct-wp seconds">
+                                            <div class="ct-it">0</div>
+                                            <div class="ct-un">{lang key='seconds'}</div>
+                                        </div>
+                                    </div>
+                                </div>                
+                                {inline_script}<script>
+                                    $(() => {
+                                        let until = new Date("{$Artikel->dSonderpreisEnde_de|date_format:"Y-m-d"}T23:59:59");
+                                        let countDownDate = until.getTime();
+                                        let timeout = setInterval(update, 1000);
+
+                                        update();
+                                        $(window).trigger('resize');
+
+                                        function update()
+                                        {
+                                            let now      = new Date().getTime();
+                                            let distance = countDownDate - now; 
+                                            let days     = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                            let hours    = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                            let minutes  = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                            let seconds  = Math.floor((distance % (1000 * 60)) / 1000);
+
+                                            if (distance <= 0) {
+                                                clearInterval(timeout);
+                                                days    = 0;
+                                                hours   = 0;
+                                                minutes = 0;
+                                                seconds = 0;
+                                                $("#{$uid}").hide();
+                                                $(window).trigger('resize');
+                                            }
+
+                                            $("#{$uid} .days .ct-it").html(days);
+                                            $("#{$uid} .hours .ct-it").html(hours);
+                                            $("#{$uid} .minutes .ct-it").html(minutes);
+                                            $("#{$uid} .seconds .ct-it").html(seconds);
+                                        }
+                                    });
+                                </script>{/inline_script}
+                            {elseif $snackyConfig.specialpriceDate == "D"}
+                                <div class="mb-sm mt-sm panel text-center">
+                                    <div class="h4 m0">
+                                        {lang key="sonderpreisBisDetail" section="custom"} {$Artikel->dSonderpreisEnde_de|date_format:"{$snackyConfig.deliveryDateFormat}"}
+                                    </div>
+                                </div>
+                            {/if}
+                        {/if}
+                    {/block}
+                    {block name="km-verfuegbar-ab"}
+                        {if $Artikel->nErscheinendesProdukt}
+                            {if $snackyConfig.availableDate == "C"}
+                                {assign var="uid" value="aval-ct"}
+                                <div id="{$uid}" class="sale-wp mb-sm mt-sm text-center panel">
+                                    <div class="mb-xs h4">{lang key="productAvailableIn" section="custom"}</div>
+                                    <div class="dpflex-j-c">
+                                        <div class="ct-wp days">
+                                            <div class="ct-it">0</div>
+                                            <div class="ct-un">{lang key='days'}</div>
+                                        </div>
+                                        <div class="ct-wp hours">
+                                            <div class="ct-it">0</div>
+                                            <div class="ct-un">{lang key='hours'}</div>
+                                        </div>
+                                        <div class="ct-wp minutes">
+                                            <div class="ct-it">0</div>
+                                            <div class="ct-un">{lang key='minutes'}</div>
+                                        </div>
+                                        <div class="ct-wp seconds">
+                                            <div class="ct-it">0</div>
+                                            <div class="ct-un">{lang key='seconds'}</div>
+                                        </div>
+                                    </div>
+                                    {if $Einstellungen.global.global_erscheinende_kaeuflich === 'Y' && $Artikel->inWarenkorbLegbar == 1}
+                                        <div class="mt-xs text-muted">{lang key="preorderPossible" section="global"}</div>
+                                    {/if}
+                                </div>                
+                                {inline_script}<script>
+                                    $(() => {
+                                        let until = new Date("{$Artikel->Erscheinungsdatum_de|date_format:"Y-m-d"}T00:00:00");
+                                        let countDownDate = until.getTime();
+                                        let timeout = setInterval(update, 1000);
+
+                                        update();
+                                        $(window).trigger('resize');
+
+                                        function update()
+                                        {
+                                            let now      = new Date().getTime();
+                                            let distance = countDownDate - now; 
+                                            let days     = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                            let hours    = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                            let minutes  = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                            let seconds  = Math.floor((distance % (1000 * 60)) / 1000);
+
+                                            if (distance <= 0) {
+                                                clearInterval(timeout);
+                                                days    = 0;
+                                                hours   = 0;
+                                                minutes = 0;
+                                                seconds = 0;
+                                                $("#{$uid}").hide();
+                                                $(window).trigger('resize');
+                                            }
+
+                                            $("#{$uid} .days .ct-it").html(days);
+                                            $("#{$uid} .hours .ct-it").html(hours);
+                                            $("#{$uid} .minutes .ct-it").html(minutes);
+                                            $("#{$uid} .seconds .ct-it").html(seconds);
+                                        }
+                                    });
+                                </script>{/inline_script}
+                            {elseif $snackyConfig.availableDate == "D"}
+                                <div class="mb-sm mt-sm panel text-center">
+                                    <div class="h4 m0">
+                                        {lang key="productAvailableFrom" section="global"}: {$Artikel->Erscheinungsdatum_de}
+                                    </div>
+                                    {if $Einstellungen.global.global_erscheinende_kaeuflich === 'Y' && $Artikel->inWarenkorbLegbar == 1}
+                                        <div class="mt-xxs text-muted">{lang key="preorderPossible" section="global"}</div>
+                                    {/if}
+                                </div>
+                            {/if}
+                        {/if}
+                    {/block}
                     {block name="details-buy-wrapper"}
                     <div class="buy-wrapper row dpflex-a-end">
-                        <div class="col-12{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-6{/if} as-fs">
+                        <div class="col-12{if $Artikel->bHasKonfig} no-pop-tg{elseif $snackyConfig.css_maxPageWidth >= 1600} col-xl-6{/if} as-fs">
                         {block name="productdetails-info-price"}
                             {if !($Artikel->Preise->fVKNetto == 0 && isset($Artikel->FunktionsAttribute[$smarty.const.FKT_ATTRIBUT_VOUCHER_FLEX]))}
                                 {include file="productdetails/price.tpl" Artikel=$Artikel tplscope="detail"}
@@ -283,7 +445,7 @@
                             {/block}
                         {/block}
                         </div>
-						<div class="col-12{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-6{/if} buy-col">
+						<div class="col-12{if $Artikel->bHasKonfig}{elseif $snackyConfig.css_maxPageWidth >= 1600} col-xl-6{/if} buy-col">
                         {block name="details-wenig-bestand-wrapper"}
                             {* Wenig Bestand *}
                             {if $snackyConfig.hotStock > 0 && $Artikel->cLagerBeachten === 'Y' && $Artikel->cLagerKleinerNull === 'N' && $Artikel->fLagerbestand <= $snackyConfig.hotStock && $Artikel->fLagerbestand > 0}
@@ -322,6 +484,8 @@
                                         {lang key='requestNotification'}
                                     </button>
                                 {/if}
+                            {elseif $Artikel->Lageranzeige->nStatus == '0'}
+                                <div class="alert alert-danger text-center m0">{lang key='soldout'}</div>
                             {/if}
                         {/block}
                             <div class="add-pays text-center dpflex">
@@ -421,18 +585,18 @@
             {block name="productdetails-recommendations"}
 				{if isset($Xselling->Standard->XSellGruppen) && count($Xselling->Standard->XSellGruppen) > 0}
                     {foreach $Xselling->Standard->XSellGruppen as $Gruppe}
-                        {include file='snippets/product_slider.tpl' class='x-supplies' id='slider-xsell-group-'|cat:$Gruppe@iteration productlist=$Gruppe->Artikel title=$Gruppe->Name}
+                        {include file='snippets/product_slider.tpl' class='x-supplies mb-lg' id='slider-xsell-group-'|cat:$Gruppe@iteration productlist=$Gruppe->Artikel title=$Gruppe->Name desc=$Gruppe->Beschreibung}
 					{/foreach}
 				{/if}
 
 				{if isset($Xselling->Kauf->Artikel) && count($Xselling->Kauf->Artikel) > 0}
 					{lang key='customerWhoBoughtXBoughtAlsoY' section='productDetails' assign='slidertitle'}
-					{include file='snippets/product_slider.tpl' class='x-sell' id='slider-xsell' productlist=$Xselling->Kauf->Artikel title=$slidertitle desc=$Gruppe->Beschreibung}
+					{include file='snippets/product_slider.tpl' class='x-sell mb-lg' id='slider-xsell' productlist=$Xselling->Kauf->Artikel title=$slidertitle}
 				{/if}
                 
                 {if isset($oAehnlicheArtikel_arr) && count($oAehnlicheArtikel_arr) > 0}
                     {lang key='RelatedProducts' section='productDetails' assign='slidertitle'}
-                    {include file='snippets/product_slider.tpl' class='x-related' id='slider-related' productlist=$oAehnlicheArtikel_arr title=$slidertitle}
+                    {include file='snippets/product_slider.tpl' class='x-related mb-lg' id='slider-related' productlist=$oAehnlicheArtikel_arr title=$slidertitle}
                 {/if}                
             {/block}
             </div>

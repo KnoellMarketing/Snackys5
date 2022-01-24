@@ -88,8 +88,7 @@
 					&& $Artikel->Preise->fVKBrutto < $Artikel->fUVP}
 					{* if $snackyConfig.oldPricePlace !== '1' *}
 						<div class="suggested-price">
-							<abbr title="{lang key="suggestedPrice" section="productDetails"}">{lang key="suggestedPrice" section="productDetails"}</abbr>:
-							<span class="value text-nowrap">{$Artikel->cUVPLocalized}</span>
+							{lang key="suggestedPrice" section="productDetails"}: {$Artikel->cUVPLocalized}
 						</div>
 					{* /if *}
                     {* Preisersparnis zur UVP anzeigen? *}

@@ -19,13 +19,6 @@
     background: none;
     opacity: .5;
 }
-.choose_quantity button:hover .img-ct{
-    transform: rotate(360deg);
-    transition: 1s ease;
-}
-.choose_quantity .img-ct{
-    opacity: .7;
-}
 .right-boxes{
     max-width: 28rem;
 }

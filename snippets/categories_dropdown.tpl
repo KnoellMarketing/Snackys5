@@ -160,7 +160,7 @@
                     <span class="caret hidden-xs"></span>{include file='snippets/mobile-menu-arrow.tpl'}
                 </span>
             {/if}
-            <ul class="dropdown-menu keepopen dropdown-manu">
+            <ul class="dropdown-menu keepopen dropdown-manu first">
 				{foreach name=hersteller from=$manufacturers item=hst}
 					<li class="title{if isset($NaviFilter->Hersteller) && $NaviFilter->Hersteller->kHersteller == $hst->kHersteller} active{/if}"><a href="{$hst->cURLFull}" class="dropdown-link defaultlink"><span class="notextov">{$hst->cName}</span></a></li>
 				{/foreach}

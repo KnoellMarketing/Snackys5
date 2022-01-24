@@ -1,4 +1,5 @@
 {block name='account-index'}
+{if !isset($viewportImages)}{assign var="viewportImages" value=0}{/if}
 {block name="header"}
     {include file='layout/header.tpl'}
 {/block}
@@ -36,6 +37,7 @@
                     <div class="panel-heading">
                         <span class="panel-title h4 block">{lang key="myAccount"}</span>
                     </div>
+                    <hr class="invisible hr-sm">
                     <ul class="blanklist panel-body nav">
                         <li class="nav-it">
                             <a href="{get_static_route id='jtl.php'}" class="defaultlink dpflex-a-center dpflex-j-between{if $step === 'mein Konto'} active{/if}">
@@ -44,7 +46,7 @@
                             {if $step === 'mein Konto'}</strong>{/if}
                                 <span class="img-ct icon icon-wt ic-md">
                                     <svg>
-                                      <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-user"></use>
+                                      <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-user"></use>
                                     </svg>
                                 </span>
                             </a>
@@ -56,7 +58,7 @@
                             {if $step === 'bestellung' || $step === 'bestellungen'}</strong>{/if}
                                 <span class="img-ct icon icon-wt ic-md">
                                     <svg>
-                                      <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-{if $snackyConfig.basketType == 0}cart{else}shopping{/if}"></use>
+                                      <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-{if $snackyConfig.basketType == 0}cart{else}shopping{/if}"></use>
                                     </svg>
                                 </span>
                             </a>
@@ -68,7 +70,7 @@
                             {if $step === 'rechnungsdaten'}</strong>{/if}
                                 <span class="img-ct icon icon-wt ic-md">
                                     <svg>
-                                      <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-house"></use>
+                                      <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-house"></use>
                                     </svg>
                                 </span>
                             </a>
@@ -81,7 +83,7 @@
                                 {if $step|substr:0:11 === 'wunschliste'}</strong>{/if}
                                 <span class="img-ct icon icon-wt ic-md">
                                     <svg>
-                                      <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-heart"></use>
+                                      <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-heart"></use>
                                     </svg>
                                 </span>
                                 </a>
@@ -93,7 +95,7 @@
                                     {lang key="compare" sektion="global"}
                                     <span class="img-ct icon icon icon-wt ic-md">
                                         <svg>
-                                          <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-compare"></use>
+                                          <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-compare"></use>
                                         </svg>
                                     </span>
                                 </a>
@@ -106,12 +108,13 @@
                                 {if $step === 'bewertungen'}</strong>{/if}
                                 <span class="img-ct icon icon-wt ic-md">
                                     <svg>
-                                      <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-reviews"></use>
+                                      <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-reviews"></use>
                                     </svg>
                                 </span>
                             </a>
                         </li>
                     </ul>
+                    <hr class="invisible hr-sm">
                     <div class="panel-footer">
 			             <a href="{get_static_route id='jtl.php' secure=true}?logout=1" title="{lang key='logOut'}" class="btn btn-block">{lang key='logOut'}</a>
                     </div>

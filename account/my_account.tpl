@@ -33,7 +33,7 @@
                     </span>
                     <span class="img-ct icon icon-wt">
                         <svg>
-                          <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#ar-right"></use>
+                          <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#ar-right"></use>
                         </svg>
                     </span>
                 </a>
@@ -42,7 +42,7 @@
                     <strong class="w100">{lang key="showAll"}</strong>
                     <span class="img-ct icon icon-wt">
                         <svg>
-                          <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#ar-right"></use>
+                          <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#ar-right"></use>
                         </svg>
                     </span>
                 </a>
@@ -67,7 +67,7 @@
             </span>
             <span class="img-ct icon icon-wt">
                 <svg>
-                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-edit"></use>
+                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-edit"></use>
                 </svg>
             </span>
         </a>
@@ -78,7 +78,7 @@
             </span>
             <span class="img-ct icon icon-wt">
                 <svg>
-                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-edit"></use>
+                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-edit"></use>
                 </svg>
             </span>
         </a>
@@ -86,7 +86,7 @@
             <strong class="w100">{lang key="changePassword" section="login"}</strong>
             <span class="img-ct icon icon-wt">
                 <svg>
-                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-edit"></use>
+                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-edit"></use>
                 </svg>
             </span>
         </a>

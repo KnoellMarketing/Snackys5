@@ -92,7 +92,7 @@
 		<span class="dpflex-a-center">
 			<span class="img-ct icon icon-wt op1">
 				<svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-				  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-user"></use>
+				  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-user"></use>
 				</svg>
 			</span>
 			<span class="visible-xs text">
@@ -111,7 +111,7 @@
 		<span class="dpflex-a-center">
 			<span class="img-ct icon icon-wt op1">
 				<svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-				  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-heart"></use>
+				  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-heart"></use>
 				</svg>
 			</span>
 			<span class="visible-xs text">
@@ -127,7 +127,7 @@
 		<span class="dpflex-a-center">
 			<span class="img-ct icon icon-wt op1">
 				<svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-				  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-compare"></use>
+				  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-compare"></use>
 				</svg>
 			</span>
 			<span class="visible-xs text">
@@ -142,7 +142,7 @@
 		<span class="dpflex-a-center">
 			<span class="img-ct icon icon-wt op1">
 				<svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-				  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-{if $snackyConfig.basketType == 0}cart{else}shopping{/if}"></use>
+				  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-{if $snackyConfig.basketType == 0}cart{else}shopping{/if}"></use>
 				</svg>
 			</span>
 			<span class="visible-xs text">{lang key='basket'}</span>

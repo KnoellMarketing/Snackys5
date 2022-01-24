@@ -1,5 +1,5 @@
 {block name='snippets-consent-manager'}
-<div id="consent-manager" data-nosnippet class="{if isset($smarty.session.consents)}mini {/if}active">
+<div id="consent-manager" data-nosnippet class="d-none">
 	{$privacyURL = ''}
 	{if isset($oSpezialseiten_arr[$smarty.const.LINKTYP_DATENSCHUTZ])}
 		{$privacyURL = $oSpezialseiten_arr[$smarty.const.LINKTYP_DATENSCHUTZ]->getURL()}

@@ -59,9 +59,9 @@
 				</div>
 			</div>
 			{/if}
-            <div class="row p-sl no-scrollbar dpflex-nowrap{if isset($isBox)} sidebar{/if}" data-track-type="start" data-track-event="view_item_list" data-track-p-value="" data-track-p-currency="{$smarty.session.Waehrung->getName()}" data-track-p-items='[{foreach name=artikel from=$productlist item=Artikel}{if !$smarty.foreach.artikel.first},{/if}{ldelim}"id":"{if $snackyConfig.artnr == "id"}{$Artikel->kArtikel}{else}{$Artikel->cArtNr}{/if}","category":"{$gtagTitle}","name":"{$Artikel->cName|escape}","price":"{$Artikel->Preise->fVKNetto}"{rdelim}{/foreach}]'>
+            <div class="row p-sl no-scrollbar dpflex-nowrap{if isset($isBox)} sidebar{/if}">
                 {foreach name="sliderproducts" from=$productlist item='product'}
-                    <div class="col-lg-2 p-w{if isset($style)} {$style}{/if}">
+                    <div class="col-lg-2 p-w">
                         {include file='productlist/item_slider.tpl' Artikel=$product tplscope=$tplscope class=''}
                     </div>
                 {/foreach}

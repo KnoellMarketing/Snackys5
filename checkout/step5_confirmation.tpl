@@ -27,10 +27,10 @@
                             <p>
                                 {include file='checkout/inc_billing_address.tpl'}
                             </p>
-                            <a class="small edit pr" href="{get_static_route id='bestellvorgang.php'}?editRechnungsadresse=1">
-                                <span class="img-ct icon">
+                            <a class="small dpflex-a-c" href="{get_static_route id='bestellvorgang.php'}?editRechnungsadresse=1">
+                                <span class="img-ct icon mr-xxs">
 									<svg>
-									  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-edit"></use>
+									  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-edit"></use>
 									</svg>
 								</span> {lang key="modifyBillingAdress" section="global"}
                             </a>
@@ -44,10 +44,10 @@
                             <p>
                                 {include file='checkout/inc_delivery_address.tpl'}
                             </p>
-                            <a class="small edit pr" href="{get_static_route id='bestellvorgang.php'}?editLieferadresse=1#select_shipping_address">
-                                <span class="img-ct icon">
+                            <a class="small dpflex-a-c" href="{get_static_route id='bestellvorgang.php'}?editLieferadresse=1#select_shipping_address">
+                                <span class="img-ct icon mr-xxs">
 									<svg>
-									  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-edit"></use>
+									  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-edit"></use>
 									</svg>
 								</span> {lang key="modifyShippingAdress" section="checkout"}
                             </a>
@@ -80,10 +80,10 @@
                                     <strong>{lang key="shippingTime" section="global"}</strong>: {$cEstimatedDelivery}
                                 </p>
                             {/if}
-                            <a class="small edit pr" href="{get_static_route id='bestellvorgang.php'}?editVersandart=1">
-                                <span class="img-ct icon">
+                            <a class="small dpflex-a-c" href="{get_static_route id='bestellvorgang.php'}?editVersandart=1">
+                                <span class="img-ct icon mr-xxs">
 									<svg>
-									  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-edit"></use>
+									  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-edit"></use>
 									</svg>
 								</span> {lang key="modifyShippingOption" section="checkout"}
                             </a>
@@ -99,10 +99,10 @@
                         {if isset($smarty.session.Zahlungsart->cHinweisText) && !empty($smarty.session.Zahlungsart->cHinweisText)}{* this should be localized *}
                             <p class="small text-muted">{$smarty.session.Zahlungsart->cHinweisText}</p>
                         {/if}
-                        <a class="small edit pr" href="{get_static_route id='bestellvorgang.php'}?editZahlungsart=1">
-                            <span class="img-ct icon">
+                        <a class="small dpflex-a-c" href="{get_static_route id='bestellvorgang.php'}?editZahlungsart=1">
+                            <span class="img-ct icon mr-xxs">
 								<svg>
-								  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-edit"></use>
+								  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-edit"></use>
 								</svg>
 							</span> {lang key="modifyPaymentOption" section="checkout"}
                         </a>

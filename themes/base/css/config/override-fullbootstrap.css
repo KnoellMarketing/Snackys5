@@ -28,6 +28,13 @@
 .label{
     color: @defaulttext;
 }
+.dropdown-toggle:after{
+    display: none;
+}
+.form-control,
+.input-group-sm > .form-control:not(textarea), .input-group-sm > .custom-select{
+    height: auto;
+}
 @media screen and (max-width: 767px){
     #cat-w .mm-mainlink .fa-caret-down.visible-xs, #cat-w .fa-caret-down.visible-xs{
         display: flex !important;

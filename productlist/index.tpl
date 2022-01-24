@@ -1,4 +1,5 @@
 {block name='productlist-index'}
+{if !isset($viewportImages)}{assign var="viewportImages" value=0}{/if}
 {assign var=ismobile value=false}
 {if $isMobile && !$isTablet}
     {assign var=ismobile value=true}
@@ -6,7 +7,7 @@
 {assign var=contentFilters value=$NaviFilter->getAvailableContentFilters()}
 {assign var=show_filters value=$Einstellungen.artikeluebersicht.suchfilter_anzeigen_ab == 0
         || $NaviFilter->getSearchResults()->getProductCount() >= $Einstellungen.artikeluebersicht.suchfilter_anzeigen_ab
-        || $NaviFilter->getFilterCount() > 0}
+        || $NaviFilter->getFilterCount() > 0 || $Suchergebnisse->getProductCount() > 0}
 {block name="header"}
     {if !isset($bAjaxRequest) || !$bAjaxRequest}
         {include file='layout/header.tpl'}
@@ -15,10 +16,13 @@
 {if !isset($smarty.get.sidebar)}
 {include file="productwizard/index.tpl"}
 {/if}
-{if !$ismobile && !isset($smarty.get.sidebar)}
-    {include file="productlist/filter_top.tpl"}
-{/if}
 {include file="snippets/zonen.tpl" id="opc_before_result_options"}
+{if !$isMobile && !isset($smarty.get.sidebar)}
+    {include file="productlist/filter_top.tpl"}
+{elseif !isset($smarty.get.sidebar)}
+    {include file="productlist/filter_top_mobile.tpl"}
+{/if}
+{include file="snippets/zonen.tpl" id="opc_after_result_options"}
 
 
 {if !isset($smarty.get.sidebar)}
@@ -48,9 +52,7 @@
     {/if}
 {/if}
 
-    <div id="result-wrapper" data-wrapper="true"
-	data-track-type="start" data-track-event="view_item_list" data-track-p-value="0" data-track-p-currency="{$smarty.session.Waehrung->getName()}" data-track-p-items='[{foreach name=artikel from=$Suchergebnisse->getProducts() item=Artikel}{if !$smarty.foreach.artikel.first},{/if}{ldelim}"id":"{if $snackyConfig.artnr == "id"}{$Artikel->kArtikel}{else}{$Artikel->cArtNr}{/if}","category":"{$cate|escape}","name":"{$Artikel->cName|escape}","price":"{$Artikel->Preise->fVKNetto}"{rdelim}{/foreach}]'
-	>
+    <div id="result-wrapper" data-wrapper="true">
 
         {* Endless Scrolling Stuff *}
 		{if isset($smarty.post.isAjax)}
@@ -89,7 +91,8 @@
             {block name="productlist-bestseller"}
 				{include file="snippets/zonen.tpl" id="opc_before_bestseller"}
 				{lang key='bestseller' section='global' assign='slidertitle'}
-				{include file='snippets/product_slider.tpl' id='slider-top-products' productlist=$oBestseller_arr title=$slidertitle}
+				{include file='snippets/product_slider.tpl' id='slider-top-products' productlist=$oBestseller_arr title=$slidertitle}  
+                <div class="mb-md"><hr></div>
             {/block}
         {/if}
         
@@ -107,7 +110,7 @@
 				{include file="snippets/zonen.tpl" id="opc_before_products"}
 				<div class="row row-multi mb-spacer {$style}" id="p-l">
 					{if $Suchergebnisse->getPages()->getCurrentPage() > 1 && !isset($smarty.post.isAjax) && $snackyConfig.useEndlessScrolling == 'Y'}
-						<div class="el-sc endless-scrolling text-center block w100 form-group"><button id="view-prev" class="btn" data-url="{$oNaviSeite_arr.zurueck->cURL}">{lang key="loadPrev" section="custom"}</button></div>
+						<div class="el-sc endless-scrolling text-center block w100 form-group"><button id="view-prev" class="btn" data-url="{$oNaviSeite_arr.zurueck->getURL()}">{lang key="loadPrev" section="custom"}</button></div>
 					{/if}
 					<span class="pagination-url" data-url="{$smarty.server.REQUEST_URI}"></span>
 					{foreach name=artikel from=$Suchergebnisse->getProducts() item=Artikel}
@@ -125,7 +128,7 @@
 						{include file="snippets/zonen.tpl" id="after_product_s{$Suchergebnisse->getPages()->getCurrentPage()}_{$smarty.foreach.artikel.iteration}" title="after_product_s{$Suchergebnisse->getPages()->getCurrentPage()}_{$smarty.foreach.artikel.iteration}"}
 					{/foreach}
 					{if $Suchergebnisse->getPages()->getCurrentPage() < $Suchergebnisse->getPages()->getMaxPage() && !isset($smarty.post.isAjax) && $snackyConfig.useEndlessScrolling == 'Y'}
-						<div class="el-sc endless-scrolling text-center dpflex-a-center dpflex-j-center w100"><button id="view-next" class="btn btn-xs" data-url="{$oNaviSeite_arr.vor->cURL}"></button></div>
+						<div class="el-sc endless-scrolling text-center dpflex-a-center dpflex-j-center w100"><button id="view-next" class="btn btn-xs" data-url="{$oNaviSeite_arr.vor->getURL()}"></button></div>
 					{/if}
 					
 					
@@ -134,6 +137,7 @@
         {/block}
         
         {block name="productlist-include-footer"}
+			{if !isset($hasFilters)}{assign var="hasFilters" value=false}{/if}
 			{include file='productlist/footer.tpl' hasFilters=$hasFilters}
         {/block}
     </div>

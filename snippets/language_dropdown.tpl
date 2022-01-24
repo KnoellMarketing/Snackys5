@@ -1,11 +1,11 @@
 {block name='snippets-language-dropdown'}
     {if isset($smarty.session.Sprachen) && $smarty.session.Sprachen|@count > 1}
-        {if $isFooter}
+        {if isset($isFooter) && $isFooter}
         <div class="dropdown mb-xxs">
         {else}
         <li class="dropdown">
         {/if}
-            <a href="#" class="language-dropdown dpflex-a-c {$dropdownClass|default:''}{if $isFooter} btn btn-primary btn-block btn-sm{/if}" data-toggle="dropdown" title="{lang key='selectLang'}">
+            <a href="#" class="language-dropdown dpflex-a-c {$dropdownClass|default:''}{if isset($isFooter) && $isFooter} btn btn-primary btn-block btn-sm{/if}" data-toggle="dropdown" title="{lang key='selectLang'}">
                 {foreach $smarty.session.Sprachen as $language}
                     {if $language->getId() == $smarty.session.kSprache}
                         {block name='snippets-language-dropdown-text'}
@@ -28,7 +28,7 @@
                 {/block}
             {/foreach}
             </ul>
-        {if $isFooter}
+        {if isset($isFooter) && $isFooter}
         </div>
         {else}
         </li>

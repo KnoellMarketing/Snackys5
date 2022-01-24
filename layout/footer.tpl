@@ -4,7 +4,10 @@
 		{include file="snippets/zonen.tpl" id="opc_content"}
 		{include file="snippets/zonen.tpl" id="after_content"} {* Compability to Snackys Shop 4 *}
     </div>{* /content *}
-	{if $smallversion && !($isMobile && !$isTablet)}
+    {if $nSeitenTyp == 11}
+        {assign var="step3_active" value=($bestellschritt[5] == 1)}
+    {/if}
+	{if isset($smallversion) && $smallversion && !($isMobile && !$isTablet) && (!isset($step3_active) || !$step3_active)}
 		<div class="col-md-4 col-lg-3" id="checkout-cart">
 			{include file="basket/cart_dropdown_checkout.tpl"}
 		</div>
@@ -12,7 +15,7 @@
     {/block}
     
     {block name="aside"}
-	{if !$smallversion && !$maintenance && $Link->getLinkType() != $smarty.const.LINKTYP_404}
+	{if (!isset($smallversion) || !$smallversion) && (!isset($maintenance) || !$maintenance) && $Link->getLinkType() != $smarty.const.LINKTYP_404}
 		{has_boxes position='left' assign='hasLeftBox'}
 		{if !$bExclusive && $hasLeftBox && !empty($boxes.left|strip_tags|trim)}
 			{assign var="hasFilters" value="true"}	
@@ -69,7 +72,7 @@
     <footer id="footer" class="mt-md">
 
 		{block name="footer-boxes"}
-			{if !$smallversion && !$maintenance}
+			{if (!isset($smallversion) || !$smallversion) && (!isset($maintenance) || !$maintenance)}
 				{getBoxesByPosition position='bottom' assign='footerBoxes'}
 				{if isset($footerBoxes) && count($footerBoxes) > 0}
 					<div id="footer-boxes">
@@ -78,7 +81,7 @@
 						<div class="row row-multi{if $snackyConfig.footerBoxesDirection == "C"} dpflex-j-c{elseif $snackyConfig.footerBoxesDirection == "R"} dpflex-j-e{/if}">
 							 {if $snackyConfig.logoFooter == 0 && isset($ShopLogoURL)}
 								<div class="col-6 col-sm-4 col-md-3 col-lg-2 hidden-xs" id="logo-footer">  
-                                    {image src=$ShopLogoURL alt=$Einstellungen.global.global_shopname class="img-responsive"}
+                                    {image src=$ShopLogoURL alt=$Einstellungen.global.global_shopname}
 								</div>
 							{/if}
 							{foreach name=bottomBoxes from=$footerBoxes  item=box}
@@ -143,14 +146,14 @@
 										</div>
 										<div class="panel-body">
 										{block name="footer-language"}
-										{if !$smallversion}
+										{if (!isset($smallversion) || !$smallversion)}
 											{if isset($smarty.session.Sprachen) && $smarty.session.Sprachen|@count > 1}
 			                                     {include file="snippets/language_dropdown.tpl" isfooter=$isFooter}
 											{/if}
 										{/if}
 										{/block}
 										{block name="footer-currency"}
-										{if !$smallversion}
+										{if (!isset($smallversion) || !$smallversion)}
 											{if isset($smarty.session.Waehrungen) && $smarty.session.Waehrungen|@count > 1}
 											<div class="dropdown">
 												<a href="#" class="dropdown-toggle btn btn-primary btn-block btn-sm" data-toggle="dropdown" title="{lang key='selectCurrency'}">
@@ -203,7 +206,7 @@
                         </div>
                     {/if}
 				{/if}
-			{elseif $smallversion}
+			{elseif isset($smallversion) && $smallversion}
 				{getLink nLinkart=12 cAssign="linkdatenschutz"}
 				{getLink nLinkart=27 cAssign="linkimpressum"}
 				{getLink nLinkart=24 cAssign="linkwrb"}
@@ -246,7 +249,7 @@
 		  {include file="snippets/zonen.tpl" id="after_footerboxes" title="after_footerboxes"}
 
             {block name="footer-additional"}
-				{if !$smallversion}
+				{if !isset($smallversion) || !$smallversion}
                     {if $snackyConfig.socialmedia_footer === 'Y'}
                         <div id="footer-social" class="mw-container mt-sm">
                             <div class="footer-additional-wrapper dpflex-a-center dpflex-j-center dpflex-wrap">
@@ -254,63 +257,63 @@
                                     {if !empty($snackyConfig.facebook)}
                                         <a href="{if $snackyConfig.facebook|strpos:'http' !== 0}https://{/if}{$snackyConfig.facebook}" class="btn-social btn-facebook dpflex-a-center dpflex-j-center" title="Facebook" target="_blank" rel="noopener">
 											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-facebook"></use>
+											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-facebook"></use>
 											</svg>
 										</a>
                                     {/if}
                                     {if !empty($snackyConfig.twitter)}
                                         <a href="{if $snackyConfig.twitter|strpos:'http' !== 0}https://{/if}{$snackyConfig.twitter}" class="btn-social btn-twitter dpflex-a-center dpflex-j-center" title="Twitter" target="_blank" rel="noopener">
 											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-twitter"></use>
+											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-twitter"></use>
 											</svg>
 										</a>
                                     {/if}
                                     {if !empty($snackyConfig.youtube)}
                                         <a href="{if $snackyConfig.youtube|strpos:'http' !== 0}https://{/if}{$snackyConfig.youtube}" class="btn-social btn-youtube dpflex-a-center dpflex-j-center" title="YouTube" target="_blank" rel="noopener">
 											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-youtube"></use>
+											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-youtube"></use>
 											</svg>
 										</a>
                                     {/if}
                                     {if !empty($snackyConfig.vimeo)}
                                         <a href="{if $snackyConfig.vimeo|strpos:'http' !== 0}https://{/if}{$snackyConfig.vimeo}" class="btn-social btn-vimeo dpflex-a-center dpflex-j-center" title="Vimeo" target="_blank" rel="noopener">
 											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-vimeo"></use>
+											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-vimeo"></use>
 											</svg>
 										</a>
                                     {/if}
                                     {if !empty($snackyConfig.pinterest)}
                                         <a href="{if $snackyConfig.pinterest|strpos:'http' !== 0}https://{/if}{$snackyConfig.pinterest}" class="btn-social btn-pinterest dpflex-a-center dpflex-j-center" title="PInterest" target="_blank" rel="noopener">
 											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-pinterest"></use>
+											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-pinterest"></use>
 											</svg>
 										</a>
                                     {/if}
                                     {if !empty($snackyConfig.instagram)}
                                         <a href="{if $snackyConfig.instagram|strpos:'http' !== 0}https://{/if}{$snackyConfig.instagram}" class="btn-social btn-instagram dpflex-a-center dpflex-j-center" title="Instagram" target="_blank" rel="noopener">
 											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-instagram"></use>
+											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-instagram"></use>
 											</svg>
 										</a>
                                     {/if}
                                     {if !empty($snackyConfig.skype)}
                                         <a href="{if $snackyConfig.skype|strpos:'skype:' !== 0}skype:{$snackyConfig.skype}?add{else}{$snackyConfig.skype}{/if}" class="btn-social btn-skype dpflex-a-center dpflex-j-center" title="Skype" target="_blank" rel="noopener">
 											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-skype"></use>
+											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-skype"></use>
 											</svg>
 										</a>
                                     {/if}
                                     {if !empty($snackyConfig.xing)}
                                         <a href="{if $snackyConfig.xing|strpos:'http' !== 0}https://{/if}{$snackyConfig.xing}" class="btn-social btn-xing dpflex-a-center dpflex-j-center" title="Xing" target="_blank" rel="noopener">
 											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-xing"></use>
+											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-xing"></use>
 											</svg>
 										</a>
                                     {/if}
                                     {if !empty($snackyConfig.linkedin)}
                                         <a href="{if $snackyConfig.linkedin|strpos:'http' !== 0}https://{/if}{$snackyConfig.linkedin}" class="btn-social btn-linkedin dpflex-a-center dpflex-j-center" title="Linkedin" target="_blank" rel="noopener">
 											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-linkedin"></use>
+											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-linkedin"></use>
 											</svg>
 										</a>
                                     {/if}
@@ -354,7 +357,8 @@
 						Powered by <a href="https://jtl-url.de/jtlshop" title="JTL-Shop" target="_blank" rel="noopener nofollow">JTL-Shop</a>
 						</li>
 					{/if}
-					{if $snackyConfig.noCopyright|checkCopyfree}
+					{checkCopyfree cAssign="snackysCopyfree"}
+					{if !$snackysCopyfree}
 						<li id="template-copyright">
 							Made with <span class="color-brand">&hearts;</span> by <a href="https://www.knoell-marketing.de/" title="Werbeagentur - Knoell marketing">Knoell Marketing</a>
 						</li>
@@ -372,8 +376,28 @@
 {if $snackyConfig.designWidth == 1}
 </div>
 {/if}
+{* Restliches CSS > alles nicht kritische *}
+{block name="layout-footer-css"}
+	<link rel="preload" href="{$ShopURL}/{$combinedCSS}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<noscript>
+		<link href="{$ShopURL}/{$combinedCSS}" rel="stylesheet">
+	</noscript>
+{/block}
 {* JavaScripts *}
-{block name="footer-js"}
+{block name="layout-footer-js"}
+	{* aus head in footer geschoben *}
+	{if $Einstellungen.template.general.use_minify === 'N'}
+		{foreach $cPluginJsBody_arr as $cJS}
+			<script defer src="{$ShopURL}/{$cJS}?v={$nTemplateVersion}"></script>
+		{/foreach}
+	{else}
+		{foreach $minifiedJS as $key => $item}
+			{if $key == "plugin_js_body"}
+			<script defer src="{$ShopURL}/{$item}" data-text="true"></script>
+			{/if}
+		{/foreach}
+	{/if}
+	
 	<script>
 	if (navigator.userAgent.indexOf('MSIE')!==-1
 		|| navigator.appVersion.indexOf('Trident/') > -1) // If Internet Explorer
@@ -414,6 +438,7 @@
 	
 	{block name='consent-manager'}
 		{if $Einstellungen.consentmanager.consent_manager_active === 'Y' && !$isAjax && $consentItems->isNotEmpty()}
+			<script src="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/consent.js"></script>
 			<input id="consent-manager-show-banner" type="hidden" value="{$Einstellungen.consentmanager.consent_manager_show_banner}">
 			{include file='snippets/consent_manager.tpl'}
 
@@ -423,11 +448,9 @@
 					<script>
 						var tagmanagerloaded = false;
 						document.addEventListener('consent.ready', function(e) {
-							console.log(e.detail);
 							km_tagManager(e.detail);
 						});
 						document.addEventListener('consent.updated', function(e) {
-							console.log(e.detail);
 							km_tagManager(e.detail);
 						});
 						function km_tagManager(detail) {
@@ -435,10 +458,10 @@
 								if (detail.km_tagmanager === true) {
 									tagmanagerloaded = true;
 									(function(w,d,s,l,i){ldelim}w[l]=w[l]||[];w[l].push({ldelim}'gtm.start':
-									new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+									new Date().getTime(),event:'gtm.js'{rdelim});var f=d.getElementsByTagName(s)[0],
 									j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 									'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-									})(window,document,'script','dataLayer','{$snackyConfig.gtag|trim}');
+									{rdelim})(window,document,'script','dataLayer','{$snackyConfig.gtag|trim}');
 								} 
 							}
 						}
@@ -446,13 +469,7 @@
 					</script>
 				{else}
 					<script>
-						tagmanagerloaded = true;
-						(function(w,d,s,l,i){ldelim}w[l]=w[l]||[];w[l].push({ldelim}'gtm.start':
-						new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-						j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-						'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-						})(window,document,'script','dataLayer','{$snackyConfig.gtag|trim}');
-						
+						var tagmanagerloaded = false;
 						document.addEventListener('consent.ready', function(e) {
 							km_tagManager_consent(e.detail);
 						});
@@ -468,50 +485,64 @@
 										'ad_storage': 'granted',
 										'analytics_storage': 'granted'
 									});
+									
 								} 
+								
+								if(tagmanagerloaded == false)
+								{
+										
+										dataLayerConsent();
+										tagmanagerloaded = true;
+										(function(w,d,s,l,i){ldelim}w[l]=w[l]||[];w[l].push({ldelim}'gtm.start':
+										new Date().getTime(),event:'gtm.js'{rdelim});var f=d.getElementsByTagName(s)[0],
+										j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+										'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+										{rdelim})(window,document,'script','dataLayer','{$snackyConfig.gtag|trim}');
+								}
 							}
+							
 						}
 					</script>
 				{/if}
 			{/if}
 			
+			
 			<script>
-				$(window).on('load', function () {
-					window.CM = new ConsentManager({
-						version: 1
-					});
-					var trigger = document.querySelectorAll('.trigger');
-					var triggerCall = function (e) {
-						e.preventDefault();
-						let type = e.target.dataset.consent;
-						if (CM.getSettings(type) === false) {
-							CM.openConfirmationModal(type, function () {
-								let data = CM._getLocalData();
-								if (data === null) {
-									data = { settings: {} };
-								}
-								data.settings[type] = true;
-								document.dispatchEvent(new CustomEvent('consent.updated', { detail: data.settings }));
-							});
+				document.addEventListener('consent.updated', function(e) {
+					$.post('{$ShopURLSSL}/', {
+							'action': 'updateconsent',
+							'jtl_token': '{$smarty.session.jtl_token}',
+							'data': e.detail
 						}
-					}
-                    document.addEventListener('consent.updated', function(e) {
-                        $.post('{$ShopURLSSL}/', {
-                                'action': 'updateconsent',
-                                'jtl_token': '{$smarty.session.jtl_token}',
-                                'data': e.detail
-                            }
-                        );
-                    });
-                    {if !isset($smarty.session.consents)}
-                        document.addEventListener('consent.ready', function(e) {
-                            document.dispatchEvent(new CustomEvent('consent.updated', { detail: e.detail }));
-                        });
-                    {/if}
-					for (let i = 0; i < trigger.length; ++i) {
-						trigger[i].addEventListener('click', triggerCall)
-					}
+					);
 				});
+				{if !isset($smarty.session.consents)}
+					document.addEventListener('consent.ready', function(e) {
+						document.dispatchEvent(new CustomEvent('consent.updated', { detail: e.detail }));
+					});
+				{/if}
+
+				window.CM = new ConsentManager({
+					version: 1
+				});
+				var trigger = document.querySelectorAll('.trigger')
+				var triggerCall = function(e) {
+					e.preventDefault();
+					let type = e.target.dataset.consent;
+					if (CM.getSettings(type) === false) {
+						CM.openConfirmationModal(type, function() {
+							let data = CM._getLocalData();
+							if (data === null ) {
+								data = { settings: {} };
+							}
+							data.settings[type] = true;
+							document.dispatchEvent(new CustomEvent('consent.updated', { detail: data.settings }));
+						});
+					}
+				}
+				for(let i = 0; i < trigger.length; ++i) {
+					trigger[i].addEventListener('click', triggerCall)
+				}
 			</script>
 		{else}
 		<script>
@@ -524,6 +555,7 @@
 		</script>
 		{/if}
 	{/block}
+	
 	
 	{block name="rich-snippets"}
 		{include file='snippets/rich-snippets.tpl'}

@@ -93,7 +93,7 @@
 				{
 					{block name="rich-snippets-product-inner"}
 						"@context": "http://schema.org",
-						"@type": {if !empty($Artikel->cISBN)}["Product,"Book"]{else}"Product"{/if},
+						"@type": {if !empty($Artikel->cISBN)}["Product","Book"]{else}"Product"{/if},
 						"name": "{$Artikel->cName|escape:'html'}",
 						"image": [
 							{foreach $Artikel->Bilder as $image}
@@ -144,7 +144,7 @@
 									,
 									"validFrom": "{$Artikel->dSonderpreisStart_en}",
 									"validThrough": "{$Artikel->dSonderpreisEnde_en}",
-									"priceValidUntil": "{$Artikel->dSonderpreisEnde_en}",
+									"priceValidUntil": "{$Artikel->dSonderpreisEnde_en}"
 								{/if}
 							}
 						{/block}
@@ -186,20 +186,20 @@
 				}
 				</script>
 			{/block}
-		{elseif $nSeitenTyp === $smarty.const.PAGE_ARTIKELLISTE}
+		{elseif $nSeitenTyp === $smarty.const.PAGE_ARTIKELLISTE && $snackyConfig.richSnippetsLists == 1}
 			{block name="rich-snippets-productlist"}
 				<script type="application/ld+json">
 				{
 					{block name="rich-snippets-productlist-inner"}
 					  "@context":"https://schema.org",
-					  "@type":"mainEntity",
+					  "@type":"ItemList",
 					  "itemListElement":[
 						{foreach name=artikel from=$Suchergebnisse->getProducts() item=Artikel}
 							{if !$Artikel@first},{/if}
 							{
 								"@type": {if !empty($Artikel->cISBN)}["Product,"Book"]{else}"Product"{/if},
-								"name": "{$Artikel->cName|escape:'html'}",
 								"position":{$Artikel@iteration},
+								"name": "{$Artikel->cName|escape:'html'}",
 								"image": [
 									{foreach $Artikel->Bilder as $image}
 										{if $image@iteration < 3}	{* In List view, max 2 pictures *}

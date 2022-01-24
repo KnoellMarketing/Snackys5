@@ -1,0 +1,26 @@
+/* Wartungsmodus */
+#maintenance-mode.navbar{
+	padding: .5rem;
+	background: #6FA6FF;
+	font-size: .9rem;
+	color: #fff;
+}
+/* Dropper Zones */
+.dropper-box{
+    padding: 13px;
+    margin: 5px 0;
+    border: 1px dashed #f96058;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(249, 96, 88, 0.15);
+    flex-wrap: wrap;
+}
+/* OPC Modules */
+#opc #opcDeleteModal .modal-dialog{
+    max-width: none !important;
+}
+#snackys-tpl #opc #opc-startmenu{
+    top: 3rem;
+}

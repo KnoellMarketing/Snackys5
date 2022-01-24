@@ -70,71 +70,66 @@
 	{include file="snippets/zonen.tpl" id="opc_before_tabs"}
     <div id="tab-wp" class="mb-lg">
     {block name="tab-nav-block"}
-    {if $tabanzeige}
+    {if $tabanzeige && !$isMobile}
     <ul class="blanklist dpflex-a-end nav nav-tabs" role="tablist" id="article-tab-nav">
         {if $useDescription}
-            <li role="presentation" {if $setActiveClass.description} class="active"{/if}>
-                <span aria-controls="tab-description" role="tab" data-toggle="tab">
+            <li role="presentation" class="nav-item">
+                <a class="nav-link{if $setActiveClass.description} active{/if}" aria-controls="tab-description" role="tab" data-toggle="tab" href="#tab-description">
                     {block name='tab-description-title'}{lang key='description' section='productDetails'}{/block}
-                </span>
+                </a>
             </li>
         {/if}
         {if $useDownloads}
-            <li role="presentation" {if $setActiveClass.downloads} class="active"{/if}>
-                <span aria-controls="tab-downloads" role="tab" data-toggle="tab">
+            <li role="presentation" class="nav-item">
+                <a class="nav-link{if $setActiveClass.downloads} active{/if}" aria-controls="tab-downloads" role="tab" data-toggle="tab" href="#tab-downloads">
                     {lang section="productDownloads" key="downloadSection"}
-                </span>
+                </a>
             </li>
         {/if}
         {if !empty($separatedTabs)}
             {foreach from=$separatedTabs item=separatedTab name="separatedTabsHeader"}
-                <li role="presentation"
-                    {if $setActiveClass.separatedTabs && $smarty.foreach.separatedTabsHeader.first}
-                        class="active"
-                    {/if}>
-                    <span aria-controls="tab-{$separatedTab.id}" role="tab" data-toggle="tab">
+                <li role="presentation" class="nav-item">
+                    <a class="nav-link{if $setActiveClass.separatedTabs && $smarty.foreach.separatedTabsHeader.first} active{/if}" aria-controls="tab-{$separatedTab.id}" role="tab" data-toggle="tab" href="#tab-{$separatedTab.id}">
                         {$separatedTab.name}
-                    </span>
+                    </a>
                 </li>
             {/foreach}
         {/if}
         {if $useVotes}
-            <li role="presentation" {if $setActiveClass.votes} class="active"{/if}>
-                <span aria-controls="tab-votes" role="tab" data-toggle="tab">
-                    {lang key="Votes" section="global"}
-                </span>
+            <li role="presentation" class="nav-item">
+                <a class="nav-link{if $setActiveClass.votes} active{/if}" aria-controls="tab-votes" role="tab" data-toggle="tab" href="#tab-votes">
+                    {lang key="Votes" section="global"} {if $Artikel->Bewertungen->oBewertungGesamt->nAnzahl > 0}({$Artikel->Bewertungen->oBewertungGesamt->nAnzahl}){/if}
+                </a>
             </li>
         {/if}
         {if $useQuestionOnItem}
-            <li role="presentation" {if $setActiveClass.questionOnItem} class="active" {/if}>
-                <span aria-controls="tab-questionOnItem" role="tab" data-toggle="tab">
+            <li role="presentation" class="nav-item">
+                <a class="nav-link{if $setActiveClass.questionOnItem} active{/if}" aria-controls="tab-questionOnItem" role="tab" data-toggle="tab" href="#tab-questionOnItem">
                     {lang key="productQuestion" section="productDetails"}
-                </span>
+                </a>
             </li>
         {/if}
         {if $usePriceFlow}
-            <li role="presentation" {if $setActiveClass.priceFlow} class="active"{/if}>
-                <span aria-controls="tab-priceFlow" role="tab" data-toggle="tab">
+            <li role="presentation" class="nav-item">
+                <a class="nav-link{if $setActiveClass.priceFlow} active{/if}" aria-controls="tab-priceFlow" role="tab" data-toggle="tab" href="#tab-priceFlow">
                     {lang key="priceFlow" section="productDetails"}
-                </span>
+                </a>
             </li>
         {/if}
         {if $useAvailabilityNotification}
-            <li role="presentation"
-                {if $setActiveClass.availabilityNotification} class="active"{/if}>
-                <span aria-controls="tab-availabilityNotification" role="tab" data-toggle="tab">
+            <li role="presentation" class="nav-item">
+                <a class="nav-link{if $setActiveClass.availabilityNotification} active{/if}" aria-controls="tab-availabilityNotification" role="tab" data-toggle="tab" href="#tab-availabilityNotification">
                     {lang key="notifyMeWhenProductAvailableAgain" section="global"}
-                </span>
+                </a>
             </li>
         {/if}
         {if $useMediaGroup}
             {foreach $Artikel->getMediaTypes() as $mediaType}
                 {$cMedienTypId = $mediaType->name|@seofy}
-                <li role="presentation"
-                    {if $setActiveClass.mediaGroup && $mediaType@first} class="active"{/if}>
-                    <span aria-controls="tab-{$cMedienTypId}" role="tab" data-toggle="tab">
+                <li role="presentation" class="nav-item">
+                    <a class="nav-link{if $setActiveClass.mediaGroup && $mediaType@first} active{/if}" aria-controls="tab-{$cMedienTypId}" role="tab" data-toggle="tab" href="#tab-{$cMedienTypId}">
                         {$mediaType->name} ({$mediaType->count})
-                    </span>
+                    </a>
                 </li>
             {/foreach}
         {/if}	
@@ -142,17 +137,17 @@
     {/if}
     {/block}
     {block name="details-tabs-outer"}
-    <div class="tab-content notabs" id="article-tabs">
+    <div class="tab-content" id="article-tabs">
         {block name='productdetails-tabs-inner'}{block name="tabs-desc"}
                 {if $useDescription}
-                <div class="tab-ct panel-default open-show{if $setActiveClass.description} in active{/if}" id="tab-description">
-                    <div class="panel-heading dpflex-j-between dpflex-a-c">
-                        <h2 class="panel-title h3 m0">
+                <div class="tab-ct tab-pane panel-default{if $setActiveClass.description} show active{/if}" id="tab-description">
+                    <div class="panel-heading dpflex-j-between dpflex-a-c" data-toggle="collapse" href="#tab-description" role="button">
+                        <div class="panel-title h3 m0">
                             {block name='tab-description-title'}{lang key='description' section='productDetails'}{/block}
-                        </h2>
+                        </div>
                         <span class="img-ct icon">
-                            <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-caret"></use>
+                            <svg class="{if (isset($darkHead) && $darkHead == 'true') || (isset($darkMode) && $darkMode == 'true')}icon-darkmode{/if}">
+                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-caret"></use>
                             </svg>
                         </span>
                     </div>
@@ -194,12 +189,12 @@
             {/block}
             {block name="tabs-downloads"}
                 {if $useDownloads}
-                <div class="tab-ct panel-default{if $setActiveClass.downloads} in active{/if}" id="tab-downloads">
-                    <div class="panel-heading dpflex-a-c dpflex-j-between">
-                        <h2 class="panel-title h3 m0">{lang section="productDownloads" key="downloadSection"}</h2>
+                <div class="tab-ct tab-pane panel-default{if $setActiveClass.downloads} show active{/if}" id="tab-downloads">
+                    <div class="panel-heading dpflex-a-c dpflex-j-between" data-toggle="collapse" href="#tab-downloads" role="button">
+                        <div class="panel-title h3 m0">{lang section="productDownloads" key="downloadSection"}</div>
                         <span class="img-ct icon">
-                            <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-caret"></use>
+                            <svg>
+                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-caret"></use>
                             </svg>
                         </span>
                     </div>
@@ -214,12 +209,12 @@
             {block name="tabs-separated"}
                 {if !empty($separatedTabs)}
                     {foreach $separatedTabs as $separatedTab}
-                    <div class="tab-ct panel-default{if $setActiveClass.separatedTabs && $separatedTab@first} in active{/if}" id="tab-{$separatedTab.id}">
-                        <div class="panel-heading dpflex-a-center dpflex-j-between">
-                            <h2 class="panel-title h3 m0">{$separatedTab.name}</h2>
+                    <div class="tab-ct tab-pane panel-default{if $setActiveClass.separatedTabs && $separatedTab@first} show active{/if}" id="tab-{$separatedTab.id}">
+                        <div class="panel-heading dpflex-a-center dpflex-j-between" data-toggle="collapse" href="#tab-{$separatedTab.id}" role="button">
+                            <div class="panel-title h3 m0">{$separatedTab.name}</div>
                             <span class="img-ct icon">
-                                <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-                                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-caret"></use>
+                                <svg>
+                                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-caret"></use>
                                 </svg>
                             </span>
                         </div>
@@ -234,12 +229,12 @@
             {/block}
             {block name="tabs-votes"}
                 {if $useVotes}
-                <div class="tab-ct panel-default{if $setActiveClass.votes} in active{/if}" id="tab-votes">
-                    <div class="panel-heading dpflex-a-center dpflex-j-between">
-                        <h2 class="panel-title h3 m0">{lang key="Votes" section="global"}</h2>
+                <div class="tab-ct tab-pane panel-default{if $setActiveClass.votes} show active{/if}" id="tab-votes">
+                    <div class="panel-heading dpflex-a-center dpflex-j-between" data-toggle="collapse" href="#tab-votes" role="button">
+                        <div class="panel-title h3 m0">{lang key="Votes" section="global"} {if $Artikel->Bewertungen->oBewertungGesamt->nAnzahl > 0}({$Artikel->Bewertungen->oBewertungGesamt->nAnzahl}){/if}</div>
                         <span class="img-ct icon">
-                            <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-caret"></use>
+                            <svg>
+                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-caret"></use>
                             </svg>
                         </span>
                     </div>
@@ -253,12 +248,12 @@
             {/block}
             {block name="tabs-question"}
                 {if $useQuestionOnItem}
-                <div class="tab-ct panel-default{if $setActiveClass.questionOnItem} in active{/if}" id="tab-questionOnItem">
-                    <div class="panel-heading dpflex-a-center dpflex-j-between">
-                        <h2 class="panel-title h3 m0">{lang key="productQuestion" section="productDetails"}</h2>
+                <div class="tab-ct tab-pane panel-default{if $setActiveClass.questionOnItem} show active{/if}" id="tab-questionOnItem">
+                    <div class="panel-heading dpflex-a-center dpflex-j-between" data-toggle="collapse" href="#tab-questionOnItem" role="button">
+                        <div class="panel-title h3 m0">{lang key="productQuestion" section="productDetails"}</div>
                         <span class="img-ct icon">
-                            <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-caret"></use>
+                            <svg>
+                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-caret"></use>
                             </svg>
                         </span>
                     </div>
@@ -272,12 +267,12 @@
             {/block}
             {block name="tabs-priceflow"}
                 {if $usePriceFlow} 
-                <div class="tab-ct panel-default{if $setActiveClass.priceFlow} in active{/if}" id="tab-priceFlow">
-                    <div class="panel-heading dpflex-a-center dpflex-j-between">
-                        <h2 class="panel-title h3 m0">{lang key="priceFlow" section="productDetails"}</h2>
+                <div class="tab-ct tab-pane panel-default{if $setActiveClass.priceFlow} show active{/if}" id="tab-priceFlow">
+                    <div class="panel-heading dpflex-a-center dpflex-j-between" data-toggle="collapse" href="#tab-priceFlow" role="button">
+                        <div class="panel-title h3 m0">{lang key="priceFlow" section="productDetails"}</div>
                         <span class="img-ct icon">
-                            <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-caret"></use>
+                            <svg>
+                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-caret"></use>
                             </svg>
                         </span>
                     </div>
@@ -291,12 +286,12 @@
             {/block}
             {block name="tabs-avail-note"}
                 {if $useAvailabilityNotification}
-                <div class="tab-ct panel-default{if $setActiveClass.availabilityNotification} in active{/if}" id="tab-availabilityNotification">
-                    <div class="panel-heading dpflex-a-center dpflex-j-between">
-                        <h2 class="panel-title h3 m0">{lang key="notifyMeWhenProductAvailableAgain" section="global"}</h2>
+                <div class="tab-ct tab-pane panel-default{if $setActiveClass.availabilityNotification} show active{/if}" id="tab-availabilityNotification">
+                    <div class="panel-heading dpflex-a-center dpflex-j-between" data-toggle="collapse" href="#tab-availabilityNotification" role="button">
+                        <div class="panel-title h3 m0">{lang key="notifyMeWhenProductAvailableAgain" section="global"}</div>
                         <span class="img-ct icon">
-                            <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-caret"></use>
+                            <svg>
+                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-caret"></use>
                             </svg>
                         </span>
                     </div>
@@ -313,12 +308,12 @@
                     {foreach $Artikel->getMediaTypes() as $mediaType}
                         {$cMedienTypId = $mediaType->name|@seofy}
                         {if $cMedienTypId !== 'videos'}
-                            <div class="tab-ct panel-default{if $setActiveClass.mediaGroup && $mediaType@first} in active{/if}" id="tab-{$cMedienTypId}">
-                                <div class="panel-heading dpflex-a-center dpflex-j-between">
-                                    <h2 class="panel-title h3 m0">{$mediaType->name}</h2>
+                            <div class="tab-ct tab-pane panel-default{if $setActiveClass.mediaGroup && $mediaType@first} show active{/if}" id="tab-{$cMedienTypId}">
+                                <div class="panel-heading dpflex-a-center dpflex-j-between" data-toggle="collapse" href="#tab-{$cMedienTypId}" role="button">
+                                    <div class="panel-title h3 m0">{$mediaType->name}</div>
                                     <span class="img-ct icon">
-                                        <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-                                          <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-caret"></use>
+                                        <svg>
+                                          <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-caret"></use>
                                         </svg>
                                     </span>
                                 </div>

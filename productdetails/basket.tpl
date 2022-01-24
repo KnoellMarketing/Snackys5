@@ -3,14 +3,6 @@
     <div id="add-to-cart" class="hidden-print product-buy{if $Artikel->nErscheinendesProdukt} coming_soon{/if}">
 
         {block name="add-to-cart"}
-            {if $Artikel->nErscheinendesProdukt}
-                <div class="{if $Einstellungen.global.global_erscheinende_kaeuflich === 'Y'}alert alert-warning coming_soon{else}alert alert-info {/if} text-center">
-                    {lang key="productAvailableFrom" section="global"}: <strong>{$Artikel->Erscheinungsdatum_de}</strong>
-                    {if $Einstellungen.global.global_erscheinende_kaeuflich === 'Y' && $Artikel->inWarenkorbLegbar == 1}
-                        ({lang key="preorderPossible" section="global"})
-                    {/if}
-                </div>
-            {/if}
             {if $Artikel->inWarenkorbLegbar == 1 && !$Artikel->oKonfig_arr}
                 {if !$showMatrix}
                     {block name="basket-form-inline"}
@@ -43,7 +35,7 @@
                                     <div class="btn btn-blank qty-sub">
                                         <span class="img-ct icon">
                                             <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-                                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-minus"></use>
+                                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-minus"></use>
                                             </svg>
                                         </span>
                                     </div>
@@ -65,20 +57,21 @@
                                     <div class="btn btn-blank qty-add">
                                         <span class="img-ct icon">
                                             <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-                                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-plus"></use>
+                                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-plus"></use>
                                             </svg>
                                         </span>
                                     </div>
                                 </div>
                             </div>
-                        {/if}
                         <hr class="hr-xs invisible w100">
                         {/if}
-                        <button aria-label="{lang key='addToCart'}" name="inWarenkorb" type="submit" value="{lang key='addToCart'}" class="sn-addBasket submit btn btn-primary btn-lg btn-block{if isset($wkWeiterleiten)} wkWeiterleiten{/if}"{if $Artikel->nIstVater && $Artikel->kVaterArtikel == 0 && !$showMatrix} disabled{/if}
-                            data-track-type="click" data-track-event="add_to_cart" data-track-p-value="{$Artikel->Preise->fVKNetto}" data-track-p-currency="{$smarty.session.Waehrung->cISO}" data-track-p-items='[{ldelim}"id":"{$Artikel->cArtNr}","category":"{$cate|htmlspecialchars}","name":"{$Artikel->cName|htmlspecialchars}","price":"{$Artikel->Preise->fVKNetto}","quantity":"selectorval:#quantity"{rdelim}]'
-                        >
+                        {/if}
+                        <button aria-label="{lang key='addToCart'}" name="inWarenkorb" type="submit" value="{lang key='addToCart'}" class="sn-addBasket submit btn btn-primary btn-lg btn-block{if isset($wkWeiterleiten)} wkWeiterleiten{/if}"{if $Artikel->nIstVater && $Artikel->kVaterArtikel == 0 && !$showMatrix} disabled{/if}>
                             <span class="">{lang key='addToCart'}</span>
                         </button>
+                        {if $snackyConfig.quantityButtons != '1'}
+                        </div>
+                        {/if}
                     {/block}
                 {/if}
                 {if $Artikel->nIstVater && $Artikel->kVaterArtikel == 0 && !$showMatrix}

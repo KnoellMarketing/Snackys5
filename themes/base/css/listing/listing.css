@@ -44,13 +44,10 @@
 }
 /* Active Filters */
 .active-filters .btn:not(.btn-block){
-    margin: 0 .2rem .2rem 0;
+    margin: 0 .4rem .4rem 0;
 }
-.active-filters .btn-block{
-    margin: .2rem 0;
-    display: flex;
-}
-.active-filters .btn-block .img-ct{
-    margin: 0 0 0 auto;
-    order: 1;
+@media screen and (max-width: 767px){
+    .active-filters .btn:not(.btn-block){
+        margin: 0 .2rem .2rem 0;
+    }
 }

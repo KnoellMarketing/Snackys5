@@ -1,4 +1,5 @@
 {block name='basket-index'}
+{if !isset($viewportImages)}{assign var="viewportImages" value=0}{/if}
 {block name="header"}
     {include file='layout/header.tpl'}
 {/block}
@@ -51,7 +52,7 @@
         <div class="c-empt">
             <span class="img-ct">
                 <svg>
-                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-{if $snackyConfig.basketType == 0}cart{else}shopping{/if}"></use>
+                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-{if $snackyConfig.basketType == 0}cart{else}shopping{/if}"></use>
                 </svg>
                 {if $snackyConfig.basketType == 0}
                 <span class="h4 text-center">0</span>
@@ -123,7 +124,7 @@
                     <span class="price_label"><strong>{lang key="totalSum" section="global"}:</strong></span>
                     <strong class="price total-sum">{$WarensummeLocalized[0]}</strong>
                 </div>
-                <a href="{get_static_route id='bestellvorgang.php'}?wk=1" class="submit btn btn-primary btn-block btn-lg">{lang key='nextStepCheckout' section='checkout'}</a>
+                <a href="{get_static_route id='bestellvorgang.php'}?wk=1" class="submit btn btn-primary btn-block btn-lg" id="cart-checkout-btn">{lang key='nextStepCheckout' section='checkout'}</a>
             </div>
             <div class="add-pays dpflex">
                 <div class="paypal"></div>

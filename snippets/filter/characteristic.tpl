@@ -43,6 +43,7 @@
             {block name='snippets-filter-characteristics-nav'}
                 {if {$Merkmal->getData('cTyp')} === 'TEXT'}
                     {block name='snippets-filter-characteristics-nav-text'}
+                        {if $attributeValue->getCount() > 0}
                         <li class="nav-it">
                         {link
                             class="{if $attributeValue->isActive()}active{/if} filter-item dpflex-a-center"
@@ -62,9 +63,10 @@
                                 {/if}
                         {/link}
                         </li>
+                        {/if}
                     {/block}
                 {elseif $Merkmal->getData('cTyp') === 'BILD' && $attributeImageURL !== null}
-                    {block name='snippets-filter-characteristics-nav-image'}
+                    {block name='snippets-filter-characteristics-nav-image'}                        
                         <li class="nav-it">
                         {link href="{if !empty($attributeValue->getURL())}{$attributeValue->getURL()}{else}#{/if}"
                             title="{if $showFilterCount}{$attributeValue->getValue()|escape:'html'}: {$attributeValue->getCount()}{else}{$attributeValue->getValue()|escape:'html'}{/if}"
@@ -85,6 +87,7 @@
                     {/block}
                 {else}
                     {block name='snippets-filter-characteristics-nav-else'}
+                        {if $attributeValue->getCount() > 0}
                         <li class="nav-it">
                             {link href="{if !empty($attributeValue->getURL())}{$attributeValue->getURL()}{else}#{/if}"
                                 title="{if $showFilterCount}{$attributeValue->getValue()|escape:'html'}: {$attributeValue->getCount()}{else}{$attributeValue->getValue()|escape:'html'}{/if}"
@@ -109,6 +112,7 @@
                             {/if}
                             {/link}
                         </li>
+                        {/if}
                     {/block}
                 {/if}
             {/block}

@@ -9,10 +9,6 @@
 .panel-slider .sl-ar.inactive{
     opacity: .3;
 }
-/* Trusted bei Sidebar-Open ausblenden */
-.shw-sb .etrusted-badge-container.etrusted-badge-container--left{
-	display: none;
-}
 /* Mobile-Link nicht Klickbar */
 @media screen and (max-width: 768px){
 	.mmlca-n #cat-w li:not(.open) > .mm-mainlink .fa-caret-down.visible-xs{

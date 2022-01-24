@@ -1,152 +1,42 @@
 #select_shipping_address,
-#ppp-modal{
+#ppp-modal,
+#checkout .btn.hidden{
     display: none;
 }
-body{
+body:not(.no-pd){
     padding-right: 28rem;
-}
-.mw-container{
-    max-width: 1500px;
 }
 #content-wrapper{
     margin-bottom: 3rem;
+}
+.mw-container{
+    max-width: 1500px;
 }
 #shop-nav{
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
 }
-#checkout-cart{
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    padding: 2rem;
-    max-height: 100%;
-    overflow: auto;
-    background: #f6f6f6;
-    max-width: 28rem;
-    width: 100%;
-}
-#checkout .nav-wizard li {
+/* Steps */
+.c-stp {
     border-top: 1px solid @lightborder;
 }
-#checkout .nav-wizard:not(.first) li:last-child{
+.c-stps.last .c-stp:last-child{
     border-bottom: 1px solid @lightborder;
 }
-#checkout .nav-wizard li > a,
-#checkout .nav-wizard li > span{
+.c-stp > .dpflex-a-c{
     transition: opacity .2s ease;
     opacity: .4;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     padding: 1.25rem 0;
 }
-#checkout .nav-wizard li.active a,
-#checkout .nav-wizard li.active span,
-#checkout .nav-wizard.first li a:hover{
+.c-stp.active > .dpflex-a-c,
+.c-stp a:hover{
     opacity: 1;
 }
-#checkout .nav-wizard.first{
-    margin-bottom: 1.5rem;
-}
-#checkout .nav-wizard.last{
-    margin-top: 3rem;
-}
-#checkout .nav-wizard li.active a{
+.c-stp.active a{
     pointer-events: none;
 }
-#checkout .nav-wizard .img-ct{
-    width: 1.25rem;
-}
-#checkout form > .panel-wrap{
-    margin-bottom: 2rem;
-}
-.form-group > div:last-child > div{
-    border-bottom: 1px solid @lightborder;
-}
-.form-group > div img{
-    max-width: 4rem;
-    max-height: 3rem;
-}
-#fieldset-payment label{
-    cursor: pointer;
-}
-#checkout .btn.hidden{
-	display: none;
-}
-.form-group label .control-label.flex{
-    display: flex;
-    align-items: center;
-}
-.form-group label .control-label.flex .btn-block{
-    margin: 0 1rem;
-}
-#select_shipping_address{
-    margin-top: 3rem;
-}
-#select_shipping_address ul{
-    padding: 0;
-    list-style: none;
-}
-#panel-edit-coupon fieldset{
-    width: 100%;
-}
-.edit.pr{
-    display: flex;
-}
-.edit.pr .img-ct{
-    margin-right: .5rem;
-}
-#checkout-cart .price{
-    font-size: 1rem;
-}
-#checkout-cart .icons-list{
-    max-height: 5.75rem;
-    overflow: auto;
-}
-#checkout-cart .items-list{
-    height: calc(100% - 5.75rem);
-    overflow: auto;
-}
-#checkout-total-sum{
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 1.5rem 2rem;
-    min-height: 5.75rem;
-    background: @lightbg;
-}
-#checkout-total-sum > div{
-    display: flex;
-    justify-content: space-between;
-}
-#checkout-cart .characteristic{
-    display: none;
-}
-#footer > .container > .row:first-child{
-    display: none;
-}
-.c-it.sb-it>.row>div:not(.pr)>.row:last-child{
-    justify-content: flex-end;
-}
-.c-it.sb-it > .row > div:not(.pr) > .row.first .col-lg-9{
-    white-space: normal;
-}
-form-register > .panel-wrap > fieldset:first-of-type legend{
-	display: none;
-}
-#choose-way{
-	margin-bottom: 1.5rem;
-}
-#choose-way img{
-	object-fit: contain;
-}
+/* Anmelden/gast/reg */
 #choose-way .step-box{
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	font-weight: 600; 
 	border: 1px solid @defaultborder;
 	padding: 1.3rem 1rem;
@@ -161,14 +51,12 @@ form-register > .panel-wrap > fieldset:first-of-type legend{
 }
 #choose-way .step-box.first{
 	right: -1px;
-	border-top-left-radius: .3rem;
-	border-bottom-left-radius: .3rem;
+    border-radius: .3rem 0 0 .3rem;
 	order: 0;
 }
 #choose-way .step-box.last{
 	left: -1px;
-	border-top-right-radius: .3rem;
-	border-bottom-right-radius: .3rem;
+    border-radius: 0 .3rem .3rem;
 	order: 2;
 }
 #choose-way .img-ct{
@@ -176,36 +64,33 @@ form-register > .panel-wrap > fieldset:first-of-type legend{
 	min-width: 1.5rem;
 	margin-right: 1rem;
 }
-#choose-way .pr{
-	margin: 0;
-}
 label[data-target="#create_account_data"]{
 	opacity: 0;
 	height: 0;
 	overflow: hidden;
 }
-
 /* Zahlungs- und Versandarten */
 .payship-option,
 .payship-option.col-12,
 #fieldset-payment #zahlung .list-group-item{
-	padding-left: 0;
-	padding-right: 0;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding: 1rem 0;
     border-top: 1px solid @lightborder;
+}
+#fieldset-payment #zahlung .list-group-item:first-child{
+    border-top: 0;
 }
 .payship-option label{
 	font-weight: 400;
     display: flex;
+    cursor: pointer;
 }
 .payship-option .stc-input,
 #fieldset-payment #zahlung .list-group-item input[type="radio"]{
-	min-width: 14px;
+	min-width: 16px;
+    height: 16px;
 	margin-right: 1rem;
 }
 .payship-option .icon{
-	opacity: 1;
 	width: 3rem;
 }
 .payship-option .payship-img,
@@ -223,6 +108,12 @@ label[data-target="#create_account_data"]{
 	font-size: 80%;
 	position: relative;
 	top: -.1rem;
+}
+.form-group > div:last-child > div{
+    border-bottom: 1px solid @lightborder;
+}
+#fieldset-payment .card{
+    margin: 1rem 0;
 }
 /* Amazon Pay */
 #checkout .lpa-alternate-checkout-snippet{
@@ -287,6 +178,7 @@ label[data-target="#create_account_data"]{
 	left: 0;
 	top: 50%;
 	transform: translateY(-50%);
+    margin-top: 0;
 }
 #fieldset-payment #zahlung p{
 	margin: 0;
@@ -354,18 +246,57 @@ label[data-target="#create_account_data"]{
 .card-primary{
     border: 2px solid @brand;
 }
+/* Gutscheine im Checkout */
+#jtl_vouchers{
+  width: 100%;
+  padding: 0;
+  margin: 1rem 0;
+}
+#jtl_vouchers .card-header{
+    background: white;
+    border-bottom: 1px solid @lightborder;
+}
+#jtl_vouchers .card{
+  background: white;
+}
+#jtl_vouchers .card-header .h3{
+  font-size: 1rem; 
+  margin:0;
+}
+#jtl_vouchers .btn{
+  margin-top: .5rem;
+}
+#jtl_vouchers .btn i{
+  display: none;
+}
+#jtl_vouchers .card-body{
+  font-size: .9rem;
+}
+#voucher-cloud-modal .modal-title h3{
+  font-size: 1rem;
+  margin: .5rem 0 0 0;
+}
+#voucher-cloud-modal .col-md-12{
+  padding: 0;
+}
+#voucher-cloud-modal .form-group{
+  margin:0;
+}
+#voucher-cloud-modal .form-text{
+  display: block;
+  margin-top: .5rem;
+}
+#voucher-cloud-modal .modal-footer .btn{
+  display: block;
+  width: 100%;
+  margin: 0;
+}
 @media screen and (max-width: 1600px){
-    #checkout-cart{
-        max-width: 25rem;
-    }
-    body {
+    body:not(.no-pd){
         padding-right: 25rem;
     }
 }
 @media screen and (max-width: 1199px){
-    #checkout-cart{
-        padding: 2rem 1.5rem;
-    }
     #shop-nav .xs-order-1{
         order: 1;
         text-align: right;
@@ -386,11 +317,9 @@ label[data-target="#create_account_data"]{
 	}
 }
 @media screen and (max-width: 991px){
-    body{
+    body,
+    body:not(.no-pd){
         padding: 0;
-    }
-    #checkout-cart{
-        display: none;
     }
     #order-confirm>.row{
         margin-bottom: 2rem;
@@ -425,10 +354,10 @@ label[data-target="#create_account_data"]{
     body[data-page="11"] #content-wrapper{
         margin-top: 0;
     }
-    #checkout .nav-wizard li > *{
+    .c-stp > *{
         padding: 1rem 0;
     }
-    #checkout .nav-wizard.first{
+    .c-stps.first{
         margin-bottom: .5rem;
     }
     #checkout form>.panel-wrap {

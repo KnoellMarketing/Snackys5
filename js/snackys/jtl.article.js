@@ -107,16 +107,6 @@
         },
 
 		snackys: function($wrapper){
-
-			$('#article-tab-nav span',$wrapper).on('click',function(e){
-				var tabSelector = $(this).attr('aria-controls')
-				$('#article-tab-nav li').removeClass('active');
-				$(this).parent().addClass('active');
-				$('#article-tabs > div').removeClass('active');
-				$('#article-tabs > div#' + tabSelector).addClass('active');
-				
-			});
-			
 			$('#jump-to-votes-tab').on('click',function(event){
 				event.preventDefault();
 				$('span[aria-controls=tab-votes]').trigger('click');
@@ -125,10 +115,6 @@
 					  behavior: 'smooth' 
 					});
 				},150);
-			});
-
-			$('.tab-content.notabs .panel-heading').on('click',function(){
-				$(this).closest('.panel-default').toggleClass('open-show');
 			});
 			
 			$('.qty-sub').click(function(e){
@@ -195,19 +181,6 @@
                         }
                     });
                 that.configurator(true);
-				
-
-				//Modal Configuratror
-				$('#cfg-container select, #cfg-container input').on('change',function(){
-					var cfg = $(this).closest('#cfg-container');
-					var elements = $(cfg).find('select[required],input[required]');
-					var errors = false;
-					for (var i = 0; i < elements.length; i++) {
-						if(!elements[i].checkValidity()) errors = true;
-					}
-					
-					$(cfg).closest('form').find('input[type=submit],button[type=submit]').prop('disabled', errors);
-				});
             }
         },
 
@@ -219,46 +192,7 @@
                 tickIcon: 'fa-check',
                 hideDisabled: true,
                 showTick: true
-                /*mobile: true*/
             });
-			
-			//Before with Snackys:
-			/*
-			if($('body').hasClass('ios'))
-				$('.variations select', $wrapper).selectric({disableOnMobile:false,nativeOnMobile:false,
-					optionsItemBuilder: function(itemData) {
-						var code = $(itemData.element).attr('data-content');
-						if(!code)
-							code = '{text}'
-						return code;
-					},
-					labelBuilder: function(itemData) {
-						var code = $(itemData.element).attr('data-content');
-						if(!code)
-							code = $(itemData.element).text()
-						return code;
-					}
-				});
-			else
-				$('.variations select', $wrapper).on('mouseenter', function()
-				{
-					$(this).unbind('mouseenter');
-					$(this).selectric({disableOnMobile:false,nativeOnMobile:false,
-						optionsItemBuilder: function(itemData) {
-							var code = $(itemData.element).attr('data-content');
-							if(!code)
-								code = '{text}'
-							return code;
-						},
-						labelBuilder: function(itemData) {
-							var code = $(itemData.element).attr('data-content');
-							if(!code)
-								code = $(itemData.element).text()
-							return code;
-						}
-					});
-				});
-			*/
 
             $('.simple-variations input[type="radio"]', $wrapper)
                 .on('change', function() {
@@ -592,10 +526,6 @@
                     if (typeof done === 'function') {
                         done();
                     }
-					/*
-					if(sImages)
-						sImages.rewatch();
-					*/
                 })
                 .fail(function() {
                     if (typeof fail === 'function') {
@@ -888,33 +818,6 @@
 
                 sidebar.css('width', sidebar.width());
 
-                if (init) {
-                    sidebar.affix({
-                        offset: {
-                            top: function () {
-                                var navHeight = $('#evo-main-nav-wrapper.affix').outerHeight(true);
-                                navHeight = navHeight === undefined ? 0 : navHeight;
-                                var top = parseInt(container.offset().top - navHeight);
-                                if (sidebar.hasClass('affix')) {
-                                    sidebar.css('top', navHeight);
-                                } else {
-                                    sidebar.css('top', 0);
-                                }
-                                if (viewport.current() !== 'lg') {
-                                    top = 999999;
-                                }
-                                return top;
-                            },
-                            bottom: function () {
-                                var bottom = $('body').height() - (container.height() + container.offset().top);
-                                if (viewport.current() !== 'lg') {
-                                    bottom = 999999;
-                                }
-                                return bottom;
-                            }
-                        }
-                    });
-                }
 
                 $('#buy_form').find('*[data-selected="true"]')
                     .attr('checked', true)
@@ -947,6 +850,26 @@
                         return;
                     }
 
+
+					//Fehlermeldungen von Elementen usw.
+					$('.cfg-group').removeClass('has-error','is-correct');
+                    $('.cfg-group').each(function (i, item) {
+                        if (data.response.invalidGroups && data.response.invalidGroups.includes($(this).data('id'))) {
+							$(this).addClass('has-error');
+						} else {
+							$(this).addClass('is-correct');
+						}
+                    });
+					
+					$('#cfg-container .group.panel-body.collapse').on('shown.bs.collapse',function(){
+						$(this).parent().addClass('seen');
+					});
+					
+					var errors = false;
+					if(data.response.invalidGroups && data.response.invalidGroups.length > 0)
+						errors = true;
+					$('#cfg-container').closest('form').find('input[type=submit],button[type=submit]').prop('disabled', errors);
+					
                     // global price
                     nNetto = result.nNettoPreise;
                     that.setPrice(result.fGesamtpreis[nNetto], result.cPreisLocalized[nNetto], result.cPreisString);
@@ -954,7 +877,6 @@
 
                     $('#content .summary').html(result.cTemplate);
 
-                    sidebar.affix('checkPosition');
 
                     // groups
                     for (i = 0; i < result.oKonfig_arr.length; i++) {
@@ -1012,6 +934,19 @@
                         }
                     }
 
+
+					//Modal Configuratror
+					/*
+					$('#cfg-container select, #cfg-container input').on('change',function(){
+						var cfg = $(this).closest('#cfg-container');
+						var errors = false;
+						var elements = $(cfg).find('select[required],input[required]');
+						for (var i = 0; i < elements.length; i++) {
+							if(!elements[i].checkValidity()) errors = true;
+						}
+						$(cfg).closest('form').find('input[type=submit],button[type=submit]').prop('disabled', errors);
+					});
+					*/
                     $.evo.extended()
                         .trigger('priceChanged', result);
                 });
@@ -1020,7 +955,6 @@
 
         variationRefreshAll: function($wrapper) {
             $('.variations select', $wrapper).selectpicker('refresh');
-            //Snackys from Shop 4: $('.variations select', $wrapper).selectric('refresh');
         },
 
         getConfigGroupQuantity: function (groupId) {
@@ -1247,7 +1181,7 @@
             var $wrapper = this.getWrapper(wrapper),
                 $item    = $('[data-value="' + value + '"].variation', $wrapper);
 
-            $item.removeClass('not-available');
+            $item.removeClass('not-available swatches-sold-out swatches-not-in-stock');
         },
 
         variationActive: function(key, value, def, wrapper) {
@@ -1299,7 +1233,8 @@
             $item.removeAttr('data-stock');
         },
 
-        variationInfo: function(value, status, note, wrapper) {
+        variationInfo: function(value, status, note, notExists, wrapper) {
+			
             var $wrapper = this.getWrapper(wrapper),
                 $item    = $('[data-value="' + value + '"].variation', $wrapper),
                 type     = $item.attr('data-type'),
@@ -1307,7 +1242,7 @@
                 content,
                 $wrapper,
                 label;
-
+				
             $item.attr('data-stock', _stock_info[status]);
 
             switch (type) {
@@ -1322,7 +1257,7 @@
                         .remove();
 
                     label = $('<span />')
-                        .addClass('label label-default label-not-available')
+                        .addClass('tag label label-default label-not-available')
                         .text(note);
 
                     $wrapper.append(label);
@@ -1331,7 +1266,6 @@
                         .attr('data-content', $wrapper.html());
 
                     $item.closest('select')
-					//Shop 4 Snackys:		.selectric('refresh');
                        .selectpicker('refresh');
                     break;
                 case 'radio':
@@ -1339,20 +1273,23 @@
                         .remove();
 
                     label = $('<span />')
-                        .addClass('label label-default label-not-available')
+                        .addClass('tag label label-default label-not-available')
                         .text(note);
 
                     $item.append(label);
                     break;
                 case 'swatch':
                     $item.attr('title', note);
-                    window.setTimeout(function () {
-                        $item.tooltip({
-                            title: note,
-                            trigger: 'hover',
-                            container: 'body'
-                        });
-                    }, 300);
+                    $item.tooltip({
+                        title: note,
+                        trigger: 'hover',
+                        container: 'body'
+                    });
+                    if (notExists) {
+                        $item.addClass('tag swatches-not-in-stock');
+                    } else {
+                        $item.addClass('swatches-sold-out');
+                    }
                     break;
             }
         },

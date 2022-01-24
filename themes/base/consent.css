@@ -1,3 +1,6 @@
+.shw-sb #consent-manager{
+    display: none;
+}
 .consent-hidden{
     display: none !important;
 }

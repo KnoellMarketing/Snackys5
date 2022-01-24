@@ -17,8 +17,6 @@
 				this.watchEndless()
 			}
         },
-        panelOpener: function() {},
-        closePanels: function() {},
         rewatchEndless: function() {
             $.snackyList.data.endlessObserver.disconnect(),
             $.snackyList.addToObserver()

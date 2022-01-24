@@ -6,12 +6,12 @@
 	<div class="sr-tg hidden-xs">
 		<span class="img-ct icon icon-xl">
 			<svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-			  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-search"></use>
+			  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-search"></use>
 			</svg>
 		</span>
 		<span class="img-ct icon icon-xl">
 			<svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-			  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-close"></use>
+			  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-close"></use>
 			</svg>
 		</span>
 	</div>
@@ -20,10 +20,10 @@
 {block name="navbar-top-user"}
     {block name="navbar-top-user-account"}
     <div class="dropdown">
-        <a href="#" data-toggle="modal" data-target="#login-popup" {if empty($smarty.session.Kunde->kKunde)}title="{lang key='login'}"{else}title="{lang key='hello'}"{/if}>
+        <a href="#" data-toggle="modal" data-target="#login-popup" {if empty($smarty.session.Kunde->kKunde)}title="{lang key='login'}"{else}title="{lang key='myAccount'}"{/if}>
             <span class="img-ct icon icon-xl">
                 <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
-                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-user"></use>
+                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-user"></use>
                 </svg>
             </span>
         </a>

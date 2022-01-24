@@ -22,49 +22,19 @@
     {/if}
     {include file="snippets/zonen.tpl" id="opc_before_heading"}
     
-    <div class="title dpflex-a-center dpflex-j-between mb-spacer mb-small">
-		{if !isset($oNavigationsinfo)
-		|| (!$oNavigationsinfo->getManufacturer() && !$oNavigationsinfo->getCharacteristicValue() && !$oNavigationsinfo->getCategory())}
-			<h1 class="m0">{$Suchergebnisse->getSearchTermWrite()}</h1>
-		{elseif $oNavigationsinfo->getCategory() && !empty($oNavigationsinfo->getCategory()->categoryAttributes) && isset($oNavigationsinfo->getCategory()->categoryAttributes.seo_name) && $showTitle}
-			<h1>{$oNavigationsinfo->getCategory()->categoryAttributes.seo_name->cWert}</h1>
-        {elseif $oNavigationsinfo->getName() && $showTitle}
-			<h1 class="m0">{$oNavigationsinfo->getName()}</h1>
-		{/if}
-        {if count($Suchergebnisse->getProducts()) > 0 && !$ismobile}
-            <div class="dpflex-a-c ml-a">
-                {include file="productlist/improve_search.tpl"} 
-                {has_boxes position='left' assign='hasLeftBox'}
-                {if !$bExclusive && $hasLeftBox && !empty($boxes.left|strip_tags|trim) && $nSeitenTyp == $smarty.const.PAGE_ARTIKELLISTE}
-                    {assign var="hasFilters" value="true"}	
-                {else}
-                    {assign var="hasFilters" value=false}	
-                {/if}
-                {if ($hasFilters) == true}
-                <div class="visible-xs visible-sm ml-xs c-pt" id="ftr-tg">
-                    <div class="img-ct icon ic-lg">
-                        <svg class="">
-                            <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-filter"></use>
-                        </svg>
-                    </div>
-                </div>
-                {/if}
-            </div>
-        {elseif count($Suchergebnisse->getProducts()) > 0}
-            <div id="ftr-tg">
-                <div class="img-ct icon ic-lg">
-                    <svg class="">
-                        <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-filter"></use>
-                    </svg>
-                </div>
-            </div>
-        {/if}
-    </div>
+    {if !isset($oNavigationsinfo)
+    || (!$oNavigationsinfo->getManufacturer() && !$oNavigationsinfo->getCharacteristicValue() && !$oNavigationsinfo->getCategory())}
+        <h1 class="title mb-small">{$Suchergebnisse->getSearchTermWrite()}</h1>
+    {elseif $oNavigationsinfo->getCategory() && !empty($oNavigationsinfo->getCategory()->categoryAttributes) && isset($oNavigationsinfo->getCategory()->categoryAttributes.seo_name) && $showTitle}
+        <h1 class="title mb-small">{$oNavigationsinfo->getCategory()->categoryAttributes.seo_name->cWert}</h1>
+    {elseif $oNavigationsinfo->getName() && $showTitle}
+        <h1 class="title mb-small">{$oNavigationsinfo->getName()}</h1>
+    {/if}
 	{if $oNavigationsinfo->getName()}
 		<div class="desc text-lg clearfix mb-spacer mb-small{if $oNavigationsinfo->getImageURL()|strpos:'gfx/keinBild.gif' === false && $oNavigationsinfo->getImageURL()|strpos:'gfx/keinBild_kl.gif' === false && $showImage} row{/if}">
 			{if $oNavigationsinfo->getImageURL() && $oNavigationsinfo->getImageURL()|strpos:'gfx/keinBild.gif' === false && $oNavigationsinfo->getImageURL()|strpos:'gfx/keinBild_kl.gif' === false && $showImage}
 			<div class="col-6 col-sm-3 col-md-4 col-lg-2 product-border">
-			  <div class="img-ct{if $snackyConfig.imageratioCategory == '43'}  rt4x3{/if}">
+			  <div class="img-ct{if $snackyConfig.imageratioCategory == '43'} rt4x3{/if}">
 				{image src=$oNavigationsinfo->getImageURL()
 					webp=true
 					lazy=true

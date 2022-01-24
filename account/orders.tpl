@@ -26,7 +26,7 @@
                         </span>
                         <span class="img-ct icon icon-wt">
                             <svg>
-                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#ar-right"></use>
+                              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#ar-right"></use>
                             </svg>
                         </span>
                     </a>

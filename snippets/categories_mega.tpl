@@ -130,7 +130,8 @@
                                                                 <ul class="blanklist small subsub">
                                                                     {foreach name='subsub_categories' from=$subsub_categories item='subsub'}
                                                                         {if $smarty.foreach.subsub_categories.iteration <= $max_subsub_items}
-                                                                            <li class="{if $subsub->getID() == $activeId || (isset($activeParents[2]) && $activeParents[2]->getID() == $subsub->getID())} active{/if}{if is_array($subsub->KategorieAttribute) && !empty($subsub->KategorieAttribute["css_klasse"])} {$subsub->KategorieAttribute["css_klasse"]}{/if}">
+																			{assign var="subCatFunctions" value=$sub->getFunctionalAttributes()}
+                                                                            <li class="{if $subsub->getID() == $activeId || (isset($activeParents[2]) && $activeParents[2]->getID() == $subsub->getID())} active{/if}{if !empty($subCatFunctions["css_klasse"])} {$subCatFunctions["css_klasse"]}{/if}">
                                                                                 <a href="{$subsub->getURL()}" class="defaultlink">
                                                                                     {$subsub->getShortName()}
                                                                                 </a>

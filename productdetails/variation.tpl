@@ -121,7 +121,7 @@
                                 {* /do nothing *}
                             {else}
                                 {block name='productdetails-info-variation-swatch'}
-                                    <label class="variation block btn btn-default{if $bSelected} active{/if}{if $Variationswert->notExists} not-available{/if}{if isset($smallView) || $smallView} btn-xs{/if}{if !empty($Variationswert->cBildPfadMiniFull)} btn-img{/if}"
+                                    <label class="variation block btn btn-default{if $bSelected} active{/if}{if $Variationswert->notExists} not-available{/if}{if isset($smallView) && $smallView} btn-xs{/if}{if !empty($Variationswert->cBildPfadMiniFull)} btn-img{/if}"
                                             data-type="swatch"
                                             data-original="{$Variationswert->cName}"
                                             data-key="{$Variationswert->kEigenschaft}"

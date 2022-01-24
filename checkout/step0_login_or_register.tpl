@@ -15,6 +15,8 @@
 {/if}
 
 {assign var="activeClass" value="none"}
+{assign var="loginClass" value=""}
+{assign var="regClass" value=""}
 
 {if $snackyConfig.checkoutPosTabs == '0'}
 	{assign var="loginClass" value="first"}
@@ -74,29 +76,29 @@
 {/if}
 
 <div id="register-customer" class="row">
-	<div class="col-12" id="choose-way">
-		<div class="row pr">
-			<div class="col-4 step-box login {$loginClass}{if $activeClass == 'login'} active{/if}">
+	<div class="col-12 mb-sm" id="choose-way">
+		<div class="row m0">
+			<div class="col-4 step-box dpflex-a-c dpflex-j-c login {$loginClass}{if $activeClass == 'login'} active{/if}">
 				<span class="img-ct">
 					<svg>
-					  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-user-reg"></use>
+					  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-user-reg"></use>
 					</svg>
 				</span>
 				<span>{lang key="COlogin" section="custom"}</span>
 			</div>
-			<div class="col-4 step-box nouser reg {$regClass}{if $activeClass == 'reg'} active{/if}">
+			<div class="col-4 step-box dpflex-a-c dpflex-j-c nouser reg {$regClass}{if $activeClass == 'reg'} active{/if}">
 				<span class="img-ct">
 					<svg>
-					  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-user-new"></use>
+					  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-user-new"></use>
 					</svg>
 				</span>
 				<span>{lang key="COreg" section="custom"}</span>
 			</div>
 			{if $Einstellungen.kaufabwicklung.bestellvorgang_unregistriert === 'Y'}
-			<div class="col-4 step-box nouser guest {$guestClass}{if $activeClass == 'guest'} active{/if}" id="checkout-guest-btn">
+			<div class="col-4 step-box dpflex-a-c dpflex-j-c nouser guest {$guestClass}{if $activeClass == 'guest'} active{/if}" id="checkout-guest-btn">
 				<span class="img-ct">
 					<svg>
-					  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-user-guest"></use>
+					  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-user-guest"></use>
 					</svg>
 				</span>
 				<span>{lang key="COguest" section="custom"}</span>

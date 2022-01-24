@@ -7,11 +7,11 @@
 <aside id="sp-l" class="hidden-print col-12{if !isset($smarty.get.sidebar) & $isMobile} lazy{/if}">
     {if isset($smarty.get.sidebar) || !$isMobile || $isTablet}
         <div class="inside">
-            <div class="{if !$ismobile}visible-xs visible-sm{/if}">
+            <div class="{if !$isMobile}visible-xs visible-sm{/if}">
                 <span class="block h3">{lang key="filterBy" setion="global"}</span>
                 <hr class="op0 hr-sm">
             </div>
-            {if $nSeitenTyp == 2 && $ismobile}
+            {if $nSeitenTyp == 2 && $isMobile}
                 {include file="productlist/improve_search.tpl"}
                 {include file="productlist/filter_top.tpl"}
             {/if}

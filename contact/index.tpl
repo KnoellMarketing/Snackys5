@@ -1,4 +1,5 @@
 {block name='contact-index'}
+{if !isset($viewportImages)}{assign var="viewportImages" value=0}{/if}
 {block name="header"}
     {include file='layout/header.tpl'}
 {/block}

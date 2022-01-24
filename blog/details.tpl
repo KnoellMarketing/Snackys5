@@ -6,10 +6,10 @@
 {else}
     <article>
         <div id="nw-ct">
-            <h1>
+            <h1 class="text-center">
                 {$oNewsArchiv->getTitle()}
             </h1>
-            <p class="text-muted">
+            <div class="text-center">
                 {if empty($oNewsArchiv->getDateValidFrom())}
                     {assign var=dDate value=$oNewsArchiv->getDateCreated()->format('Y-m-d H:i:s')}
                 {else}
@@ -25,16 +25,27 @@
                     {assign var=dDate value=$oNewsArchiv->getDateValidFrom()->format('d.m.Y')}
                 {/if}
                 </span>
-            </p>
-
+            </div>
+            {if $newsItem->getPreviewImage() !== ''}
+                {block name='blog-details-image'}
+                    <div class="img-ct rt4x3 mt-sm mb-sm">
+                    {include file='snippets/image.tpl'
+                        item=$newsItem
+                        square=false
+                        center=true
+                        class="blog-details-image"
+                        alt="{$newsItem->getTitle()|escape:'quotes'} - {$newsItem->getMetaTitle()|escape:'quotes'}"}
+                    </div>
+                {/block}
+            {/if}
             <div class="mb-spacer mb-small">
                 {if $snackyConfig.optimize_news == "Y"}{$oNewsArchiv->getContent()|optimize}{else}{$oNewsArchiv->getContent()}{/if}
             </div>
 
             {if isset($Einstellungen.news.news_kategorie_unternewsanzeigen) && $Einstellungen.news.news_kategorie_unternewsanzeigen === 'Y' && !empty($oNewsKategorie_arr)}
-                <div class="top10 news-categorylist mb-spacer mb-small">
+                <div class="newscats mb-spacer mb-small">
                     {foreach $oNewsKategorie_arr as $oNewsKategorie}
-                        <a href="{$oNewsKategorie->cURLFull}" title="{$oNewsKategorie->cBeschreibung|strip_tags|escape:"html"|truncate:60}" class="badge btn btn-xs">{$oNewsKategorie->cName}</a>
+                        <a href="{$oNewsKategorie->cURLFull}" title="{$oNewsKategorie->cBeschreibung|strip_tags|escape:"html"|truncate:60}" class="btn btn-xs">{$oNewsKategorie->cName}</a>
                     {/foreach}
                 </div>
             {/if}

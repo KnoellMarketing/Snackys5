@@ -16,3 +16,12 @@
 #footer svg{
     fill: white;
 }
+[data-page="11"] #footer{
+    padding-top: 3rem;
+}
+#footer .fa-caret-down{
+    filter: invert(100%);
+}
+#footer .p-c strong.price .old-price{
+    color: white;
+}

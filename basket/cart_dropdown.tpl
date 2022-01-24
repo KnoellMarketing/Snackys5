@@ -21,7 +21,7 @@
             </div>
         {/if}
 			<form id="cart-form-xs" method="post" action="{get_static_route id='warenkorb.php'}">
-			{$jtl_token}
+			{if isset($jtl_token)}{$jtl_token}{/if}
 			<input type="hidden" name="wka" value="1" />
             {foreach name="positionen" from=$smarty.session.Warenkorb->PositionenArr item=oPosition}
                 {if !$oPosition->istKonfigKind()}
@@ -53,17 +53,17 @@
                                 {/if}
                             </div>
                             {if $snackyConfig.editSidebasket == 2}
-							<button class="editpos" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<button class="editpos" type="button" data-toggle="collapse" data-target="#edit_{$oPosition@iteration}">
 								<span class="img-ct icon icon">
 									<svg>
-									  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-edit"></use>
+									  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-edit"></use>
                                     </svg>
 								</span>
 							</button>
                             {/if}
 							</div>
                             {if $snackyConfig.editSidebasket == 2}
-							<div class="edit-item">
+							<div class="edit-item" id="edit_{$oPosition@iteration}">
 								{if $oPosition->istKonfigVater()}
 									<div class="qty-wrapper modify">
 										<a class="btn btn-default configurepos btn-xs"
@@ -73,15 +73,15 @@
 									</div>
 								{else}
 									<div class="form-inline dpflex-j-end">
-										<div class="input-group" role="group" id="quantity-grp{$smarty.foreach.positionen.index}">
-											<input name="anzahl[{$smarty.foreach.positionen.index}]" id="quantity{$smarty.foreach.positionen.index}" class="btn-group form-control quantity text-right" size="3" value="{$oPosition->nAnzahl}" />
+										<div class="input-group" role="group">
+											<input name="anzahl[{$smarty.foreach.positionen.index}]" class="btn-group form-control quantity text-right" size="3" value="{$oPosition->nAnzahl}" />
 											{* if $oPosition->Artikel->cEinheit}
 												<span class="btn-group unit input-group-addon hidden-xs">{$oPosition->Artikel->cEinheit}</span>
 											{/if *}
 												<button type="submit" class="btn btn-default btn-xs" title="{lang key='refresh' section='checkout'}">
 													<span class="img-ct icon">
 														<svg>
-														  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-refresh"></use>
+														  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-refresh"></use>
 														</svg>
 																</span>
 												</button>
@@ -91,7 +91,7 @@
 								<button type="submit" class="droppos btn btn-xs dpflex-a-center btn-flex btn-danger" name="dropPos" value="{$smarty.foreach.positionen.index}" title="{lang key="delete" section="global"}">
 									<span class="img-ct icon op1">
 										<svg class="icon-darkmode">
-											<use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-bin"></use>
+											<use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-bin"></use>
                                         </svg>
 									</span>
                             	</button>
@@ -120,7 +120,7 @@
 							<button class="editpos invisible">
 								<span class="img-ct icon icon">
 									<svg>
-									  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-info"></use>
+									  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-info"></use>
                                     </svg>
 								</span>
 							</button>
@@ -188,7 +188,7 @@
     <div class="c-empt">
         <span class="img-ct">
             <svg>
-              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-{if $snackyConfig.basketType == 0}cart{else}shopping{/if}"></use>
+              <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-{if $snackyConfig.basketType == 0}cart{else}shopping{/if}"></use>
             </svg>
             {if $snackyConfig.basketType == 0}
             <span class="h4 text-center">0</span>

@@ -207,11 +207,10 @@
                         </div>
                         <div class="col-4 col-md-4 col-lg-3 text-right">
                             {if $tplscope === 'cart' && $oPosition->nPosTyp == 1}
-                                <button type="submit" class="droppos text-muted pr dpflex-a-center btn-flex" name="dropPos" value="{$smarty.foreach.positionen.index}" title="{lang key="delete" section="global"}"
-                                    data-track-type="click" data-track-event="remove_from_cart" data-track-p-value="{$oPosition->Artikel->Preise->fVKNetto}" data-track-p-currency="{$smarty.session.Waehrung->cISO}" data-track-p-items='[{ldelim}"id":"{$oPosition->Artikel->cArtNr}","name":"{$oPosition->Artikel->cName|replace:'"':''}","price":"{$oPosition->Artikel->Preise->fVKNetto}","quantity":"{$oPosition->nAnzahl}"{rdelim}]'>
+                                <button type="submit" class="droppos text-muted pr dpflex-a-center btn-flex" name="dropPos" value="{$smarty.foreach.positionen.index}" title="{lang key="delete" section="global"}">
                                     <span class="img-ct icon">
                                         <svg>
-                                          <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-bin"></use>
+                                          <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-bin"></use>
                                         </svg>
                                     </span>
                                 </button>
@@ -246,7 +245,7 @@
                                                                    href="{get_static_route id='index.php'}?a={$oPosition->kArtikel}&ek={$oPosition@index}">
                                                                     <span class="img-ct icon">
                                                                         <svg>
-                                                                          <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-edit"></use>
+                                                                          <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-edit"></use>
                                                                         </svg>
                                                                     </span>
                                                                 </a>
@@ -280,7 +279,7 @@
                                                                     <button type="submit" class="btn btn-default btn-sm pr" title="{lang key='refresh' section='checkout'}">
                                                                         <span class="img-ct icon">
 																			<svg>
-																			  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg#icon-refresh"></use>
+																			  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-refresh"></use>
 																			</svg>
                                                                         </span>
                                                                     </button>
