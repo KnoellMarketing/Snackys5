@@ -4,11 +4,10 @@
     <Author>Knoell Marketing</Author>
     <URL>https://www.knoell-marketing.de</URL>
     <MinShopVersion>5.1.0</MinShopVersion>
-    <Version>5.1.1</Version>
+    <Version>5.1.2</Version>
     <Preview>preview-snackys.png</Preview>
     <Description>Ultraschnelles responsive JTL Template von Knoell Marketing</Description>
     <Framework>Bootstrap4</Framework>
-	<ExsID>31fe34e5-f40d-4a6d-864e-2d2ec94c10fb</ExsID>
 	<Settings>
 		<Section Name="Allgemein" Key="general">
             <Setting Description="Komprimierung von JavaScript- und CSS-Dateien" Key="use_minify" Type="select" Value="Y">

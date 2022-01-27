@@ -1224,7 +1224,7 @@
                     break;
                 case 'swatch':
                     if ($item.data('bs.tooltip')) {
-                        $item.tooltip('destroy');
+                        //$item.tooltip('destroy');
                         $item.attr('title', $item.attr('data-title'));
                     }
                     break;

@@ -378,10 +378,34 @@
 {/if}
 {* Restliches CSS > alles nicht kritische *}
 {block name="layout-footer-css"}
-	<link rel="preload" href="{$ShopURL}/{$combinedCSS}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-	<noscript>
-		<link href="{$ShopURL}/{$combinedCSS}" rel="stylesheet">
-	</noscript>
+    {if $Einstellungen.template.general.use_minify === 'N'}
+        {foreach $cCSS_arr as $cCSS}
+            <link rel="preload" href="{$ShopURL}/{$cCSS}?v={$nTemplateVersion}" as="style"
+                  onload="this.onload=null;this.rel='stylesheet'">
+        {/foreach}
+        {if isset($cPluginCss_arr)}
+            {foreach $cPluginCss_arr as $cCSS}
+                <link rel="preload" href="{$ShopURL}/{$cCSS}?v={$nTemplateVersion}" as="style"
+                      onload="this.onload=null;this.rel='stylesheet'">
+            {/foreach}
+        {/if}
+
+        <noscript>
+            {foreach $cCSS_arr as $cCSS}
+                <link rel="stylesheet" href="{$ShopURL}/{$cCSS}?v={$nTemplateVersion}">
+            {/foreach}
+            {if isset($cPluginCss_arr)}
+                {foreach $cPluginCss_arr as $cCSS}
+                    <link href="{$ShopURL}/{$cCSS}?v={$nTemplateVersion}" rel="stylesheet">
+                {/foreach}
+            {/if}
+        </noscript>
+    {else}
+        <link rel="preload" href="{$ShopURL}/{$combinedCSS}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript>
+            <link href="{$ShopURL}/{$combinedCSS}" rel="stylesheet">
+        </noscript>
+    {/if}
 {/block}
 {* JavaScripts *}
 {block name="layout-footer-js"}
@@ -544,7 +568,7 @@
 					trigger[i].addEventListener('click', triggerCall)
 				}
 			</script>
-		{else}
+		{elseif !empty($snackyConfig.gtag|trim)}
 		<script>
 			tagmanagerloaded = true;
 			(function(w,d,s,l,i){ldelim}w[l]=w[l]||[];w[l].push({ldelim}'gtm.start':

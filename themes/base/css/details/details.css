@@ -45,6 +45,9 @@
     margin-right: .5rem;
     margin-left: -.5rem;
 }
+#add-to-cart .sn-addBasket[disabled]{
+    opacity: .5;
+}
 
 /* Alerts */
 #result-wrapper > .alert{
