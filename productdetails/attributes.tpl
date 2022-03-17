@@ -27,7 +27,7 @@
                                                 alt=$oMerkmalWert->cWert}
                                             </span>
                                         {else}
-                                            <a href="{$oMerkmalWert->cURLFull}" class="tag">{$oMerkmalWert->cWert|escape:'html'}</a>
+                                            <span class="tag">{$oMerkmalWert->cWert|escape:'html'}</span>
                                         {/if}
                                     </a>
                                 {/if}

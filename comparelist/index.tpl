@@ -6,8 +6,8 @@
 
 {block name="content"}
 	{include file="snippets/zonen.tpl" id="opc_before_heading"}
-	
     <h1 class="text-center mb-sm">{lang key="compare" section="global"}</h1>
+    {include file="snippets/zonen.tpl" id="opc_after_heading"}
 
     {include file="snippets/extension.tpl"}
 

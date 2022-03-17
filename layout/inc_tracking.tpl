@@ -55,8 +55,8 @@ dataLayer.push({ldelim}
 		transactionId: '{$Bestellung->cBestellNr}',
 		transactionProducts: [{foreach from=$Bestellung->Positionen item="prodid" name="prodid"}
 			{if $prodid->nPosTyp == $C_WARENKORBPOS_TYP_ARTIKEL}
-				{
 					{if !$smarty.foreach.prodid.first},{/if}
+				{
 				   sku: '{if $snackyConfig.artnr == "id"}{$prodid->Artikel->kArtikel}{else}{$prodid->Artikel->cArtNr|escape}{/if}',
 				   name: '{$prodid->Artikel->cName|escape}',
 				   price: {$prodid->Artikel->Preise->fVKNetto|number_format:2:".":""},
@@ -215,16 +215,6 @@ dataLayer.push({ldelim}
 		  'event': 'purchase',
 		  'ecommerce': {
 			'purchase': {
-			  'actionField': {
-				'id': '{$Bestellung->cBestellNr}',                         // Transaction ID. Required for purchases and refunds.
-				'revenue': '{$Bestellung->fWarensummeNetto|number_format:2:".":""}',                     // Total transaction value (incl. tax and shipping)
-				'tax':'{$Bestellung->fSteuern|number_format:2:".":""}',
-				'shipping': '{$Bestellung->fVersandNetto|number_format:2:".":""}',
-				'currency': '{$smarty.session.Waehrung->getCode()}'
-				  {if $coupon!=""}
-					,'coupon': '{$coupon}'
-				  {/if}
-			  },
 			  'products': [
 				{foreach from=$Bestellung->Positionen item="prodid" name="prodid"}
 					{if $prodid->nPosTyp == $C_WARENKORBPOS_TYP_ARTIKEL}
@@ -242,7 +232,17 @@ dataLayer.push({ldelim}
 						{assign var="coupon" value=$prodid->cName|escape}
 					 {/if}
 				{/foreach}
-			  ]
+			  ],
+			  'actionField': {
+				'id': '{$Bestellung->cBestellNr}',                         // Transaction ID. Required for purchases and refunds.
+				'revenue': '{$Bestellung->fWarensummeNetto|number_format:2:".":""}',                     // Total transaction value (incl. tax and shipping)
+				'tax':'{$Bestellung->fSteuern|number_format:2:".":""}',
+				'shipping': '{$Bestellung->fVersandNetto|number_format:2:".":""}',
+				'currency': '{$smarty.session.Waehrung->getCode()}'
+				  {if $coupon!=""}
+					,'coupon': '{$coupon}'
+				  {/if}
+			  }
 			}
 		  }
 		});

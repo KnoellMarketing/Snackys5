@@ -46,7 +46,7 @@
         <div class="col-12 col-md-8 col-lg-9">
             {if isset($smarty.session.Zahlungsart->nWaehrendBestellung) && $smarty.session.Zahlungsart->nWaehrendBestellung == 1}
                 <h1 class="mb-spacer mb-small">{lang key="orderCompletedPre" section="checkout"}</h1>
-            {elseif $Bestellung->Zahlungsart->cModulId !== 'za_kreditkarte_jtl' && $Bestellung->Zahlungsart->cModulId !== 'za_lastschrift_jtl'}
+            {else}
                 <h1 class="mb-spacer mb-small">{lang key="orderCompletedPost" section="checkout"}</h1>
             {/if}
             {if ($method === null || $Bestellung->Zahlungsart->cModulId !== $method->getModuleID())
@@ -64,6 +64,9 @@
                     <p>{lang key='yourChosenPaymentOption' section='checkout'}: <strong>{$Bestellung->cZahlungsartName}</strong></p>
                 </div>
             {/if *}
+            {if isset($showBasket) && $showBasket == 'inc-order-items'}
+                {include file='checkout/inc_order_items.tpl' tplscope='init-payment'}
+            {/if}
             <div class="payment-method-inner">
                 {if $Bestellung->Zahlungsart->cModulId === 'za_paypal_jtl'}
                     {include file='checkout/modules/paypal/bestellabschluss.tpl'}
@@ -72,9 +75,10 @@
                 {elseif $method !== null && $Bestellung->Zahlungsart->cModulId === $method->getModuleID()}
                     {include file=$method->getTemplateFilePath()}
                 {/if}
-                <br />
             </div>
-            {include file='account/order_item.tpl' tplscope='confirmation'}
+            {if isset($showBasket) && $showBasket == 'order-item'}
+                {include file='account/order_item.tpl' tplscope='confirmation'}
+            {/if}
         </div>
     </div>
 {/if}

@@ -4,7 +4,7 @@
 {else}
 {hasOnlyListableVariations artikel=$Artikel maxVariationCount=$snackyConfig.variation_select_productlist maxWerteCount=$snackyConfig.variation_max_werte_productlist assign="hasOnlyListableVariations"}
 {/if}
-<div id="result-wrapper_buy_form_{$Artikel->kArtikel}" data-wrapper="true"
+<div id="{$idPrefix|default:''}result-wrapper_buy_form_{$Artikel->kArtikel}" data-wrapper="true"
 	class="p-c {if $snackyConfig.hover_productlist === 'Y' && !$isMobile} hv-e{/if}{if isset($listStyle) && $listStyle === 'gallery'} active{/if}{if isset($class)} {$class}{/if}">
     {block name="productlist-image"}
     <a class="img-w block" href="{$Artikel->cURLFull}">
@@ -66,7 +66,7 @@
         </div>
     </div>{* /caption *}
     {/block}
-    <form id="buy_form_{$Artikel->kArtikel}" action="{$ShopURL}/" method="post" class="form form-basket jtl-validate" data-toggle="basket-add">
+    <form id="{$idPrefix|default:''}buy_form_{$Artikel->kArtikel}" action="{$ShopURL}/" method="post" class="form form-basket jtl-validate" data-toggle="basket-add">
         {$jtl_token}
         {block name="productlist-delivery-status"}
         <div class="delivery-status">

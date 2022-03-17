@@ -462,13 +462,13 @@
 	
 	{block name='consent-manager'}
 		{if $Einstellungen.consentmanager.consent_manager_active === 'Y' && !$isAjax && $consentItems->isNotEmpty()}
-			<script src="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/consent.js"></script>
 			<input id="consent-manager-show-banner" type="hidden" value="{$Einstellungen.consentmanager.consent_manager_show_banner}">
 			{include file='snippets/consent_manager.tpl'}
 
 			{* Google Tag Manager *}
 			{if !empty($snackyConfig.gtag|trim)}
 				{if $snackyConfig.gtagAllways == 'N'}
+					{inline_script}
 					<script>
 						var tagmanagerloaded = false;
 						document.addEventListener('consent.ready', function(e) {
@@ -491,7 +491,9 @@
 						}
 
 					</script>
+					{/inline_script}
 				{else}
+					{inline_script}
 					<script>
 						var tagmanagerloaded = false;
 						document.addEventListener('consent.ready', function(e) {
@@ -527,10 +529,11 @@
 							
 						}
 					</script>
+					{/inline_script}
 				{/if}
 			{/if}
 			
-			
+			{inline_script}
 			<script>
 				document.addEventListener('consent.updated', function(e) {
 					$.post('{$ShopURLSSL}/', {
@@ -568,7 +571,16 @@
 					trigger[i].addEventListener('click', triggerCall)
 				}
 			</script>
+			{/inline_script}
+			
+			{* Preload Stati for saving rendering time! *}
+			<script>
+				if(JSON.parse(localStorage.getItem('consent')))
+					document.getElementById('consent-manager').classList.add('mini');
+				document.getElementById('consent-manager').classList.add('active');
+			</script>
 		{elseif !empty($snackyConfig.gtag|trim)}
+		{inline_script}
 		<script>
 			tagmanagerloaded = true;
 			(function(w,d,s,l,i){ldelim}w[l]=w[l]||[];w[l].push({ldelim}'gtm.start':
@@ -577,6 +589,7 @@
 			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 			})(window,document,'script','dataLayer','{$snackyConfig.gtag|trim}');
 		</script>
+		{/inline_script}
 		{/if}
 	{/block}
 	

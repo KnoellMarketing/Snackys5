@@ -59,7 +59,7 @@
                 {if $isDropdown}
                     <ul class="mm-fullscreen">
                         <li>
-								<a class="category-title block" href="{$category->getURL()}">
+								<a class="category-title block" href="{$category->getURL()}" title="{$category->category()|escape:'html'}">
 									{$category->cName}
 								</a>
                                     {assign var=hasInfoColumn value=false}
@@ -67,7 +67,7 @@
                                         {assign var=hasInfoColumn value=true}
                                         <div class="visible-lg mega-info-lg top15 pr hiden-xs">
                                                 {if $category->cBildURL !== 'gfx/keinBild.gif' && !$isMobile}
-                                                    <a class="img-ct{if $snackyConfig.imageratioCategory == '43'}  rt4x3{/if}" href="{$category->getURL()}">
+                                                    <a class="img-ct{if $snackyConfig.imageratioCategory == '43'}  rt4x3{/if}" href="{$category->getURL()}" title="{$category->category()|escape:'html'}">
 													{include file='snippets/image.tpl'
 																		class='img-responsive'
 																		item=$category
@@ -89,7 +89,7 @@
                                                 {foreach name='sub_categories' from=$sub_categories item='sub'}
                                                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 category-wrapper top15{if $sub->getID() == $activeId || (isset($activeParents[1]) && $activeParents[1]->getID() == $sub->getID())} active{/if}">
                                                             {if isset($snackyConfig.show_category_images) && $snackyConfig.show_category_images !== 'N' && !$isMobile}
-                                                                    <a class="img text-center pr block hidden-xs" href="{$sub->getURL()}">
+                                                                    <a class="img text-center pr block hidden-xs" href="{$sub->getURL()}" title="{$sub->category()|escape:'html'}">
                                                                         <span class="img-ct{if $snackyConfig.imageratioCategory == '43'}  rt4x3{/if}">
 																			{include file='snippets/image.tpl'
 																								class='image'
@@ -99,7 +99,7 @@
                                                                         </span>
                                                                     </a>
                                                             {/if}
-                                                                    <a class="h5 title caption{if isset($snackyConfig.show_category_images) && $snackyConfig.show_category_images !== 'N'} text-center{/if}" href="{$sub->getURL()}">
+                                                                    <a class="h5 title caption{if isset($snackyConfig.show_category_images) && $snackyConfig.show_category_images !== 'N'} text-center{/if}" href="{$sub->getURL()}" title="{$sub->category()|escape:'html'}">
                                                                             {$sub->getShortName()}
 																		{if $show_subcategories && $sub->hasChildren()}
 																		<span class="fa-caret-down visible-xs"></span>
@@ -116,7 +116,7 @@
                                                                     {foreach name='subsub_categories' from=$subsub_categories item='subsub'}
                                                                         {if $smarty.foreach.subsub_categories.iteration <= $max_subsub_items}
                                                                             <li{if $subsub->getID() == $activeId || (isset($activeParents[2]) && $activeParents[2]->getID() == $subsub->getID())} class="active"{/if}>
-                                                                                <a href="{$subsub->getURL()}">
+                                                                                <a href="{$subsub->getURL()}" title="{$subsub->category()|escape:'html'}">
                                                                                     {$subsub->getShortName()}
                                                                                 </a>
                                                                             </li>

@@ -51,3 +51,8 @@
         margin: 0 .2rem .2rem 0;
     }
 }
+/* Amazon Button */
+.lpa-button-content,
+.lpa-button-tooltip-wrapper{
+    max-width: 100%;
+}

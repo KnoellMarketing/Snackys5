@@ -12,6 +12,7 @@
 	{else}
 		<h1>{lang key="contact" section="breadcrumb"}</h1>
     {/if}
+    {include file="snippets/zonen.tpl" id="opc_after_heading"}
     <hr class="invisible">
     {include file="snippets/extension.tpl"}
     {if isset($step)}

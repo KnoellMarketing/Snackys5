@@ -40,7 +40,7 @@
 }
 #km-fw .fw-sl,
 #km-fw .slide,
-#km-fw .img-ct{
+#km-fw .img-ct:not(.icon){
 	height: 100%;
 }
 #km-fw .sl-w .img-ct:before{

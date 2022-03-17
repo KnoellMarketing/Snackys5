@@ -280,6 +280,8 @@
         {$countryISO=$cPost_var['land']}
     {elseif !empty($Kunde->cLand)}
         {$countryISO=$Kunde->cLand}
+	{elseif !empty($Einstellungen.kunden.kundenregistrierung_standardland)}
+		  {$countryISO=$Einstellungen.kunden.kundenregistrierung_standardland}
     {else}
         {$countryISO=$shippingCountry}
     {/if}

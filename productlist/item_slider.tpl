@@ -7,7 +7,7 @@
 <div class="p-c {if isset($class)} {$class}{/if} thumbnail pr">
     <a class="img-w block" href="{$Artikel->cURLFull}">
         {if isset($Artikel->Bilder[0]->cAltAttribut)}
-			{assign var="alt" value=$Artikel->Bilder[0]->cAltAttribut|strip_tags|truncate:60|escape:"html"}
+			{assign var="alt" value=$Artikel->Bilder[0]->cAltAttribut|truncate:60}
         {else}
 			{assign var="alt" value=$Artikel->cName}
         {/if}

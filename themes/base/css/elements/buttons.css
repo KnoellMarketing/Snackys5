@@ -33,7 +33,6 @@
 .btn-warning,
 .btn-success,
 .btn-info,
-.consent-btn-tertiary,
 .consent-btn-primary{
     color: @backgroundtext;
 }

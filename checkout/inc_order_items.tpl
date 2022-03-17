@@ -31,7 +31,7 @@
                 {if $Einstellungen.kaufabwicklung.warenkorb_produktbilder_anzeigen === 'Y'}
                     <div class="img-col col-3 col-sm-2 col-md-2">
                         {if !empty($oPosition->Artikel->cVorschaubild)}
-                        <a href="{$oPosition->Artikel->cURLFull}" title="{$oPosition->cName|trans}" class="img-ct w100">
+                        <a href="{$oPosition->Artikel->cURLFull}" title="{$oPosition->cName|trans|escape:'html'}" class="img-ct w100">
                             {if isset($nSeitenTyp) && $nSeitenTyp == 37}
 								{include file='snippets/image.tpl'
 									fluid=false
@@ -54,7 +54,7 @@
                     <div class="row first">
                         <div class="col-8 col-md-8 col-lg-9">
                              {if $oPosition->nPosTyp == $C_WARENKORBPOS_TYP_ARTIKEL || $oPosition->nPosTyp == $C_WARENKORBPOS_TYP_GRATISGESCHENK}
-                                <a href="{$oPosition->Artikel->cURLFull}" title="{$oPosition->cName|trans}" class="block"><strong class="title">{$oPosition->cName|trans}</strong></a>
+                                <a href="{$oPosition->Artikel->cURLFull}" title="{$oPosition->cName|trans|escape:'html'}" class="block"><strong class="title">{$oPosition->cName|trans}</strong></a>
                                 {if !isset($isSidebar)}
                                 <ul class="list-unstyled text-muted small info-ul blanklist">
                                     <li class="sku"><strong>{lang key="productNo" section="global"}:</strong> {$oPosition->Artikel->cArtNr}</li>

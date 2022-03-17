@@ -88,7 +88,7 @@
 	<hr class="invisible">
 </li>
 <li class="dropdown-style visible-xs{if $nSeitenTyp == 4} active{/if}">
-	<a href="jtl.php" title="{if empty($smarty.session.Kunde->kKunde)}{lang key='login'}{else}{lang key='hello'}{/if}" class="home-icon">
+	<a href="{get_static_route id='jtl.php'}" title="{if empty($smarty.session.Kunde->kKunde)}{lang key='login'}{else}{lang key='hello'}{/if}" class="home-icon">
 		<span class="dpflex-a-center">
 			<span class="img-ct icon icon-wt op1">
 				<svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">

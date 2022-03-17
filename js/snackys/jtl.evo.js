@@ -435,7 +435,7 @@
 
             if (target.length > 0) {
                 // scroll below the static megamenu
-                var nav         = $('#cat-w');
+                var nav         = ($('body').hasClass('mobile')) ? $('#shop-nav') : $('#cat-w');
                 var fixedOffset = nav.length > 0 ? nav.outerHeight() : 0;
 
                 targetOffset = target.offset().top - fixedOffset - parseInt(target.css('margin-top'));

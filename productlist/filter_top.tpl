@@ -78,7 +78,7 @@
                         {if !$isMobile}
                             {include file="productlist/improve_search.tpl"} 
                             {has_boxes position='left' assign='hasLeftBox'}
-                            {if !$bExclusive && $hasLeftBox && !empty($boxes.left|strip_tags|trim) && $nSeitenTyp == $smarty.const.PAGE_ARTIKELLISTE}
+                            {if !empty($boxes.left)}
                                 {assign var="hasFilters" value="true"}	
                             {else}
                                 {assign var="hasFilters" value=false}	
@@ -106,6 +106,20 @@
     {if !$isMobile}
         {include file="productlist/active_filters.tpl"} 
     {/if}
+</div>
+{elseif !$isMobile && !empty($boxes.left)}
+<div class="visible-xs visible-sm mb-sm">
+    <div class="btn dpflex-a-c dpflex-j-b w100" id="ftr-tg">
+        <div class="dpflex-a-c">
+            <div class="img-ct icon ic-md mr-xxs"> 
+                <svg class="">
+                    <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-filter"></use>
+                </svg>
+            </div>
+            {lang key='filterBy'}
+        </div>
+        {if $Suchergebnisse->getProductCount() >= 1}{$Suchergebnisse->getProductCount()} {lang key='products'}{/if} 
+    </div>
 </div>
 {/if}
 {/block}

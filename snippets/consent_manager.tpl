@@ -74,11 +74,6 @@
 							<input type="checkbox" class="consent-input" id="consent-all-1" name="consent-all-1" data-toggle="consent-all">
 							<label class="consent-label consent-label-secondary" for="consent-all-1"><span>{lang key='selectAll' section='consent'}</span></label>
 						</div>
-						<div class="consent-accept">
-							<button type="button" id="consent-accept-banner-btn-close" class="consent-btn consent-btn-tertiary consent-btn-block consent-btn-primary consent-btn-sm d-md-none" data-toggle="consent-close">
-								{lang key='apply' section='consent'}
-							</button>
-						</div>
 					</div>
 				{/block}
 				{block name='snippets-consent-manager-settings-hr'}

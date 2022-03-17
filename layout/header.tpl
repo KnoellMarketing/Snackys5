@@ -27,10 +27,6 @@
 		{/if}
 		
         <script src="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/jquery36-lazysizes.min.js"></script>
-		{if $Einstellungen.consentmanager.consent_manager_active === 'Y' && !$isAjax && $consentItems->isNotEmpty()}
-			<link rel="preload" href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/consent.js" as="script">
-		{/if}
-		
         {if $Einstellungen.template.general.use_minify === 'N'}
             {if isset($cPluginJsHead_arr)}
                 {foreach $cPluginJsHead_arr as $cJS}
@@ -95,7 +91,7 @@
             && $oNavigationsinfo->getImageURL() !== 'gfx/keinBild.gif'
             && $oNavigationsinfo->getImageURL() !== 'gfx/keinBild_kl.gif'
         }
-            <meta property="og:image" content="{$imageBaseURL}{$oNavigationsinfo->getImageURL()}" />
+            <meta property="og:image" content="{$oNavigationsinfo->getImageURL()}" />
         {elseif $nSeitenTyp === $smarty.const.PAGE_NEWSDETAIL && !empty($oNewsArchiv->getPreviewImage())}
             <meta property="og:image" content="{$imageBaseURL}{$oNewsArchiv->getPreviewImage()}" />
         {else}

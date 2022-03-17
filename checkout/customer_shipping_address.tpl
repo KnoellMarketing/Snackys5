@@ -131,6 +131,8 @@
     {$countryISO=$smarty.session.preferredDeliveryCountryCode}
 {elseif !empty($Kunde->cLand)}
     {$countryISO=$Kunde->cLand}
+{elseif !empty($Einstellungen.kunden.lieferadresse_abfragen_standardland)}
+	{$countryISO=$Einstellungen.kunden.lieferadresse_abfragen_standardland}
 {else}
     {$countryISO=$shippingCountry}
 {/if}

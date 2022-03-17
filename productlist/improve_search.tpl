@@ -4,9 +4,11 @@
     {assign var=ismobile value=true}
 {/if}
     {block name='productlist-sorting-options'}
-    <div class="col-12{if !$isMobile} col-sm-12 col-md-6 col-lg-4{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-3{/if}{/if}">
-        {include file='productlist/result_options.tpl'}
-    </div>
+    {if count($Suchergebnisse->getSortingOptions()) > 0}
+        <div class="col-12{if !$isMobile} col-sm-12 col-md-6 col-lg-4{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-3{/if}{/if}">
+            {include file='productlist/result_options.tpl'}
+        </div>
+    {/if}
     {/block}
     {block name='productlist-layout-options'}
         {if isset($oErweiterteDarstellung->nDarstellung)

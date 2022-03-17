@@ -30,6 +30,7 @@
     {elseif $oNavigationsinfo->getName() && $showTitle}
         <h1 class="title mb-small">{$oNavigationsinfo->getName()}</h1>
     {/if}
+    {include file="snippets/zonen.tpl" id="opc_after_heading"}
 	{if $oNavigationsinfo->getName()}
 		<div class="desc text-lg clearfix mb-spacer mb-small{if $oNavigationsinfo->getImageURL()|strpos:'gfx/keinBild.gif' === false && $oNavigationsinfo->getImageURL()|strpos:'gfx/keinBild_kl.gif' === false && $showImage} row{/if}">
 			{if $oNavigationsinfo->getImageURL() && $oNavigationsinfo->getImageURL()|strpos:'gfx/keinBild.gif' === false && $oNavigationsinfo->getImageURL()|strpos:'gfx/keinBild_kl.gif' === false && $showImage}

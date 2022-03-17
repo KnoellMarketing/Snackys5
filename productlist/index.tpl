@@ -5,25 +5,38 @@
     {assign var=ismobile value=true}
 {/if}
 {assign var=contentFilters value=$NaviFilter->getAvailableContentFilters()}
-{assign var=show_filters value=$Einstellungen.artikeluebersicht.suchfilter_anzeigen_ab == 0
-        || $NaviFilter->getSearchResults()->getProductCount() >= $Einstellungen.artikeluebersicht.suchfilter_anzeigen_ab
-        || $NaviFilter->getFilterCount() > 0 || $Suchergebnisse->getProductCount() > 0}
+{if !$isMobile}
+    {assign var=show_filters value=(count($NaviFilter->getAvailableContentFilters()) > 0
+    && ($Einstellungen.artikeluebersicht.suchfilter_anzeigen_ab == 0
+        || $NaviFilter->getSearchResults()->getProductCount() >= $Einstellungen.artikeluebersicht.suchfilter_anzeigen_ab))
+    || $NaviFilter->getFilterCount() > 0 || count($Suchergebnisse->getSortingOptions()) > 0
+     || (isset($oErweiterteDarstellung->nDarstellung)
+        && $Einstellungen.artikeluebersicht.artikeluebersicht_erw_darstellung === 'Y'
+        && empty($AktuelleKategorie->categoryFunctionAttributes['darstellung']))}
+{else}
+    {assign var=show_filters value=(count($NaviFilter->getAvailableContentFilters()) > 0
+    && ($Einstellungen.artikeluebersicht.suchfilter_anzeigen_ab == 0
+        || $NaviFilter->getSearchResults()->getProductCount() >= $Einstellungen.artikeluebersicht.suchfilter_anzeigen_ab))
+    || $NaviFilter->getFilterCount() > 0 || count($Suchergebnisse->getSortingOptions()) > 0
+     || !empty($boxes.left)}
+{/if}
 {block name="header"}
     {if !isset($bAjaxRequest) || !$bAjaxRequest}
         {include file='layout/header.tpl'}
     {/if}
 {/block}
 {if !isset($smarty.get.sidebar)}
-{include file="productwizard/index.tpl"}
+    {include file="productwizard/index.tpl"}
+    {include file="snippets/zonen.tpl" id="opc_before_result_options"}
 {/if}
-{include file="snippets/zonen.tpl" id="opc_before_result_options"}
 {if !$isMobile && !isset($smarty.get.sidebar)}
     {include file="productlist/filter_top.tpl"}
 {elseif !isset($smarty.get.sidebar)}
     {include file="productlist/filter_top_mobile.tpl"}
 {/if}
-{include file="snippets/zonen.tpl" id="opc_after_result_options"}
-
+{if !isset($smarty.get.sidebar)}
+    {include file="snippets/zonen.tpl" id="opc_after_result_options"}
+{/if}
 
 {if !isset($smarty.get.sidebar)}
 {block name="content"}
@@ -35,22 +48,22 @@
 	{/foreach}
 
     {if $Suchergebnisse->getProducts()|@count <= 0 && isset($KategorieInhalt)}
-    {if isset($KategorieInhalt->TopArtikel->elemente) && $KategorieInhalt->TopArtikel->elemente|@count > 0}
-		{include file="snippets/zonen.tpl" id="opc_before_category_top"}
-        {lang key="topOffer" section="global" assign='slidertitle'}
-        {include file='snippets/product_slider.tpl' id='slider-top-products' productlist=$KategorieInhalt->TopArtikel->elemente title=$slidertitle}
-		{assign var=viewportImages value=5}
-        <div class="mb-spacer mb-small"><hr class="hidden"></div>
-    {/if}
+        {if isset($KategorieInhalt->TopArtikel->elemente) && $KategorieInhalt->TopArtikel->elemente|@count > 0}
+            {include file="snippets/zonen.tpl" id="opc_before_category_top"}
+            {lang key="topOffer" section="global" assign='slidertitle'}
+            {include file='snippets/product_slider.tpl' id='slider-top-products' productlist=$KategorieInhalt->TopArtikel->elemente title=$slidertitle}
+            {assign var=viewportImages value=5}
+            <div class="mb-spacer mb-small"><hr class="hidden"></div>
+        {/if}
 
-    {if isset($KategorieInhalt->BestsellerArtikel->elemente) && $KategorieInhalt->BestsellerArtikel->elemente|@count > 0}
-		{include file="snippets/zonen.tpl" id="opc_before_category_bestseller"}
-        {lang key="bestsellers" section="global" assign='slidertitle'}
-        {include file='snippets/product_slider.tpl' id='slider-bestseller-products' productlist=$KategorieInhalt->BestsellerArtikel->elemente title=$slidertitle}
-		{assign var=viewportImages value=5}
-        <div class="mb-spacer mb-small"><hr class="hidden"></div>
+        {if isset($KategorieInhalt->BestsellerArtikel->elemente) && $KategorieInhalt->BestsellerArtikel->elemente|@count > 0}
+            {include file="snippets/zonen.tpl" id="opc_before_category_bestseller"}
+            {lang key="bestsellers" section="global" assign='slidertitle'}
+            {include file='snippets/product_slider.tpl' id='slider-bestseller-products' productlist=$KategorieInhalt->BestsellerArtikel->elemente title=$slidertitle}
+            {assign var=viewportImages value=5}
+            <div class="mb-spacer mb-small"><hr class="hidden"></div>
+        {/if}
     {/if}
-{/if}
 
     <div id="result-wrapper" data-wrapper="true">
 

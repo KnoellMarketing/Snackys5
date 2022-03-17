@@ -10,6 +10,7 @@
 <div class="row {if ($Warenkorb->PositionenArr|@count > 0)}dpflex-j-between{else}dpflex-j-center{/if}">
     <div class="{if ($Warenkorb->PositionenArr|@count > 0)}col-12 col-md-7 col-lg-8{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-9{/if}{else}col-12 col-md-8 col-lg-6{/if}">
     <h1 class="mb-spacer mb-small{if ($Warenkorb->PositionenArr|@count == 0)} text-center{/if}">{lang key="basket" section="global"} {if ($Warenkorb->PositionenArr|@count > 0)}<span class="text-muted">({$WarenkorbArtikelPositionenanzahl} {lang key="product" section="global"})</span>{/if}</h1>
+    {include file="snippets/zonen.tpl" id="opc_after_heading"}
     
     {block name='basket-index-notice-shipping'}
         {if !empty($WarenkorbVersandkostenfreiHinweis) && $Warenkorb->PositionenArr|@count > 0}
@@ -29,7 +30,7 @@
     {if ($Warenkorb->PositionenArr|@count > 0)}
         {block name="basket"}
             <div class="basket_wrapper">
-                <div class="basket-well{if !empty($xselling->Kauf) && count($xselling->Kauf->Artikel) > 0} mb-spacer{/if}">
+                <div class="basket-well mb-sm">
                     {block name="basket-items"}
 						{include file="snippets/zonen.tpl" id="before_basket" title="opc_before_basket"}
                         <form id="cart-form" method="post" action="{get_static_route id='warenkorb.php'}">
@@ -40,10 +41,13 @@
                     {/block}
                 </div>
     
-                {if !empty($xselling->Kauf) && count($xselling->Kauf->Artikel) > 0}
+                {if !empty($xselling->Kauf) && count($xselling->Kauf->Artikel) > 0 && !$isMobile}
                     {block name="basket-xsell"}
-                        {lang key='basketCustomerWhoBoughtXBoughtAlsoY' section='global' assign='panelTitle'}
-                        {include file='snippets/product_slider.tpl' productlist=$xselling->Kauf->Artikel title=$panelTitle}
+                      <div class="basket-xsell">
+                       <hr class="invisible">
+                       {lang key='basketCustomerWhoBoughtXBoughtAlsoY' section='global' assign='panelTitle'}
+                       {include file='snippets/product_slider.tpl' productlist=$xselling->Kauf->Artikel title=$panelTitle}
+                      </div>
                     {/block}
                 {/if}
             </div>
@@ -190,6 +194,16 @@
     </div>
     {/if}
     </div>
+        
+    {if !empty($xselling->Kauf) && count($xselling->Kauf->Artikel) > 0 && $isMobile}
+        {block name="basket-xsell"}
+          <div class="basket-xsell-xs">
+           <hr class="invisible">
+           {lang key='basketCustomerWhoBoughtXBoughtAlsoY' section='global' assign='panelTitle'}
+           {include file='snippets/product_slider.tpl' productlist=$xselling->Kauf->Artikel title=$panelTitle}
+          </div>
+        {/block}
+    {/if}
 {/block}
 
 {block name="footer"}

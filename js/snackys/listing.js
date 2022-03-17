@@ -17,6 +17,12 @@
 				this.watchEndless()
 			}
         },
+		amazonPayPal: function()
+		{
+			if (!(typeof window.amazon === 'undefined' || window.amazon === null)) {
+				window.lpa().initButtons();
+			}
+		},
         rewatchEndless: function() {
             $.snackyList.data.endlessObserver.disconnect(),
             $.snackyList.addToObserver()
@@ -49,7 +55,7 @@
                     $.snackyList.data.endlessObserver.observe(t[a])
         },
         loadArticles: function(e, t) {
-            var a = e, url, html;
+            var a = e, url, html, that=this;
             e && "" != e && $.ajax({
                 type: "POST",
                 url: e,
@@ -79,7 +85,8 @@
                 addValidationListener()),
                 $("#p-l .exp a, #p-l a.img-w").off("click").on("click", function(e) {
                     window.history.replaceState("endless", window.title, window.location.href + "#" + $(this).closest(".p-c").attr("id"))
-                })
+                });
+				that.amazonPayPal();
             }).fail(function(e) {
                 console.log("error while loading articles")
             })

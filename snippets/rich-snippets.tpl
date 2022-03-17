@@ -197,7 +197,7 @@
 						{foreach name=artikel from=$Suchergebnisse->getProducts() item=Artikel}
 							{if !$Artikel@first},{/if}
 							{
-								"@type": {if !empty($Artikel->cISBN)}["Product,"Book"]{else}"Product"{/if},
+								"@type": {if !empty($Artikel->cISBN)}["Product","Book"]{else}"Product"{/if},
 								"position":{$Artikel@iteration},
 								"name": "{$Artikel->cName|escape:'html'}",
 								"image": [

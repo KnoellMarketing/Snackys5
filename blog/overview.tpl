@@ -1,6 +1,7 @@
 {block name='blog-overview'}
 {include file="snippets/zonen.tpl" id="opc_before_heading"}
 <h1>{lang key='news' section='news'}</h1>
+{include file="snippets/zonen.tpl" id="opc_after_heading"}
 
 
 {include file='snippets/extension.tpl'}

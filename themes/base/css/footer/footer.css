@@ -39,11 +39,6 @@
         padding: 2.5rem 0
     }
 }
-@media screen and (min-width: 768px){
-    before_heading .panel{
-        padding: 0 1rem;
-    }
-}
 @media screen and (max-width: 500px){
     #footer-boxes .col-6{
         width: 100%;

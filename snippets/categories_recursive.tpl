@@ -42,7 +42,7 @@
                 {/if}
 				{assign var="catFunctions" value=$category->getFunctionalAttributes()}
                 <li class="nav-it{if $category->getID() == $activeId || ((isset($activeParent) && isset($activeParent->getID())) && $activeParent->getID() == $category->getID())} active open{/if}{if is_array($catFunctions) && !empty($catFunctions["css_klasse"])} {$catFunctions["css_klasse"]}{/if}">
-                    <a href="{$category->getURL()}"{if $hasItems} class="nav-sub dpflex{if $category->getID() == $activeId || ((isset($activeParent) && isset($activeParent->getID())) && $activeParent->getID() == $category->getID())} active open{/if}"{/if} data-ref="{$category->getID()}">
+                    <a href="{$category->getURL()}"{if $hasItems} class="nav-sub dpflex{if $category->getID() == $activeId || ((isset($activeParent) && isset($activeParent->getID())) && $activeParent->getID() == $category->getID())} active open{/if}"{/if} data-ref="{$category->getID()}" title="{$category->getShortName()|escape:'html'}">
                         {$category->getShortName()}
                         {if $hasItems}<i class="fa fa-caret-{$caret} nav-toggle"></i>{/if}
                     </a>

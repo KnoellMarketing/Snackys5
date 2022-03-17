@@ -40,7 +40,7 @@
                 {/if}
 				{assign var="catFunctions" value=$category->getFunctionalAttributes()}
                 <li class="{if $hasItems}mgm-fw dropdown-style{/if}{if $category->getID() == $activeId || ((isset($activeParent) && isset($activeParent->getID())) && $activeParent->getID() == $category->getID())} active{/if}{if is_array($catFunctions) && !empty($catFunctions["css_klasse"])} {$catFunctions["css_klasse"]}{/if}">
-                    <a href="{$category->getURL()}" class="mm-mainlink" data-ref="{$category->getID()}" title="{$category->getShortName()}">
+                    <a href="{$category->getURL()}" class="mm-mainlink" data-ref="{$category->getID()}" title="{$category->getShortName()|escape:'html'}">
                         {$category->getShortName()}
                         {if $hasItems}
 							<span class="ar ar-r hidden-xs"></span>{include file='snippets/mobile-menu-arrow.tpl'}
@@ -50,7 +50,7 @@
                         <ul class="dropdown-menu keepopen{if $i == 0} first {/if}">
 							{if $snackyConfig.mmenu_link_clickable == 'N'}
 							<li class="title{if $category->getID() == $activeId} active{/if}">
-								<a href="{$category->getURL()}" class="mm-mainlink" data-ref="{$category->getID()}" title="{$category->getShortName()}">
+								<a href="{$category->getURL()}" class="mm-mainlink" data-ref="{$category->getID()}">
 									{lang key="showAll" section="global"}
 								</a>
 							</li>

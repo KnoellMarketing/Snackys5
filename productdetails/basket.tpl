@@ -34,7 +34,7 @@
                                 <div class="btn-group qty-btns w100 m0">
                                     <div class="btn btn-blank qty-sub">
                                         <span class="img-ct icon">
-                                            <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
+                                            <svg>
                                               <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-minus"></use>
                                             </svg>
                                         </span>
@@ -56,7 +56,7 @@
                                 {if $snackyConfig.quantityButtons == '1'}
                                     <div class="btn btn-blank qty-add">
                                         <span class="img-ct icon">
-                                            <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
+                                            <svg>
                                               <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-plus"></use>
                                             </svg>
                                         </span>

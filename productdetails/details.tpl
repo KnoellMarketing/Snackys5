@@ -166,13 +166,13 @@
                                         {block name="product-info-manufacturer"}
                                             <strong class="block first icon-wt">{lang key='manufacturer' section='productDetails'}: </strong>
                                             {if $Einstellungen.artikeldetails.artikel_weitere_artikel_hersteller_anzeigen === 'Y'}
-                                                <a href="{if !empty($Artikel->cHerstellerHomepage)}{$Artikel->cHerstellerHomepage}{else}{$Artikel->cHerstellerSeo}{/if}" title="{$Artikel->cHersteller}" class="dpflex-a-c">
+                                                <a href="{if !empty($Artikel->cHerstellerHomepage)}{$Artikel->cHerstellerHomepage}{else}{$Artikel->cHerstellerSeo}{/if}" title="{$Artikel->cHersteller|escape:'html'}" class="dpflex-a-c">
                                             {else}
                                                 <span class="dpflex-a-c">
                                             {/if}
                                                 {if ($Einstellungen.artikeldetails.artikeldetails_hersteller_anzeigen === 'B' || $Einstellungen.artikeldetails.artikeldetails_hersteller_anzeigen === 'BT') && !empty($Artikel->cHerstellerBildURLKlein)}	
                                                 <span class="img-ct icon icon-wt icon-xl contain">
-                                                {image lazy=true webp=true src=$Artikel->cHerstellerBildURLKlein alt=$Artikel->cHersteller}
+                                                {image lazy=true webp=true src=$Artikel->cHerstellerBildURLKlein alt=$Artikel->cHersteller|escape:'html'}
                                                 </span>
                                                 {/if}
                                                 {if $Einstellungen.artikeldetails.artikeldetails_hersteller_anzeigen !== 'B'}
@@ -476,7 +476,7 @@
                         {block name="detail-notification-wrapper"}
                             {if ($verfuegbarkeitsBenachrichtigung == 1 || $verfuegbarkeitsBenachrichtigung == 2 || $verfuegbarkeitsBenachrichtigung == 3)}
                                 {if $verfuegbarkeitsBenachrichtigung == 1}
-                                    <a href="{if $Einstellungen.artikeldetails.artikeldetails_tabs_nutzen !== 'N'}#tab-wp{else}#tab-availabilityNotification{/if}" class="btn btn btn-primary btn-block btn-lg" title="{lang key='requestNotification'}">
+                                    <a id="goToNotification" href="#tab-availabilityNotification" class="btn btn btn-primary btn-block btn-lg" title="{lang key='requestNotification'}">
                                         {lang key='requestNotification'}
                                     </a>
                                 {else}

@@ -314,6 +314,10 @@
 #consent-manager:not(.mini) ~ [id*="trustbadge-container"]{
     display: none;
 }
+.consent-btn-tertiary{
+    background: @blackbg;
+    color: white;
+}
 @media (min-width: 768px){
     .consent-btn-holder{
         -webkit-box-orient: horizontal;

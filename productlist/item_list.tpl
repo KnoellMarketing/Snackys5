@@ -4,7 +4,7 @@
 {else}
 {hasOnlyListableVariations artikel=$Artikel maxVariationCount=$snackyConfig.variation_select_productlist maxWerteCount=$snackyConfig.variation_max_werte_productlist assign="hasOnlyListableVariations"}
 {/if}
-<div id="result-wrapper_buy_form_{$Artikel->kArtikel}" data-wrapper="true"
+<div id="{$idPrefix|default:''}result-wrapper_buy_form_{$Artikel->kArtikel}" data-wrapper="true"
 	class="p-c{if isset($listStyle) && $listStyle === 'gallery'} active{/if}{if isset($class)} {$class}{/if}">
     {block name="productlist-image"}
     <a class="img-w block" href="{$Artikel->cURLFull}">
@@ -166,7 +166,7 @@
         {/block}
     {block name="list-right-wrapper"}
     <div class="col-12 col-sm-4 col-md-5 col-lg-5{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-4{/if} text-right col-right">
-    <form id="buy_form_{$Artikel->kArtikel}" action="{$ShopURL}/" method="post" class="form form-basket jtl-validate right" data-toggle="basket-add">
+    <form id="{$idPrefix|default:''}buy_form_{$Artikel->kArtikel}" action="{$ShopURL}/" method="post" class="form form-basket jtl-validate right" data-toggle="basket-add">
     {include file="productdetails/price.tpl" Artikel=$Artikel tplscope=$tplscope}
         {$jtl_token}
         {block name="productlist-delivery-status"}

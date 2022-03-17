@@ -53,7 +53,7 @@
                             src=$Artikel->cHerstellerBildURLKlein
                             srcset="{$Artikel->cHerstellerBildURLKlein} {$Einstellungen.bilder.bilder_hersteller_mini_breite}w,
                                     {$Artikel->cHerstellerBildURLNormal} {$Einstellungen.bilder.bilder_hersteller_normal_breite}w"
-                            alt=$Artikel->cHersteller
+                            alt=$Artikel->cHersteller|escape:'html'
                             sizes="25px"
                             class="img-xs"}
                     {/if}
