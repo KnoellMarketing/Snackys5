@@ -74,7 +74,7 @@
                 {/block}
                 {block name='layout-header-shopnav-user-adress'}
 				<a href="{get_static_route id='jtl.php' params=['editRechnungsadresse' => 1]}" class="dpflex-a-center dpflex-j-between nav-it defaultlink">
-					{lang key="addresses" section="account data"}
+					{lang key="billingAdress" section="account data"}
 					<span class="img-ct icon icon icon-wt ic-md">
 						<svg>
 						  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-house"></use>

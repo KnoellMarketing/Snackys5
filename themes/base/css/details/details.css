@@ -110,7 +110,7 @@
     display: none;
 }
 #add-to-cart ~ .add-pays{
-    display: flex;
+    display: block;
 }
 #add-to-cart ~ .payplan{
     display: block;
@@ -125,7 +125,7 @@
 	margin-top: .5rem;
     margin-bottom: 0;
 }
-/* payPal */
+/* PayPal */
 .ppf-container{
 	margin: 1rem 0;
 	border-radius: .3rem;
@@ -161,6 +161,10 @@
 }
 .sale-wp .h4{
     text-transform: uppercase;
+}
+/* PayPal Checkout JTL-Bug: Z-Index Fix */
+#snackys-tpl #paypal-button-productDetails-container iframe{
+    z-index: 2;
 }
 @media screen and (max-width: 1099px){
     .sale-wp .ct-it{

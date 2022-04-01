@@ -4,7 +4,7 @@
         {if !isset($Versandarten)}
             <div class="alert alert-danger">{lang key="noShippingMethodsAvailable" section="checkout"}</div>
         {else}
-            <form method="post" action="{get_static_route id='bestellvorgang.php'}" class="form jtl-validate shipping-payments">
+            <form method="post" action="{get_static_route id='bestellvorgang.php'}" class="form jtl-validate shipping-payments checkout-shipping-form">
                 {$jtl_token}
                 <div class="panel-wrap mb-sm">
                     <fieldset id="checkout-shipping-payment">

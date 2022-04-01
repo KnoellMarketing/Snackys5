@@ -130,7 +130,7 @@
                 </div>
                 <a href="{get_static_route id='bestellvorgang.php'}?wk=1" class="submit btn btn-primary btn-block btn-lg" id="cart-checkout-btn">{lang key='nextStepCheckout' section='checkout'}</a>
             </div>
-            <div class="add-pays dpflex">
+            <div class="add-pays">
                 <div class="paypal"></div>
                 <div class="amazon"></div>
             </div>

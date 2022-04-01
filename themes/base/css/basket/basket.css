@@ -49,6 +49,10 @@ fileupload-wrapper:blank{
 .add-pays .ppc-message{
     margin-top: 1rem;
 }
+/* PayPal Checkout JTL-Bug: Z-Index Fix */
+#snackys-tpl #paypal-button-cart-container iframe{
+    z-index: 2;
+}
 @media screen and (max-width: 991px){
     .basket-xsell{
         display: none;

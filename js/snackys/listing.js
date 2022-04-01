@@ -28,6 +28,12 @@
             $.snackyList.addToObserver()
         },
         watchEndless: function() {
+			var that = this;
+			$('#view-next-click').click(function(){
+				//change id of current
+				$(this).attr("id","view-next");
+				that.watchEndless();
+			});
             this.data.endlessObserver = new IntersectionObserver(function(e, t) {
                 if (0 == $.snackyList.data.isLoading)
                     for (var a = 0; a < e.length; a++)

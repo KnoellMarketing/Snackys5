@@ -66,7 +66,7 @@
                         <li class="nav-it">
                             <a href="{get_static_route id='jtl.php' params=['editRechnungsadresse' => 1]}" class="defaultlink dpflex-a-center dpflex-j-between{if $step === 'rechnungsdaten'} active{/if}">
                             {if $step === 'rechnungsdaten'}<strong>{/if}
-                            {lang key="addresses" section="account data"}
+                            {lang key="billingAdress" section="account data"}
                             {if $step === 'rechnungsdaten'}</strong>{/if}
                                 <span class="img-ct icon icon-wt ic-md">
                                     <svg>

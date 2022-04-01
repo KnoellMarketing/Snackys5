@@ -12,6 +12,10 @@
     transform: rotate(360deg);
     transition: 1s ease;
 }
+/* PayPal Express */
+.add-pays .paypal{
+    margin-top: .5rem;
+}
 @media screen and (max-width: 767px){
     /* Mobile Search */
     #search input{

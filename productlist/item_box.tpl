@@ -22,7 +22,7 @@
 				srcset="{$image->cURLMini} {$Einstellungen.bilder.bilder_artikel_mini_breite}w,
 						 {$image->cURLKlein} {$Einstellungen.bilder.bilder_artikel_klein_breite}w,
 						 {$image->cURLNormal} {$Einstellungen.bilder.bilder_artikel_normal_breite}w"
-				sizes="auto"
+				sizes="{if $stopLazy}{$Einstellungen.bilder.bilder_artikel_klein_breite}px{else}auto{/if}"
 				class="{if !$isMobile && !empty($Artikel->Bilder[1])} first{/if}"
 				lazy=!$stopLazy
 			}

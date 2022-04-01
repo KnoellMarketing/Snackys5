@@ -9,15 +9,15 @@
     {assign var=show_filters value=(count($NaviFilter->getAvailableContentFilters()) > 0
     && ($Einstellungen.artikeluebersicht.suchfilter_anzeigen_ab == 0
         || $NaviFilter->getSearchResults()->getProductCount() >= $Einstellungen.artikeluebersicht.suchfilter_anzeigen_ab))
-    || $NaviFilter->getFilterCount() > 0 || count($Suchergebnisse->getSortingOptions()) > 0
-     || (isset($oErweiterteDarstellung->nDarstellung)
+    || $NaviFilter->getFilterCount() > 0 || (count($Suchergebnisse->getSortingOptions()) > 0 && $Suchergebnisse->getProductCount() >= 1)
+     || (isset($oErweiterteDarstellung->nDarstellung) && $Suchergebnisse->getProductCount() >= 1
         && $Einstellungen.artikeluebersicht.artikeluebersicht_erw_darstellung === 'Y'
         && empty($AktuelleKategorie->categoryFunctionAttributes['darstellung']))}
 {else}
     {assign var=show_filters value=(count($NaviFilter->getAvailableContentFilters()) > 0
     && ($Einstellungen.artikeluebersicht.suchfilter_anzeigen_ab == 0
         || $NaviFilter->getSearchResults()->getProductCount() >= $Einstellungen.artikeluebersicht.suchfilter_anzeigen_ab))
-    || $NaviFilter->getFilterCount() > 0 || count($Suchergebnisse->getSortingOptions()) > 0
+    || $NaviFilter->getFilterCount() > 0 || (count($Suchergebnisse->getSortingOptions()) > 0 && $Suchergebnisse->getProductCount() >= 1)
      || !empty($boxes.left)}
 {/if}
 {block name="header"}
@@ -140,8 +140,13 @@
 						</div>
 						{include file="snippets/zonen.tpl" id="after_product_s{$Suchergebnisse->getPages()->getCurrentPage()}_{$smarty.foreach.artikel.iteration}" title="after_product_s{$Suchergebnisse->getPages()->getCurrentPage()}_{$smarty.foreach.artikel.iteration}"}
 					{/foreach}
-					{if $Suchergebnisse->getPages()->getCurrentPage() < $Suchergebnisse->getPages()->getMaxPage() && !isset($smarty.post.isAjax) && $snackyConfig.useEndlessScrolling == 'Y'}
-						<div class="el-sc endless-scrolling text-center dpflex-a-center dpflex-j-center w100"><button id="view-next" class="btn btn-xs" data-url="{$oNaviSeite_arr.vor->getURL()}"></button></div>
+					{if $Suchergebnisse->getPages()->getCurrentPage() < $Suchergebnisse->getPages()->getMaxPage() && !isset($smarty.post.isAjax) && ($snackyConfig.useEndlessScrolling == 'Y' || $snackyConfig.useEndlessScrolling == 'B')}
+						{if $snackyConfig.useEndlessScrolling == 'B'}
+							{assign var="anzMore" value=$Suchergebnisse->getProductCount()-$Suchergebnisse->getOffsetEnd()}
+							<div class="el-sc endless-scrolling text-center dpflex-a-center dpflex-j-center w100"><button id="view-next-click" class="btn btn-xs" data-url="{$oNaviSeite_arr.vor->getURL()}">{lang key="loadNext" section="custom" printf=$anzMore}</button></div>
+						{else}
+							<div class="el-sc endless-scrolling text-center dpflex-a-center dpflex-j-center w100"><button id="view-next" class="btn btn-xs" data-url="{$oNaviSeite_arr.vor->getURL()}"></button></div>
+						{/if}
 					{/if}
 					
 					

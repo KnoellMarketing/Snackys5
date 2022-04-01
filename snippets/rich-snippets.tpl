@@ -13,7 +13,7 @@
 				  "@context": "https://schema.org",
 				  "@type": "NewsArticle",
 				  "headline": "{$newsItem->getTitle()|escape:'html'}",
-				  {if $newsItem->getPreviewImage() !== ''}
+				  {if !empty($newsItem->getPreviewImage())}
 				  "image": [
 					"{$imageBaseURL}{$newsItem->getPreviewImage()}"
 				   ],
@@ -240,7 +240,7 @@
 											,
 											"validFrom": "{$Artikel->dSonderpreisStart_en}",
 											"validThrough": "{$Artikel->dSonderpreisEnde_en}",
-											"priceValidUntil": "{$Artikel->dSonderpreisEnde_en}",
+											"priceValidUntil": "{$Artikel->dSonderpreisEnde_en}"
 										{/if}
 									}
 								{/block}

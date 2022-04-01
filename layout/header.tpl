@@ -92,8 +92,8 @@
             && $oNavigationsinfo->getImageURL() !== 'gfx/keinBild_kl.gif'
         }
             <meta property="og:image" content="{$oNavigationsinfo->getImageURL()}" />
-        {elseif $nSeitenTyp === $smarty.const.PAGE_NEWSDETAIL && !empty($oNewsArchiv->getPreviewImage())}
-            <meta property="og:image" content="{$imageBaseURL}{$oNewsArchiv->getPreviewImage()}" />
+        {elseif $nSeitenTyp === $smarty.const.PAGE_NEWSDETAIL && !empty($newsItem->getPreviewImage())}
+            <meta property="og:image" content="{$imageBaseURL}{$newsItem->getPreviewImage()}" />
         {else}
             <meta property="og:image" content="{$ShopLogoURL}" />
         {/if}

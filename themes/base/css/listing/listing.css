@@ -4,7 +4,7 @@
     z-index: 11;
     position: relative;
 }
-.el-sc:last-child button{
+.el-sc:last-child button:not(#view-next-click){
 	position: absolute;
 	bottom: 0;
     width: 2.1rem;
@@ -16,6 +16,8 @@
 	animation: 1.2s ease-in-out 0s infinite both spin;
     box-shadow: none;
     background: none;
+    font-size: 0;
+    transition: font-size 0s;
 }
 .sidecart-open .dropdown.open .c-dp>.inside{
 	animation: .4s ease .1s 1 both slide-in;

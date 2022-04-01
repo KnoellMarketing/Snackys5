@@ -72,7 +72,8 @@ label[data-target="#create_account_data"]{
 /* Zahlungs- und Versandarten */
 .payship-option,
 .payship-option.col-12,
-#fieldset-payment #zahlung .list-group-item{
+#fieldset-payment #zahlung .list-group-item,
+.ppc-checkout-payment-method{
     padding: 1rem 0;
     border-top: 1px solid @lightborder;
 }
@@ -185,7 +186,8 @@ label[data-target="#create_account_data"]{
 }
 /* Styled Controls */
 .stc-radio input[type="radio"],
-.stc-checkbox input[type="checkbox"]{
+.stc-checkbox input[type="checkbox"],
+.ppc-checkout-payment-method input[type="radio"]{
 	opacity: 0;
 	width: 0;
 	height: 0;
@@ -193,7 +195,8 @@ label[data-target="#create_account_data"]{
 }
 .stc-radio .stc-radio-btn,
 .stc-checkbox .stc-checkbox-btn,
-#checkout .lpa-alternate-checkout-snippet .panel-body:before{
+#checkout .lpa-alternate-checkout-snippet .panel-body:before,
+.ppc-checkout-payment-method label.d-flex:before{
 	width: 16px;
 	height: 16px;
 	display: inline-block;
@@ -206,7 +209,8 @@ label[data-target="#create_account_data"]{
 	border-radius: 3px;
 }
 .stc-radio input:checked + .stc-radio-btn,
-#checkout .lpa-alternate-checkout-snippet .panel-body:hover:before{
+#checkout .lpa-alternate-checkout-snippet .panel-body:hover:before,
+.ppc-checkout-payment-method input:checked + label.d-flex:before{
 	border: 5px solid @brand;
 }
 .stc-checkbox input:checked + .stc-checkbox-btn{
@@ -290,6 +294,22 @@ label[data-target="#create_account_data"]{
   display: block;
   width: 100%;
   margin: 0;
+}
+/* PayPal Checkout */
+.ppc-checkout-payment-method label.d-flex{
+    display: flex;
+}
+.ppc-checkout-payment-method label.d-flex:before{
+    content: '';
+    box-sizing: border-box;
+    min-width: 16px;
+    margin-right: 1rem;
+}
+.ppc-option-img{
+    width: auto !important;
+}
+.paypal-buttons-label-buynow{
+    margin: 0 auto;
 }
 @media screen and (max-width: 1600px){
     body:not(.no-pd){
