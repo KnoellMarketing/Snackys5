@@ -10,6 +10,10 @@
         <span class="price_label price_on_application small">{lang key="priceOnApplication" section="global"}</span>
     {else}
 		<div class="price-row">
+		
+			{* Fallback für PayPal Checkout Plugin > murks aber leider nur so funktionstüchtig *}
+			<meta itemprop="price" content="{if $Artikel->Preise->oPriceRange->isRange()}{$Artikel->Preise->oPriceRange->minBruttoPrice}{else}{$Artikel->Preise->fVKBrutto}{/if}">
+			
         {block name='price-label'}
             {if ($tplscope !== 'detail' && $Artikel->Preise->oPriceRange->isRange() && $Artikel->Preise->oPriceRange->rangeWidth() > $Einstellungen.artikeluebersicht.articleoverview_pricerange_width)
                 || ($tplscope === 'detail' && ($Artikel->nVariationsAufpreisVorhanden == 1 || $Artikel->bHasKonfig) && $Artikel->kVaterArtikel == 0)}

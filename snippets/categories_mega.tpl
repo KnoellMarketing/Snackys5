@@ -66,6 +66,7 @@
                 {if $isDropdown}
                     <ul class="dropdown-menu keepopen">
                         <li class="mgm-c mw-container">
+						    {include file="snippets/zonen.tpl" id="before_megamenu_content_{$category->getID()}" title="before_megamenu_content_{$category->getID()}"}
                                 <div class="row dpflex-a-start">
                                     {assign var=hasInfoColumn value=false}
                                     {if isset($snackyConfig.show_maincategory_info) && $snackyConfig.show_maincategory_info !== 'N' && ($category->getImageUrl() !== $noImgUrl || !empty($category->getDescription()))}
@@ -151,6 +152,7 @@
                                     </div>{* /mega-categories *}
                                 </div>{* /row *}
                             {* /mgm-c *}
+						    {include file="snippets/zonen.tpl" id="after_megamenu_content_{$category->getID()}" title="after_megamenu_content_{$category->getID()}"}
                         </li>
                     </ul>
                 {/if}
@@ -189,6 +191,7 @@
             {/if}
             <ul class="dropdown-menu keepopen">
                 <li class="mgm-c mw-container">
+                    {include file="snippets/zonen.tpl" id="before_megamenu_content_manufacturers" title="before_megamenu_content_manufacturers"}
 					<div class="row row-multi">
 						{foreach name=hersteller from=$manufacturers item=hst}
 							<div class="col-12 col-sm-3 col-md-3{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-2{/if}{if isset($NaviFilter->Hersteller) && $NaviFilter->Hersteller->kHersteller == $hst->kHersteller} active{/if}">
@@ -209,6 +212,7 @@
 							</div>
 						{/foreach}
 					</div>{* /row *}
+                    {include file="snippets/zonen.tpl" id="after_megamenu_content_manufacturers" title="after_megamenu_content_manufacturers"}
                 </li>
             </ul>
         </li>

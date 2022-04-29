@@ -99,7 +99,7 @@
                             {$item->getImage(\JTL\Media\Image::SIZE_SM)} {$klein}w,
                             {$item->getImage(\JTL\Media\Image::SIZE_MD)} {$normal}w,
                             {$item->getImage(\JTL\Media\Image::SIZE_LG)} {$gross}w"
-                    alt=$alt|strip_tags|escape:'quotes'|escape:'html'
+                    alt=$alt|strip_tags|escape:'quotes'
                     sizes=$sizes
                     class=$class
                 }

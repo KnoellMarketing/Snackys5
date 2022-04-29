@@ -80,8 +80,12 @@
                     {block name="layout-footer-boxes"}
 						<div class="row row-multi{if $snackyConfig.footerBoxesDirection == "C"} dpflex-j-c{elseif $snackyConfig.footerBoxesDirection == "R"} dpflex-j-e{/if}">
 							 {if $snackyConfig.logoFooter == 0 && isset($ShopLogoURL)}
-								<div class="col-6 col-sm-4 col-md-3 col-lg-2 hidden-xs" id="logo-footer">  
-                                    {image src=$ShopLogoURL alt=$Einstellungen.global.global_shopname}
+								<div class="col-6 col-sm-4 col-md-3 col-lg-2 hidden-xs" id="logo-footer">
+                                   	{if !empty($snackyConfig.svgLogo)}
+                                        <img src="{$snackyConfig.svgLogo}" alt="{$Einstellungen.global.global_shopname}">
+                                    {else}  
+                                        {image src=$ShopLogoURL alt=$Einstellungen.global.global_shopname}
+                                    {/if}
 								</div>
 							{/if}
 							{foreach name=bottomBoxes from=$footerBoxes  item=box}
@@ -156,7 +160,7 @@
 										{if (!isset($smallversion) || !$smallversion)}
 											{if isset($smarty.session.Waehrungen) && $smarty.session.Waehrungen|@count > 1}
 											<div class="dropdown">
-												<a href="#" class="dropdown-toggle btn btn-primary btn-block btn-sm" data-toggle="dropdown" title="{lang key='selectCurrency'}">
+												<a href="#" class="dropdown-toggle btn btn-block btn-sm" data-toggle="dropdown" title="{lang key='selectCurrency'}">
 													{$smarty.session.Waehrung->getName()}
 													<span class="caret"></span></a>
 												<ul id="currency-dropdown" class="dropdown-menu dropdown-menu-left">
@@ -507,7 +511,7 @@
 						{
 							if (detail !== null && typeof detail.km_tagmanager !== 'undefined') {
 								if (detail.km_tagmanager === true) {
-									gtag('consent', 'update', {
+									gtagManager('consent', 'update', {
 										'ad_storage': 'granted',
 										'analytics_storage': 'granted'
 									});
@@ -531,6 +535,116 @@
 					</script>
 					{/inline_script}
 				{/if}
+			{/if}
+			
+			{* Google Analytics 4 / Ads Tracking *}
+			{if !empty($snackyConfig.google_ads|trim) || !empty($snackyConfig.google_analytics_four|trim)}
+				{inline_script}
+				<script>
+						var gtagLoaded = false;
+						document.addEventListener('consent.ready', function(e) {
+							km_gtag_consent(e.detail);
+						});
+						document.addEventListener('consent.updated', function(e) {
+							km_gtag_consent(e.detail);
+						});
+						
+						function km_gtag_consent(detail)
+						{
+							if (gtagLoaded == false && detail !== null && ((typeof detail.km_gtagAds !== 'undefined' && detail.km_gtagAds === true) || (typeof detail.km_gtagAnalytics !== 'undefined' && detail.km_gtagAnalytics === true))) {
+								gtagLoaded = true;
+								
+								var f=document.getElementsByTagName('script')[0],
+								j=document.createElement('script');j.async=true;
+								j.src='https://www.googletagmanager.com/gtag/js?id={if !empty($snackyConfig.google_analytics_four|trim)}{$snackyConfig.google_analytics_four|trim}{else}{$snackyConfig.google_ads|trim}{/if}Z&l=gtagDataLayer';
+								f.parentNode.insertBefore(j,f);
+							}
+							
+						}
+				</script>
+				{/inline_script}
+			{/if}
+			
+			{* Bing Ads *}
+			{if !empty($snackyConfig.bing_ads|trim)}
+				{inline_script}
+				<script>
+						var bingLoaded = false;
+						document.addEventListener('consent.ready', function(e) {
+							km_bing_consent(e.detail);
+						});
+						document.addEventListener('consent.updated', function(e) {
+							km_bing_consent(e.detail);
+						});
+						
+						function km_bing_consent(detail)
+						{
+							if (bingLoaded == false && detail !== null && typeof detail.km_bing !== 'undefined' && detail.km_bing === true) {
+								bingLoaded = true;
+								(function(w,d,t,r,u)
+								{
+									var f,n,i;
+									w[u]=w[u]||[],f=function()
+									{
+										var o={
+											ti:"{$snackyConfig.bing_ads|trim}"
+										};
+										o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")
+									},
+									n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function()
+									{
+										var s=this.readyState;
+										s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)
+									},
+									i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)
+								})
+								(window,document,"script","//bat.bing.com/bat.js","uetq");
+							}
+							
+						}
+				</script>
+				{/inline_script}
+			{/if}
+			
+			{* Matomo *}
+			{if !empty($snackyConfig.matomo|trim)}
+				{inline_script}
+				<script>
+					var _paq = window._paq = window._paq || [];
+					_paq.push(["setExcludedQueryParams", ["v"]]);
+					_paq.push(['trackPageView']);
+					_paq.push(['enableLinkTracking']);
+					
+					{if $snackyConfig.matomoConsent != 'Y'}
+						(function(){
+							var u="{$snackyConfig.matomo|trim}";
+							_paq.push(['setTrackerUrl', u+'matomo.php']);
+							_paq.push(['setSiteId', '{$snackyConfig.matomoSiteId}']);
+							var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+							g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+						})();
+					{else}
+						var matomoLoaded = false;
+						document.addEventListener('consent.ready', function(e) {
+							km_matomo_consent(e.detail);
+						});
+						document.addEventListener('consent.updated', function(e) {
+							km_matomo_consent(e.detail);
+						});
+						function km_matomo_consent(detail)
+						{
+							if (matomoLoaded == false && detail !== null && typeof detail.km_matomo !== 'undefined' && detail.km_matomo === true) {
+								var u="{$snackyConfig.matomo|trim}";
+								_paq.push(['setTrackerUrl', u+'matomo.php']);
+								_paq.push(['setSiteId', '{$snackyConfig.matomoSiteId}']);
+								var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+								g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+								matomoLoaded = true;
+							}
+						}
+					{/if}
+				</script>
+				{/inline_script}
 			{/if}
 			
 			{inline_script}
@@ -579,17 +693,78 @@
 					document.getElementById('consent-manager').classList.add('mini');
 				document.getElementById('consent-manager').classList.add('active');
 			</script>
-		{elseif !empty($snackyConfig.gtag|trim)}
-		{inline_script}
-		<script>
-			tagmanagerloaded = true;
-			(function(w,d,s,l,i){ldelim}w[l]=w[l]||[];w[l].push({ldelim}'gtm.start':
-			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-			})(window,document,'script','dataLayer','{$snackyConfig.gtag|trim}');
-		</script>
-		{/inline_script}
+		{else}
+			{* Google Tag Manager *}
+			{if !empty($snackyConfig.gtag|trim)}
+				{inline_script}
+				<script>
+					tagmanagerloaded = true;
+					(function(w,d,s,l,i){ldelim}w[l]=w[l]||[];w[l].push({ldelim}'gtm.start':
+					new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+					j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+					'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+					})(window,document,'script','dataLayer','{$snackyConfig.gtag|trim}');
+				</script>
+				{/inline_script}
+			{/if}
+			
+			{* Google Analytics 4 / Google Ads *}
+			{if !empty($snackyConfig.google_ads|trim) || !empty($snackyConfig.google_analytics_four|trim)}
+				{inline_script}
+				<script async src="https://www.googletagmanager.com/gtag/js?id={if !empty($snackyConfig.google_analytics_four|trim)}{$snackyConfig.google_analytics_four|trim}{else}{$snackyConfig.google_ads|trim}{/if}Z&l=gtagDataLayer"></script
+				<script>
+					gtagLoaded = true;
+				</script>
+				{/inline_script}
+			{/if}
+			
+
+			{* Bing Ads *}
+			{if !empty($snackyConfig.bing_ads|trim)}
+				{inline_script}
+				<script>
+					var bingLoaded = true;
+					(function(w,d,t,r,u)
+					{
+						var f,n,i;
+						w[u]=w[u]||[],f=function()
+						{
+							var o={
+								ti:"{$snackyConfig.bing_ads|trim}"
+							};
+							o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")
+						},
+						n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function()
+						{
+							var s=this.readyState;
+							s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)
+						},
+						i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)
+					})
+					(window,document,"script","//bat.bing.com/bat.js","uetq");
+				</script>
+				{/inline_script}
+			{/if}
+			
+			{* Matomo *}
+			{if !empty($snackyConfig.matomo|trim)}
+				{inline_script}
+				<script>
+					var _paq = window._paq = window._paq || [];
+					/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+					_paq.push(["setExcludedQueryParams", ["v"]]);
+					_paq.push(['trackPageView']);
+					_paq.push(['enableLinkTracking']);
+					(function() {
+						var u="{$snackyConfig.matomo|trim}";
+						_paq.push(['setTrackerUrl', u+'matomo.php']);
+						_paq.push(['setSiteId', '{$snackyConfig.matomoSiteId}']);
+						var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+						g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+					})();
+				</script>
+				{/inline_script}
+			{/if}
 		{/if}
 	{/block}
 	

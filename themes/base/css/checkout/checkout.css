@@ -56,7 +56,7 @@ body:not(.no-pd){
 }
 #choose-way .step-box.last{
 	left: -1px;
-    border-radius: 0 .3rem .3rem;
+    border-radius: 0 .3rem .3rem 0;
 	order: 2;
 }
 #choose-way .img-ct{

@@ -45,6 +45,14 @@ fileupload-wrapper:blank{
 .c-it .info-ul li{
     padding: .1rem 0
 }
+.c-it .qty{
+    border: 1px solid @defaultborder;
+    border-radius: .3rem;
+    padding: .5rem 1rem;
+}
+.add-pays{
+    margin-top: .5rem;
+}
 /* PayPal Finanzierung*/
 .add-pays .ppc-message{
     margin-top: 1rem;

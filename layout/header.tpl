@@ -16,14 +16,27 @@
 	
     {block name="head-resources-jquery"}
 		<link rel="preload" href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/jquery36-lazysizes.min.js" as="script">
-		<link rel="preload" href="{$ShopLogoURL|getWebpURL}" as="image">
+		{if !empty($snackyConfig.svgLogo)}
+			<link rel="preload" href="{$snackyConfig.svgLogo}" as="image">
+		{else}
+			<link rel="preload" href="{$ShopLogoURL}" as="image">
+		{/if}
 		
         <script>
             window.lazySizesConfig = window.lazySizesConfig || {};
             window.lazySizesConfig.expand  = 50;
         </script>
 		{if !empty($snackyConfig.gtag|trim)}
-			{include file="layout/inc_tracking.tpl"}
+			{include file="layout/tracking/tagmanager.tpl"}
+		{/if}
+		{if !empty($snackyConfig.matomo|trim)}
+			{include file="layout/tracking/matomo.tpl"}
+		{/if}
+		{if !empty($snackyConfig.bing_ads|trim)}
+			{include file="layout/tracking/bing.tpl"}
+		{/if}
+		{if !empty($snackyConfig.google_ads|trim) || !empty($snackyConfig.google_analytics_four|trim)}
+			{include file="layout/tracking/gtag.tpl"}
 		{/if}
 		
         <script src="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}js/jquery36-lazysizes.min.js"></script>
@@ -77,6 +90,12 @@
 		*}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		
+		{if $nSeitenTyp==2 && $NaviFilter->getFilterCount() > $snackyConfig.filterIndexing}
+			{assign var="bNoIndex" value=true}
+		{elseif $nSeitenTyp==2 && $NaviFilter->getFilterCount() >0}
+			{assign var="bNoIndex" value=false}
+		{/if}
         <meta name="robots" content="{if $robotsContent}{$robotsContent}{elseif $bNoIndex === true  || (isset($Link) && $Link->getNoFollow() === true)}noindex{else}index, follow{/if}">
 		
         <meta property="og:type" content="website" />
@@ -101,6 +120,17 @@
 
     <title>{block name="head-title"}{$meta_title}{/block}</title>
 
+	{if isset($Suchergebnisse) && $Suchergebnisse->getPages()->getMaxPage() > 1 && $snackyConfig.prevnext == 'Y'}
+		{block name='layout-header-prev-next'}
+			{if $Suchergebnisse->getPages()->getCurrentPage() > 1}
+				<link rel="prev" href="{$filterPagination->getPrev()->getURL()}">
+			{/if}
+			{if $Suchergebnisse->getPages()->getCurrentPage() < $Suchergebnisse->getPages()->getMaxPage()}
+				<link rel="next" href="{$filterPagination->getNext()->getURL()}">
+			{/if}
+		{/block}
+	{/if}
+	
 	{block name="canonical"}
 		{if $snackyConfig.listingCanonicalToFirst == 'Y' && $nSeitenTyp == 2 && $filterPagination->getPrev()->getPageNumber() > 0}
 			{foreach $filterPagination->getPages() as $page}
@@ -371,9 +401,9 @@
         </style>
     {/if}
 	{block name="layout-header-theme-color"}
-	<meta name="theme-color" content="{$snackyConfig.css_brand}">
+	<meta name="theme-color" content="{if !empty($snackyConfig.themecolor)}{$snackyConfig.themecolor}{else}{$snackyConfig.css_brand}{/if}">
     {/block}
-	<link rel="apple-touch-icon" href="{if empty($snackyConfig.appleTouchIcon)}/templates/Snackys/img/icons/apple-touch-icon.png{else}{$snackyConfig.appleTouchIcon}{/if}"/>
+	{if !empty($snackyConfig.appleTouchIcon)}<link rel="apple-touch-icon" href="{$snackyConfig.appleTouchIcon}"/>{/if}
 	{if !empty($snackyConfig.pwa_icon192) && $snackyConfig.pwa == 'Y'}<link rel="icon" sizes="192x192" href="{$snackyConfig.pwa_icon192}">{/if}
 	{if !empty($snackyConfig.pwa_icon512) && $snackyConfig.pwa == 'Y'}<link rel="icon" sizes="512x512" href="{$snackyConfig.pwa_icon512}">{/if}
 	

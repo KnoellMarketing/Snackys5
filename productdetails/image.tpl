@@ -8,7 +8,7 @@
             {strip}
                 <div class="img-w{if $smarty.foreach.thumbnails.first} active{/if}">
                     <div class="img-ct">
-						{image alt=$image->cAltAttribut|escape:'html'
+						{image alt=$image->cAltAttribut|escape:'quotes'
 							class="product-image"
 							fluid=true
 							lazy=true
@@ -41,7 +41,7 @@
 						{if $smarty.foreach.gallery.first && $snackyConfig.nolazyloadProductdetails == 'Y'}
 							{assign var="isLazy" value=false}
 						{/if}
-						{image alt=$image->cAltAttribut|escape:'html'
+						{image alt=$image->cAltAttribut|escape:'quotes'
 							class="product-image"
 							fluid=true
 							lazy=$isLazy

@@ -49,7 +49,7 @@
                                     {/if}
                                        id="quantity" class="quantity form-control{if $snackyConfig.quantityButtons == '1'} text-center{else} text-right{/if}" name="anzahl"
                                        aria-label="{lang key='quantity'}"
-                                       value="{if $Artikel->fAbnahmeintervall > 0}{if $Artikel->fMindestbestellmenge > $Artikel->fAbnahmeintervall}{$Artikel->fMindestbestellmenge}{else}{$Artikel->fAbnahmeintervall}{/if}{else}1{/if}" />
+                                       value="{if $Artikel->fAbnahmeintervall > 0 || $Artikel->fMindestbestellmenge > 1}{if $Artikel->fMindestbestellmenge > $Artikel->fAbnahmeintervall}{$Artikel->fMindestbestellmenge}{else}{$Artikel->fAbnahmeintervall}{/if}{else}1{/if}" />
                                 {if $Artikel->cEinheit}
                                     <span class="input-group-addon unit">{$Artikel->cEinheit}</span>
                                 {/if}

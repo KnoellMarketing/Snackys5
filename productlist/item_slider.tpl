@@ -65,7 +65,7 @@
             {include file="productdetails/price.tpl" Artikel=$Artikel price_image=null tplscope=$tplscope}
         </div>
     </div>
-	<form action="navi.php" method="post" class="buy_form_{$Artikel->kArtikel} form form-basket jtl-validate" data-toggle="basket-add{if $snackyConfig.liveBasketFromBasket == 'N' && $nSeitenTyp == 3}-direct{/if}">
+	<form action="{$ShopURL}/" method="post" class="buy_form_{$Artikel->kArtikel} form form-basket jtl-validate" data-toggle="basket-add{if $snackyConfig.liveBasketFromBasket == 'N' && $nSeitenTyp == 3}-direct{/if}">
         {$jtl_token}
 		{if $snackyConfig.listShowCart != 1}
         <div class="exp{if $snackyConfig.listShowCart == 2} flo-bt pr{/if} hide-qty">

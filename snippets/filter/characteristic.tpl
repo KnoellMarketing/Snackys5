@@ -49,6 +49,7 @@
                             class="{if $attributeValue->isActive()}active{/if} filter-item dpflex-a-center"
                             href="{if !empty($attributeValue->getURL())}{$attributeValue->getURL()}{else}#{/if}"
                             title="{$attributeValue->getValue()|escape:'html'}"
+							rel="nofollow"
                         }
                                 {if !empty($attributeImageURL)}
                                     {image lazy=true webp=true

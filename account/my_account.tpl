@@ -3,7 +3,7 @@
 {if isset($smarty.get.reg)}
     <div class="alert alert-success">{lang key='accountCreated' section='global'}</div>
 {/if}
-{include file="snippets/zonen.tpl" id="before_account_page" title="before_account_page"}
+{include file="snippets/zonen.tpl" id="after_account_page_headline" title="after_account_page_headline"}
 <p>{lang key="myAccountDesc" section="login"}</p>
 
 {block name="account-credit"}
@@ -102,5 +102,4 @@
         {lang key="deleteAccount" section="login"}
     </a>
 </div>
-{include file="snippets/zonen.tpl" id="after_account_page" title="after_account_page"}
 {/block}

@@ -53,18 +53,20 @@
             </div>
         {/block}
     {else}
-        <div class="c-empt">
-            <span class="img-ct">
-                <svg>
-                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-{if $snackyConfig.basketType == 0}cart{else}shopping{/if}"></use>
-                </svg>
-                {if $snackyConfig.basketType == 0}
-                <span class="h4 text-center">0</span>
-                {/if}
-            </span>
-        </div>
-        <div class="alert alert-info text-center">{lang key="emptybasket" section="checkout"}</div>
-        <a href="{$ShopURL}" class="submit btn btn-primary btn-block btn-lg">{lang key="continueShopping" section="checkout"}</a>
+        {block name="basket-empty"}
+            <div class="c-empt">
+                <span class="img-ct">
+                    <svg>
+                      <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-{if $snackyConfig.basketType == 0}cart{else}shopping{/if}"></use>
+                    </svg>
+                    {if $snackyConfig.basketType == 0}
+                    <span class="h4 text-center">0</span>
+                    {/if}
+                </span>
+            </div>
+            <div class="alert alert-info text-center">{lang key="emptybasket" section="checkout"}</div>
+            <a href="{$ShopURL}" class="submit btn btn-primary btn-block btn-lg">{lang key="continueShopping" section="checkout"}</a>
+        {/block}
     {/if}
     </div>
     {if ($Warenkorb->PositionenArr|@count > 0)}
@@ -80,61 +82,69 @@
         <div class="cart-sum panel mb-spacer mb-small">
             {assign var="showCoupon" value=false}
             {if $Einstellungen.kaufabwicklung.warenkorb_kupon_anzeigen === 'Y' && $KuponMoeglich == 1}
-                {assign var="showCoupon" value=true}
-                <div class="panel-heading">
-                    <h2 class="h5 m0 panel-title">{lang key="useCoupon" section="checkout"}</h2>
-                </div>
-                <div class="apply-coupon panel-body mb-spacer mb-xs">
-                    <form class="form-inline jtl-validate" id="basket-coupon-form" method="post" action="{get_static_route id='warenkorb.php'}">
-                        {$jtl_token}
-                        {block name="basket-coupon"}
-                            <div class="form-group m0 w100{if !empty($invalidCouponCode)} has-error{/if}">
-                                <div class="input-group">
-                                    <input aria-label="{lang key='couponCode' section='account data'}" class="form-control" type="text" name="Kuponcode" id="couponCode" maxlength="32" placeholder="{lang key='couponCode' section='account data'}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" required/>
-                                    <span class="input-group-btn">
-                                        <input class="btn btn-default" type="submit" value="&rsaquo;" />
-                                    </span>
+                {block name="basket-coupon-outer"}
+                    {assign var="showCoupon" value=true}
+                    <div class="panel-heading">
+                        <h2 class="h5 m0 panel-title">{lang key="useCoupon" section="checkout"}</h2>
+                    </div>
+                    <div class="apply-coupon panel-body mb-spacer mb-xs">
+                        <form class="form-inline jtl-validate" id="basket-coupon-form" method="post" action="{get_static_route id='warenkorb.php'}">
+                            {$jtl_token}
+                            {block name="basket-coupon"}
+                                <div class="form-group m0 w100{if !empty($invalidCouponCode)} has-error{/if}">
+                                    <div class="input-group">
+                                        <input aria-label="{lang key='couponCode' section='account data'}" class="form-control" type="text" name="Kuponcode" id="couponCode" maxlength="32" placeholder="{lang key='couponCode' section='account data'}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" required/>
+                                        <span class="input-group-btn">
+                                            <input class="btn btn-default" type="submit" value="&rsaquo;" />
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                        {/block}
-                    </form>
-                </div>
+                            {/block}
+                        </form>
+                    </div>
+                {/block}
             {/if}
             <div class="panel-body">
-                {if $NettoPreise}
-                    <div class="total-net dpflex-j-between">
-                        <span class="price_label"><strong>{lang key="totalSum" section="global"} ({lang key="net" section="global"}):</strong></span>
-                        <strong class="price total-sum">{$WarensummeLocalized[$NettoPreise]}</strong>
-                    </div>
-                {/if}
-                {if $Einstellungen.global.global_steuerpos_anzeigen !== 'N' && $Steuerpositionen|@count > 0}
-                    {foreach name=steuerpositionen from=$Steuerpositionen item=Steuerposition}
-                        <div class="tax dpflex-j-between">
-                            {if $Einstellungen.kaufabwicklung.warenkorb_produktbilder_anzeigen === 'Y'}
-                                <td class="hidden-xs"></td>
-                            {/if}
-                            <span class="tax_label">{$Steuerposition->cName}:</span>
-                            <span class="tax_label">{$Steuerposition->cPreisLocalized}</span>
+                {block name="basket-prices"}
+                    {if $NettoPreise}
+                        <div class="total-net dpflex-j-between">
+                            <span class="price_label"><strong>{lang key="totalSum" section="global"} ({lang key="net" section="global"}):</strong></span>
+                            <strong class="price total-sum">{$WarensummeLocalized[$NettoPreise]}</strong>
                         </div>
-                    {/foreach}
-                {/if}
-                {if isset($smarty.session.Bestellung->GuthabenNutzen) && $smarty.session.Bestellung->GuthabenNutzen == 1}
-                     <div class="customer-credit dpflex-j-between">
-                         <span>{lang key="useCredit" section="account data"}</span>
-                          <span>{$smarty.session.Bestellung->GutscheinLocalized}</span>
-                     </div>
-                {/if}
-                <div class="total info dpflex-j-between mb-spacer mb-xs text-lg">
-                    <span class="price_label"><strong>{lang key="totalSum" section="global"}:</strong></span>
-                    <strong class="price total-sum">{$WarensummeLocalized[0]}</strong>
+                    {/if}
+                    {if $Einstellungen.global.global_steuerpos_anzeigen !== 'N' && $Steuerpositionen|@count > 0}
+                        {foreach name=steuerpositionen from=$Steuerpositionen item=Steuerposition}
+                            <div class="tax dpflex-j-between">
+                                {if $Einstellungen.kaufabwicklung.warenkorb_produktbilder_anzeigen === 'Y'}
+                                    <td class="hidden-xs"></td>
+                                {/if}
+                                <span class="tax_label">{$Steuerposition->cName}:</span>
+                                <span class="tax_label">{$Steuerposition->cPreisLocalized}</span>
+                            </div>
+                        {/foreach}
+                    {/if}
+                    {if isset($smarty.session.Bestellung->GuthabenNutzen) && $smarty.session.Bestellung->GuthabenNutzen == 1}
+                         <div class="customer-credit dpflex-j-between">
+                             <span>{lang key="useCredit" section="account data"}</span>
+                              <span>{$smarty.session.Bestellung->GutscheinLocalized}</span>
+                         </div>
+                    {/if}
+                    <div class="total info dpflex-j-between mb-spacer mb-xs text-lg">
+                        <span class="price_label"><strong>{lang key="totalSum" section="global"}:</strong></span>
+                        <strong class="price total-sum">{$WarensummeLocalized[0]}</strong>
+                    </div>
+                {/block}
+                {block name="basket-checkout-btn"}
+                    <a href="{get_static_route id='bestellvorgang.php'}?wk=1" class="submit btn btn-primary btn-block btn-lg" id="cart-checkout-btn">{lang key='nextStepCheckout' section='checkout'}</a>
+                {/block}
+            </div>
+            {block name="basket-add-pays"}
+                <div class="add-pays">
+                    <div class="paypal"></div>
+                    <div class="amazon"></div>
                 </div>
-                <a href="{get_static_route id='bestellvorgang.php'}?wk=1" class="submit btn btn-primary btn-block btn-lg" id="cart-checkout-btn">{lang key='nextStepCheckout' section='checkout'}</a>
-            </div>
-            <div class="add-pays">
-                <div class="paypal"></div>
-                <div class="amazon"></div>
-            </div>
-            <div class="payplan"></div>
+                <div class="payplan"></div>
+            {/block}
         </div>
         {if $oArtikelGeschenk_arr|@count > 0}
             {block name="basket-freegift"}
@@ -183,13 +193,15 @@
 
         
         {if $Einstellungen.kaufabwicklung.warenkorb_versandermittlung_anzeigen === 'Y'}
-        <div class="basket-shipping-estimate-form">
-			{include file="snippets/zonen.tpl" id="opc_before_shipping_calculator"}
-            <form id="basket-shipping-estimate-form" method="post" action="{get_static_route id='warenkorb.php'}">
-                {$jtl_token}
-                {include file='snippets/shipping_calculator.tpl' checkout=true tplscope="cart"}
-            </form>
-        </div>
+            {block name="basket-shipping-estimate-form"}
+                <div class="basket-shipping-estimate-form">
+                    {include file="snippets/zonen.tpl" id="opc_before_shipping_calculator"}
+                    <form id="basket-shipping-estimate-form" method="post" action="{get_static_route id='warenkorb.php'}">
+                        {$jtl_token}
+                        {include file='snippets/shipping_calculator.tpl' checkout=true tplscope="cart"}
+                    </form>
+                </div>
+            {/block}
         {/if}
     </div>
     {/if}

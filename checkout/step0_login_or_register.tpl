@@ -74,6 +74,9 @@
 {if isset($fehlendeAngaben.formular_zeit) && $fehlendeAngaben.formular_zeit == 1}
     {assign var="activeClass" value="reg"}
 {/if}
+{if isset($smarty.get.unreg_form) && $smarty.get.unreg_form == 1}
+    {assign var="activeClass" value="guest"}
+{/if}
 
 <div id="register-customer" class="row">
 	<div class="col-12 mb-sm" id="choose-way">

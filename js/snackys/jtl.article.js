@@ -103,6 +103,8 @@
             this.registerArticleOverlay($wrapper);
             this.registerFinish($wrapper);
 			
+            this.initMinMaxAbnahme();
+			
 			this.snackys($wrapper);
         },
 
@@ -1411,6 +1413,23 @@
         variationDispose: function(wrapper) {
             var $wrapper = this.getWrapper(wrapper);
             $('[role="tooltip"]', $wrapper).remove();
+        },
+		
+
+        initMinMaxAbnahme: function() {
+			$('#quantity').on('change', function () {
+				var maximum   = parseFloat($(this).attr('max'));
+				var minimum   = parseFloat($(this).attr('min'));
+				var value = parseFloat($(this).val().replace(/,/g, '.'));
+				if(maximum > 0 && value > maximum)
+				{
+					$(this).val(maximum);
+				}
+				if(minimum > 0 && value < minimum)
+				{
+					$(this).val(minimum);
+				}
+			});
         }
     };
 

@@ -122,7 +122,7 @@
 			{if $Suchergebnisse->getProducts()|@count > 0}
 				{include file="snippets/zonen.tpl" id="opc_before_products"}
 				<div class="row row-multi mb-spacer {$style}" id="p-l">
-					{if $Suchergebnisse->getPages()->getCurrentPage() > 1 && !isset($smarty.post.isAjax) && $snackyConfig.useEndlessScrolling == 'Y'}
+					{if $Suchergebnisse->getPages()->getCurrentPage() > 1 && !isset($smarty.post.isAjax) && ($snackyConfig.useEndlessScrolling == 'Y' || $snackyConfig.useEndlessScrolling == 'B')}
 						<div class="el-sc endless-scrolling text-center block w100 form-group"><button id="view-prev" class="btn" data-url="{$oNaviSeite_arr.zurueck->getURL()}">{lang key="loadPrev" section="custom"}</button></div>
 					{/if}
 					<span class="pagination-url" data-url="{$smarty.server.REQUEST_URI}"></span>
@@ -140,7 +140,7 @@
 						</div>
 						{include file="snippets/zonen.tpl" id="after_product_s{$Suchergebnisse->getPages()->getCurrentPage()}_{$smarty.foreach.artikel.iteration}" title="after_product_s{$Suchergebnisse->getPages()->getCurrentPage()}_{$smarty.foreach.artikel.iteration}"}
 					{/foreach}
-					{if $Suchergebnisse->getPages()->getCurrentPage() < $Suchergebnisse->getPages()->getMaxPage() && !isset($smarty.post.isAjax) && ($snackyConfig.useEndlessScrolling == 'Y' || $snackyConfig.useEndlessScrolling == 'B')}
+					{if $Suchergebnisse->getPages()->getCurrentPage() < $Suchergebnisse->getPages()->getMaxPage() && !isset($smarty.post.isAjax) && ($snackyConfig.useEndlessScrolling == 'Y' || $snackyConfig.useEndlessScrolling == 'B') && (!isset($bAjaxRequest) || !$bAjaxRequest)}
 						{if $snackyConfig.useEndlessScrolling == 'B'}
 							{assign var="anzMore" value=$Suchergebnisse->getProductCount()-$Suchergebnisse->getOffsetEnd()}
 							<div class="el-sc endless-scrolling text-center dpflex-a-center dpflex-j-center w100"><button id="view-next-click" class="btn btn-xs" data-url="{$oNaviSeite_arr.vor->getURL()}">{lang key="loadNext" section="custom" printf=$anzMore}</button></div>

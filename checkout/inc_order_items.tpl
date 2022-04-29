@@ -23,7 +23,7 @@
         <div class="alert alert-success">{$pushedArtikel->cName} {lang key="productAddedToCart" section="global"}</div>
     {/if}
 {/if}
-
+ 
 {foreach name=positionen from=$smarty.session.Warenkorb->PositionenArr item=oPosition}
     {if !$oPosition->istKonfigKind()}
         <div class="type-{$oPosition->nPosTyp} c-it{if isset($isSidebar)} sb-it{/if}{if isset($isCheckout)} sb-it{/if}">
@@ -294,7 +294,7 @@
                                     <input name="anzahl[{$smarty.foreach.positionen.index}]" type="hidden" value="1" />
                                 {/if}
                             {else}
-                                {$oPosition->nAnzahl|replace_delim} {if !empty($oPosition->Artikel->cEinheit)}{$oPosition->Artikel->cEinheit}{/if}
+                                <span class="qty">{$oPosition->nAnzahl|replace_delim} {if !empty($oPosition->Artikel->cEinheit)}{$oPosition->Artikel->cEinheit}{/if}</span>
                             {/if}            
                         </div>
                     </div>

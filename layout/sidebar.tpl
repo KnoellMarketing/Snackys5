@@ -7,6 +7,7 @@
 <aside id="sp-l" class="hidden-print col-12{if !isset($smarty.get.sidebar) & $isMobile} lazy{/if}">
     {if isset($smarty.get.sidebar) || !$isMobile || $isTablet}
         <div class="inside">
+            {include file="snippets/zonen.tpl" id="before_sidepanel" title="before_sidepanel"}
             <div class="{if !$isMobile}visible-xs visible-sm{/if}">
                 <span class="block h3">{lang key="filterBy" setion="global"}</span>
                 <hr class="op0 hr-sm">
@@ -18,10 +19,11 @@
             {block name="footer-sidepanel-left-content"}
                 {$boxes.left}
             {/block}
-			</div>
-			<div class="visible-xs visible-sm overlay-bg"></div>
-			<div class="visible-xs visible-sm close-sidebar close-btn"></div>
-		{/if}
-	</aside>
+            {include file="snippets/zonen.tpl" id="after_sidepanel" title="after_sidepanel"}
+        </div>
+        <div class="visible-xs visible-sm overlay-bg"></div>
+        <div class="visible-xs visible-sm close-sidebar close-btn"></div>
+    {/if}
+</aside>
 {/block}
 {/block}
