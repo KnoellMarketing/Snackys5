@@ -506,6 +506,9 @@
                 }, null, true);
             });
 
+
+            regionsToState();
+            /*
             $('#country').on('change', function (e) {
                 var val = $(this).find(':selected').val();
 
@@ -525,6 +528,7 @@
                     }
                 });
             });
+            */
         },
 		
         setCompareListHeight: function() {

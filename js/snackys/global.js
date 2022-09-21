@@ -109,6 +109,7 @@ function categoryMenu(rootcategory) {
 function compatibility() {
 }
 
+/*
 function regionsToState() {
     var state = $('#state');
     if (state.length === 0) {
@@ -262,6 +263,75 @@ function regionsToState() {
 
         return false;
     });
+}
+*/
+
+
+function regionsToState(){
+    $('.js-country-select').on('change', function() {
+
+        var result = {};
+        var io = $.evo.io();
+        var country = $(this).find(':selected').val();
+        country = (country !== null && country !== undefined) ? country : '';
+        var connection_id = $(this).attr('id').toString().replace("-country","");
+
+        io.call('getRegionsByCountry', [country], result, function (error, data) {
+            if (error) {
+                console.error(data);
+            } else {
+                var state_id = connection_id+'-state';
+                var state = $('#'+state_id);
+                var state_data = state.data();
+
+                if (typeof(result.response) === 'undefined' || state.length === 0) {
+                    return;
+                }
+                var title = state_data.defaultoption;
+                var stateIsRequired = result.response.required;
+                var data = result.response.states;
+                var def = $('#'+state_id).val();
+                if(typeof(data)!=='undefined'){
+                    if (data !== null && data.length > 0) {
+                        if (stateIsRequired){
+                            var state = $('<select />').attr({ id: state_id, name: state.attr('name'), class: 'custom-select required state-input js-state-select', required: 'required'});
+                        } else {
+                            var state = $('<select />').attr({ id: state_id, name: state.attr('name'), class: 'state-input custom-select js-state-select'});
+                        }
+
+                        Object.keys(state_data).forEach(function(key,index) {
+                            state.data(key,state_data[key]);
+                        });
+
+                        state.append('<option value="">' + title + '</option>');
+                        $(data).each(function(idx, item) {
+                            state.append(
+                                $('<option></option>').val(item.iso).html(item.name)
+                                    .attr('selected', item.iso == def || item.name == def ? 'selected' : false)
+                            );
+                        });
+                        $('#'+state_id).replaceWith(state);
+                    } else {
+                        if (stateIsRequired) {
+                            var state = $('<input />').attr({ type: 'text', id: state_id, name: state.attr('name'),  class: 'required form-control js-state-select', placeholder: title, required: 'required' });
+                        } else {
+                            var state = $('<input />').attr({ type: 'text', id: state_id, name: state.attr('name'),  class: 'form-control js-state-select', placeholder: title });
+                        }
+                        Object.keys(state_data).forEach(function(key,index) {
+                            state.data(key,state_data[key]);
+                        });
+                        $('#'+state_id).replaceWith(state);
+                    }
+                    if (stateIsRequired){
+                        state.parent().find('.state-optional').addClass('d-none');
+                    } else {
+                        state.parent().find('.state-optional').removeClass('d-none');
+                    }
+                }
+            }
+        });
+        return false;
+    }).trigger('change');
 }
 
 function loadContent(url)

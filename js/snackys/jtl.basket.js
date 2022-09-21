@@ -119,8 +119,8 @@
 
         updateCart: function(type) {
             var that = this,
-                t = parseInt(type);
-
+                t = (type === undefined) ? 0 : parseInt(type);
+				
             $.evo.io().call('getBasketItems', [t], this, function(error, data) {
                 if (error) {
                     return;
@@ -149,7 +149,7 @@
 
     // PLUGIN DATA-API
     // ===============
-    $('#content-wrapper').on('submit', '[data-toggle="basket-add"]', function(event) {
+    $(document).on('submit', '[data-toggle="basket-add"]', function(event) {
         event.preventDefault();
         $.evo.basket().addToBasket($(this));
     }).on('submit', '[data-toggle="basket-add-direct"]', function(event) {

@@ -56,7 +56,7 @@
                     {foreach from=$zahlungsartenFooter item=zahlungsart}
                         {if $zahlungsart->nActive == 1 && $zahlungsart->nNutzbar==1 && !empty($zahlungsart->cBild) && $snackyConfig.paymentWall != 3}
                             <li class="img">
-                                {image src=$zahlungsart->cBild alt=$zahlungsart->cName}
+                                {image src=$zahlungsart->cBild alt=$zahlungsart->cName lazy=true}
                             </li>
                         {else if $zahlungsart->nActive == 1 && $zahlungsart->nNutzbar==1 && $snackyConfig.paymentWall != 2}
                             <li class="text">{$zahlungsart->cName}</li>
@@ -79,21 +79,23 @@
 					<div class="mw-container">
                     {block name="layout-footer-boxes"}
 						<div class="row row-multi{if $snackyConfig.footerBoxesDirection == "C"} dpflex-j-c{elseif $snackyConfig.footerBoxesDirection == "R"} dpflex-j-e{/if}">
-							 {if $snackyConfig.logoFooter == 0 && isset($ShopLogoURL)}
-								<div class="col-6 col-sm-4 col-md-3 col-lg-2 hidden-xs" id="logo-footer">
-                                   	{if !empty($snackyConfig.svgLogo)}
-                                        <img src="{$snackyConfig.svgLogo}" alt="{$Einstellungen.global.global_shopname}">
-                                    {else}  
-                                        {image src=$ShopLogoURL alt=$Einstellungen.global.global_shopname}
-                                    {/if}
-								</div>
+							 {if $snackyConfig.logoFooter == 0 && (isset($ShopLogoURL) || !empty($snackyConfig.svgLogo))}
+							     {block name="footer-logo"}
+                                      <div class="col-6 col-sm-4 col-md-3 col-lg-2 hidden-xs" id="logo-footer">
+                                          {include file="snippets/zonen.tpl" id="before_footer_logo" title="before_footer_logo"}
+                                          {include file='layout/shoplogo.tpl' tplscope="footer"}
+                                          {include file="snippets/zonen.tpl" id="after_footer_logo" title="after_footer_logo"}
+								      </div>
+								{/block}
 							{/if}
 							{foreach name=bottomBoxes from=$footerBoxes  item=box}
+                                {block name="footer-boxes-boxes"}
 									{if $smarty.foreach.bottomBoxes.iteration < 10 && $box->isActive() && !empty($box->getRenderedContent())}
 									   <div class="{block name="footer-boxes-class"}col-6 col-sm-4 col-md-3 col-lg-2{/block}">
 										{$box->getRenderedContent()}
 									   </div>
 									{/if}
+                                {/block}
 							{/foreach}
                             {block name="footer-newsletter-outer"}
 							{if $snackyConfig.newsletter_footer === 'Y'
@@ -256,73 +258,7 @@
 				{if !isset($smallversion) || !$smallversion}
                     {if $snackyConfig.socialmedia_footer === 'Y'}
                         <div id="footer-social" class="mw-container mt-sm">
-                            <div class="footer-additional-wrapper dpflex-a-center dpflex-j-center dpflex-wrap">
-                                {block name="footer-socialmedia"}
-                                    {if !empty($snackyConfig.facebook)}
-                                        <a href="{if $snackyConfig.facebook|strpos:'http' !== 0}https://{/if}{$snackyConfig.facebook}" class="btn-social btn-facebook dpflex-a-center dpflex-j-center" title="Facebook" target="_blank" rel="noopener">
-											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-facebook"></use>
-											</svg>
-										</a>
-                                    {/if}
-                                    {if !empty($snackyConfig.twitter)}
-                                        <a href="{if $snackyConfig.twitter|strpos:'http' !== 0}https://{/if}{$snackyConfig.twitter}" class="btn-social btn-twitter dpflex-a-center dpflex-j-center" title="Twitter" target="_blank" rel="noopener">
-											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-twitter"></use>
-											</svg>
-										</a>
-                                    {/if}
-                                    {if !empty($snackyConfig.youtube)}
-                                        <a href="{if $snackyConfig.youtube|strpos:'http' !== 0}https://{/if}{$snackyConfig.youtube}" class="btn-social btn-youtube dpflex-a-center dpflex-j-center" title="YouTube" target="_blank" rel="noopener">
-											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-youtube"></use>
-											</svg>
-										</a>
-                                    {/if}
-                                    {if !empty($snackyConfig.vimeo)}
-                                        <a href="{if $snackyConfig.vimeo|strpos:'http' !== 0}https://{/if}{$snackyConfig.vimeo}" class="btn-social btn-vimeo dpflex-a-center dpflex-j-center" title="Vimeo" target="_blank" rel="noopener">
-											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-vimeo"></use>
-											</svg>
-										</a>
-                                    {/if}
-                                    {if !empty($snackyConfig.pinterest)}
-                                        <a href="{if $snackyConfig.pinterest|strpos:'http' !== 0}https://{/if}{$snackyConfig.pinterest}" class="btn-social btn-pinterest dpflex-a-center dpflex-j-center" title="PInterest" target="_blank" rel="noopener">
-											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-pinterest"></use>
-											</svg>
-										</a>
-                                    {/if}
-                                    {if !empty($snackyConfig.instagram)}
-                                        <a href="{if $snackyConfig.instagram|strpos:'http' !== 0}https://{/if}{$snackyConfig.instagram}" class="btn-social btn-instagram dpflex-a-center dpflex-j-center" title="Instagram" target="_blank" rel="noopener">
-											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-instagram"></use>
-											</svg>
-										</a>
-                                    {/if}
-                                    {if !empty($snackyConfig.skype)}
-                                        <a href="{if $snackyConfig.skype|strpos:'skype:' !== 0}skype:{$snackyConfig.skype}?add{else}{$snackyConfig.skype}{/if}" class="btn-social btn-skype dpflex-a-center dpflex-j-center" title="Skype" target="_blank" rel="noopener">
-											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-skype"></use>
-											</svg>
-										</a>
-                                    {/if}
-                                    {if !empty($snackyConfig.xing)}
-                                        <a href="{if $snackyConfig.xing|strpos:'http' !== 0}https://{/if}{$snackyConfig.xing}" class="btn-social btn-xing dpflex-a-center dpflex-j-center" title="Xing" target="_blank" rel="noopener">
-											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-xing"></use>
-											</svg>
-										</a>
-                                    {/if}
-                                    {if !empty($snackyConfig.linkedin)}
-                                        <a href="{if $snackyConfig.linkedin|strpos:'http' !== 0}https://{/if}{$snackyConfig.linkedin}" class="btn-social btn-linkedin dpflex-a-center dpflex-j-center" title="Linkedin" target="_blank" rel="noopener">
-											<svg class="icon-darkmode">
-											  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-linkedin"></use>
-											</svg>
-										</a>
-                                    {/if}
-                                {/block}
-                            </div>
+				            {include file='snippets/socialprofiles.tpl' tplscope="footer"}
                         </div>
                     {/if}
                 {/if}
@@ -405,9 +341,9 @@
             {/if}
         </noscript>
     {else}
-        <link rel="preload" href="{$ShopURL}/{$combinedCSS}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="preload" href="{$ShopURL}/{$combinedCSS|replace:"evo":"snackys"}" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript>
-            <link href="{$ShopURL}/{$combinedCSS}" rel="stylesheet">
+            <link href="{$ShopURL}/{$combinedCSS|replace:"evo":"snackys"}" rel="stylesheet">
         </noscript>
     {/if}
 {/block}
@@ -536,11 +472,17 @@
 					{/inline_script}
 				{/if}
 			{/if}
-			
+
 			{* Google Analytics 4 / Ads Tracking *}
 			{if !empty($snackyConfig.google_ads|trim) || !empty($snackyConfig.google_analytics_four|trim)}
+				{if $snackyConfig.gads_analytics_consentmode == 'Y'}
+					<script async src="https://www.googletagmanager.com/gtag/js?id={if !empty($snackyConfig.google_analytics_four|trim)}{$snackyConfig.google_analytics_four|trim}{else}{$snackyConfig.google_ads|trim}{/if}Z&l=gtagDataLayer"></script
+					<script>
+						gtagLoaded = true;
+					</script>
+				{/if}
 				{inline_script}
-				<script>
+					<script>
 						var gtagLoaded = false;
 						document.addEventListener('consent.ready', function(e) {
 							km_gtag_consent(e.detail);
@@ -548,20 +490,39 @@
 						document.addEventListener('consent.updated', function(e) {
 							km_gtag_consent(e.detail);
 						});
-						
+
+						{if $snackyConfig.gads_analytics_consentmode == 'Y'}
+						function km_gtag_consent(detail)
+						{
+							if (detail !== null && (typeof detail.km_gtagAds !== 'undefined' && detail.km_gtagAds === true))
+							{
+								gtag('consent', 'update', {
+									'ad_storage': 'granted'
+								});
+							}
+							if (detail !== null && (typeof detail.km_gtagAnalytics !== 'undefined' && detail.km_gtagAnalytics === true))
+							{
+								gtag('consent', 'update', {
+									'analytics_storage': 'granted'
+								});
+							}
+
+						}
+						{else}
 						function km_gtag_consent(detail)
 						{
 							if (gtagLoaded == false && detail !== null && ((typeof detail.km_gtagAds !== 'undefined' && detail.km_gtagAds === true) || (typeof detail.km_gtagAnalytics !== 'undefined' && detail.km_gtagAnalytics === true))) {
 								gtagLoaded = true;
-								
+
 								var f=document.getElementsByTagName('script')[0],
-								j=document.createElement('script');j.async=true;
+										j=document.createElement('script');j.async=true;
 								j.src='https://www.googletagmanager.com/gtag/js?id={if !empty($snackyConfig.google_analytics_four|trim)}{$snackyConfig.google_analytics_four|trim}{else}{$snackyConfig.google_ads|trim}{/if}Z&l=gtagDataLayer';
 								f.parentNode.insertBefore(j,f);
 							}
-							
+
 						}
-				</script>
+						{/if}
+					</script>
 				{/inline_script}
 			{/if}
 			

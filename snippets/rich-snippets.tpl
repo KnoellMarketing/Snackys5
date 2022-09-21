@@ -229,7 +229,7 @@
 								{block name='rich-snippets-list-offer'}
 									"offers": {
 										"@type": "Offer",
-										"price": "{if $Artikel->Preise->oPriceRange->isRange()}{$Artikel->Preise->oPriceRange->minBruttoPrice}{else}{$Artikel->Preise->fVKBrutto}{/if}",
+										"price": "{if $Artikel->Preise->oPriceRange->isRange()}{$Artikel->Preise->oPriceRange->minBruttoPrice|string_format:"%.2f"}{else}{$Artikel->Preise->fVKBrutto|string_format:"%.2f"}{/if}",
 										"priceCurrency": "{$smarty.session.Waehrung->getName()}",
 										{block name='rich-snippets-list-availability'}
 											"availability": "{if $Artikel->cLagerBeachten === 'N' || $Artikel->fLagerbestand > 0 || $Artikel->cLagerKleinerNull === 'Y'}https://schema.org/InStock{elseif $Artikel->nErscheinendesProdukt && $Artikel->Erscheinungsdatum_de !== '00.00.0000' && $Einstellungen.global.global_erscheinende_kaeuflich === 'Y'}https://schema.org/PreOrder{elseif $Artikel->cLagerBeachten === 'Y' && $Artikel->cLagerKleinerNull === 'N' && $Artikel->fLagerbestand <= 0}https://schema.org/OutOfStock{/if}",

@@ -254,7 +254,6 @@ label[data-target="#create_account_data"]{
 #jtl_vouchers{
   width: 100%;
   padding: 0;
-  margin: 1rem 0;
 }
 #jtl_vouchers .card-header{
     background: white;
@@ -276,6 +275,10 @@ label[data-target="#create_account_data"]{
 #jtl_vouchers .card-body{
   font-size: .9rem;
 }
+#voucher-cloud-modal .form-row{
+    display: flex;
+    flex-wrap: wrap;
+}
 #voucher-cloud-modal .modal-title h3{
   font-size: 1rem;
   margin: .5rem 0 0 0;
@@ -295,6 +298,10 @@ label[data-target="#create_account_data"]{
   width: 100%;
   margin: 0;
 }
+#fieldset-payment div.h3{
+    font-size: 1.2rem;
+    margin: 1rem 0 0 0; 
+}
 /* PayPal Checkout */
 .ppc-checkout-payment-method label.d-flex{
     display: flex;
@@ -310,6 +317,62 @@ label[data-target="#create_account_data"]{
 }
 .paypal-buttons-label-buynow{
     margin: 0 auto;
+}
+/* DHL Wunschpaket */
+#jtl_pack_optionen{
+    margin-top: 2rem;
+}
+#jtl_pack_optionen label{
+    font-weight: 400;
+}
+#wunschpaket_options{
+    border-top: 1px solid @lightborder;
+    margin: .5rem 0;
+    padding: 1.2rem 0;
+}
+#wunschpaket_options .button-label {
+    border-top: 3px solid #d10d1e;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 0 2px 5px 0;
+    cursor: pointer;
+    color: #292929;
+    background: #fecf3b;
+    border-radius: .5rem;
+}
+#wunschpaket_options .dhl-wunschtag:checked+.button-label {
+    background: #d10d1e;
+    color: #efefef;
+}
+#jtl_pack_optionen + hr{
+    display: none;
+}
+#jtl_pack_optionen .button-wrap{
+    margin-bottom: 1rem;
+}
+#shipping-method .small + br{
+    display: none;
+}
+#wunschpaket_options .col-xs-12{
+    padding: 0;
+}
+#select_shipping_address ul{
+    padding: 0;
+    list-style: none;
+}
+#select_shipping_address.collapse-non-validate{
+    margin-top: 3rem;
+}
+#select_shipping_address ul label{
+    padding: .8rem 0;
+    border-bottom: 1px solid @lightbg;
+    cursor: pointer;
+}
+#select_shipping_address .storelocator{
+    margin: 1rem 0 2rem 0;
+}
+#select_shipping_address[aria-expanded="true"]{
+    display: block;
 }
 @media screen and (max-width: 1600px){
     body:not(.no-pd){

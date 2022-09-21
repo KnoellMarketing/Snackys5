@@ -7,15 +7,16 @@
 }
 /* Dropper Zones */
 .dropper-box{
-    padding: 13px;
+    padding: 8px;
     margin: 5px 0;
     border: 1px dashed #f96058;
     border-radius: .5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(249, 96, 88, 0.15);
+    background: rgba(249,96,88,.15);
     flex-wrap: wrap;
+    font-size: 13px;
 }
 /* OPC Modules */
 #opc #opcDeleteModal .modal-dialog{

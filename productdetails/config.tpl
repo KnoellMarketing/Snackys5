@@ -51,7 +51,7 @@
                                         {if !empty($cBildPfad)}
                                             <div class="hidden-xs col-sm-2">
                                                 <span class="img-ct contain">
-                                                    <img src="{$cBildPfad}" alt="{$oSprache->getName()}" id="img{$kKonfiggruppe}" class="w100" />
+                                                    <img src="{$ShopURL}/{$cBildPfad}" alt="{$oSprache->getName()}" id="img{$kKonfiggruppe}" class="w100" />
                                                 </span>
                                             </div>
                                         {/if}
@@ -89,7 +89,8 @@
                                                     <span class="block cfg-ct{if $oItem->getEmpfohlen()} highlighted{/if}{if empty($bSelectable)} disable{/if}">
                                                         {if !empty($oItem->getBildPfad())}
                                                             <span class="img-ct mb-xs">
-                                                                {image lazy=true webp=true src=$oItem->getBildPfad() alt=$oItem->getName()}
+                                                                {assign var="oItemImgSrc" value="{$ShopURL}/{$oItem->getBildPfad()}"}
+                                                                {image lazy=true webp=true src=$oItemImgSrc alt=$oItem->getName()}
                                                             </span>
                                                         {/if}
                                                         <span class="caption{if empty($oItem->getBildPfad())} w100{/if}">

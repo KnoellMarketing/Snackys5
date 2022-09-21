@@ -22,3 +22,7 @@ html:not([dir=rtl]) .box .noUi-horizontal .noUi-handle {
 #sp-l .jslider-pointer{
     background: @brand;
 }
+.box-categories .active > a{
+    color: @brand;
+    font-weight: bold;
+}

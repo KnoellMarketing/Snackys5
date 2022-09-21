@@ -50,14 +50,14 @@
         <fieldset id="register_shipping_address" class="collapse panel collapse-non-validate{if $kLieferadresse == -1} show{/if}" aria-expanded="{if $kLieferadresse == -1}true{else}false{/if}">
             <span class="h4 block">{lang key="createNewShippingAdress" section="account data"}</span>
             {include file="checkout/customer_shipping_address.tpl" prefix="register" fehlendeAngaben=$fehlendeAngabenShipping}
-        </fieldset>
             {include file="checkout/customer_shipping_contact.tpl" prefix="register" fehlendeAngaben=$fehlendeAngabenShipping}
+        </fieldset>
     {else}
         <fieldset class="panel">
             <span class="h4 block">{lang key="createNewShippingAdress" section="account data"}</span>
             {include file="checkout/customer_shipping_address.tpl" prefix="register" fehlendeAngaben=$fehlendeAngabenShipping}
-        </fieldset>
             {include file="checkout/customer_shipping_contact.tpl" prefix="register" fehlendeAngaben=$fehlendeAngabenShipping}
+        </fieldset>
     {/if}
     {/block}
 </div>

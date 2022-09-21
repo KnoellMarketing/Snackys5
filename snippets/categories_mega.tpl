@@ -15,7 +15,7 @@
             {$activeId = 0}
         {/if}
     {/if}
-    {assign var=max_subsub_items value=5}
+    {assign var=max_subsub_items value=$snackyConfig.megamenu_subcats}
 {/block}
 {block name='snippets-categories-mega-linkhome'}
 {if $snackyConfig.megaHome == 0}

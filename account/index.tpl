@@ -39,6 +39,7 @@
                     </div>
                     <hr class="invisible hr-sm">
                     <ul class="blanklist panel-body nav">
+                        {block name="my-account-menu-list"}
                         <li class="nav-it">
                             <a href="{get_static_route id='jtl.php'}" class="defaultlink dpflex-a-center dpflex-j-between{if $step === 'mein Konto'} active{/if}">
                             {if $step === 'mein Konto'}<strong>{/if}
@@ -113,6 +114,7 @@
                                 </span>
                             </a>
                         </li>
+                        {/block}
                     </ul>
                     <hr class="invisible hr-sm">
                     <div class="panel-footer">

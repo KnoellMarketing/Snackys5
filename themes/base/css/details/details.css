@@ -105,8 +105,8 @@
 	font-size: smaller;
 }
 /* Paypal/Amazon */
-.add-pays,
-.payplan{
+.buy-wrapper .add-pays,
+.buy-wrapper .payplan{
     display: none;
 }
 #add-to-cart ~ .add-pays{

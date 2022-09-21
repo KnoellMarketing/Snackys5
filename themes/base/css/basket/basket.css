@@ -45,7 +45,7 @@ fileupload-wrapper:blank{
 .c-it .info-ul li{
     padding: .1rem 0
 }
-.c-it .qty{
+.c-it input.qty{
     border: 1px solid @defaultborder;
     border-radius: .3rem;
     padding: .5rem 1rem;

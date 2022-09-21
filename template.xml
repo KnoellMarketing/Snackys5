@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Template isFullResponsive="true">
     <Name>Snackys</Name>
-    <Author>Knoell Marketing</Author>
-    <URL>https://www.knoell-marketing.de</URL>
+    <Author>eRock Marketing</Author>
+    <URL>https://www.erock-marketing.de</URL>
     <MinShopVersion>5.1.0</MinShopVersion>
-    <Version>5.1.5</Version>
+    <Version>5.1.6</Version>
     <Preview>preview-snackys.png</Preview>
-    <Description>Ultraschnelles responsive JTL Template von Knoell Marketing</Description>
+    <Description>Ultraschnelles responsive JTL Template von eRock Marketing</Description>
     <Framework>Bootstrap4</Framework>
-	<ExsID>31fe34e5-f40d-4a6d-864e-2d2ec94c10fb</ExsID>
 	<Settings>
 		<Section Name="Allgemein" Key="general">
             <Setting Description="Komprimierung von JavaScript- und CSS-Dateien" Key="use_minify" Type="select" Value="Y">

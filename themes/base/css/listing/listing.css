@@ -1,7 +1,7 @@
 /* Endles Scrolling Spinner */
 .el-sc:last-child{
     height: 3.4rem;
-    z-index: 11;
+    z-index: 8;
     position: relative;
 }
 .el-sc:last-child button:not(#view-next-click){
