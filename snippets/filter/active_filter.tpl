@@ -6,7 +6,7 @@
                 {assign var=activeFilterValue value=$activeFilter->getValue()}
                 {assign var=activeValues value=$activeFilter->getActiveValues()}
                 {if $activeFilterValue !== null}
-                    {if $activeValues|is_array}
+                    {if is_array($activeValues)}
                         {foreach $activeValues as $filterOption}
                             {block name='snippets-filter-active-filter-values'}
                                 {link href=$activeFilter->getUnsetFilterURL($filterOption->getValue())

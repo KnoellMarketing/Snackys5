@@ -66,7 +66,7 @@
     {/foreach}
     {include file="snippets/zonen.tpl" id="opc_before_buy_form"}
     {block name="buyform-block"}
-    <form id="buy_form" method="post" action="{$Artikel->cURLFull}" class="jtl-validate mb-lg">
+    <form id="buy_form{if !empty($smarty.get.quickView)}-quickview{/if}" method="post" action="{$Artikel->cURLFull}" class="jtl-validate mb-lg">
         {$jtl_token}
         <div class="row product-primary" id="product-offer">
             <div class="product-gallery col-12 col-sm-6">
@@ -131,10 +131,10 @@
                                 {/block}
 
                                 {block name="productdetails-info-category-wrapper"}
-                                {assign var=i_kat value=($Brotnavi|@count)-2}
+                                {assign var=i_kat value=($Brotnavi|count)-2}
                                 {if $Einstellungen.artikeldetails.artikeldetails_kategorie_anzeigen === 'Y' && isset($Brotnavi[$i_kat])}
                                     <li class="product-category word-break nav-it">
-                                        <strong>{lang key="category" section="global"}: </strong><a href="{$Brotnavi[$i_kat]->getURLFull()}">{$Brotnavi[$i_kat]->getName()}</a>
+                                        <strong>{lang key="category" section="global"}: </strong><a href="{$Brotnavi[$i_kat]->getURLFull()}" {if !empty($smarty.get.quickView)}target="_blank"{/if}>{$Brotnavi[$i_kat]->getName()}</a>
                                     </li>
                                 {/if}
                                 {/block}  
@@ -166,12 +166,12 @@
                                         {block name="product-info-manufacturer"}
                                             <strong class="block first icon-wt">{lang key='manufacturer' section='productDetails'}: </strong>
                                             {if $Einstellungen.artikeldetails.artikel_weitere_artikel_hersteller_anzeigen === 'Y'}
-                                                <a href="{if !empty($Artikel->cHerstellerHomepage)}{$Artikel->cHerstellerHomepage}{else}{$Artikel->cHerstellerSeo}{/if}" title="{$Artikel->cHersteller|escape:'html'}" class="dpflex-a-c">
+                                                <a href="{if !empty($Artikel->cHerstellerHomepage)}{$Artikel->cHerstellerHomepage}{else}{$Artikel->cHerstellerURL}{/if}" title="{$Artikel->cHersteller|escape:'html'}" class="dpflex-a-c"{if !empty($Artikel->cHerstellerHomepage)} target="_blank"{/if}>
                                             {else}
                                                 <span class="dpflex-a-c">
                                             {/if}
                                                 {if ($Einstellungen.artikeldetails.artikeldetails_hersteller_anzeigen === 'B' || $Einstellungen.artikeldetails.artikeldetails_hersteller_anzeigen === 'BT') && !empty($Artikel->cHerstellerBildURLKlein)}	
-                                                <span class="img-ct icon icon-wt icon-xl contain">
+                                                <span class="img-ct icon icon-wt icon-xl contain img-manu">
                                                 {image lazy=true webp=true src=$Artikel->cHerstellerBildURLKlein alt=$Artikel->cHersteller|escape:'html'}
                                                 </span>
                                                 {/if}
@@ -191,10 +191,8 @@
                         {/block}
                         </div>
                         <div class="col-md-4 col-lg-6">  
-                            {block name="details-buy-actions-label-wrapper"}
-                                {if !($Artikel->nIstVater && $Artikel->kVaterArtikel == 0)}
-                                    {include file="productdetails/actions-labels.tpl"}
-                                {/if}
+                            {block name="details-buy-actions-label-wrapper"}                                
+								{include file="productdetails/actions-labels.tpl"}
                             {/block}
                         </div>
                     </div>
@@ -212,7 +210,7 @@
                     {/block}
                 {/if}
                 {/block}
-
+                {block name="productdetails-info-product-offer"}
                 <div class="product-offer">
                     <hr>
                     {block name="productdetails-info-hidden"}
@@ -224,13 +222,13 @@
                         <input type="hidden" name="VariKindArtikel" value="{$Artikel->kVariKindArtikel}" />
                     {/if}
                     {if isset($smarty.get.ek)}
-                        <input type="hidden" name="ek" value="{$smarty.get.ek|intval}" />
+                        {input type="hidden" name="ek" value=intval($smarty.get.ek)}
                     {/if}
                     <input type="hidden" id="AktuellerkArtikel" class="current_article" name="a" value="{$Artikel->kArtikel}" />
                     <input type="hidden" name="wke" value="1" />
                     <input type="hidden" name="show" value="1" />
-                    <input type="hidden" name="kKundengruppe" value="{$smarty.session.Kundengruppe->getID()}" />
-                    <input type="hidden" name="kSprache" value="{$smarty.session.kSprache}" />
+                    <input type="hidden" name="kKundengruppe" value="{JTL\Session\Frontend::getCustomerGroup()->getID()}" />
+                    <input type="hidden" name="kSprache" value="{JTL\Shop::getLanguageID()}" />
                     {/block}
                     {block name="productdetails-info-variation"}
                     <!-- VARIATIONEN -->
@@ -287,10 +285,12 @@
                     {/block}
                     {/if}
                     {block name='productdetails-details-include-uploads'}
-                        {include file="snippets/uploads.tpl" tplscope='product'}
+                        {if empty($smarty.get.quickView)}
+                            {include file="snippets/uploads.tpl" tplscope='product'}
+                        {/if}
                     {/block}
                     {block name="km-sonderpreis-bis"}
-                        {if !empty($Artikel->dSonderpreisEnde_de) && $Artikel->dSonderpreisEnde_de|date_format:"%y%m%d" >= $smarty.now|date_format:"%y%m%d"  && $Artikel->dSonderpreisStart_de|date_format:"%y%m%d" <= $smarty.now|date_format:"%y%m%d"}
+                        {if !empty($Artikel->dSonderpreisEnde_de) && $Artikel->dSonderpreisEnde_de|date_format:"%y%m%d" >= $smarty.now|date_format:"%y%m%d"  && $Artikel->dSonderpreisStart_de|date_format:"%y%m%d" <= $smarty.now|date_format:"%y%m%d" && $Artikel->Preise->Sonderpreis_aktiv == 1}
                             {if $snackyConfig.specialpriceDate == "C"}
                                 {assign var="uid" value="art_c_{$Artikel->kArtikel}_{1|mt_rand:20}"}
                                 <div id="{$uid}" class="sale-wp mb-sm mt-sm text-center panel">
@@ -470,7 +470,9 @@
                             {/block}
                             {block name="details-buy-submit-wrapper"}
                                 {*WARENKORB anzeigen wenn keine variationen mehr auf lager sind?!*}
-                                {include file="productdetails/basket.tpl"}
+                                {if empty($smarty.get.quickView)}
+                                    {include file="productdetails/basket.tpl"}
+                                {/if}
                             {/block}
                         {/block}
                         {block name="detail-notification-wrapper"}
@@ -496,17 +498,16 @@
                         </div>
                     </div>           
                     {block name="details-buy-actions-wrapper"}
-                        {if !($Artikel->nIstVater && $Artikel->kVaterArtikel == 0)}
-                            <div class="hidden">
-                                {include file="productdetails/actions.tpl"}
-                            </div>
-                        {/if}
+						<div class="hidden">
+							{include file="productdetails/actions.tpl"}
+						</div>
                     {/block}
                     {/block}
                     {if isset($varKombiJSON) && $varKombiJSON!= ''}
                     <script id="varKombiArr" type="application/json">{$varKombiJSON}</script>
                     {/if}
                 </div>
+                {/block}
             {/block}{* productdetails-detail-info *}
             {/block}{* productdetails-info *}
 			{include file="snippets/zonen.tpl" id="after_product_info" title="after_product_info"}
@@ -519,7 +520,8 @@
     </div>{* /row *}
 </form>
 {/block}
-	{if $Einstellungen.artikeldetails.artikeldetails_fragezumprodukt_anzeigen === 'P'}
+{block name="details-question-availability-modals"}
+	{if $Einstellungen.artikeldetails.artikeldetails_fragezumprodukt_anzeigen === 'P' && empty($smarty.get.quickView)}
 		<div class="modal fade mod-frm" id="pp-question_on_item" tabindex="-1" role="dialog" aria-labelledby="pp-question_on_item-label" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -551,7 +553,8 @@
 		  </div>
 		</div>
 	{/if}
-{if !isset($smarty.get.quickView) || $smarty.get.quickView != 1}
+{/block}
+{if empty($smarty.get.quickView)}
 
     {block name="details-tabs"}
     	{include file="productdetails/tabs.tpl"}
@@ -559,13 +562,13 @@
 
 
     {*SLIDERS*}
-    {if isset($Einstellungen.artikeldetails.artikeldetails_stueckliste_anzeigen) && $Einstellungen.artikeldetails.artikeldetails_stueckliste_anzeigen === 'Y' && isset($Artikel->oStueckliste_arr) && $Artikel->oStueckliste_arr|@count > 0
-        || isset($Einstellungen.artikeldetails.artikeldetails_produktbundle_nutzen) && $Einstellungen.artikeldetails.artikeldetails_produktbundle_nutzen === 'Y' && isset($Artikel->oProduktBundle_arr) && $Artikel->oProduktBundle_arr|@count > 0
+    {if isset($Einstellungen.artikeldetails.artikeldetails_stueckliste_anzeigen) && $Einstellungen.artikeldetails.artikeldetails_stueckliste_anzeigen === 'Y' && isset($Artikel->oStueckliste_arr) && $Artikel->oStueckliste_arr|count > 0
+        || isset($Einstellungen.artikeldetails.artikeldetails_produktbundle_nutzen) && $Einstellungen.artikeldetails.artikeldetails_produktbundle_nutzen === 'Y' && isset($Artikel->oProduktBundle_arr) && $Artikel->oProduktBundle_arr|count > 0
         || isset($Xselling->Standard->XSellGruppen) && count($Xselling->Standard->XSellGruppen) > 0
         || isset($Xselling->Kauf->Artikel) && count($Xselling->Kauf->Artikel) > 0
         || isset($oAehnlicheArtikel_arr) && count($oAehnlicheArtikel_arr) > 0}
         
-        {if isset($Einstellungen.artikeldetails.artikeldetails_stueckliste_anzeigen) && $Einstellungen.artikeldetails.artikeldetails_stueckliste_anzeigen === 'Y' && isset($Artikel->oStueckliste_arr) && $Artikel->oStueckliste_arr|@count > 0}
+        {if isset($Einstellungen.artikeldetails.artikeldetails_stueckliste_anzeigen) && $Einstellungen.artikeldetails.artikeldetails_stueckliste_anzeigen === 'Y' && isset($Artikel->oStueckliste_arr) && $Artikel->oStueckliste_arr|count > 0}
             <div class="partslist">
 				<hr class="invisible">
                 {lang key='listOfItems' section='global' assign='slidertitle'}
@@ -573,7 +576,7 @@
             </div>
         {/if}
 
-        {if isset($Einstellungen.artikeldetails.artikeldetails_produktbundle_nutzen) && $Einstellungen.artikeldetails.artikeldetails_produktbundle_nutzen === 'Y' && isset($Artikel->oProduktBundle_arr) && $Artikel->oProduktBundle_arr|@count > 0}
+        {if isset($Einstellungen.artikeldetails.artikeldetails_produktbundle_nutzen) && $Einstellungen.artikeldetails.artikeldetails_produktbundle_nutzen === 'Y' && isset($Artikel->oProduktBundle_arr) && $Artikel->oProduktBundle_arr|count > 0}
             <div class="bundle">
                 {include file="productdetails/bundle.tpl" ProductKey=$Artikel->kArtikel Products=$Artikel->oProduktBundle_arr ProduktBundle=$Artikel->oProduktBundlePrice ProductMain=$Artikel->oProduktBundleMain}
             </div>

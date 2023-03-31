@@ -14,7 +14,7 @@
                 {if $Einstellungen.navigationsfilter.hersteller_anzeigen_als == 'B'}
                     {block name='snippets-filter-manufacturer-item-image'}
                     <span class="img-ct icon ic-lg icon-wt">
-                        {image lazy=true webo=true src=$filterOption->getData('cBildpfadKlein') class="vmiddle filter-img"}
+                        {image lazy=true webp=true src=$filterOption->getData('cBildpfadKlein') alt=$filterOption->getName()|escape:'html' class="vmiddle filter-img"}
                     </span>
                     <span class="ctr">{$filterOption->getCount()}</span>
                     {/block}
@@ -22,7 +22,7 @@
                     {block name='snippets-filter-manufacturer-item-image-text'}
                         <span class="dpflex-a-center">
                             <span class="img-ct icon ic-lg icon-wt">
-                                {image lazy=true webp=true src=$filterOption->getData('cBildpfadKlein') class="vmiddle filter-img"}
+                                {image lazy=true webp=true src=$filterOption->getData('cBildpfadKlein') alt=$filterOption->getName()|escape:'html' class="vmiddle filter-img"}
                             </span>
                             <span class="word-break">{$filterOption->getName()}</span>
                         </span>
@@ -30,7 +30,6 @@
                     {/block}
                 {elseif $Einstellungen.navigationsfilter.hersteller_anzeigen_als === 'T'}
                     {block name='snippets-filter-manufacturer-item-text'}
-                        <i class="far fa-{if $filterIsActive === true}check-{/if}square snippets-filter-item-icon-right"></i>
                         <span class="word-break">{$filterOption->getName()}</span>
                         <span class="ctr">{$filterOption->getCount()}</span>
                     {/block}

@@ -1,7 +1,7 @@
 {block name='account-feedback'}
 <h1 class="h2 mb-spacer mb-small">{lang key='allRatings'}</h1>
 
-{if empty($smarty.session.Kunde->kKunde)}
+{if JTL\Session\Frontend::getCustomer()->getID() === 0}
     <div class="alert alert-danger">{lang key='loginFirst' section='product rating'}</div>
 {elseif $bewertungen|count == 0}
     <div class="alert alert-danger">{lang key='no feedback' section='product rating'}</div>

@@ -4,7 +4,7 @@
 {/block}
 {block name='content'}
 	{if !$editRechnungsadresse}
-		{if !$smarty.session.Warenkorb->hasDigitalProducts() && isset($checkout)
+		{if !JTL\Session\Frontend::getCart()->hasDigitalProducts() && isset($checkout)
 			&& $Einstellungen.kaufabwicklung.bestellvorgang_unregistriert === 'Y'}
 			<div class="form-group checkbox control-toggle">
 				<input type="hidden" name="unreg_form" value="1">
@@ -23,7 +23,7 @@
 
 		<div id="create_account_data" class="collapse show collapse-non-validate" aria-expanded="true"
 					{if empty($checkout)
-                        || $smarty.session.Warenkorb->hasDigitalProducts()
+                        || JTL\Session\Frontend::getCart()->hasDigitalProducts()
                         || $Einstellungen.kaufabwicklung.bestellvorgang_unregistriert === 'N'
                         || ($unregForm !== 1 && !empty($fehlendeAngaben))}
 						

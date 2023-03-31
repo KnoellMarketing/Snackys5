@@ -1,5 +1,5 @@
 {block name='productdetails-review-item'}
-<div id="comment{$oBewertung->kBewertung}" class="review-comment {if $Einstellungen.bewertung.bewertung_hilfreich_anzeigen === 'Y' && isset($smarty.session.Kunde->kKunde) && $smarty.session.Kunde->kKunde > 0 && $smarty.session.Kunde->kKunde != $oBewertung->kKunde}use_helpful{/if} {if isset($bMostUseful) && $bMostUseful}most_useful{/if}">
+<div id="comment{$oBewertung->kBewertung}" class="review-comment {if $Einstellungen.bewertung.bewertung_hilfreich_anzeigen === 'Y' && JTL\Session\Frontend::getCustomer()->getID() > 0 && JTL\Session\Frontend::getCustomer()->getID() !== $oBewertung->kKunde}use_helpful{/if} {if isset($bMostUseful) && $bMostUseful}most_useful{/if}">
     {block name="productdetails-review-content"}
     <div class="top5">
         <div class="title dpflex-j-between dpflex-a-start">
@@ -37,10 +37,16 @@
                 <cite><span><span>{$oBewertung->cName}</span></span>.</cite>,
                 {$oBewertung->Datum}
             </small>
+			{block name='productdetails-review-item-details-verified-purchase'}
+				{if !empty($oBewertung->wasPurchased)}
+					<span class="blockquote-divider"></span>
+					<span class="verified-purchase">{lang key='verifiedPurchase' section='product rating'}</span>
+				{/if}
+			{/block}
         </blockquote>
         
         {if $Einstellungen.bewertung.bewertung_hilfreich_anzeigen === 'Y'}
-            {if isset($smarty.session.Kunde) && $smarty.session.Kunde->kKunde > 0 && $smarty.session.Kunde->kKunde != $oBewertung->kKunde}
+            {if JTL\Session\Frontend::getCustomer()->getID() > 0 && JTL\Session\Frontend::getCustomer()->getID() !== $oBewertung->kKunde}
                 <div class="review-helpful btn-group" id="help{$oBewertung->kBewertung}">
                     <button class="helpful btn btn-xs" title="{lang key="yes"}" name="hilfreich_{$oBewertung->kBewertung}" type="submit">
                         <div class="img-ct icon">

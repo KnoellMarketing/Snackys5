@@ -13,7 +13,7 @@
                     {foreach $oBox->getItems() as $newsMonth}
                         {block name='boxes-box-news-month-news-link'}
                             <li class="nav-it">
-                                <a href="{$newsMonth->cURL}" title="{$newsMonth->cName}" class="dpflex">
+                                <a href="{$newsMonth->cURLFull}" title="{$newsMonth->cName}" class="dpflex">
                                     <span class="name">{$newsMonth->cName}</span>
                                     <span class="ctr">{$newsMonth->nAnzahl}</span>
                                 </a>

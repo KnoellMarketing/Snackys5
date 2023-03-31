@@ -18,9 +18,9 @@
                 alt=$alt 
                 webp=true
                 src="{$image->cURLKlein}"
-                srcset="{$image->cURLMini} {$Einstellungen.bilder.bilder_artikel_mini_breite}w,
-                         {$image->cURLKlein} {$Einstellungen.bilder.bilder_artikel_klein_breite}w,
-                         {$image->cURLNormal} {$Einstellungen.bilder.bilder_artikel_normal_breite}w"
+                srcset="{$image->cURLMini} {$image->imageSizes->xs->size->width}w,
+                         {$image->cURLKlein} {$image->imageSizes->sm->size->width}w,
+                         {$image->cURLNormal} {$image->imageSizes->md->size->width}w"
                 sizes="auto"
                 class="{if !$isMobile && !empty($Artikel->Bilder[1])} first{/if}"
                 lazy=true
@@ -32,9 +32,9 @@
 
                 {image alt=$alt fluid=true webp=true lazy=true
                     src="{$image2->cURLKlein}"
-                    srcset="{$image2->cURLMini} {$Einstellungen.bilder.bilder_artikel_mini_breite}w,
-                             {$image2->cURLKlein} {$Einstellungen.bilder.bilder_artikel_klein_breite}w,
-                             {$image2->cURLNormal} {$Einstellungen.bilder.bilder_artikel_normal_breite}w"
+                    srcset="{$image2->cURLMini} {$image2->imageSizes->xs->size->width}w,
+                             {$image2->cURLKlein} {$image2->imageSizes->sm->size->width}w,
+                             {$image2->cURLNormal} {$image2->imageSizes->md->size->width}w"
                     sizes="auto"
                     class="{if !$isMobile && !empty($Artikel->Bilder[1])} first{/if}"
                     fluid=true

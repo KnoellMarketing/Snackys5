@@ -10,10 +10,10 @@
     {if $nQuestion < $AWA->getCurQuestion()}
         <span class="selection-wizard-answer">
             {assign var="oWert" value=$AWA->getSelectedValue($nQuestion)}
-            {if $AWA->getConf('auswahlassistent_anzeigeformat')|in_array:['B', 'BT']:true && $oWert->cBildpfadKlein !== ''}
+            {if in_array($AWA->getConf('auswahlassistent_anzeigeformat'), ['B', 'BT'], true)}
                 <img src="{$imageBaseURL}{$oWert->cBildpfadKlein}" alt="{$oWert->getValue()}" title="{$oWert->getValue()}">
             {/if}
-            {if $AWA->getConf('auswahlassistent_anzeigeformat')|in_array:['T', 'BT', 'S']:true}
+            {if in_array($AWA->getConf('auswahlassistent_anzeigeformat'), ['T', 'BT', 'S'], true)}
                 {$oWert->getValue()}
             {/if}
         </span>
@@ -37,10 +37,10 @@
             {foreach $oFrage->oWert_arr as $oWert}
                 {if isset($oWert->nAnzahl)}
                     <a class="selection-wizard-answer" href="#" onclick="return setSelectionWizardAnswerJS({$oWert->kMerkmalWert});">
-                        {if $AWA->getConf('auswahlassistent_anzeigeformat')|in_array:['B', 'BT']:true && $oWert->cBildpfadKlein !== ''}
+                        {if in_array($AWA->getConf('auswahlassistent_anzeigeformat'), ['B', 'BT'], true)}
                             <img src="{$imageBaseURL}{$oWert->cBildpfadKlein}" alt="{$oWert->getValue()}" title="{$oWert->getValue()}">
                         {/if}
-                        {if $AWA->getConf('auswahlassistent_anzeigeformat')|in_array:['T', 'BT']:true}
+                        {if in_array($AWA->getConf('auswahlassistent_anzeigeformat'), ['T', 'BT'], true)}
                             <span>{$oWert->getValue()}</span>
                             {if $AWA->getConf('auswahlassistent_anzahl_anzeigen') === 'Y'}
                                 <span class="badge">
@@ -62,10 +62,10 @@
             {foreach $oFrage->oWert_arr as $oWert}
                 {if $oWert->getCount() > 0}
                     <span class="selection-wizard-answer">
-                        {if $AWA->getConf('auswahlassistent_anzeigeformat')|in_array:['B', 'BT']:true && $oWert->cBildpfadKlein !== ''}
+                        {if in_array($AWA->getConf('auswahlassistent_anzeigeformat'), ['B', 'BT'], true)}
                             <img src="{$imageBaseURL}{$oWert->cBildpfadKlein}" alt="{$oWert->getValue()}" title="{$oWert->getValue()}">
                         {/if}
-                        {if $AWA->getConf('auswahlassistent_anzeigeformat')|in_array:['T', 'BT']:true}
+                        {if in_array($AWA->getConf('auswahlassistent_anzeigeformat'), ['T', 'BT'], true)}
                             {$oWert->getValue()}
                         {/if}
                     </span>

@@ -16,7 +16,7 @@
                         {foreach $oBox->getProducts() as $product}
                             <li class="dpflex-a-center nav-it">
                                 <a class="img-ct icon ic-lg icon-wt" href="{$product->cURLFull}">
-                                    {include file='snippets/image.tpl' item=$product srcSize='sm'}
+                                    {include file='snippets/image.tpl' item=$product srcSize='sm' sizes= '(min-width: 1300px) 10vw, (min-width: 992px) 13vw, (min-width: 768px) 34vw, 50vw'}
                                 </a>
                                 <div class="block">
                                     {link class="productbox-title" href=$product->cURLFull}

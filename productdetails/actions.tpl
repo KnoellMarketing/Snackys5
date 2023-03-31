@@ -6,13 +6,15 @@
         {if $Artikel->kArtikelVariKombi > 0}
             {assign var=kArtikel value=$Artikel->kArtikelVariKombi}
         {/if}
-        {if $Einstellungen.global.global_wunschliste_anzeigen === 'Y'}
-            <button id="wl-action" name="Wunschliste" type="submit"title="{lang key='addToWishlist' section='productDetails'}">
-            </button>
-        {/if}
-        {if $Einstellungen.artikeldetails.artikeldetails_vergleichsliste_anzeigen === 'Y' && $Einstellungen.vergleichsliste.vergleichsliste_anzeigen === 'Y'}
-            <button id="vg-action" name="Vergleichsliste" type="submit" title="{lang key='addToCompare' section='productDetails'}">
-            </button>
+		{if !($Artikel->nIstVater && $Artikel->kVaterArtikel == 0)}
+			{if $Einstellungen.global.global_wunschliste_anzeigen === 'Y'}
+				<button id="wl-action" name="Wunschliste" type="submit"title="{lang key='addToWishlist' section='productDetails'}">
+				</button>
+			{/if}
+			{if $Einstellungen.artikeldetails.artikeldetails_vergleichsliste_anzeigen === 'Y' && $Einstellungen.vergleichsliste.vergleichsliste_anzeigen === 'Y'}
+				<button id="vg-action" name="Vergleichsliste" type="submit" title="{lang key='addToCompare' section='productDetails'}">
+				</button>
+			{/if}
         {/if}
         {if $Einstellungen.artikeldetails.artikeldetails_fragezumprodukt_anzeigen === 'P'}
             <button type="button" id="z{$kArtikel}" title="{lang key='productQuestion' section='productDetails'}" data-toggle="modal" data-target="#pp-question_on_item">

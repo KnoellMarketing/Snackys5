@@ -13,12 +13,15 @@
     {if $oNavigationsinfo->getCategory() !== null}
         {$showTitle = in_array($Einstellungen['navigationsfilter']['kategorie_bild_anzeigen'], ['Y', 'BT'])}
         {$showImage = in_array($Einstellungen['navigationsfilter']['kategorie_bild_anzeigen'], ['B', 'BT'])}
+		{$navData = $oNavigationsinfo->getCategory()}
     {elseif $oNavigationsinfo->getManufacturer() !== null}
         {$showImage = in_array($Einstellungen['navigationsfilter']['hersteller_bild_anzeigen'], ['B', 'BT'])}
         {$showTitle = in_array($Einstellungen['navigationsfilter']['hersteller_bild_anzeigen'], ['Y', 'BT'])}
+		{$navData = $oNavigationsinfo->getManufacturer()}
     {elseif $oNavigationsinfo->getCharacteristicValue() !== null}
         {$showImage = in_array($Einstellungen['navigationsfilter']['merkmalwert_bild_anzeigen'], ['B', 'BT'])}
         {$showTitle = in_array($Einstellungen['navigationsfilter']['merkmalwert_bild_anzeigen'], ['Y', 'BT'])}
+		{$navData = $oNavigationsinfo->getCharacteristicValue()}
     {/if}
     {include file="snippets/zonen.tpl" id="opc_before_heading"}
     
@@ -39,7 +42,8 @@
 				{image src=$oNavigationsinfo->getImageURL()
 					webp=true
 					lazy=true
-					alt="{if $oNavigationsinfo->getCategory() !== null}{$oNavigationsinfo->getCategory()->cBeschreibung|strip_tags|truncate:40|escape:'html'}{elseif $oNavigationsinfo->getManufacturer() !== null}{$oNavigationsinfo->getManufacturer()->cBeschreibung|strip_tags|truncate:40|escape:'html'}{/if}"
+				  	sizes="{if !$bExclusive && $boxes.left !== null && !empty(trim(strip_tags($boxes.left))) && $smarty.const.PAGE_ARTIKELLISTE === $nSeitenTyp}(min-width: 992px) 67vw, (min-width: 1300px) 75vw, 100vw{/if} "
+					alt="{if $oNavigationsinfo->getCategory() !== null && !empty($navData->getImageAlt())}{$navData->getImageAlt()}{else}{$navData->getDescription()|default:''|strip_tags|truncate:50}{/if}"
 					class="img-responsive"}
 			  </div>
 			</div>
@@ -47,18 +51,18 @@
 			{/if}
 			{if $Einstellungen.navigationsfilter.kategorie_beschreibung_anzeigen === 'Y'
             && $oNavigationsinfo->getCategory() !== null
-            && $oNavigationsinfo->getCategory()->cBeschreibung|strlen > 0}
-				<div class="item_desc custom_content">{if $snackyConfig.optimize_kategorie == "Y"}{$oNavigationsinfo->getCategory()->cBeschreibung|optimize}{else}{$oNavigationsinfo->getCategory()->cBeschreibung}{/if}</div>
+            && $oNavigationsinfo->getCategory()->getDescription()|strlen > 0}
+				<div class="item_desc custom_content">{if $snackyConfig.optimize_kategorie == "Y"}{$oNavigationsinfo->getCategory()->getDescription()|optimize}{else}{$oNavigationsinfo->getCategory()->getDescription()}{/if}</div>
 			{/if}
 			{if $Einstellungen.navigationsfilter.hersteller_beschreibung_anzeigen === 'Y'
             && $oNavigationsinfo->getManufacturer() !== null
-            && $oNavigationsinfo->getManufacturer()->cBeschreibung|strlen > 0}
-				<div class="item_desc custom_content">{if $snackyConfig.optimize_kategorie == "Y"}{$oNavigationsinfo->getManufacturer()->cBeschreibung|optimize}{else}{$oNavigationsinfo->getManufacturer()->cBeschreibung}{/if}</div>
+            && $oNavigationsinfo->getManufacturer()->getDescription()|strlen > 0}
+				<div class="item_desc custom_content">{if $snackyConfig.optimize_kategorie == "Y"}{$oNavigationsinfo->getManufacturer()->getDescription()|optimize}{else}{$oNavigationsinfo->getManufacturer()->getDescription()}{/if}</div>
 			{/if}
 			{if $Einstellungen.navigationsfilter.merkmalwert_beschreibung_anzeigen === 'Y'
             && $oNavigationsinfo->getCharacteristicValue() !== null
-            && $oNavigationsinfo->getCharacteristicValue()->cBeschreibung|strlen > 0}
-				<div class="item_desc custom_content">{if $snackyConfig.optimize_kategorie == "Y"}{$oNavigationsinfo->getCharacteristicValue()->cBeschreibung|optimize}{else}{$oNavigationsinfo->getCharacteristicValue()->cBeschreibung}{/if}</div>
+            && $oNavigationsinfo->getCharacteristicValue()->getDescription()|strlen > 0}
+				<div class="item_desc custom_content">{if $snackyConfig.optimize_kategorie == "Y"}{$oNavigationsinfo->getCharacteristicValue()->getDescription()|optimize}{else}{$oNavigationsinfo->getCharacteristicValue()->getDescription()}{/if}</div>
 			{/if}
 			{if $oNavigationsinfo->getImageURL()|strpos:'gfx/keinBild.gif' === false && $oNavigationsinfo->getImageURL()|strpos:'gfx/keinBild_kl.gif' === false &&  $showImage}
 			</div>
@@ -69,7 +73,7 @@
 {/block}
 
 {block name="productlist-subcategories"}
-{if $Einstellungen.navigationsfilter.artikeluebersicht_bild_anzeigen !== 'N' && $oUnterKategorien_arr|@count > 0}
+{if $Einstellungen.navigationsfilter.artikeluebersicht_bild_anzeigen !== 'N' && $oUnterKategorien_arr|count > 0}
 	{include file="snippets/zonen.tpl" id="opc_before_subcategories"}
     <div class="row row-multi sc-w mb-spacer mb-small">
         {foreach $oUnterKategorien_arr as $Unterkat}
@@ -81,12 +85,30 @@
 							{if $viewportImages < 4}
 								{image fluid=true lazy=false webp=true
 									src=$Unterkat->getImage(\JTL\Media\Image::SIZE_MD)
-									alt=$Unterkat->getName()}
+									alt=$Unterkat->getName()
+									srcset="
+										{$Unterkat->getImage(\JTL\Media\Image::SIZE_XS)}
+										{$Unterkat->getImageWidth(\JTL\Media\Image::SIZE_XS)}w,
+										{$Unterkat->getImage(\JTL\Media\Image::SIZE_SM)}
+										{$Unterkat->getImageWidth(\JTL\Media\Image::SIZE_SM)}w,
+										{$Unterkat->getImage(\JTL\Media\Image::SIZE_MD)}
+										{$Unterkat->getImageWidth(\JTL\Media\Image::SIZE_MD)}w"|strip
+									sizes="(min-width: 992px) 25vw, 33vw"
+								}
 								{assign var=viewportImages value=$viewportImages+1 scope="global"}
 							{else}
 								{image fluid=true lazy=true webp=true
 									src=$Unterkat->getImage(\JTL\Media\Image::SIZE_MD)
-									alt=$Unterkat->getName()}
+									alt=$Unterkat->getName()
+									srcset="
+										{$Unterkat->getImage(\JTL\Media\Image::SIZE_XS)}
+										{$Unterkat->getImageWidth(\JTL\Media\Image::SIZE_XS)}w,
+										{$Unterkat->getImage(\JTL\Media\Image::SIZE_SM)}
+										{$Unterkat->getImageWidth(\JTL\Media\Image::SIZE_SM)}w,
+										{$Unterkat->getImage(\JTL\Media\Image::SIZE_MD)}
+										{$Unterkat->getImageWidth(\JTL\Media\Image::SIZE_MD)}w"|strip
+									sizes="(min-width: 992px) 25vw, 33vw"
+								}
 							{/if}
                             </div>
                     </a>

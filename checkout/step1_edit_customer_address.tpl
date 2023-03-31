@@ -1,5 +1,5 @@
 {block name='checkout-step1-edit-customer-address'}
-{if isset($editRechnungsadresse) && $editRechnungsadresse === 1 && !empty($smarty.session.Kunde->kKunde)}
+{if isset($editRechnungsadresse) && $editRechnungsadresse === 1 && JTL\Session\Frontend::getCustomer()->getID() > 0}
     {assign var="unreg_form" value=0}
     {assign var="unreg_step" value=$step}
 {else}

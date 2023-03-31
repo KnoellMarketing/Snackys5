@@ -145,7 +145,7 @@
                                             {if ((isset($smarty.session.Sprachen) && $smarty.session.Sprachen|@count > 1) && (isset($smarty.session.Waehrungen) && $smarty.session.Waehrungen|@count > 1))}
                                             &
                                             {/if}
-                                            {if isset($smarty.session.Waehrungen) && $smarty.session.Waehrungen|@count > 1}
+                                            {if JTL\Session\Frontend::getCurrencies()|count > 1}
                                             {lang key="currency" section="global"}
                                             {/if}
                                             {if $snackyConfig.footerBoxesOpen === '0'}<span class="caret"></span>{/if}
@@ -160,13 +160,13 @@
 										{/block}
 										{block name="footer-currency"}
 										{if (!isset($smallversion) || !$smallversion)}
-											{if isset($smarty.session.Waehrungen) && $smarty.session.Waehrungen|@count > 1}
+											{if JTL\Session\Frontend::getCurrencies()|count > 1}
 											<div class="dropdown">
 												<a href="#" class="dropdown-toggle btn btn-block btn-sm" data-toggle="dropdown" title="{lang key='selectCurrency'}">
-													{$smarty.session.Waehrung->getName()}
+													{JTL\Session\Frontend::getCurrency()->getName()}
 													<span class="caret"></span></a>
 												<ul id="currency-dropdown" class="dropdown-menu dropdown-menu-left">
-												{foreach from=$smarty.session.Waehrungen item=oWaehrung}
+												{foreach JTL\Session\Frontend::getCurrencies() item=oWaehrung}
 													<li>
 														<a href="{$oWaehrung->getURL()}" rel="nofollow">{$oWaehrung->getName()}</a>
 													</li>
@@ -300,7 +300,7 @@
 					{checkCopyfree cAssign="snackysCopyfree"}
 					{if !$snackysCopyfree}
 						<li id="template-copyright">
-							Made with <span class="color-brand">&hearts;</span> by <a href="https://www.knoell-marketing.de/" title="Werbeagentur - Knoell marketing">Knoell Marketing</a>
+							Made with <span class="color-brand">&hearts;</span> by <a href="https://www.erock-marketing.de/" title="eCommerce Agency - eRock marketing">eRock Marketing</a>
 						</li>
 					{/if}
 				</ul>
@@ -476,7 +476,7 @@
 			{* Google Analytics 4 / Ads Tracking *}
 			{if !empty($snackyConfig.google_ads|trim) || !empty($snackyConfig.google_analytics_four|trim)}
 				{if $snackyConfig.gads_analytics_consentmode == 'Y'}
-					<script async src="https://www.googletagmanager.com/gtag/js?id={if !empty($snackyConfig.google_analytics_four|trim)}{$snackyConfig.google_analytics_four|trim}{else}{$snackyConfig.google_ads|trim}{/if}Z&l=gtagDataLayer"></script
+					<script async src="https://www.googletagmanager.com/gtag/js?id={if !empty($snackyConfig.google_analytics_four|trim)}{$snackyConfig.google_analytics_four|trim}{else}{$snackyConfig.google_ads|trim}{/if}&l=gtagDataLayer"></script>
 					<script>
 						gtagLoaded = true;
 					</script>
@@ -516,7 +516,7 @@
 
 								var f=document.getElementsByTagName('script')[0],
 										j=document.createElement('script');j.async=true;
-								j.src='https://www.googletagmanager.com/gtag/js?id={if !empty($snackyConfig.google_analytics_four|trim)}{$snackyConfig.google_analytics_four|trim}{else}{$snackyConfig.google_ads|trim}{/if}Z&l=gtagDataLayer';
+								j.src='https://www.googletagmanager.com/gtag/js?id={if !empty($snackyConfig.google_analytics_four|trim)}{$snackyConfig.google_analytics_four|trim}{else}{$snackyConfig.google_ads|trim}{/if}&l=gtagDataLayer';
 								f.parentNode.insertBefore(j,f);
 							}
 
@@ -611,7 +611,7 @@
 			{inline_script}
 			<script>
 				document.addEventListener('consent.updated', function(e) {
-					$.post('{$ShopURLSSL}/', {
+					$.post('{$ShopURLSSL}/_updateconsent', {
 							'action': 'updateconsent',
 							'jtl_token': '{$smarty.session.jtl_token}',
 							'data': e.detail
@@ -625,7 +625,7 @@
 				{/if}
 
 				window.CM = new ConsentManager({
-					version: 1
+					version: {$smarty.session.consentVersion|default:1}
 				});
 				var trigger = document.querySelectorAll('.trigger')
 				var triggerCall = function(e) {
@@ -672,7 +672,7 @@
 			{* Google Analytics 4 / Google Ads *}
 			{if !empty($snackyConfig.google_ads|trim) || !empty($snackyConfig.google_analytics_four|trim)}
 				{inline_script}
-				<script async src="https://www.googletagmanager.com/gtag/js?id={if !empty($snackyConfig.google_analytics_four|trim)}{$snackyConfig.google_analytics_four|trim}{else}{$snackyConfig.google_ads|trim}{/if}Z&l=gtagDataLayer"></script
+				<script async src="https://www.googletagmanager.com/gtag/js?id={if !empty($snackyConfig.google_analytics_four|trim)}{$snackyConfig.google_analytics_four|trim}{else}{$snackyConfig.google_ads|trim}{/if}Z&l=gtagDataLayer"></script>
 				<script>
 					gtagLoaded = true;
 				</script>

@@ -21,7 +21,7 @@
                                         {assign var=int1 value=5}
                                         {math equation='x - y' x=$int1 y=$i assign='schluessel'}
                                         {assign var=int2 value=100}
-                                        {math equation='a/b*c' a=$nSterne b=$Artikel->Bewertungen->oBewertungGesamt->nAnzahl c=$int2 assign='percent'}
+                                        {math equation='(a/b)*c' a=$nSterne b=$Artikel->Bewertungen->oBewertungGesamt->nAnzahl c=$int2 assign='percent'}
                                         <div class="dpflex-a-center">
                                             <div class="text">
                                                 {if isset($bewertungSterneSelected) && $bewertungSterneSelected === $schluessel}
@@ -118,6 +118,11 @@
         {/if}
 
         {if $ratingPagination->getPageItemCount() > 0}
+			{block name='productdetails-reviews-verified-purchase-notice'}
+				{button type="link" variant="outline-secondary" block="true" class="verified-purchase-notice" data=["toggle"=>"popover","content"=>"{{lang key='verifiedPurchaseNotice' section='product rating'}|escape:"html"}"]}
+					{lang key='reviewsHowTo' section='product rating'}
+				{/button}
+			{/block}
             <form method="post" action="{get_static_route id='bewertung.php'}#tab-votes" class="reviews-list">
                 {$jtl_token}
                 <input name="bhjn" type="hidden" value="1" />
@@ -131,7 +136,9 @@
                     </div>
                 {/foreach}
             </form>
-            {include file="snippets/pagination.tpl" oPagination=$ratingPagination cThisUrl=$Artikel->cURLFull cAnchor='tab-votes' showFilter=false}
+			{if empty($smarty.get.quickView)}
+				{include file='snippets/pagination.tpl' oPagination=$ratingPagination cThisUrl=$Artikel->cURLFull cParam_arr=['btgsterne'=>$bewertungSterneSelected] cAnchor='tab-votes' showFilter=false}
+			{/if}
         {/if}
     </div>{* /col *}
     {/if}

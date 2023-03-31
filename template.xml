@@ -3,8 +3,8 @@
     <Name>Snackys</Name>
     <Author>eRock Marketing</Author>
     <URL>https://www.erock-marketing.de</URL>
-    <MinShopVersion>5.1.0</MinShopVersion>
-    <Version>5.1.6</Version>
+    <MinShopVersion>5.2.0</MinShopVersion>
+    <Version>5.2.0</Version>
     <Preview>preview-snackys.png</Preview>
     <Description>Ultraschnelles responsive JTL Template von eRock Marketing</Description>
     <Framework>Bootstrap4</Framework>
@@ -118,6 +118,7 @@
 				<File Path="js/snackys/jtl.io.js"/>
 				<File Path="js/snackys/jtl.gallery.js"/>
 				<File Path="js/snackys/jquery.zoom.min.js"/>
+				<File Path="js/parallax.min.js"/>
 				<File Path="js/snackys/spin.js"/>
 				<File Path="js/snackys/global.js"/>
 				<File Path="js/snackys/listing.js" />
@@ -126,7 +127,8 @@
 				<File Path="js/nouislider.min.js" />
 				<File Path="js/slick-lightbox.min.js" />
 				<File Path="js/consent.js" />
-				
+				<File Path="js/snackys/livesearch.js" />
+
 				
 				<File Path="js/typeahead.bundle.js" DependsOnSettingGroup="CONF_TEMPLATE" DependsOnSetting="template.general.use_typehead" DependsOnSettingValue="Y"/>
 				<File Path="js/typeahead.fallback.js" DependsOnSettingGroup="CONF_TEMPLATE" DependsOnSetting="template.general.use_typehead" DependsOnSettingValue="N"/>

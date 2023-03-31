@@ -18,7 +18,11 @@
             <div class="alert alert-success">{$pushedArtikel->cName} {lang key="productAddedToCart" section="global"}</div>
         {/if}
 	{/block}
-    {if $smarty.session.Warenkorb->PositionenArr|@count > 0}
+    {$cartPositions = JTL\Session\Frontend::getCart()->PositionenArr}
+	{block name='basket-cart-dropdown-max-cart-positions'}
+		{$maxCartPositions = 15}
+	{/block}
+	{if $cartPositions|count > 0}
        {block name='sidebasket-filled'}
            {if !empty($WarenkorbVersandkostenfreiHinweis)}
               {block name='sidebasket-versandfrei-hinweis'}
@@ -33,9 +37,10 @@
                <form id="cart-form-xs" method="post" action="{get_static_route id='warenkorb.php'}">
                    {if isset($jtl_token)}{$jtl_token}{/if}
                        <input type="hidden" name="wka" value="1" />
-                        {foreach name="positionen" from=$smarty.session.Warenkorb->PositionenArr item=oPosition}
+                        {foreach $cartPositions as $oPosition}
                             {if !$oPosition->istKonfigKind()}
-                                {if $oPosition->nPosTyp == C_WARENKORBPOS_TYP_ARTIKEL}
+                                {if $oPosition->nPosTyp == $smarty.const.C_WARENKORBPOS_TYP_ARTIKEL
+				   				|| $oPosition->nPosTyp == $smarty.const.C_WARENKORBPOS_TYP_GRATISGESCHENK}
                                    {block name='sidebasket-items-warenkorbartikel'}
                                         <div class="sc-item dropdown">
                                             <div class="dpflex-a-center">
@@ -159,7 +164,7 @@
                                 <div class="text-nowrap text-right"><span>{$WarensummeLocalized[$NettoPreise]}</span></div>
                             </div>
                         {/if}
-                        {if $Einstellungen.global.global_steuerpos_anzeigen !== 'N' && isset($Steuerpositionen) && $Steuerpositionen|@count > 0}
+                        {if $Einstellungen.global.global_steuerpos_anzeigen !== 'N' && isset($Steuerpositionen) && $Steuerpositionen|count > 0}
                             {foreach $Steuerpositionen as $Steuerposition}
                                 <div class="text-muted tax dpflex-j-between cols-sums">
                                     <div colspan="3">{$Steuerposition->cName}</div>

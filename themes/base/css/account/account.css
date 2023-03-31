@@ -32,3 +32,9 @@
         margin-top: 2rem;
     }
 }
+@media screen and (max-width: 549px){
+	.sa-card .btn{
+		padding-left: .6rem;
+		padding-right: .6rem;
+	}
+}

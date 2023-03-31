@@ -4,13 +4,13 @@
     {block name="top-bar-user-settings"}
     <ul class="list-inline">
         {block name="top-bar-user-settings-currency"}
-        {if isset($smarty.session.Waehrungen) && $smarty.session.Waehrungen|@count > 1}
+        {if JTL\Session\Frontend::getCurrencies()|count > 1}
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle dpflex-a-center" data-toggle="dropdown" title="{lang key='selectCurrency'}">
-					{$smarty.session.Waehrung->getName()} <span class="caret"></span>
+					{JTL\Session\Frontend::getCurrency()->getName()} <span class="caret"></span>
 				</a>
                 <ul class="dropdown-menu">
-                {foreach from=$smarty.session.Waehrungen item=oWaehrung}
+                {foreach JTL\Session\Frontend::getCurrencies() item=oWaehrung}
                     <li>
                         <a href="{$oWaehrung->getURL()}" rel="nofollow">{$oWaehrung->getName()}</a>
                     </li>
@@ -38,7 +38,7 @@
     {block name="top-bar-cms-pages"}
         {foreach $linkgroups->getLinkGroupByTemplate('Kopf')->getLinks() as $Link}
 			<li{if $Link->getIsActive()} class="active"{/if}>
-				<a class="defaultlink" href="{$Link->getURL()}"{if $Link->getNoFollow()} rel="nofollow"{/if} title="{$Link->getTitle()}">{$Link->getName()}</a>
+				<a class="defaultlink" href="{$Link->getURL()}"{if $Link->getNoFollow()} rel="nofollow"{/if} title="{$Link->getTitle()}" target={$Link->getTarget()}>{$Link->getName()}</a>
 			</li>
         {/foreach}
     {/block}

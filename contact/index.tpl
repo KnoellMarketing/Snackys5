@@ -125,9 +125,7 @@
 							</div>
 						</div>
 					{/if}
-					{if !isset($cPost_arr)}
-						{assign var=cPost_arr value=array()}
-					{/if}
+					{assign var=cPost_arr value=$cPost_arr|default:[]}
 					{include file='snippets/checkbox.tpl' nAnzeigeOrt=$nAnzeigeOrt cPlausi_arr=$fehlendeAngaben cPost_arr=$cPost_arr}
 
 				</fieldset>
@@ -174,7 +172,7 @@
 					</div>
 				</fieldset>
                 {if (!isset($smarty.session.bAnti_spam_already_checked) || $smarty.session.bAnti_spam_already_checked !== true) &&
-                    isset($Einstellungen.kontakt.kontakt_abfragen_captcha) && $Einstellungen.kontakt.kontakt_abfragen_captcha !== 'N' && empty($smarty.session.Kunde->kKunde)}
+                    isset($Einstellungen.kontakt.kontakt_abfragen_captcha) && $Einstellungen.kontakt.kontakt_abfragen_captcha !== 'N' && JTL\Session\Frontend::getCustomer()->getID() === 0}
                     {captchaMarkup getBody=true}
 				{/if}
 				<input type="hidden" name="kontakt" value="1" />

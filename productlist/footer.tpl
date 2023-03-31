@@ -20,7 +20,7 @@
 	{include file="snippets/zonen.tpl" id="opc_before_footer"}
 	<div class="row">
 		<div class="col-12">
-	{include file="snippets/zonen.tpl" id="opc_before_footer"}
+	{include file="snippets/zonen.tpl" id="opc_before_footer_pagination"}
     <ul class="pagination pagination-ajax dpflex-j-center blanklist">
         {if $filterPagination->getPrev()->getPageNumber() > 0}
             <li class="prev icon-wt">

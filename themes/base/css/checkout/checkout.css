@@ -185,6 +185,9 @@ label[data-target="#create_account_data"]{
 	margin: 0;
 }
 /* Styled Controls */
+label.stc-radio{
+    cursor: pointer;
+}
 .stc-radio input[type="radio"],
 .stc-checkbox input[type="checkbox"],
 .ppc-checkout-payment-method input[type="radio"]{
@@ -374,6 +377,10 @@ label[data-target="#create_account_data"]{
 #select_shipping_address[aria-expanded="true"]{
     display: block;
 }
+/* Lieferadresse */
+.sa-card .stc-input{
+    margin-right: .75rem;
+}
 @media screen and (max-width: 1600px){
     body:not(.no-pd){
         padding-right: 25rem;
@@ -493,4 +500,8 @@ label[data-target="#create_account_data"]{
     #shipping-address{
         width: 100%;
     }
+	.sa-card .btn{
+		padding-left: .6rem;
+		padding-right: .6rem;
+	}
 }

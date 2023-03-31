@@ -1,7 +1,7 @@
 {block name="account-orders"}
     <h1 class="h2 mb-spacer mb-small">{block name="account-orders-title"}{lang key="myOrders"}{/block}</h1>
 
-    {if $Bestellungen|@count > 0}
+    {if $Bestellungen|count > 0}
         {block name="account-orders-body"}
             {assign var=bDownloads value=false}
             {foreach $Bestellungen as $order}
@@ -12,8 +12,9 @@
 
             <div class="card">
                 <div class="card-body">
+					{get_static_route id='jtl.php' assign='ordersURL'}
                     {foreach $orderPagination->getPageItems() as $order}
-                    <a href="{$cCanonicalURL}?bestellung={$order->kBestellung}" class="dpflex-a-center item" title="{lang key='showOrder' section='login'}: {lang key='orderNo' section='login'} {$order->cBestellNr}">
+                    <a href="{$ordersURL}?bestellung={$order->kBestellung}" class="dpflex-a-center item" title="{lang key='showOrder' section='login'}: {lang key='orderNo' section='login'} {$order->cBestellNr}">
                         <span class="w100">
                             <span class="row dpflex-a-center">
                                 <span class="col-6">

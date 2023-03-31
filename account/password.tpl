@@ -8,7 +8,7 @@
 	
     <div id="newpw">
 
-    {if $step === 'formular'}
+    {if $step !== 'confirm'}
         {block name="password-reset-form"}
             <h1 class="h2 mb-spacer mb-small">{lang key="forgotPassword" section="global"}</h1>    
             {if !empty($cFehler)}
@@ -32,6 +32,13 @@
                         required
                         />
                     </div>
+					{if (!isset($smarty.session.bAnti_spam_already_checked) || $smarty.session.bAnti_spam_already_checked !== true)
+					&& ($Einstellungen.kunden.forgot_password_captcha|default:'N')}
+						<div class="form-group float-label-control{if isset($fehlendeAngaben.captcha) && $fehlendeAngaben.captcha !== false} has-error{/if}">
+							{captchaMarkup getBody=true}
+						</div>
+						<hr>
+					{/if}
                     <div class="form-group">
                         {if $bExclusive === true}
                           <input type="hidden" name="exclusive_content" value="1" />
@@ -43,7 +50,7 @@
             </form>
             {/block}
         {/block}
-    {elseif $step === 'confirm'}
+    {else}
         {block name="password-reset-confirm"}
         <h1 class="h2 mb-spacer mb-small">{block name="password-reset-confirm-title"}{lang key="createNewPassword" section="forgot password"}{/block}</h1>    
         {if !empty($cFehler)}
@@ -72,9 +79,6 @@
             </form>
             {/block}
         {/block}
-    {else}
-        <h1 class="h2 mb-spacer mb-small">{block name="password-reset-confirm-title"}{lang key="createNewPassword" section="forgot password"}{/block}</h1> 
-        <div class="alert alert-success">{lang key="newPasswortWasGenerated" section="forgot password"}</div>
     {/if}
         </div>
 {/block}

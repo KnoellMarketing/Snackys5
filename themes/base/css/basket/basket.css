@@ -50,6 +50,13 @@ fileupload-wrapper:blank{
     border-radius: .3rem;
     padding: .5rem 1rem;
 }
+.c-it .inf-col .col-4{
+    display: flex;
+    flex-direction: column;
+}
+.c-it .droppos{
+    order: -1;
+}
 .add-pays{
     margin-top: .5rem;
 }
@@ -60,6 +67,9 @@ fileupload-wrapper:blank{
 /* PayPal Checkout JTL-Bug: Z-Index Fix */
 #snackys-tpl #paypal-button-cart-container iframe{
     z-index: 2;
+}
+#ppc-cart-horizontal-container{
+	margin: 0;
 }
 @media screen and (max-width: 991px){
     .basket-xsell{

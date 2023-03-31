@@ -22,20 +22,20 @@
             {if $Bestellung->dBezahldatum_de === '00.00.0000' || empty($Bestellung->dBezahldatum_de)}
                 <li>{$Bestellung->cZahlungsartName}</li>
                 <li>
-                    {if ($Bestellung->cStatus == BESTELLUNG_STATUS_OFFEN || $Bestellung->cStatus == BESTELLUNG_STATUS_IN_BEARBEITUNG)
+                    {if ($Bestellung->cStatus == $smarty.const.BESTELLUNG_STATUS_OFFEN || $Bestellung->cStatus == $smarty.const.BESTELLUNG_STATUS_IN_BEARBEITUNG)
                         && (($Bestellung->Zahlungsart->cModulId !== 'za_ueberweisung_jtl'
                         && $Bestellung->Zahlungsart->cModulId !== 'za_nachnahme_jtl'
                         && $Bestellung->Zahlungsart->cModulId !== 'za_rechnung_jtl'
                         && $Bestellung->Zahlungsart->cModulId !== 'za_barzahlung_jtl')
                         && (isset($Bestellung->Zahlungsart->bPayAgain) && $Bestellung->Zahlungsart->bPayAgain))}
-                            {link href="{get_static_route id='bestellab_again.php'}?kBestellung={$Bestellung->kBestellung}"}{lang key='payNow' section='global'}{/link}
+                            {link href="{get_static_route id='bestellabschluss.php'}?payAgain=1&kBestellung={$Bestellung->kBestellung}"}{lang key='payNow' section='global'}{/link}
                     {else}
                         {lang key='notPayedYet' section='login'}
                     {/if}
                 </li>
             {/if}
             {foreach $incommingPayments as $paymentProvider => $incommingPayment}
-                <li>{$paymentProvider|htmlentities}</li>
+                <li>{htmlentities($paymentProvider)}</li>
                 {foreach $incommingPayment as $payment}
                     <li>{$payment->paymentLocalization}</li>
                 {/foreach}
@@ -49,13 +49,13 @@
     {block name='order-details-shipping-body'}
         <ul class="blanklist">
             <li>{$Bestellung->cVersandartName}</li>
-            {if $Bestellung->cStatus == BESTELLUNG_STATUS_VERSANDT}
+            {if $Bestellung->cStatus == $smarty.const.BESTELLUNG_STATUS_VERSANDT}
                 <li>{lang key='shippedOn' section='login'} {$Bestellung->dVersanddatum_de}</li>
-            {elseif $Bestellung->cStatus == BESTELLUNG_STATUS_TEILVERSANDT}
+            {elseif $Bestellung->cStatus == $smarty.const.BESTELLUNG_STATUS_TEILVERSANDT}
                 <li>{$Bestellung->Status}</li>
             {else}
                 <li>{lang key='notShippedYet' section='login'}</li>
-                {if $Bestellung->cStatus != BESTELLUNG_STATUS_STORNO}
+                {if $Bestellung->cStatus != $smarty.const.BESTELLUNG_STATUS_STORNO}
                 <li><strong>{lang key='shippingTime' section='global'}</strong>: {if isset($cEstimatedDeliveryEx)}{$cEstimatedDeliveryEx}{else}{$Bestellung->cEstimatedDelivery}{/if}</li>
                 {/if}
             {/if}
@@ -63,9 +63,9 @@
     {/block}
     {/block}
 
-	{if $Bestellung->oLieferschein_arr|@count > 0}
+	{if $Bestellung->oLieferschein_arr|count > 0}
 	{block name="order-details-delivery-note"}
-		<div class="panel-title h6 mb-xxs">{if $Bestellung->cStatus == BESTELLUNG_STATUS_TEILVERSANDT}{lang key='partialShipped' section='order'}{else}{lang key='shipped' section='order'}{/if}</div>
+		<div class="panel-title h6 mb-xxs">{if $Bestellung->cStatus == $smarty.const.BESTELLUNG_STATUS_TEILVERSANDT}{lang key='partialShipped' section='order'}{else}{lang key='shipped' section='order'}{/if}</div>
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered">
 				<thead>
@@ -79,7 +79,7 @@
 					{foreach $Bestellung->oLieferschein_arr as $oLieferschein}
 						<tr>
 							<td><a class="popup-dep" id="{$oLieferschein->getLieferschein()}" href="#" title="{$oLieferschein->getLieferscheinNr()}">{$oLieferschein->getLieferscheinNr()}</a></td>
-							<td>{$oLieferschein->getErstellt()|date_format:"%d.%m.%Y %H:%M"}</td>
+							<td>{$oLieferschein->getErstellt()|date_format:'d.m.Y H:i'}</td>
 							<td class="text-right">{foreach $oLieferschein->oVersand_arr as $oVersand}{if $oVersand->getIdentCode()}<p><a href="{$oVersand->getLogistikVarUrl()}" target="_blank" class="shipment" title="{$oVersand->getIdentCode()}">{lang key='packageTracking' section='order'}</a></p>{/if}{/foreach}</td>
 						</tr>
 					{/foreach}
@@ -91,13 +91,13 @@
 		{foreach $Bestellung->oLieferschein_arr as $oLieferschein}
 			{block name='order-details-delivery-note-popup'}
 			<div id="popup{$oLieferschein->getLieferschein()}" class="hidden">
-				<h1>{if $Bestellung->cStatus == BESTELLUNG_STATUS_TEILVERSANDT}{lang key='partialShipped' section='order'}{else}{lang key='shipped' section='order'}{/if}</h1>
+				<h1>{if $Bestellung->cStatus == $smarty.const.BESTELLUNG_STATUS_TEILVERSANDT}{lang key='partialShipped' section='order'}{else}{lang key='shipped' section='order'}{/if}</h1>
 				<div class="well well-sm">
 					<strong>{lang key='shippingOrder' section='order'}</strong>: {$oLieferschein->getLieferscheinNr()}<br />
-					<strong>{lang key='shippedOn' section='login'}</strong>: {$oLieferschein->getErstellt()|date_format:"%d.%m.%Y %H:%M"}<br />
+					<strong>{lang key='shippedOn' section='login'}</strong>: {$oLieferschein->getErstellt()|date_format:'d.m.Y H:i'}<br />
 				</div>
 
-				{if $oLieferschein->getHinweis()|@count_characters > 0}
+				{if $oLieferschein->getHinweis()|strlen > 0}
 					<div class="alert alert-info">
 						{$oLieferschein->getHinweis()}
 					</div>
@@ -142,13 +142,13 @@
 											{/if}
 
 											{if $Einstellungen.kaufabwicklung.bestellvorgang_artikelmerkmale == 'Y' && !empty($oLieferscheinpos->oPosition->Artikel->oMerkmale_arr)}
-												{foreach $oLieferscheinpos->oPosition->Artikel->oMerkmale_arr as $oMerkmale_arr}
+												{foreach $oLieferscheinpos->oPosition->Artikel->oMerkmale_arr as $characteristic}
 													<li class="characteristic">
-														<strong>{$oMerkmale_arr->cName}</strong>:
+														<strong>{$characteristic->getName()}</strong>:
 														<span class="values">
-															{foreach $oMerkmale_arr->oMerkmalWert_arr as $oWert}
-																{if !$oWert@first}, {/if}
-																{$oWert->cWert}
+															{foreach $characteristic->getCharacteristicValues() as $characteristicValue}
+																{if !$characteristicValue@first}, {/if}
+																{$characteristicValue->getValue()}
 															{/foreach}
 														</span>
 													</li>
@@ -168,7 +168,7 @@
 	{/block}
 	{/if}
 
-	{if $Bestellung->cKommentar}
+	{if $Bestellung->cKommentar !== null && !empty(trim($Bestellung->cKommentar))}
     <hr>
 		<div class="panel-title h6 mb-xxs">{lang key="yourOrderComment" section="login"}</div>
 		<p>{$Bestellung->cKommentar}</p>

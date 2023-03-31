@@ -9,23 +9,51 @@
             <h1 class="text-center">
                 {$oNewsArchiv->getTitle()}
             </h1>
-            <div class="text-center">
-                {if empty($oNewsArchiv->getDateValidFrom())}
-                    {assign var=dDate value=$oNewsArchiv->getDateCreated()->format('Y-m-d H:i:s')}
-                {else}
-                    {assign var=dDate value=$oNewsArchiv->getDateValidFrom()->format('Y-m-d H:i:s')}
-                {/if}
-                {if $oNewsArchiv->getAuthor() !== null}
-                    {include file="snippets/author.tpl" oAuthor=$oNewsArchiv->getAuthor() dDate=$dDate cDate=$oNewsArchiv->getDateValidFrom()->format('Y-m-d H:i:s')}
-                {/if}
-                <span class="v-box">
-                {if empty($oNewsArchiv->getDateValidFrom())}
-                    {assign var=dDate value=$oNewsArchiv->getDateCreated()->format('d.m.Y')}
-                {else}
-                    {assign var=dDate value=$oNewsArchiv->getDateValidFrom()->format('d.m.Y')}
-                {/if}
-                </span>
-            </div>
+            {block name='blog-details-author'}
+				<div class="author-meta text-center">
+					{if empty($newsItem->getDateValidFrom())}
+						{assign var=dDate value=$newsItem->getDateCreated()->format('d.m.Y')}
+					{else}
+						{assign var=dDate value=$newsItem->getDateValidFrom()->format('d.m.Y')}
+					{/if}
+					<span class="date">{$dDate}</span>
+					{if isset($Einstellungen.news.news_kategorie_unternewsanzeigen) && $Einstellungen.news.news_kategorie_unternewsanzeigen === 'Y' && !empty($oNewsKategorie_arr)}
+						{block name='blog-details-sub-news'}
+							<span class="news-categorylist">
+								{if $newsItem->getAuthor() === null}/{/if}
+								{foreach $oNewsKategorie_arr as $newsCategory}
+									{link itemprop="articleSection"
+										href="{$newsCategory->getURL()}"
+										title="{$newsCategory->getDescription()|strip_tags|escape:'html'|truncate:60}"
+										class="{if !$newsCategory@last}mr-1{/if} d-inline-block"
+									}
+										{$newsCategory->getName()}
+									{/link}
+								{/foreach}
+							</span>
+						{/block}
+					{/if}
+
+					{block name='blog-details-comments-link'}
+						{if $Einstellungen.news.news_kommentare_nutzen === 'Y' && $newsItem->getCommentCount() > 0}
+						/
+						<a class="dpflex-a-c df-inl" href="#comments" title="{lang key='readComments' section='news'}">
+							<span class="img-ct icon mr-xxs">
+								<svg>
+								  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-comment"></use>
+								</svg>
+							</span>
+							<span>
+								{$newsItem->getCommentCount()}
+								{if $newsItem->getChildCommentsCount()  && $Einstellungen.news.news_kommentare_anzahl_antwort_kommentare_anzeigen === 'Y'}
+									({$newsItem->getChildCommentsCount()})
+								{/if}
+							</span>
+						</a>
+						{/if}
+					{/block}
+				</div>
+			{/block}
             {if $newsItem->getPreviewImage() !== ''}
                 {block name='blog-details-image'}
                     <div class="img-ct rt4x3 mt-sm mb-sm">
@@ -44,8 +72,8 @@
 
             {if isset($Einstellungen.news.news_kategorie_unternewsanzeigen) && $Einstellungen.news.news_kategorie_unternewsanzeigen === 'Y' && !empty($oNewsKategorie_arr)}
                 <div class="newscats mb-spacer mb-small">
-                    {foreach $oNewsKategorie_arr as $oNewsKategorie}
-                        <a href="{$oNewsKategorie->cURLFull}" title="{$oNewsKategorie->cBeschreibung|strip_tags|escape:"html"|truncate:60}" class="btn btn-xs">{$oNewsKategorie->cName}</a>
+                    {foreach $oNewsKategorie_arr as $newsCategory}
+                        <a href="{$newsCategory->getURL()}" title="{$newsCategory->getDescription()|strip_tags|escape:'html'|truncate:60}" class="btn btn-xs">{$newsCategory->getName()}</a>
                     {/foreach}
                 </div>
             {/if}
@@ -53,7 +81,7 @@
 
         {if isset($Einstellungen.news.news_kommentare_nutzen) && $Einstellungen.news.news_kommentare_nutzen === 'Y'}
         <div id="nw-cmt">
-            {if $comments|@count > 0}
+            {if $comments|count > 0}
                 {if !empty($oNewsArchiv->getSeo())}
                     {assign var=articleURL value=$oNewsArchiv->getURL()}
                     {assign var=cParam_arr value=[]}

@@ -1,7 +1,7 @@
 {block name='productdetails-bundle'}
 {if !empty($Products)}
     <hr class="invisible">
-    <form action="{if !empty($ProductMain->cURLFull)}{$ProductMain->cURLFull}{else}{get_static_route id='index.php'}{/if}" method="post" id="form_bundles" class="jtl-validate mb-lg">
+    <form action="{if !empty($ProductMain->cURLFull)}{$ProductMain->cURLFull}{else}{$ShopURL}/{/if}" method="post" id="form_bundles" class="jtl-validate mb-lg">
 		{$jtl_token}
 		<input type="hidden" name="a" value="{$ProductMain->kArtikel}" />
 		<input type="hidden" name="addproductbundle" value="1" />
@@ -70,7 +70,7 @@
 					{/foreach}
 				</div>
 			</div>
-			{if $smarty.session.Kundengruppe->mayViewPrices()}
+			{if JTL\Session\Frontend::getCustomerGroup()->mayViewPrices()}
 				<div class="dpflex-a-center panel mt-xs">
 					<div class="bundle-price h4">
 						<span class="price-sum">{lang key="priceForAll" section="productDetails"}:

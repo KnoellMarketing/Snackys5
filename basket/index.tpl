@@ -5,15 +5,16 @@
 {/block}
 
 {block name="content"}
+{get_static_route id='warenkorb.php' assign='cartURL'}
 	{include file="snippets/zonen.tpl" id="opc_before_heading"}
 {include file="snippets/extension.tpl"}
-<div class="row {if ($Warenkorb->PositionenArr|@count > 0)}dpflex-j-between{else}dpflex-j-center{/if}">
-    <div class="{if ($Warenkorb->PositionenArr|@count > 0)}col-12 col-md-7 col-lg-8{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-9{/if}{else}col-12 col-md-8 col-lg-6{/if}">
-    <h1 class="mb-spacer mb-small{if ($Warenkorb->PositionenArr|@count == 0)} text-center{/if}">{lang key="basket" section="global"} {if ($Warenkorb->PositionenArr|@count > 0)}<span class="text-muted">({$WarenkorbArtikelPositionenanzahl} {lang key="product" section="global"})</span>{/if}</h1>
+<div class="row {if ($Warenkorb->PositionenArr|count > 0)}dpflex-j-between{else}dpflex-j-center{/if}">
+    <div class="{if ($Warenkorb->PositionenArr|count > 0)}col-12 col-md-7 col-lg-8{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-9{/if}{else}col-12 col-md-8 col-lg-6{/if}">
+    <h1 class="mb-spacer mb-small{if ($Warenkorb->PositionenArr|count == 0)} text-center{/if}">{lang key="basket" section="global"} {if ($Warenkorb->PositionenArr|count > 0)}<span class="text-muted">({count(JTL\Session\Frontend::getCart()->PositionenArr)} {lang key='products'})</span>{/if}</h1>
     {include file="snippets/zonen.tpl" id="opc_after_heading"}
     
     {block name='basket-index-notice-shipping'}
-        {if !empty($WarenkorbVersandkostenfreiHinweis) && $Warenkorb->PositionenArr|@count > 0}
+        {if !empty($WarenkorbVersandkostenfreiHinweis) && $Warenkorb->PositionenArr|count > 0}
             <div class="alert alert-info">
                 {$WarenkorbVersandkostenfreiHinweis}
             </div>
@@ -27,13 +28,13 @@
         {/if}
     {/block}
     
-    {if ($Warenkorb->PositionenArr|@count > 0)}
+    {if ($Warenkorb->PositionenArr|count > 0)}
         {block name="basket"}
             <div class="basket_wrapper">
                 <div class="basket-well mb-sm">
                     {block name="basket-items"}
 						{include file="snippets/zonen.tpl" id="before_basket" title="opc_before_basket"}
-                        <form id="cart-form" method="post" action="{get_static_route id='warenkorb.php'}">
+                        <form id="cart-form" method="post" action="{$cartURL}">
                             {$jtl_token}
                             <input type="hidden" name="wka" value="1" />
                             {include file='checkout/inc_order_items.tpl' tplscope='cart'}
@@ -69,7 +70,7 @@
         {/block}
     {/if}
     </div>
-    {if ($Warenkorb->PositionenArr|@count > 0)}
+    {if ($Warenkorb->PositionenArr|count > 0)}
     <div class="col-12 col-md-5 col-lg-4{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-3{/if} right-boxes mt-xs">
 		{block name='basket-index-include-uploads'}
 			{if !empty($oUploadSchema_arr)}
@@ -88,7 +89,7 @@
                         <h2 class="h5 m0 panel-title">{lang key="useCoupon" section="checkout"}</h2>
                     </div>
                     <div class="apply-coupon panel-body mb-spacer mb-xs">
-                        <form class="form-inline jtl-validate" id="basket-coupon-form" method="post" action="{get_static_route id='warenkorb.php'}">
+                        <form class="form-inline jtl-validate" id="basket-coupon-form" method="post" action="{$cartURL}#basket-coupon-form">
                             {$jtl_token}
                             {block name="basket-coupon"}
                                 <div class="form-group m0 w100{if !empty($invalidCouponCode)} has-error{/if}">
@@ -112,7 +113,7 @@
                             <strong class="price total-sum">{$WarensummeLocalized[$NettoPreise]}</strong>
                         </div>
                     {/if}
-                    {if $Einstellungen.global.global_steuerpos_anzeigen !== 'N' && $Steuerpositionen|@count > 0}
+                    {if $Einstellungen.global.global_steuerpos_anzeigen !== 'N' && $Steuerpositionen|count > 0}
                         {foreach name=steuerpositionen from=$Steuerpositionen item=Steuerposition}
                             <div class="tax dpflex-j-between">
                                 {if $Einstellungen.kaufabwicklung.warenkorb_produktbilder_anzeigen === 'Y'}
@@ -134,6 +135,11 @@
                         <strong class="price total-sum">{$WarensummeLocalized[0]}</strong>
                     </div>
                 {/block}
+				{block name="basket-checkout-shipping-costs"}
+					<div class="small mb-xs">
+						{$favourableShippingString}
+					</div>
+				{/block}
                 {block name="basket-checkout-btn"}
                     <a href="{get_static_route id='bestellvorgang.php'}?wk=1" class="submit btn btn-primary btn-block btn-lg" id="cart-checkout-btn">{lang key='nextStepCheckout' section='checkout'}</a>
                 {/block}
@@ -146,7 +152,7 @@
                 <div class="payplan"></div>
             {/block}
         </div>
-        {if $oArtikelGeschenk_arr|@count > 0}
+        {if $oArtikelGeschenk_arr|count > 0}
             {block name="basket-freegift"}
                 <div id="freegift" class="panel mb-spacer mb-small">
                     <div class="panel-heading">
@@ -154,7 +160,7 @@
                     </div>
                     <div class="panel-body">
                         {block name="basket-freegift-body"}
-                            <form method="post" name="freegift" action="{get_static_route id='warenkorb.php'}">
+                            <form method="post" name="freegift" action="{$cartURL}#freegift">
                                 {$jtl_token}
                                     {foreach $oArtikelGeschenk_arr as $oArtikelGeschenk}
 									<div class="row mb-spacer mb-xs">
@@ -196,7 +202,7 @@
             {block name="basket-shipping-estimate-form"}
                 <div class="basket-shipping-estimate-form">
                     {include file="snippets/zonen.tpl" id="opc_before_shipping_calculator"}
-                    <form id="basket-shipping-estimate-form" method="post" action="{get_static_route id='warenkorb.php'}">
+                    <form id="basket-shipping-estimate-form" method="post" action="{$cartURL}#basket-shipping-estimate-form">
                         {$jtl_token}
                         {include file='snippets/shipping_calculator.tpl' checkout=true tplscope="cart"}
                     </form>

@@ -21,7 +21,7 @@
             <div class="hidden-xs">{$newsItem->getAuthor()->cName}</div>
             <span class="sep">|</span>
         {/if}
-        {$newsItem->getDateCreated()->format('d.m.Y')}
+        {$newsItem->getDateValidFrom()->format('d.m.Y')}
         {if isset($Einstellungen.news.news_kommentare_nutzen) && $Einstellungen.news.news_kommentare_nutzen === 'Y'}
             <span class="sep">|</span>
             <a class="dpflex-a-center" href="{$newsItem->getURL()}#comments" title="{lang key="readComments" section="news"}">

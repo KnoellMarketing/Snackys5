@@ -4,7 +4,7 @@
         <div class="type-{$oPosition->nPosTyp} c-it">
             <div class="row">
                 <div class="img-col col-3 col-md-2">
-                    {if !empty($oPosition->Artikel->cVorschaubild)}
+                    {if !empty($oPosition->Artikel->cVorschaubildURL)}
                     <a href="{$oPosition->Artikel->cURLFull}" title="{$oPosition->cName|trans|escape:'html'}" class="img-ct">
                         {if isset($nSeitenTyp) && $nSeitenTyp == 37}
                             {include file='snippets/image.tpl'
@@ -12,13 +12,15 @@
                                 item=$oPosition->Artikel
                                 square=false
                                 lazy=false
-                                class='img-responsive-width'}
+                                class='img-responsive-width'
+								alt=$oPosition->cName|trans|escape:'html'}
                         {else}
                             {include file='snippets/image.tpl'
                                 fluid=false
                                 item=$oPosition->Artikel
                                 square=false
-                                class='img-responsive-width'}
+                                class='img-responsive-width'
+								alt=$oPosition->cName|trans|escape:'html'}
                         {/if}
                     </a>
                     {/if}
@@ -44,12 +46,23 @@
                                     {if $Einstellungen.kaufabwicklung.warenkorb_varianten_varikombi_anzeigen === 'Y' && isset($oPosition->WarenkorbPosEigenschaftArr) && !empty($oPosition->WarenkorbPosEigenschaftArr)}
                                         {foreach name=variationen from=$oPosition->WarenkorbPosEigenschaftArr item=Variation}
                                             <li class="variation">
-                                                <strong>{$Variation->cEigenschaftName|trans}:</strong> {$Variation->cEigenschaftWertName|trans}
+                                                <strong>{$Variation->cEigenschaftName|trans}:</strong> {$Variation->cEigenschaftWertName|trans} {if !empty($Variation->cAufpreisLocalized[$NettoPreise])}&raquo;
+												{if substr($Variation->cAufpreisLocalized[$NettoPreise], 0, 1) !== '-'}+{/if}{$Variation->cAufpreisLocalized[$NettoPreise]} {/if}
                                             </li>
                                         {/foreach}
                                     {/if}
-                                    {if $Einstellungen.kaufabwicklung.bestellvorgang_lieferstatus_anzeigen === 'Y' && $oPosition->cLieferstatus|trans}
-                                        <li class="delivery-status"><strong>{lang key="deliveryStatus" section="global"}:</strong> {$oPosition->cLieferstatus|trans}</li>
+                                    {if $Einstellungen.kaufabwicklung.bestellvorgang_lieferstatus_anzeigen === 'Y' && $oPosition->cLieferstatus|trans}                                        
+										<li class="delivery-status">{lang key='orderStatus' section='login'}:
+											<strong>
+											{if $oPosition->bAusgeliefert}
+												{lang key='statusShipped' section='order'}
+											{elseif $oPosition->nAusgeliefert > 0}
+												{if $oPosition->cUnique|strlen == 0}{lang key='statusShipped' section='order'}: {$oPosition->nAusgeliefertGesamt}{else}{lang key='statusPartialShipped' section='order'}{/if}
+											{else}
+												{lang key='notShippedYet' section='login'}
+											{/if}
+											</strong>
+										</li>
                                     {/if}
                                     {if !empty($oPosition->cHinweis)}
                                         <li class="text-info notice">{$oPosition->cHinweis}</li>
@@ -66,13 +79,13 @@
                                     {/if}
 
                                     {if $Einstellungen.kaufabwicklung.bestellvorgang_artikelmerkmale == 'Y' && !empty($oPosition->Artikel->oMerkmale_arr)}
-                                        {foreach $oPosition->Artikel->oMerkmale_arr as $oMerkmale_arr}
+                                        {foreach $oPosition->Artikel->oMerkmale_arr as $characteristic}
                                             <li class="characteristic">
-                                                <strong>{$oMerkmale_arr->cName}</strong>:
+                                                <strong>{$characteristic->getName()}</strong>:
                                                 <span class="values">
-													{foreach $oMerkmale_arr->oMerkmalWert_arr as $oWert}
-														{if !$oWert@first}, {/if}
-                                                        {$oWert->cWert}
+													{foreach $characteristic->getCharacteristicValues() as $characteristicValue}
+														{if !$characteristicValue@first}, {/if}
+                                                        {$characteristicValue->getValue()}
                                                     {/foreach}
                                                 </span>
                                             </li>
@@ -89,6 +102,13 @@
                                             </li>
                                         {/foreach}
                                     {/if}
+									{if $Einstellungen.kaufabwicklung.bestellvorgang_artikelkurzbeschreibung == 'Y'
+										&& $oPosition->Artikel->cKurzBeschreibung !== null
+										&& $oPosition->Artikel->cKurzBeschreibung|strlen > 0}
+										{block name='account-order-item-short-desc'}
+											<li class="shortdescription">{$oPosition->Artikel->cKurzBeschreibung}</li>
+										{/block}
+									{/if}
                                 </ul>
                             {else}
                                 <strong>{$oPosition->cName|trans}{if isset($oPosition->discountForArticle)}{$oPosition->discountForArticle|trans}{/if}</strong>
@@ -119,7 +139,7 @@
                                                     <span class="qty">{if !(is_string($oPosition->cUnique) && !empty($oPosition->cUnique) && (int)$oPosition->kKonfigitem === 0)}{$KonfigPos->nAnzahlEinzel}{else}1{/if}x</span>
                                                     {$KonfigPos->cName|trans} &raquo;<br/>
                                                     <span class="price_value">
-                                                        {if $KonfigPos->cEinzelpreisLocalized[$NettoPreise]|substr:0:1 !== '-'}+{/if}{$KonfigPos->cEinzelpreisLocalized[$NettoPreise]}
+                                                        {if substr($KonfigPos->cEinzelpreisLocalized[$NettoPreise], 0, 1) !== '-'}+{/if}{$KonfigPos->cEinzelpreisLocalized[$NettoPreise]}
                                                         {lang key='pricePerUnit' section='checkout'}
                                                     </span>
                                                 </li>

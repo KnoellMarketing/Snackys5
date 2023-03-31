@@ -17,6 +17,7 @@
     border-right: 0;
     border-left: 0;
     border-radius: 0;
+	text-align: center;
 }
 #buy_form .qty-btns .input-group-addon.unit{
     margin: 0;

@@ -1,4 +1,5 @@
-{if $NaviFilter->getFilterCount() > 0}
+{block name='er-active-filters'}
+   {if $NaviFilter->getFilterCount() > 0}
     {if !$isMobile}
         <hr>
     {/if}
@@ -48,3 +49,4 @@
             {/if}
     </div>
 {/if}
+{/block}

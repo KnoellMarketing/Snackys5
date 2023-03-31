@@ -70,7 +70,7 @@
 				{* Warenkorb *}
 				ecomm_prodid: [{foreach from=$smarty.session.Warenkorb->PositionenArr item="Artikel" name="prodid"}{if !$smarty.foreach.prodid.first},{/if}"{if $snackyConfig.artnr == "id"}{$Artikel->Artikel->kArtikel}{else}{$Artikel->Artikel->cArtNr|escape}{/if}"{/foreach}],
 				ecomm_pagetype: 'cart',
-				ecomm_totalvalue: [{foreach from=$smarty.session.Warenkorb->PositionenArr item="totalvalue" name="totalvalue"}{if !$smarty.foreach.totalvalue.first},{/if}{$totalvalue->Artikel->Preise->fVKNetto|number_format:2:".":""}{/foreach}]
+				ecomm_totalvalue: [{foreach from=$smarty.session.Warenkorb->PositionenArr item="totalvalue" name="totalvalue"}{if !$smarty.foreach.totalvalue.first},{/if}{$totalvalue->fPreis|number_format:2:".":""}{/foreach}]
 				{else}
 				{* Content *}
 				ecomm_prodid: '',
@@ -194,7 +194,7 @@
 							{
 								'name': '{$prodid->Artikel->cName|escape}',       // Name or ID is required.
 								'id': '{if $snackyConfig.artnr == "id"}{$prodid->Artikel->kArtikel}{else}{$prodid->Artikel->cArtNr|escape}{/if}',
-								'price': {$prodid->Artikel->Preise->fVKNetto|number_format:2:".":""},
+								'price': {$prodid->fPreis|number_format:2:".":""},
 								{if !empty($prodid->Artikel->cHersteller)}
 								'brand': '{$prodid->Artikel->cHersteller|escape}',
 								{/if}

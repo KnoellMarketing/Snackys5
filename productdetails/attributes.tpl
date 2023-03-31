@@ -1,33 +1,36 @@
 {block name='productdetails-attributes'}
+{$inQuickView = !empty($smarty.get.quickView)}
 {if $showAttributesTable}
     <ul class="product-attributes blanklist p-att">
     {block name='productdetails-attributes-main'}
         {if $Einstellungen.artikeldetails.merkmale_anzeigen === 'Y'}
             {block name='productdetails-attributes-characteristics'}
-                {foreach $Artikel->oMerkmale_arr as $oMerkmal}
+                {foreach $Artikel->oMerkmale_arr as $characteristic}
                     <li class="dpflex">
-                        <strong class="first mr-xxs">{$oMerkmal->cName}: </strong>
+                        <strong class="first mr-xxs">{$characteristic->getName()}: </strong>
                         {strip}
                         <span class="right dpflex-a-c dpflex-wrap">
-                            {foreach $oMerkmal->oMerkmalWert_arr as $oMerkmalWert}
-                                {if $oMerkmal->cTyp === 'TEXT' || $oMerkmal->cTyp === 'SELECTBOX' || $oMerkmal->cTyp === ''}
-                                    <a href="{$oMerkmalWert->cURLFull}" class="tag">{$oMerkmalWert->cWert|escape:'html'}</a>
+                            {foreach $characteristic->getCharacteristicValues() as $characteristicValue}
+                                {if $characteristic->getType() === 'TEXT' || $characteristic->getType() === 'SELECTBOX' || $characteristic->getType() === ''}
+                                    <a {if !$inQuickView}href="{$characteristicValue->getURL()}"{/if} class="tag">{$characteristicValue->getValue()|escape:'html'}</a>
                                 {else}
-                                    <a href="{$oMerkmalWert->cURLFull}" data-toggle="tooltip" data-placement="top" title="{$oMerkmalWert->cWert|escape:'html'}">
-                                        {if $oMerkmalWert->cBildpfadKlein !== 'gfx/keinBild_kl.gif'}
+                                    <a {if !$inQuickView}href="{$characteristicValue->getURL()}"{/if} data-toggle="tooltip" data-placement="top" title="{$characteristicValue->getValue()|escape:'html'}">
+                                        {$img = $characteristicValue->getImage(\JTL\Media\Image::SIZE_XS)}
+                                        {if $img !== null && strpos($img, $smarty.const.BILD_KEIN_MERKMALBILD_VORHANDEN) === false
+                                        && strpos($img, $smarty.const.BILD_KEIN_ARTIKELBILD_VORHANDEN) === false}
                                             <span class="img-ct icon icon-xl">
                                             {include file='snippets/image.tpl'
-                                                item=$oMerkmalWert
+                                                item=$characteristicValue
                                                 square=false
                                                 srcSize='xs'
                                                 sizes='40px'
                                                 width='40'
                                                 height='40'
                                                 class='img-aspect-ratio'
-                                                alt=$oMerkmalWert->cWert}
+                                                alt=$characteristicValue->getValue()}
                                             </span>
                                         {else}
-                                            <span class="tag">{$oMerkmalWert->cWert|escape:'html'}</span>
+                                            <span class="tag">{$characteristicValue->getValue()|escape:'html'}</span>
                                         {/if}
                                     </a>
                                 {/if}
@@ -57,7 +60,13 @@
             {/block}
         {/if}
 
-        {if isset($Artikel->cMasseinheitName) && isset($Artikel->fMassMenge) && $Artikel->fMassMenge > 0 && $Artikel->cTeilbar !== 'Y' && ($Artikel->fAbnahmeintervall == 0 || $Artikel->fAbnahmeintervall == 1) && isset($Artikel->cMassMenge)}
+        {if $Einstellungen.artikeldetails.artikeldetails_inhalt_anzeigen === 'Y'
+            && isset($Artikel->cMasseinheitName)
+            && isset($Artikel->fMassMenge)
+            && $Artikel->fMassMenge > 0
+            && $Artikel->cTeilbar !== 'Y'
+            && ($Artikel->fAbnahmeintervall == 0 || $Artikel->fAbnahmeintervall == 1)
+            && isset($Artikel->cMassMenge)}
             {block name='productdetails-attributes-unit'}
                 <li class="dpflex-a-c">
                     <strong class="first mr-xxs">{lang key='contents' section='productDetails'}: </strong>

@@ -14,7 +14,7 @@
                             <div id="shipment_{$versandart->kVersandart}" class="payship-option">
 								<label for="del{$versandart->kVersandart}" class="dpflex-a-center m0 stc-radio">
 									<span class="stc-input">
-										<input name="Versandart" value="{$versandart->kVersandart}" type="radio" class="radio-checkbox" id="del{$versandart->kVersandart}"{if $Versandarten|@count == 1 || $AktiveVersandart == $versandart->kVersandart} checked{/if}{if $smarty.foreach.shipment.first} required{/if}>
+										<input name="Versandart" value="{$versandart->kVersandart}" type="radio" class="radio-checkbox" id="del{$versandart->kVersandart}"{if $Versandarten|count == 1 || $AktiveVersandart == $versandart->kVersandart} checked{/if}{if $smarty.foreach.shipment.first} required{/if}>
 										<span class="stc-radio-btn"></span>
 									</span>
 									{if $versandart->cBild}
@@ -26,7 +26,11 @@
 									{/if}
 									<span class="payship-content">
 										<strong class="block">
-											{$versandart->angezeigterName|trans}	
+                                            {if $versandart->angezeigterName|trans === '' && $versandart->cBild === ''}
+                                                {$versandart->cName}
+                                            {else}
+								                {$versandart->angezeigterName|trans}
+                                            {/if}
 											<span class="badge small">
 												{$versandart->cPreisLocalized}
 											</span>

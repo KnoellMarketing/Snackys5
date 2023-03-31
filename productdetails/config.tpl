@@ -1,5 +1,5 @@
 {block name='productdetails-config'}
-{if isset($Artikel->oKonfig_arr) && $Artikel->oKonfig_arr|@count > 0}
+{if isset($Artikel->oKonfig_arr) && $Artikel->oKonfig_arr|count > 0}
 	{assign var="configRequired" value=false}
     <div class="product-configuration{if $snackyConfig.configuratorMode == 1} no-pop{/if}">
         <div class="{if $snackyConfig.configuratorMode == 0}modal modal-dialog {/if}blanklist in" tabindex="-1" id="config-popup">
@@ -111,9 +111,11 @@
                                                                         <a class="desc-tgl" data-toggle="dropdown">
                                                                             i
                                                                         </a>
-                                                                        <span class="dropdown-menu">
-                                                                            {$cBeschreibung}
+                                                                        <span class="dropdown-menu{if $cBeschreibung|count_characters > 200} big{/if}">
+                                                                            {if $cBeschreibung|count_characters > 200}<span class="close-btn"></span>{/if}
+																			{$cBeschreibung}
                                                                         </span>
+                                                                        {if $cBeschreibung|count_characters > 200}<span class="hidden overlay-bg"></span>{/if}
                                                                     </span>
                                                                 {/if}
                                                             </span>
@@ -209,6 +211,7 @@
                             <td colspan="3" class="text-right word-break">
                                 <small class="text-muted block mb-xxs">{lang key='priceAsConfigured' section='productDetails'}</small>
                                 <strong class="price"></strong>
+                                <span class="base-price block small">{$Artikel->cLocalizedVPE[$NettoPreise]}</span>
                                 <p class="vat_info text-muted">
                                     <small>{include file='snippets/shipping_tax_info.tpl' taxdata=$Artikel->taxData}</small>
                                 </p>

@@ -8,7 +8,7 @@
     {if $step === 'formular'}
         {if isset($checkout) && $checkout == 1}
             {include file='checkout/inc_steps.tpl'}
-            {if !empty($smarty.session.Kunde->kKunde)}
+            {if JTL\Session\Frontend::getCustomer()->getID() > 0}
                 {lang key="changeBillingAddress" section="account data" assign="panel_heading"}
             {else}
                 {lang key="createNewAccount" section="account data" assign="panel_heading"}
@@ -27,7 +27,7 @@
         {/if}
         <div id="new_customer" class="row">
 			<div class="col-12">
-				{if !isset($checkout) && empty($smarty.session.Kunde->kKunde)}
+				{if !isset($checkout) && JTL\Session\Frontend::getCustomer()->getID() === 0}
 					{include file="snippets/zonen.tpl" id="opc_before_heading"}
 					<h1 class="mb-sm">{lang key="createNewAccount" section="account data"}</h1>
 				{/if}

@@ -12,8 +12,8 @@
         {$attributeImageURL = null}
         {if ($Merkmal->getData('cTyp') === 'BILD' || $Merkmal->getData('cTyp') === 'BILD-TEXT')}
             {$attributeImageURL = $attributeValue->getImage(\JTL\Media\Image::SIZE_XS)}
-            {if $attributeImageURL|strpos:$smarty.const.BILD_KEIN_ARTIKELBILD_VORHANDEN !== false
-                || $attributeImageURL|strpos:$smarty.const.BILD_KEIN_MERKMALWERTBILD_VORHANDEN !== false}
+            {if strpos($attributeImageURL, $smarty.const.BILD_KEIN_ARTIKELBILD_VORHANDEN) !== false
+                || strpos($attributeImageURL, $smarty.const.BILD_KEIN_MERKMALWERTBILD_VORHANDEN) !== false}
                 {$attributeImageURL = null}
             {/if}
         {/if}
@@ -70,7 +70,6 @@
                     {block name='snippets-filter-characteristics-nav-image'}                        
                         <li class="nav-it">
                         {link href="{if !empty($attributeValue->getURL())}{$attributeValue->getURL()}{else}#{/if}"
-                            title="{if $showFilterCount}{$attributeValue->getValue()|escape:'html'}: {$attributeValue->getCount()}{else}{$attributeValue->getValue()|escape:'html'}{/if}"
                             data=["toggle"=>"tooltip", "placement"=>"top", "boundary"=>"window"]
                             class="{if $attributeValue->isActive()}active{/if} filter-item" 
                             rel="nofollow"
@@ -79,7 +78,6 @@
                             {image lazy=true  webp=true
                                 src=$attributeImageURL
                                 alt=$attributeValue->getValue()|escape:'html'
-                                title="{if $showFilterCount}{$attributeValue->getValue()|escape:'html'}: {$attributeValue->getCount()}{else}{$attributeValue->getValue()|escape:'html'}{/if}"
                                 class="vmiddle filter-img"
                             }
                             </span>
@@ -91,7 +89,6 @@
                         {if $attributeValue->getCount() > 0}
                         <li class="nav-it">
                             {link href="{if !empty($attributeValue->getURL())}{$attributeValue->getURL()}{else}#{/if}"
-                                title="{if $showFilterCount}{$attributeValue->getValue()|escape:'html'}: {$attributeValue->getCount()}{else}{$attributeValue->getValue()|escape:'html'}{/if}"
                                 class="{if $attributeValue->isActive()}active{/if} filter-item dpflex-a-center" 
                                 rel="nofollow"
                             }
@@ -100,7 +97,6 @@
                                 {image lazy=true webp=true
                                     src=$attributeImageURL
                                     alt=$attributeValue->getValue()|escape:'html'
-                                    title="{if $showFilterCount}{$attributeValue->getValue()|escape:'html'}: {$attributeValue->getCount()}{else}{$attributeValue->getValue()|escape:'html'}{/if}"
                                     class="vmiddle filter-img"
                                 }
                                 </span>

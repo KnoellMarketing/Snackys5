@@ -1,5 +1,5 @@
 {block name='account-my-account'}
-<h1 class="mb-spacer mb-small">{lang key="hello"} {$smarty.session.Kunde->cVorname} {$smarty.session.Kunde->cNachname|entferneFehlerzeichen}</h1>
+<h1 class="mb-spacer mb-small">{lang key='welcome' section='login'} {$Kunde->cVorname} {$Kunde->cNachname}</h1>
 {if isset($smarty.get.reg)}
     <div class="alert alert-success">{lang key='accountCreated' section='global'}</div>
 {/if}
@@ -75,6 +75,16 @@
             <span class="w100">
                 <strong class="block">{lang key='contactInformation' section='account data'} {lang key='and'} {lang key='email' section='account data'}</strong>
                 <small class="text-muted">{$Kunde->cMail}</small>
+            </span>
+            <span class="img-ct icon icon-wt">
+                <svg>
+                  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-edit"></use>
+                </svg>
+            </span>
+        </a>
+        <a href="{$cCanonicalURL}?editLieferadresse=1" class="dpflex-a-center item">
+            <span class="w100">
+                <strong class="block">{lang key="myShippingAddresses"}</strong>
             </span>
             <span class="img-ct icon icon-wt">
                 <svg>

@@ -19,10 +19,11 @@
 				alt=$alt 
 				webp=true
 				src="{$image->cURLKlein}"
-				srcset="{$image->cURLMini} {$Einstellungen.bilder.bilder_artikel_mini_breite}w,
-						 {$image->cURLKlein} {$Einstellungen.bilder.bilder_artikel_klein_breite}w,
-						 {$image->cURLNormal} {$Einstellungen.bilder.bilder_artikel_normal_breite}w"
-				sizes="auto"
+				srcset="
+					{$image->cURLMini} {$image->imageSizes->xs->size->width}w,
+					{$image->cURLKlein} {$image->imageSizes->sm->size->width}w,
+					{$image->cURLNormal} {$image->imageSizes->md->size->width}w"
+				sizes="{if $stopLazy}{$Einstellungen.bilder.bilder_artikel_klein_breite}px{else}auto{/if}"
 				class="{if !$isMobile && !empty($Artikel->Bilder[1])} first{/if}"
 				lazy=!$stopLazy
 			}
@@ -33,9 +34,9 @@
 
                 {image alt=$alt fluid=true webp=true lazy=true
                     src="{$image2->cURLKlein}"
-                    srcset="{$image2->cURLMini} {$Einstellungen.bilder.bilder_artikel_mini_breite}w,
-                             {$image2->cURLKlein} {$Einstellungen.bilder.bilder_artikel_klein_breite}w,
-                             {$image2->cURLNormal} {$Einstellungen.bilder.bilder_artikel_normal_breite}w"
+                    srcset="{$image2->cURLMini} {$image2->imageSizes->xs->size->width}w,
+                             {$image2->cURLKlein} {$image2->imageSizes->sm->size->width}w,
+                             {$image2->cURLNormal} {$image2->imageSizes->md->size->width}w"
                     sizes="auto"
                     class="{if !$isMobile && !empty($Artikel->Bilder[1])} first{/if}"
                     fluid=true
@@ -209,8 +210,7 @@
         <div class="exp">
             {block name="form-expandable"}
             {block name="productlist-add-basket"}
-            {if ($Artikel->inWarenkorbLegbar === 1 || ($Artikel->nErscheinendesProdukt === 1 && $Einstellungen.global.global_erscheinende_kaeuflich === 'Y')) &&
-            (($Artikel->nIstVater === 0 && $Artikel->Variationen|@count === 0)) && !$Artikel->bHasKonfig}
+            {if ($Artikel->inWarenkorbLegbar === 1 || ($Artikel->nErscheinendesProdukt === 1 && $Einstellungen.global.global_erscheinende_kaeuflich === 'Y')) && (($Artikel->nIstVater === 0 && $Artikel->Variationen|count === 0)) && !$Artikel->bHasKonfig}
             {if $Artikel->nIstVater && $Artikel->kVaterArtikel == 0}
             {else}                
                 <div class="{if $snackyConfig.listShowAmountCart == 2 && $snackyConfig.quantityButtons != 1}input-group input-group-sm {/if}small mt-xxs">
@@ -233,7 +233,7 @@
 					class="quantity form-control{if $snackyConfig.quantityButtons == 1 && $snackyConfig.listShowAmountCart == 2} text-center{else} text-right{/if}{if $snackyConfig.listShowAmountCart == 1} hidden{/if}"
 					name="anzahl"
 					autocomplete="off"
-					value="{if $Artikel->fAbnahmeintervall > 0}{if $Artikel->fMindestbestellmenge > $Artikel->fAbnahmeintervall}{$Artikel->fMindestbestellmenge}{else}{$Artikel->fAbnahmeintervall}{/if}{else}{$snackyConfig.listAmountCart}{/if}">
+					value="{if $Artikel->fAbnahmeintervall > 0 || $Artikel->fMindestbestellmenge > 1}{if $Artikel->fMindestbestellmenge > $Artikel->fAbnahmeintervall}{$Artikel->fMindestbestellmenge}{else}{$Artikel->fAbnahmeintervall}{/if}{else}{$snackyConfig.listAmountCart}{/if}">
                     {if $snackyConfig.quantityButtons == 1 && $snackyConfig.listShowAmountCart == 2}
                         <div class="btn btn-blank qty-add">
                             <span class="img-ct icon">

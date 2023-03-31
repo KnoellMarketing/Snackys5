@@ -15,9 +15,7 @@
         {/if}
     {/block}
 	
-    {if !isset($cPost_arr)}
-        {assign var=cPost_arr value=array()}
-    {/if}
+    {assign var=cPost_arr value=$cPost_arr|default:[]}
     {block name='newsletter-index-link-content'}
         {if !empty($Link->getContent())}
             {include file="snippets/zonen.tpl" id="opc_before_newsletter_content"}
@@ -68,7 +66,7 @@
                                     {assign var=plausiArr value=array()}
                                 {/if}
                                 {if (!isset($smarty.session.bAnti_spam_already_checked) || $smarty.session.bAnti_spam_already_checked !== true) &&
-                                    isset($Einstellungen.newsletter.newsletter_sicherheitscode) && $Einstellungen.newsletter.newsletter_sicherheitscode !== 'N' && empty($smarty.session.Kunde->kKunde)}
+                                    isset($Einstellungen.newsletter.newsletter_sicherheitscode) && $Einstellungen.newsletter.newsletter_sicherheitscode !== 'N' && JTL\Session\Frontend::getCustomer()->getID() === 0}
                                 <hr>
                                     {captchaMarkup getBody=true}
                                     <hr>

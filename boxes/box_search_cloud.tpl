@@ -2,14 +2,14 @@
     {block name='boxes-box-search-cloud-script'}
         {inline_script}<script>
             $(window).on('load', function () {
-                var searchItems     = {$oBox->getItems()|json_encode},
+                var searchItems     = {json_encode($oBox->getItems())},
                     searchcloudTags = [];
 
                 $.each(searchItems, function (key, value) {
                     searchcloudTags.push({
                         text:   value.cSuche,
                         weight: value.nAnzahlGesuche,
-                        link:   'index.php?qs=' + value.cSuche
+                        link:   '{$ShopURL}/?qs=' + value.cSuche
                     });
                 });
 

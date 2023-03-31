@@ -50,7 +50,7 @@
                 <h1 class="mb-spacer mb-small">{lang key="orderCompletedPost" section="checkout"}</h1>
             {/if}
             {if ($method === null || $Bestellung->Zahlungsart->cModulId !== $method->getModuleID())
-            && $Bestellung->Zahlungsart->cModulId !== 'za_kreditkarte_jtl' && $Bestellung->Zahlungsart->cModulId !== 'za_lastschrift_jtl'}
+            && $Bestellung->Zahlungsart->cModulId !== 'za_lastschrift_jtl'}
                 {if isset($smarty.session.Zahlungsart->nWaehrendBestellung) && $smarty.session.Zahlungsart->nWaehrendBestellung == 1}
                     <div class="alert alert-info">{lang key='orderConfirmationPre' section='checkout'}</div>
                 {else}
@@ -58,7 +58,7 @@
                 {/if}
             {/if}
 
-            {* if (empty($smarty.session.Zahlungsart->nWaehrendBestellung) || $smarty.session.Zahlungsart->nWaehrendBestellung != 1) && $Bestellung->Zahlungsart->cModulId !== 'za_kreditkarte_jtl' && $Bestellung->Zahlungsart->cModulId !== 'za_lastschrift_jtl'}
+            {* if (empty($smarty.session.Zahlungsart->nWaehrendBestellung) || $smarty.session.Zahlungsart->nWaehrendBestellung != 1) && $Bestellung->Zahlungsart->cModulId !== 'za_lastschrift_jtl'}
                 <div class="pament-method-during-order">
                     <p>{lang key='yourOrderId' section='checkout'}: <strong>{$Bestellung->cBestellNr}</strong></p>
                     <p>{lang key='yourChosenPaymentOption' section='checkout'}: <strong>{$Bestellung->cZahlungsartName}</strong></p>
@@ -70,8 +70,6 @@
             <div class="payment-method-inner">
                 {if $Bestellung->Zahlungsart->cModulId === 'za_paypal_jtl'}
                     {include file='checkout/modules/paypal/bestellabschluss.tpl'}
-                {elseif $Bestellung->Zahlungsart->cModulId === 'za_kreditkarte_jtl'}
-                    {include file='account/retrospective_payment.tpl'}
                 {elseif $method !== null && $Bestellung->Zahlungsart->cModulId === $method->getModuleID()}
                     {include file=$method->getTemplateFilePath()}
                 {/if}

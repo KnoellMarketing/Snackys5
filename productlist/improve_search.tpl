@@ -13,7 +13,7 @@
     {block name='productlist-layout-options'}
         {if isset($oErweiterteDarstellung->nDarstellung)
         && $Einstellungen.artikeluebersicht.artikeluebersicht_erw_darstellung === 'Y'
-        && empty($AktuelleKategorie->categoryFunctionAttributes['darstellung']) && !$isMobile}
+        && empty($AktuelleKategorie->getCategoryFunctionAttribute('darstellung')) && !$isMobile}
             <div class="col-12 col-sm-12 col-md-6 col-lg-4{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-3{/if}">
             {buttongroup class="form-group l-op"}
                 {block name='productlist-layout-options-quare'}

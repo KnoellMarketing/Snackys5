@@ -2,15 +2,16 @@
 {if $isMobile && $oBox->getPosition() == 'left'}
 {else}
     <section id="sidebox{$oBox->getID()}" class="box box-login box-normal panel">
+        {$customer = JTL\Session\Frontend::getCustomer()}
         {block name='boxes-box-login-title'}
             <div class="h5 panel-heading dpflex-a-c">
-                {if empty($smarty.session.Kunde)}{lang key='login'}{else}{lang key='hello'} {$smarty.session.Kunde->cVorname} {$smarty.session.Kunde->cNachname|entferneFehlerzeichen}{/if}
+                {if $customer->getID() === 0}{lang key='login'}{else}{lang key='hello'}, {$customer->cVorname} {$customer->cNachname}{/if}
                 {if ($snackyConfig.filterOpen == 1 && $oBox->getPosition() == 'left') || ($oBox->getPosition() == 'bottom' && $snackyConfig.footerBoxesOpen === '0')}<span class="caret"></span>{/if}
             </div>
         {/block}
         {block name='boxes-box-login-content'}
             <div class="panel-body">
-            {if empty($smarty.session.Kunde->kKunde)}
+            {if $customer->getID() === 0}
                 {block name='boxes-box-login-form'}
                     {form action="{get_static_route id='jtl.php' secure=true}" method="post" class="form box_login jtl-validate" slide=true}
                         {block name='boxes-box-login-form-data'}

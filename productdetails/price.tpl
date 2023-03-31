@@ -12,7 +12,7 @@
 		<div class="price-row">
 		
 			{* Fallback für PayPal Checkout Plugin > murks aber leider nur so funktionstüchtig *}
-			<meta itemprop="price" content="{if $Artikel->Preise->oPriceRange->isRange()}{$Artikel->Preise->oPriceRange->minBruttoPrice|string_format:"%.2f"}{else}{$Artikel->Preise->fVKBrutto|string_format:"%.2f"}{/if}">
+			<meta itemprop="price" content="{if $Artikel->Preise->oPriceRange->isRange()}{$Artikel->Preise->oPriceRange->minBruttoPrice|formatForMicrodata}{else}{$Artikel->Preise->fVKBrutto|formatForMicrodata}{/if}">
 			
         {block name='price-label'}
             {if ($tplscope !== 'detail' && $Artikel->Preise->oPriceRange->isRange() && $Artikel->Preise->oPriceRange->rangeWidth() > $Einstellungen.artikeluebersicht.articleoverview_pricerange_width)
@@ -69,6 +69,8 @@
                         {include file='snippets/shipping_tax_info.tpl' taxdata=$Artikel->taxData}
                     </span>
                 {/block}
+				
+				
                 
                 {if $Artikel->Preise->Sonderpreis_aktiv && $Einstellungen.artikeldetails.artikeldetails_sonderpreisanzeige == 2 && $snackyConfig.oldPricePlace !== '1'}
                     <div class="instead_of old_price">{lang key="oldPrice" section="global"}:
@@ -107,7 +109,7 @@
         {else}{* scope productlist *}
             <div class="price-note">
                 {* Grundpreis *}
-                {if !empty($Artikel->cLocalizedVPE) && !$Artikel->Preise->oPriceRange->isRange()}
+                {if !empty($Artikel->cLocalizedVPE)}
                     {block name='productdetails-price-list-base-price'}
                         <div class="base_price">
                             <span class="value">{$Artikel->cLocalizedVPE[$NettoPreise]}</span>

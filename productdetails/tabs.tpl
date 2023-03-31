@@ -24,7 +24,7 @@
     && $Artikel->cMedienDateiAnzeige !== 'tab') || $Artikel->cMedienDateiAnzeige === 'beschreibung')
     && !empty($Artikel->getMediaTypes()))}
 {$useDescription = (($Artikel->cBeschreibung|strlen > 0) || $useDescriptionWithMediaGroup || $showAttributesTable)}
-{$useDownloads = (isset($Artikel->oDownload_arr) && $Artikel->oDownload_arr|@count > 0)}
+{$useDownloads = (isset($Artikel->oDownload_arr) && $Artikel->oDownload_arr|count > 0)}
 {$useVotes = $Einstellungen.bewertung.bewertung_anzeigen === 'Y'}
 {$useQuestionOnItem = $Einstellungen.artikeldetails.artikeldetails_fragezumprodukt_anzeigen === 'Y'}
 {$usePriceFlow = ($Einstellungen.preisverlauf.preisverlauf_anzeigen === 'Y' && $bPreisverlauf)}
@@ -65,7 +65,7 @@
 ]}
 
 {block name='productdetails-tabs-inner'}
-{if useDescription || $useDownloads || $useDescriptionWithMediaGroup || $useVotes || $useQuestionOnItem || $usePriceFlow
+{if $useDescription || $useDownloads || $useDescriptionWithMediaGroup || $useVotes || $useQuestionOnItem || $usePriceFlow
     || $useAvailabilityNotification || $useMediaGroup || !empty($separatedTabs)}
 	{include file="snippets/zonen.tpl" id="opc_before_tabs"}
     <div id="tab-wp" class="mb-lg">
@@ -146,7 +146,7 @@
                             {block name='tab-description-title'}{lang key='description' section='productDetails'}{/block}
                         </div>
                         <span class="img-ct icon">
-                            <svg class="{if (isset($darkHead) && $darkHead == 'true') || (isset($darkMode) && $darkMode == 'true')}icon-darkmode{/if}">
+                            <svg>
                               <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-caret"></use>
                             </svg>
                         </span>

@@ -4,7 +4,7 @@
     {/if}
 
     {block name="km-sonderpreis-bis"}
-        {if !empty($Artikel->dSonderpreisEnde_de) && $Artikel->dSonderpreisEnde_de|date_format:"%y%m%d" >= $smarty.now|date_format:"%y%m%d" && $Artikel->dSonderpreisStart_de|date_format:"%y%m%d" <= $smarty.now|date_format:"%y%m%d"}
+        {if !empty($Artikel->dSonderpreisEnde_de) && $Artikel->dSonderpreisEnde_de|date_format:"%y%m%d" >= $smarty.now|date_format:"%y%m%d" && $Artikel->dSonderpreisStart_de|date_format:"%y%m%d" <= $smarty.now|date_format:"%y%m%d" && $Artikel->Preise->Sonderpreis_aktiv == 1}
             {if $snackyConfig.specialpriceDate == "C"}
                 {assign var="uid" value="art_c_{$Artikel->kArtikel}_{1|mt_rand:20}"}
                 <div id="{$uid}" class="sale-ct">

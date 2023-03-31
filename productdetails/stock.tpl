@@ -24,26 +24,29 @@
 
     {if !isset($availability)}
         {if $Artikel->cEstimatedDelivery}
+			{getCountry iso=$shippingCountry assign='selectedCountry'}
             <div class="{if $Artikel->bHasKonfig} mt-xs{else} mt-xxs{/if} small">
                 <div class="estimated-delivery alert alert-info m0"
                     {if isset($oSpezialseiten_arr[$smarty.const.LINKTYP_VERSAND])}
                     data-toggle="popover"
                     data-placement="top"
-                    data-content="{if $Firma->country !== null}{lang|sprintf:$Firma->country->getName():$oSpezialseiten_arr[$smarty.const.LINKTYP_VERSAND]->getURL():$oSpezialseiten_arr[$smarty.const.LINKTYP_VERSAND]->getURL() key='shippingInformation' section='productDetails'}{/if}"
+                    data-content="{if $selectedCountry !== null}{lang key='shippingInformation' section='productDetails' assign=silv}{sprintf($silv, $selectedCountry->getName(), $oSpezialseiten_arr[$smarty.const.LINKTYP_VERSAND]->getURL(), $oSpezialseiten_arr[$smarty.const.LINKTYP_VERSAND]->getURL())}{/if}"
                     {/if}>
-                    {if $snackyConfig.deliveryDate == '1'}
+                    {if $snackyConfig.deliveryDate == '1' && !$Artikel->nErscheinendesProdukt}
                         {block name='productdetails-stock-snackys-deliverydate'}
                             <strong>{lang key="deliveryDate" section="custom"}:</strong>
                             {getDeliveryDate days=$Artikel->nMinDeliveryDays saturday=$snackyConfig.deliveryDateSaturday state=$snackyConfig.deliveryDateState endTime=$snackyConfig.deliveryDateFinishTime format=$snackyConfig.deliveryDateFormat}
                             {if $Artikel->nMinDeliveryDays < $Artikel->nMaxDeliveryDays}
                                 - {getDeliveryDate days=$Artikel->nMaxDeliveryDays saturday=$snackyConfig.deliveryDateSaturday state=$snackyConfig.deliveryDateState endTime=$snackyConfig.deliveryDateFinishTime format=$snackyConfig.deliveryDateFormat}
                             {/if}
+							<span class="estimated-delivery-info">{lang key='shippingInfoIcon' section='productDetails' printf=$selectedCountry->getISO()}</span>
                         {/block}
                     {else}
                         {block name='productdetails-stock-snackys-deliverytime'}
                             {if !isset($availability) && !isset($shippingTime)}<strong>{lang key='shippingTime'}: </strong>{/if}
                             <span class="a{$Artikel->Lageranzeige->nStatus} text-nowrap">
-                                    {$Artikel->cEstimatedDelivery}
+                                {$Artikel->cEstimatedDelivery}
+								<span class="estimated-delivery-info">{lang key='shippingInfoIcon' section='productDetails' printf=$selectedCountry->getISO()}</span>
                             </span>
                         {/block}
                     {/if}

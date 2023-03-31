@@ -4,10 +4,8 @@
     {assign var=titles value=false}
     <div class="row row-multi">
     {foreach $Artikel->oMedienDatei_arr as $oMedienDatei}
-        {if ($mediaType->name == $oMedienDatei->cMedienTyp
-            && $oMedienDatei->cAttributTab|count_characters == 0)
-            || ($oMedienDatei->cAttributTab|count_characters > 0
-                && $mediaType->name|@seofy == $oMedienDatei->cAttributTab|@seofy)}
+        {if ($mediaType->name == $oMedienDatei->cMedienTyp && $oMedienDatei->cAttributTab|strlen == 0) 
+		|| ($oMedienDatei->cAttributTab|strlen > 0 && $mediaType->name == $oMedienDatei->cAttributTab)}
             {if $oMedienDatei->nErreichbar == 0}
                 <div class="col-12">
                     <p class="alert alert-danger">
@@ -23,30 +21,26 @@
 
                 {* Images *}
                 {if $oMedienDatei->nMedienTyp == 1}
-                    <div class="col-xxs-12 col-6 col-sm-6 col-md-4{if $snackyConfig.css_maxTabsWidth >= 1200}  col-lg3{/if}{if $snackyConfig.css_maxTabsWidth >= 1600} col-xl-2{/if}">
+                    <div class="col-xxs-12 col-6 col-lg-4{if $snackyConfig.css_maxTabsWidth >= 1600} col-xl-3{/if}">
                         <div class="card">
                             <div class="card-header"><span class="h6 m0 block">{$oMedienDatei->cName}</h3></div>
                             <div class="card-body">
                                 {if $oMedienDatei->cBeschreibung}<span class="block mb-xxs">{$oMedienDatei->cBeschreibung}</span>{/if}
-                                {if isset($oMedienDatei->oMedienDateiAttribut_arr) && $oMedienDatei->oMedienDateiAttribut_arr|@count > 0}
+                                {if isset($oMedienDatei->oMedienDateiAttribut_arr) && $oMedienDatei->oMedienDateiAttribut_arr|count > 0}
                                     {foreach $oMedienDatei->oMedienDateiAttribut_arr as $oAttribut}
                                         {if $oAttribut->cName === 'img_alt'}
                                             {assign var=cMediaAltAttr value=$oAttribut->cWert}
                                         {/if}
                                     {/foreach}
                                 {/if}
-                                {if !empty($oMedienDatei->cPfad)}
-                                    <img alt="{if isset($cMediaAltAttr)}{$cMediaAltAttr}{/if}" src="{$ShopURL}/{$smarty.const.PFAD_MEDIAFILES}{$oMedienDatei->cPfad}" class="img-fluid" />
-                                {elseif !empty($oMedienDatei->cURL)}
-                                    <img alt="{if isset($cMediaAltAttr)}{$cMediaAltAttr}{/if}" src="{$oMedienDatei->cURL}" class="img-fluid" />
-                                {/if}
+								{image src="{if !empty($oMedienDatei->cPfad)}{$ShopURL}/{$smarty.const.PFAD_MEDIAFILES}{$oMedienDatei->cPfad}{elseif !empty($oMedienDatei->cURL)}{$oMedienDatei->cURL}{/if}" alt="{$cMediaAltAttr}" lazy=true}
                             </div>
                         </div>
                     </div>
                 {* Audio *}
                 {elseif $oMedienDatei->nMedienTyp == 2}
                     {if $oMedienDatei->cName|strlen > 1}
-                        <div class="col-xxs-12 col-6 col-sm-6 col-md-4{if $snackyConfig.css_maxTabsWidth >= 1200}  col-lg3{/if}{if $snackyConfig.css_maxTabsWidth >= 1600} col-xl-2{/if}">
+                        <div class="col-xxs-12 col-6 col-lg-4{if $snackyConfig.css_maxTabsWidth >= 1600} col-xl-3{/if}">
                             <div class="card">
                                 <div class="card-header"><span class="h6 m0 block">{$oMedienDatei->cName}</span></div>
                                 <div class="card-body">
@@ -73,7 +67,7 @@
                 {* Video *}
                  {elseif $oMedienDatei->nMedienTyp === 3}
                         {block name='productdetails-mediafile-video'}
-                        <div class="col-xxs-12 col-6 col-sm-6 col-md-4{if $snackyConfig.css_maxTabsWidth >= 1200}  col-lg3{/if}{if $snackyConfig.css_maxTabsWidth >= 1600} col-xl-2{/if}">
+                        <div class="col-xxs-12 col-6 col-lg-4{if $snackyConfig.css_maxTabsWidth >= 1600} col-xl-3{/if}">
                             <div class="card">
                                 <div class="card-header"><span class="h6 m0 block">{$oMedienDatei->cName}</span></div>
                                 <div class="card-body">
@@ -93,12 +87,12 @@
                         {/block}
                 {* Sonstiges *}
                 {elseif $oMedienDatei->nMedienTyp == 4}
-                    <div class="col-xxs-12 col-6 col-sm-6 col-md-4{if $snackyConfig.css_maxTabsWidth >= 1200}  col-lg3{/if}{if $snackyConfig.css_maxTabsWidth >= 1600} col-xl-2{/if}">
+                    <div class="col-xxs-12 col-6 col-lg-4{if $snackyConfig.css_maxTabsWidth >= 1600} col-xl-3{/if}">
                         <div class="card">
                             <div class="card-header"><span class="h6 m0 block">{$oMedienDatei->cName}</span></div>
                             <div class="card-body">
                                 {if $oMedienDatei->cBeschreibung}<span class="block mb-xxs">{$oMedienDatei->cBeschreibung}</span>{/if}
-                                {if $oMedienDatei->cURL|strpos:'youtube' !== false || $oMedienDatei->cURL|strpos:'youtu.be' !== false}
+                                {if strpos($oMedienDatei->cURL, 'youtube') !== false || strpos($oMedienDatei->cURL, 'youtu.be') !== false}
                                     {include file='productdetails/mediafile_youtube_embed.tpl'}
                                 {else}
                                     {if isset($oMedienDatei->oEmbed) && $oMedienDatei->oEmbed->code}
@@ -115,7 +109,7 @@
                     </div>
                     {* PDF *}
                 {elseif $oMedienDatei->nMedienTyp == 5}
-                    <div class="col-xxs-12 col-6 col-sm-6 col-md-4{if $snackyConfig.css_maxTabsWidth >= 1200}  col-lg3{/if}{if $snackyConfig.css_maxTabsWidth >= 1600} col-xl-2{/if}">
+                    <div class="col-xxs-12 col-6 col-lg-4{if $snackyConfig.css_maxTabsWidth >= 1600} col-xl-3{/if}">
                         <div class="card">
                             <div class="card-header"><span class="h6 m0 block">{$oMedienDatei->cName}</span></div>
                             <div class="card-body">

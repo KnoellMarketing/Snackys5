@@ -8,7 +8,7 @@
     {/block}
     {block name="index-article-sliders"}
         {include file="snippets/zonen.tpl" id="opc_before_boxes"}
-        {if isset($StartseiteBoxen) && $StartseiteBoxen|@count > 0}
+        {if isset($StartseiteBoxen) && $StartseiteBoxen|count > 0}
             {assign var='moreLink' value=null}
             {assign var='moreTitle' value=null}
             {foreach $StartseiteBoxen as $Box}
@@ -105,7 +105,7 @@
         {/if}
     {/block}
     {block name="index-additional"}
-        {if isset($oNews_arr) && $oNews_arr|@count > 0}
+        {if isset($oNews_arr) && $oNews_arr|count > 0}
         {include file="snippets/zonen.tpl" id="opc_before_news"}
             <section class="mb-spacer" id="news-overview">
                 <div class="dpflex-a-center dpflex-j-between mb-spacer mb-small">

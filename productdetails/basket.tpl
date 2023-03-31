@@ -1,5 +1,7 @@
 {block name='productdetails-basket'}
 {if ($Artikel->inWarenkorbLegbar == 1 || $Artikel->nErscheinendesProdukt == 1) || $Artikel->Variationen}
+    {$interval = $Artikel->fAbnahmeintervall|default:0}
+    {$mbm = $Artikel->fMindestbestellmenge|default:0}
     <div id="add-to-cart" class="hidden-print product-buy{if $Artikel->nErscheinendesProdukt} coming_soon{/if}">
 
         {block name="add-to-cart"}
@@ -18,14 +20,11 @@
                                             placeholder="{lang key='voucherFlexPlaceholder' section='productDetails' printf=$smarty.session.Waehrung->getName()}"}
                                         {inputgroupappend}
                                             {inputgrouptext class="form-control"}
-                                                {$smarty.session.Waehrung->getName()}
+                                                {JTL\Session\Frontend::getCurrency()->getName()}
                                             {/inputgrouptext}
                                         {/inputgroupappend}
                                     {/inputgroup}
                                 {/col}
-                                {if isset($kEditKonfig)}
-                                    <input type="hidden" name="kEditKonfig" value="{$kEditKonfig}"/>
-                                {/if}
                                 {input type="hidden" id="quantity" class="quantity" name="anzahl" value="1"}
                             {/block}
                         {else}
@@ -40,16 +39,35 @@
                                         </span>
                                     </div>
                                 {/if}
-
-                                <input type="{if $Artikel->cTeilbar === 'Y' && $Artikel->fAbnahmeintervall == 0}text{else}number{/if}"
-                                   min="{if $Artikel->fMindestbestellmenge}{$Artikel->fMindestbestellmenge}{else if $Artikel->cTeilbar != 'Y'}1{/if}"
-                                   max="{$Artikel->FunktionsAttribute[$smarty.const.FKT_ATTRIBUT_MAXBESTELLMENGE]|default:''}"
-                                   {if $Artikel->cTeilbar != 'Y'}
-                                       step="{if $Artikel->fAbnahmeintervall > 0}{$Artikel->fAbnahmeintervall}{else}1{/if}"
-                                    {/if}
-                                       id="quantity" class="quantity form-control{if $snackyConfig.quantityButtons == '1'} text-center{else} text-right{/if}" name="anzahl"
-                                       aria-label="{lang key='quantity'}"
-                                       value="{if $Artikel->fAbnahmeintervall > 0 || $Artikel->fMindestbestellmenge > 1}{if $Artikel->fMindestbestellmenge > $Artikel->fAbnahmeintervall}{$Artikel->fMindestbestellmenge}{else}{$Artikel->fAbnahmeintervall}{/if}{else}1{/if}" />
+                                {$step = 1}
+                                {if $Artikel->cTeilbar === 'Y' && $interval == 0}
+                                    {$step = 'any'}
+                                {elseif $interval > 0}
+                                    {$step = $interval}
+                                {/if}
+                                {$inputValue = 1}
+                                {if $interval > 0 || $mbm > 1}
+                                    {$inputValue = max($mbm,$interval)}
+                                {elseif isset($fAnzahl)}
+                                    {$inputValue = $fAnzahl}
+                                {/if}
+                                {$pid = $Artikel->kVariKindArtikel|default:$Artikel->kArtikel}
+								{if $mbm == 0 && $step != 'any'}
+									{$mbm = $step}
+								{/if}
+                                {input type="number"
+                                    min=$mbm
+                                    max=$Artikel->FunktionsAttribute[$smarty.const.FKT_ATTRIBUT_MAXBESTELLMENGE]|default:''
+                                    required=($interval > 0)
+                                    step=$step
+                                    id="quantity" class="quantity" name="anzahl"
+                                    aria=["label"=>"{lang key='quantity'}"]
+                                    value=$inputValue
+                                    data=[
+                                        "decimals"=>{getDecimalLength quantity=$interval},
+                                        "product-id"=>"{$pid}"
+                                    ]
+                                }
                                 {if $Artikel->cEinheit}
                                     <span class="input-group-addon unit">{$Artikel->cEinheit}</span>
                                 {/if}
@@ -69,6 +87,9 @@
                         <button aria-label="{lang key='addToCart'}" name="inWarenkorb" type="submit" value="{lang key='addToCart'}" class="sn-addBasket submit btn btn-primary btn-lg btn-block{if isset($wkWeiterleiten)} wkWeiterleiten{/if}"{if $Artikel->nIstVater && $Artikel->kVaterArtikel == 0 && !$showMatrix} disabled{/if}>
                             <span class="">{lang key='addToCart'}</span>
                         </button>
+                        {if isset($kEditKonfig)}
+                            <input type="hidden" name="kEditKonfig" value="{$kEditKonfig}"/>
+                        {/if}
                         {if $snackyConfig.quantityButtons != '1'}
                         </div>
                         {/if}
@@ -81,27 +102,26 @@
                {/if}
             {/if}
         {if $Artikel->inWarenkorbLegbar == 1
-            && ($Artikel->fMindestbestellmenge > 1
-                || ($Artikel->fMindestbestellmenge > 0 && $Artikel->cTeilbar === 'Y')
-                || ($Artikel->fAbnahmeintervall > 0 && $Einstellungen.artikeldetails.artikeldetails_artikelintervall_anzeigen === 'Y')
+            && ($mbm > 1
+                || ($interval > 0 &&
+                $Einstellungen.artikeldetails.artikeldetails_artikelintervall_anzeigen === 'Y')
                 || $Artikel->cTeilbar === 'Y'
-                || (!empty($Artikel->FunktionsAttribute[$smarty.const.FKT_ATTRIBUT_MAXBESTELLMENGE])
-                    && $Artikel->FunktionsAttribute[$smarty.const.FKT_ATTRIBUT_MAXBESTELLMENGE] > 0))}
+                || $Artikel->FunktionsAttribute[$smarty.const.FKT_ATTRIBUT_MAXBESTELLMENGE]|default:0 > 0)}
                 <div class="purchase-info small mt-xxs">
                     <div class="alert alert-info" role="alert">
                     {assign var="units" value=$Artikel->cEinheit}
-                    {if empty($Artikel->cEinheit) || $Artikel->cEinheit|@count_characters == 0}
+                    {if empty($Artikel->cEinheit) || $Artikel->cEinheit|strlen == 0}
                         <span class="block">{lang key="units" section="productDetails" assign="units"}</span>
                     {/if}
 
-                    {if $Artikel->fMindestbestellmenge > 1 || ($Artikel->fMindestbestellmenge > 0 && $Artikel->cTeilbar === 'Y')}
+                    {if $mbm > 1 || ($mbm > 0 && $Artikel->cTeilbar === 'Y')}
                         {lang key="minimumPurchase" section="productDetails" assign="minimumPurchase"}
-                        <span class="block">{$minimumPurchase|replace:"%d":$Artikel->fMindestbestellmenge|replace:"%s":$units}</span>
+                        <span class="block">{$minimumPurchase|replace:"%d":$mbm|replace:"%s":$units}</span>
                     {/if}
 
-                    {if $Artikel->fAbnahmeintervall > 0 && $Einstellungen.artikeldetails.artikeldetails_artikelintervall_anzeigen === 'Y'}
+                    {if $interval > 0 && $Einstellungen.artikeldetails.artikeldetails_artikelintervall_anzeigen === 'Y'}
                         {lang key="takeHeedOfInterval" section="productDetails" assign="takeHeedOfInterval"}
-                        <span class="block">{$takeHeedOfInterval|replace:"%d":$Artikel->fAbnahmeintervall|replace:"%s":$units}</span>
+                        <span class="block">{$takeHeedOfInterval|replace:"%d":$interval|replace:"%s":$units}</span>
                     {/if}
 
                     {if $Artikel->cTeilbar === 'Y'}

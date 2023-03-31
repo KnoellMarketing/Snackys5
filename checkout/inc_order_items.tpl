@@ -7,7 +7,7 @@
 {if $tplscope !== 'cart'}
 <span class="text-center h2 block">{lang key="basket" section="global"}</span>
 
-{if $smarty.session.Warenkorb->PositionenArr|@count > 0}
+{if JTL\Session\Frontend::getCart()->PositionenArr|count > 0}
 {else}
 <div class="alert alert-info">{lang key="emptybasket" section="checkout"}</div>
 {/if}
@@ -24,13 +24,13 @@
     {/if}
 {/if}
  
-{foreach name=positionen from=$smarty.session.Warenkorb->PositionenArr item=oPosition}
+{foreach JTL\Session\Frontend::getCart()->PositionenArr as $oPosition}
     {if !$oPosition->istKonfigKind()}
         <div class="type-{$oPosition->nPosTyp} c-it{if isset($isSidebar)} sb-it{/if}{if isset($isCheckout)} sb-it{/if}">
             <div class="row">
                 {if $Einstellungen.kaufabwicklung.warenkorb_produktbilder_anzeigen === 'Y'}
                     <div class="img-col col-3 col-sm-2 col-md-2">
-                        {if !empty($oPosition->Artikel->cVorschaubild)}
+                        {if !empty($oPosition->Artikel->cVorschaubildURL)}
                         <a href="{$oPosition->Artikel->cURLFull}" title="{$oPosition->cName|trans|escape:'html'}" class="img-ct w100">
                             {if isset($nSeitenTyp) && $nSeitenTyp == 37}
 								{include file='snippets/image.tpl'
@@ -53,7 +53,7 @@
                 <div class="inf-col{if $Einstellungen.kaufabwicklung.warenkorb_produktbilder_anzeigen === 'Y'} col-9 col-sm-10 col-md-10{else} col-12{/if}">
                     <div class="row first">
                         <div class="col-8 col-md-8 col-lg-9">
-                             {if $oPosition->nPosTyp == $C_WARENKORBPOS_TYP_ARTIKEL || $oPosition->nPosTyp == $C_WARENKORBPOS_TYP_GRATISGESCHENK}
+                             {if $oPosition->nPosTyp === $smarty.const.C_WARENKORBPOS_TYP_ARTIKEL || $oPosition->nPosTyp === $smarty.const.C_WARENKORBPOS_TYP_GRATISGESCHENK}
                                 <a href="{$oPosition->Artikel->cURLFull}" title="{$oPosition->cName|trans|escape:'html'}" class="block"><strong class="title">{$oPosition->cName|trans}</strong></a>
                                 {if !isset($isSidebar)}
                                 <ul class="list-unstyled text-muted small info-ul blanklist">
@@ -65,7 +65,7 @@
                                     {/if}
                                     {if $oPosition->Artikel->cLocalizedVPE 
 										&& $oPosition->Artikel->cVPE !== 'N'
-										&& $oPosition->nPosTyp != $C_WARENKORBPOS_TYP_GRATISGESCHENK
+										&& $oPosition->nPosTyp !== $smarty.const.C_WARENKORBPOS_TYP_GRATISGESCHENK
 									}
                                         <li class="baseprice"><strong>{lang key="basePrice" section="global"}:</strong> {$oPosition->Artikel->cLocalizedVPE[$NettoPreise]}</li>
                                     {/if}
@@ -94,13 +94,13 @@
                                     {/if}
 
                                     {if $Einstellungen.kaufabwicklung.bestellvorgang_artikelmerkmale == 'Y' && !empty($oPosition->Artikel->oMerkmale_arr)}
-                                        {foreach $oPosition->Artikel->oMerkmale_arr as $oMerkmale_arr}
+                                        {foreach $oPosition->Artikel->oMerkmale_arr as $characteristic}
                                             <li class="characteristic">
-                                                <strong>{$oMerkmale_arr->cName}</strong>:
+                                                <strong>{$characteristic->getName()}</strong>:
                                                 <span class="values">
-													{foreach $oMerkmale_arr->oMerkmalWert_arr as $oWert}
-														{if !$oWert@first}, {/if}
-                                                        {$oWert->cWert}
+													{foreach $characteristic->getCharacteristicValues() as $characteristicValue}
+														{if !$characteristicValue@first}, {/if}
+                                                        {$characteristicValue->getValue()}
                                                     {/foreach}
                                                 </span>
                                             </li>
@@ -163,7 +163,7 @@
 
                             {if $oPosition->istKonfigVater() && !isset($isSidebar)}
                                 <ul class="config-items text-muted small blanklist">
-                                    {foreach $smarty.session.Warenkorb->PositionenArr as $KonfigPos}
+                                    {foreach JTL\Session\Frontend::getCart()->PositionenArr as $KonfigPos}
                                         {if $oPosition->cUnique == $KonfigPos->cUnique && $KonfigPos->kKonfigitem > 0
                                             && !$KonfigPos->isIgnoreMultiplier()}
                                             <li>
@@ -179,7 +179,7 @@
                                 </ul>
                                 <ul class="config-items text-muted small blanklist">
                                     <strong>{lang key="one-off" section="checkout"}</strong>
-                                    {foreach $smarty.session.Warenkorb->PositionenArr as $KonfigPos}
+                                    {foreach JTL\Session\Frontend::getCart()->PositionenArr as $KonfigPos}
                                         {if $oPosition->cUnique == $KonfigPos->cUnique && $KonfigPos->kKonfigitem > 0
                                             && $KonfigPos->isIgnoreMultiplier()}
                                             <li>
@@ -194,7 +194,7 @@
                                     {/foreach}
                                 </ul>
                             {/if}
-							{if !empty($oPosition->Artikel->kStueckliste) && !empty($oPosition->Artikel->oStueckliste_arr)}
+							{if $Einstellungen.kaufabwicklung.bestellvorgang_partlist === 'Y' && !empty($oPosition->Artikel->kStueckliste) && !empty($oPosition->Artikel->oStueckliste_arr)}
 								<ul class="partlist-items text-muted small blanklist">
 									{foreach $oPosition->Artikel->oStueckliste_arr as $partListItem}
 										<li>
@@ -206,18 +206,9 @@
 							{/if}
                         </div>
                         <div class="col-4 col-md-4 col-lg-3 text-right">
-                            {if $tplscope === 'cart' && $oPosition->nPosTyp == 1}
-                                <button type="submit" class="droppos text-muted pr dpflex-a-center btn-flex" name="dropPos" value="{$smarty.foreach.positionen.index}" title="{lang key="delete" section="global"}">
-                                    <span class="img-ct icon">
-                                        <svg>
-                                          <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-bin"></use>
-                                        </svg>
-                                    </span>
-                                </button>
-                            {/if}
                             <div class="price-block mt-xs mb-xs">
                             {if $Einstellungen.kaufabwicklung.bestellvorgang_einzelpreise_anzeigen === 'Y'}
-                                {if $oPosition->nPosTyp == $C_WARENKORBPOS_TYP_ARTIKEL && (!$oPosition->istKonfigVater() || !isset($oPosition->oKonfig_arr) || $oPosition->oKonfig_arr|count === 0)}
+                                {if $oPosition->nPosTyp == $smarty.const.C_WARENKORBPOS_TYP_ARTIKEL && (!$oPosition->istKonfigVater() || !isset($oPosition->oKonfig_arr) || $oPosition->oKonfig_arr|count === 0)}
                                         <span class="single-price small block nowrap">
                                             {lang key="pricePerUnit" section="checkout"}: {$oPosition->cEinzelpreisLocalized[$NettoPreise][$smarty.session.cWaehrungName]}{if $tplscope != 'confirmation'} <span class="footnote-reference">*</span>{/if}
                                         </span>
@@ -290,12 +281,21 @@
                                                 </div>
                                             </div>
                                         {/if}
-                                {elseif $oPosition->nPosTyp == $C_WARENKORBPOS_TYP_GRATISGESCHENK}
+                                {elseif $oPosition->nPosTyp == $smarty.const.C_WARENKORBPOS_TYP_GRATISGESCHENK}
                                     <input name="anzahl[{$smarty.foreach.positionen.index}]" type="hidden" value="1" />
                                 {/if}
                             {else}
                                 <span class="qty">{$oPosition->nAnzahl|replace_delim} {if !empty($oPosition->Artikel->cEinheit)}{$oPosition->Artikel->cEinheit}{/if}</span>
-                            {/if}            
+                            {/if}  
+                            {if $tplscope === 'cart' && $oPosition->nPosTyp == 1}
+                                <button type="submit" class="droppos text-muted pr dpflex-a-center btn-flex" name="dropPos" value="{$smarty.foreach.positionen.index}" title="{lang key="delete" section="global"}">
+                                    <span class="img-ct icon">
+                                        <svg>
+                                          <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-bin"></use>
+                                        </svg>
+                                    </span>
+                                </button>
+                            {/if}          
                         </div>
                     </div>
                 </div>

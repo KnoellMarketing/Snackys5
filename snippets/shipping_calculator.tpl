@@ -22,7 +22,7 @@
                         </select>
                         <label class="sr-only" for="plz">{lang key="plz" section="forgot password"}</label>
                         <div class="input-group w100">
-                            <input type="text" name="plz" size="8" maxlength="8" value="{if isset($smarty.session.Kunde->cPLZ)}{$smarty.session.Kunde->cPLZ}{/if}" id="plz" class="form-control" placeholder="{lang key="plz" section="forgot password"}">
+                            <input type="text" name="plz" size="8" maxlength="8" value="{if JTL\Session\Frontend::getCustomer()->cPLZ !== null}{JTL\Session\Frontend::getCustomer()->cPLZ}{/if}" id="plz" class="form-control" placeholder="{lang key='plz' section='forgot password'}">
                             <span class="input-group-btn">
                                 <button name="versandrechnerBTN" class="btn btn-default" type="submit"><span class="hidden-xs">{lang key="estimateShipping" section="checkout"}</span><span class="visible-xs">»</span></button>
                             </span>

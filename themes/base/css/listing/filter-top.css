@@ -48,6 +48,8 @@
     border: 1px solid @lightborder;
     border-radius: .3rem;
     margin-top: .5rem;
+	max-height: 50vh;
+    overflow: auto;
 }
 #nav-ft .dropdown-item{
     padding: 0;

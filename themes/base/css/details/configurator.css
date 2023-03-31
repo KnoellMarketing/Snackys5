@@ -33,10 +33,6 @@
 #product-configuration-sidebar tfoot tr:last-child{
     border-bottom: 0;
 }
-#config-popup{
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(15px);
-}
 #config-popup .modal-content{
     max-width: 75rem;
 }
@@ -199,11 +195,36 @@ input:checked + .cfg-ct .check{
     color: @backgroundtext;
     background: @brand;
 }
-.desc-dd .dropdown-menu{
+.desc-dd .dropdown-menu:not(.big){
     padding: 0.5rem  1rem;
     font-weight: 400;
     background: @darktext;
     color: white;
+}
+/* Desc Popup Big */
+.desc-dd .dropdown-menu.big.show + .overlay-bg{
+    opacity: 1;
+    transform: none;
+    display: block;
+}
+.dropdown-menu.big.show {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(-50%) !important;
+    max-height: 60vh;
+    right: auto;
+    max-width: 60vw;
+    min-width: 0;
+    font-weight: 400;
+    font-size: ;
+    padding: 2rem;
+    width: 100%;
+    max-width: 50rem;
+}
+.dropdown-menu.big.show .close-btn{
+    top: -1rem;
+    right: -1rem;
 }
 /* Quantity */
 .cfg-ct .qt-wp{

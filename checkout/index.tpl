@@ -26,6 +26,12 @@
             
             {include file="checkout/inc_steps_next.tpl"}
         </div>
+    
+        <script type="text/javascript">
+            if (top.location !== self.location) {ldelim}
+                top.location = self.location.href;
+            {rdelim}
+        </script>
     </div>
     
     {if (isset($nWarenkorb2PersMerge) && $nWarenkorb2PersMerge === 1)}
@@ -35,12 +41,6 @@
 	</div>
 	</section></div> </div>
     {/if}
-    
-    <script type="text/javascript">
-        if (top.location !== self.location) {ldelim}
-            top.location = self.location.href;
-        {rdelim}
-    </script>
 {/block}
 
 {block name="footer"}

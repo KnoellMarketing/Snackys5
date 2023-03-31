@@ -12,8 +12,8 @@
                     <ul class="nav blanklist">
                         {foreach $oBox->getManufacturers() as $manufacturer}
                             <li class="nav-it">
-                                <a href="{$manufacturer->cSeo}" title="{$manufacturer->cName|escape:'html'}" class="dpflex">
-                                    <span class="name">{$manufacturer->cName|escape:'html'}</span>
+                                <a href="{$manufacturer->getURL()}" title="{$manufacturer->getName()|escape:'html'}" class="dpflex">
+                                    <span class="name">{$manufacturer->getName()|escape:'html'}</span>
                                 </a>
                             </li>
                         {/foreach}

@@ -156,7 +156,7 @@
                     {if !empty($prodid->Artikel->cHersteller)}
                     item_brand: "{$prodid->Artikel->cHersteller|escape}",
                     {/if}
-                    price: {$prodid->Artikel->Preise->fVKNetto|number_format:2:".":""},
+                    price: {$prodid->fPreis|number_format:2:".":""},
                     quantity: {$prodid->nAnzahl}
                 }
                 {/if}
@@ -183,7 +183,7 @@
                     {if !empty($prodid->Artikel->cHersteller)}
                     item_brand: "{$prodid->Artikel->cHersteller|escape}",
                     {/if}
-                    price: {$prodid->Artikel->Preise->fVKNetto|number_format:2:".":""},
+                    price: {$prodid->fPreis|number_format:2:".":""},
                     quantity: {$prodid->nAnzahl}
                 }
                 {elseif $prodid->nPosTyp==3}

@@ -13,7 +13,7 @@
                         {if count($LivesucheTop) > 0}
                             {foreach $LivesucheTop as $suche}
                                 <li class="tag">
-                                    <a href="{$suche->cURL}">{$suche->cSuche}</a>
+                                    <a href="{$suche->cURLFull}">{$suche->cSuche}</a>
                                     <span class="badge pull-right">{$suche->nAnzahlTreffer}</span>
                                 </li>
                             {/foreach}
@@ -33,7 +33,7 @@
                         {if count($LivesucheLast) > 0}
                             {foreach $LivesucheLast as $suche}
                                 <li class="tag">
-                                    <a href="{$suche->cURL}">{$suche->cSuche}</a>
+                                    <a href="{$suche->cURLFull}">{$suche->cSuche}</a>
                                     <span class="badge pull-right">{$suche->nAnzahlTreffer}</span>
                                 </li>
                             {/foreach}

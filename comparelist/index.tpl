@@ -4,6 +4,14 @@
     {include file='layout/header.tpl'}
 {/block}
 
+{$languageID = \JTL\Shop::getLanguageID()}
+{$fallback = $languageID}
+{$isDefault = \JTL\Language\LanguageHelper::isDefaultLanguageActive()}
+{if !$isDefault}
+    {$fallback = \JTL\Language\LanguageHelper::getDefaultLanguage()->getId()}
+{/if}
+{assign var='descriptionLength' value=200}
+
 {block name="content"}
 	{include file="snippets/zonen.tpl" id="opc_before_heading"}
     <h1 class="text-center mb-sm">{lang key="compare" section="global"}</h1>
@@ -11,7 +19,7 @@
 
     {include file="snippets/extension.tpl"}
 
-    {if $oVergleichsliste->oArtikel_arr|@count >1}
+    {if $oVergleichsliste->oArtikel_arr|count > 0}
 		{include file="snippets/zonen.tpl" id="opc_before_compare_list"}
         {* Image Row *}
         <div class="row cpr-f dpflex-j-center first">
@@ -82,6 +90,18 @@
                             <div class="col- text-center">
                                 {if $row['key'] === 'fArtikelgewicht' || $row['key'] === 'fGewicht'}
                                     {$oArtikel->$row['key']} {lang key='weightUnit' section='comparelist'}
+                                {elseif $row['key'] === 'cBeschreibung' || $row['key'] === 'cKurzBeschreibung'}
+                                    {block name='comparelist-index-products-row-description'}
+                                        {if $oArtikel->$row['key']|strlen < $descriptionLength}
+                                            {$oArtikel->$row['key']}
+                                        {else}
+                                            <div>
+                                                <span>
+                                                    {substr($oArtikel->$row['key'], $descriptionLength)}
+                                                </span>
+                                            </div>
+                                        {/if}
+                                    {/block}
                                 {else}
                                     {$oArtikel->$row['key']}
                                 {/if}
@@ -93,24 +113,25 @@
                 </div>
             {/if}
             {if $row['key'] === 'Merkmale'}
-                {foreach $oMerkmale_arr as $oMerkmale}
+                {foreach $oMerkmale_arr as $characteristic}
                     <div class="row cpr-f dpflex-j-center {if isset($bAjaxRequest) && $bAjaxRequest}mt-sm{else}mt-lg{/if} title">
                     {foreach $oVergleichsliste->oArtikel_arr as $oArtikel}
                         <div class="col-">
                             {if $oArtikel@index == 0}
-                            <div class="{if isset($bAjaxRequest) && $bAjaxRequest}h4{else}h3{/if} m0">{$oMerkmale->cName}</div>
+                            <div class="{if isset($bAjaxRequest) && $bAjaxRequest}h4{else}h3{/if} m0">{$characteristic->getName()|default:$characteristic->getName($fallback)}</div>
                             {/if}
                         </div>
                     {/foreach}
                     </div>
-                    <div class="row cpr-f dpflex-j-center{if isset($bAjaxRequest) && $bAjaxRequest}{else} text-lg{/if}" data-id="row-attr-{$oMerkmale->cName}">
+                    <div class="row cpr-f dpflex-j-center{if isset($bAjaxRequest) && $bAjaxRequest}{else} text-lg{/if}" data-id="row-attr-{$characteristic->getName()|default:$characteristic->getName($fallback)}">
                         {foreach $oVergleichsliste->oArtikel_arr as $oArtikel}
                             <div class="col- text-center">
                                 {if count($oArtikel->oMerkmale_arr) > 0}
                                     {foreach $oArtikel->oMerkmale_arr as $oMerkmaleArtikel}
-                                        {if $oMerkmale->cName == $oMerkmaleArtikel->cName}
-                                            {foreach $oMerkmaleArtikel->oMerkmalWert_arr as $oMerkmalWert}
-                                                {$oMerkmalWert->cWert}{if !$oMerkmalWert@last}, {/if}
+                                        {$innerName = $oMerkmaleArtikel->getName($languageID)|default:$oMerkmaleArtikel->getName($fallback)}
+                                        {if $name === $innerName}
+                                            {foreach $oMerkmaleArtikel->getCharacteristicValues() as $characteristicValue}
+                                                {$characteristicValue->getValue()}{if !$characteristicValue@last}, {/if}
                                             {/foreach}
                                         {/if}
                                     {/foreach}
@@ -127,7 +148,7 @@
                     <div class="row cpr-f dpflex-j-center mt-xxs" data-id="row-vari-{$oVariationen->cName}">
                         {foreach $oVergleichsliste->oArtikel_arr as $oArtikel}
                             <div class="col- text-center">
-                                {if isset($oArtikel->oVariationenNurKind_arr) && $oArtikel->oVariationenNurKind_arr|@count > 0}
+                                {if isset($oArtikel->oVariationenNurKind_arr) && $oArtikel->oVariationenNurKind_arr|count > 0}
                                     {foreach $oArtikel->oVariationenNurKind_arr as $oVariationenArtikel}
                                         {if $oVariationen->cName == $oVariationenArtikel->cName}
                                             {foreach $oVariationenArtikel->Werte as $oVariationsWerte}
@@ -139,14 +160,14 @@
                                             {/foreach}
                                         {/if}
                                     {/foreach}
-                                {elseif $oArtikel->Variationen|@count > 0}
+                                {elseif $oArtikel->Variationen|count > 0}
                                     {foreach $oArtikel->Variationen as $oVariationenArtikel}
                                         {if $oVariationen->cName == $oVariationenArtikel->cName}
                                             {foreach $oVariationenArtikel->Werte as $oVariationsWerte}
                                                 {$oVariationsWerte->cName}
-                                                {if $Einstellungen_Vergleichsliste.artikeldetails.artikel_variationspreisanzeige == 1 && $oVariationsWerte->fAufpreisNetto != 0}
+                                                {if $Einstellungen.artikeldetails.artikel_variationspreisanzeige == 1 && $oVariationsWerte->fAufpreisNetto != 0}
                                                     ({$oVariationsWerte->cAufpreisLocalized[$NettoPreise]}{if !empty($oVariationsWerte->cPreisVPEWertAufpreis[$NettoPreise])}, {$oVariationsWerte->cPreisVPEWertAufpreis[$NettoPreise]}{/if})
-                                                {elseif $Einstellungen_Vergleichsliste.artikeldetails.artikel_variationspreisanzeige == 2 && $oVariationsWerte->fAufpreisNetto != 0}
+                                                {elseif $Einstellungen.artikeldetails.artikel_variationspreisanzeige == 2 && $oVariationsWerte->fAufpreisNetto != 0}
                                                     ({$oVariationsWerte->cPreisInklAufpreis[$NettoPreise]}{if !empty($oVariationsWerte->cPreisVPEWertInklAufpreis[$NettoPreise])}, {$oVariationsWerte->cPreisVPEWertInklAufpreis[$NettoPreise]}{/if})
                                                 {/if}
                                                 {if !$oVariationsWerte@last},{/if}

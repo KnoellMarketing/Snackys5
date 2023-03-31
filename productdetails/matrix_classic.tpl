@@ -4,13 +4,13 @@
 <div class="table-responsive w100 mtrx">
     <table class="table table-striped variation-matrix">
         {* ****** 2-dimensional ****** *}
-        {if $Artikel->VariationenOhneFreifeld|@count == 2}
+        {if $Artikel->VariationenOhneFreifeld|count == 2}
             <thead>
             <tr>
                 <td>&nbsp;</td>
                 {foreach $Artikel->VariationenOhneFreifeld[0]->Werte as $oVariationWertHead}
                     <td class="vcenter">
-                        {if $Artikel->oVariBoxMatrixBild_arr|@count > 0 && (($Artikel->nIstVater == 1 && $Artikel->oVariBoxMatrixBild_arr[0]->nRichtung == 0) || $Artikel->nIstVater == 0)}
+                        {if $Artikel->oVariBoxMatrixBild_arr|count > 0 && (($Artikel->nIstVater == 1 && $Artikel->oVariBoxMatrixBild_arr[0]->nRichtung == 0) || $Artikel->nIstVater == 0)}
                             {foreach $Artikel->oVariBoxMatrixBild_arr as $oVariBoxMatrixBild}
                                 {if $oVariBoxMatrixBild->kEigenschaftWert == $oVariationWertHead->kEigenschaftWert}
                                     {image src=$oVariBoxMatrixBild->cBild fluid=true lazy=true alt=$oVariationWertHead->cName}<br>
@@ -29,7 +29,7 @@
                     {assign var=kEigenschaftWert1 value=$oVariationWert1->kEigenschaftWert}
                     <tr>
                         <td class="vcenter">
-                            {if $Artikel->oVariBoxMatrixBild_arr|@count > 0 && (($Artikel->nIstVater == 1 && $Artikel->oVariBoxMatrixBild_arr[0]->nRichtung == 1) || $Artikel->nIstVater == 0)}
+                            {if $Artikel->oVariBoxMatrixBild_arr|count > 0 && (($Artikel->nIstVater == 1 && $Artikel->oVariBoxMatrixBild_arr[0]->nRichtung == 1) || $Artikel->nIstVater == 0)}
                                 {foreach $Artikel->oVariBoxMatrixBild_arr as $oVariBoxMatrixBild}
                                     {if $oVariBoxMatrixBild->kEigenschaftWert == $oVariationWert1->kEigenschaftWert}
                                         {image src=$oVariBoxMatrixBild->cBild fluid=true lazy=true alt=$oVariationWert1->cName}<br>
@@ -187,7 +187,7 @@
                         {if $Einstellungen.global.artikeldetails_variationswertlager != 3 || (!isset($oVariationWertHead->nNichtLieferbar) || $oVariationWertHead->nNichtLieferbar != 1)}
                             {assign var=cVariBox value=$oVariationWertHead->kEigenschaft|cat:':'|cat:$oVariationWertHead->kEigenschaftWert}
                             <td class="vcenter text-center" style="width: {100/$Artikel->VariationenOhneFreifeld[0]->Werte|count}%;">
-                                {if $Artikel->oVariBoxMatrixBild_arr|@count > 0}
+                                {if $Artikel->oVariBoxMatrixBild_arr|count > 0}
                                     {foreach $Artikel->oVariBoxMatrixBild_arr as $oVariBoxMatrixBild}
                                         {if $oVariBoxMatrixBild->kEigenschaftWert == $oVariationWertHead->kEigenschaftWert}
                                         <span class="img-ct ma mb-xxs">
@@ -306,7 +306,7 @@
                         <tr>
                             <td class="vcenter">
                                 <div class="dpflex-a-center">
-                                    {if $Artikel->oVariBoxMatrixBild_arr|@count > 0}
+                                    {if $Artikel->oVariBoxMatrixBild_arr|count > 0}
                                         {foreach $Artikel->oVariBoxMatrixBild_arr as $oVariBoxMatrixBild}
                                             {if $oVariBoxMatrixBild->kEigenschaftWert == $oVariationWertHead->kEigenschaftWert}
                                                 <span class="img-ct mr-xxs">

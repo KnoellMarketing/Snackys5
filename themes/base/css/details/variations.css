@@ -99,6 +99,9 @@
 .var-it .dropdown-menu .fa{
     display: none;
 }
+.var-it .bootstrap-select>.dropdown-menu{
+    max-width: 100%;
+}
 @media screen and (max-width: 1800px){
     .var-it .swatches .btn-img.btn-default{
         width: 16.66%;

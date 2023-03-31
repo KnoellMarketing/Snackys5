@@ -42,7 +42,7 @@
         <div class="col-12 col-md-8 col-lg-9">
             {if isset($smarty.session.Zahlungsart->nWaehrendBestellung) && $smarty.session.Zahlungsart->nWaehrendBestellung == 1}
                 <h1 class="mb-spacer mb-small">{lang key="orderCompletedPre" section="checkout"}</h1>
-            {elseif $Bestellung->Zahlungsart->cModulId !== 'za_kreditkarte_jtl' && $Bestellung->Zahlungsart->cModulId !== 'za_lastschrift_jtl'}
+            {elseif $Bestellung->Zahlungsart->cModulId !== 'za_lastschrift_jtl'}
                 <h1 class="mb-spacer mb-small">{lang key="orderCompletedPost" section="checkout"}</h1>
             {/if}
             <div class="alert alert-info">{lang key="orderConfirmationPost" section="checkout"}</div>

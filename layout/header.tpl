@@ -97,7 +97,9 @@
                 {elseif $nSeitenTyp==2 && $NaviFilter->getFilterCount() >0}
                     {assign var="bNoIndex" value=false}
                 {/if}
+			{block name="head-meta-robots"}
             <meta name="robots" content="{if $robotsContent}{$robotsContent}{elseif $bNoIndex === true  || (isset($Link) && $Link->getNoFollow() === true)}noindex{else}index, follow{/if}">
+			{/block}
 
             <meta property="og:type" content="website" />
             <meta property="og:site_name" content="{$meta_title}" />
@@ -105,16 +107,34 @@
             <meta property="og:description" content="{$meta_description|truncate:1000:"":true}" />
             <meta property="og:url" content="{$cCanonicalURL}"/>
 
-            {if $nSeitenTyp === $smarty.const.PAGE_ARTIKEL && !empty($Artikel->Bilder)}
-            <meta property="og:image" content="{$Artikel->Bilder[0]->cURLGross}">
-                {elseif $nSeitenTyp === $smarty.const.PAGE_ARTIKELLISTE
-                && $oNavigationsinfo->getImageURL() !== 'gfx/keinBild.gif'
-                && $oNavigationsinfo->getImageURL() !== 'gfx/keinBild_kl.gif'
-                }
-            <meta property="og:image" content="{$oNavigationsinfo->getImageURL()}" />
-                {elseif $nSeitenTyp === $smarty.const.PAGE_NEWSDETAIL && !empty($newsItem->getPreviewImage())}
-            <meta property="og:image" content="{$imageBaseURL}{$newsItem->getPreviewImage()}" />
-                {else}
+            {$showImage = true}
+            {$navData = null}
+            {if !empty($oNavigationsinfo)}
+                {if $oNavigationsinfo->getCategory() !== null}
+                    {$showImage = in_array($Einstellungen['navigationsfilter']['kategorie_bild_anzeigen'], ['B', 'BT'])}
+                    {$navData = $oNavigationsinfo->getCategory()}
+                {elseif $oNavigationsinfo->getManufacturer() !== null}
+                    {$showImage = in_array($Einstellungen['navigationsfilter']['hersteller_bild_anzeigen'], ['B', 'BT'])}
+                    {$navData = $oNavigationsinfo->getManufacturer()}
+                {elseif $oNavigationsinfo->getCharacteristicValue() !== null}
+                    {$showImage = in_array($Einstellungen['navigationsfilter']['merkmalwert_bild_anzeigen'], ['B', 'BT'])}
+                    {$navData = $oNavigationsinfo->getCharacteristicValue()}
+                {/if}
+            {/if}
+
+            {if $nSeitenTyp === $smarty.const.PAGE_ARTIKEL && !empty($Artikel->getImage(JTL\Media\Image::SIZE_LG))}
+                <meta property="og:image" content="{$Artikel->getImage(JTL\Media\Image::SIZE_LG)}">
+                <meta property="og:image:width" content="{$Artikel->getImageWidth(JTL\Media\Image::SIZE_LG)}" />
+                <meta property="og:image:height" content="{$Artikel->getImageHeight(JTL\Media\Image::SIZE_LG)}" />
+            {elseif $nSeitenTyp === $smarty.const.PAGE_NEWSDETAIL && !empty($newsItem->getImage(JTL\Media\Image::SIZE_LG))}
+                <meta property="og:image" content="{$newsItem->getImage(JTL\Media\Image::SIZE_LG)}" />
+                <meta property="og:image:width" content="{$newsItem->getImageWidth(JTL\Media\Image::SIZE_LG)}" />
+                <meta property="og:image:height" content="{$newsItem->getImageHeight(JTL\Media\Image::SIZE_LG)}" />
+            {elseif !empty($navData) && !empty($navData->getImage(JTL\Media\Image::SIZE_LG))}
+                <meta property="og:image" content="{$navData->getImage(JTL\Media\Image::SIZE_LG)}" />
+                <meta property="og:image:width" content="{$navData->getImageWidth(JTL\Media\Image::SIZE_LG)}" />
+                <meta property="og:image:height" content="{$navData->getImageHeight(JTL\Media\Image::SIZE_LG)}" />
+            {else}
             <meta property="og:image" content="{$ShopLogoURL}" />
             {/if}
             {/block}
@@ -149,9 +169,8 @@
             <link type="image/x-icon" href="{$shopFaviconURL}" rel="icon">
             {/block}
 
-                {php}
-                    Shop::Smarty()->assign("cssArray", array());
-                {/php}
+			{createArray arr="cssArray"}
+			
             {block name="head-resources"}
 
             {block name="opc-dependencies"}
@@ -347,6 +366,9 @@
 {if $snackyConfig.dropdown_plus != 0}
 {append var='cssArray' value='/templates/Snackys/themes/base/css/header/dropdown-plus.css'}
 {/if}
+{if $snackyConfig.liveSearch == 'Y'}
+{append var='cssArray' value='/templates/Snackys/themes/base/css/elements/livesearch.css'}
+{/if}
 {if $Einstellungen.bilder.container_verwenden == 'N'}
 {append var='cssArray' value='/templates/Snackys/themes/base/css/elements/images-contain.css'}
 {/if}
@@ -377,6 +399,12 @@
                     {loadCSS css=$cssArray cPageType=$nSeitenTyp}
                     {* restliche CSS ans Seitenende gepackt layout/footer.tpl *}
                 {/block}
+			
+				{block name="image-sizes-tpl"}
+				<style id="imgsizescss">
+					{include file="snippets/imagesizes.tpl"}
+				</style>
+				{/block}
 
                 {* RSS *}
             {if isset($Einstellungen.rss.rss_nutzen) && $Einstellungen.rss.rss_nutzen === 'Y'}
@@ -384,8 +412,9 @@
             {/if}
                 {* Languages *}
             {block name="layout-header-hreflang"}
-            {if !empty($smarty.session.Sprachen) && count($smarty.session.Sprachen) > 1}
-            {foreach $smarty.session.Sprachen as $language}
+            {$languages = JTL\Session\Frontend::getLanguages()}
+            {if $languages|count > 1}
+            {foreach $languages as $language}
             <link rel="alternate"
                   hreflang="{$language->getIso639()}"
                   href="{if $language->getShopDefault() === 'Y' && isset($Link) && $Link->getLinkType() === $smarty.const.LINKTYP_STARTSEITE}{$ShopURL}/{else}{$language->getUrl()}{/if}">
