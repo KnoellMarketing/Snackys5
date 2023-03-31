@@ -12,7 +12,7 @@
 		<div class="price-row">
 		
 			{* Fallback für PayPal Checkout Plugin > murks aber leider nur so funktionstüchtig *}
-			<meta itemprop="price" content="{if $Artikel->Preise->oPriceRange->isRange()}{$Artikel->Preise->oPriceRange->minBruttoPrice|formatForMicrodata}{else}{$Artikel->Preise->fVKBrutto|formatForMicrodata}{/if}">
+			<meta itemprop="price" content="{$Artikel->Preise->cVKLocalized[$NettoPreise]|formatForMicrodata}">
 			
         {block name='price-label'}
             {if ($tplscope !== 'detail' && $Artikel->Preise->oPriceRange->isRange() && $Artikel->Preise->oPriceRange->rangeWidth() > $Einstellungen.artikeluebersicht.articleoverview_pricerange_width)

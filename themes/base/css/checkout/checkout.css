@@ -377,6 +377,24 @@ label.stc-radio{
 #select_shipping_address[aria-expanded="true"]{
     display: block;
 }
+/* PayPal Credit Card */
+#acdc_card .card_field{
+	border: 1px solid @defaultborder;
+	padding: .7em 1.2rem;
+	margin-bottom: .3rem;
+	border-radius: .3rem;
+}
+#acdc_card .card_field iframe{
+	height: 1.2rem !important;
+}
+#acdc_card .form-row{
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 -15px;
+}
+#card-holder-name{
+	margin-bottom: .3rem;
+}
 /* Lieferadresse */
 .sa-card .stc-input{
     margin-right: .75rem;
@@ -503,5 +521,8 @@ label.stc-radio{
 	.sa-card .btn{
 		padding-left: .6rem;
 		padding-right: .6rem;
+	}
+	#acdc_card .form-row{
+		margin: 0 -8px;
 	}
 }

@@ -23,14 +23,14 @@
 				{if $li->getChildLinks()->count() > 0}
 					<ul class="mm-fullscreen">
 						<li>
-									<a class="category-title block" href="{$li->getURL()}"{if $li->getNoFollow()} rel="nofollow"{/if}{if $li->getTitle()} title="{$li->cTitle}"{/if}>
+									<a class="category-title block" href="{$li->getURL()}"{if $li->getNoFollow()} rel="nofollow"{/if}{if $li->getTitle()} title="{$li->cTitle}"{/if} target="{$li->getTarget()}">
 										{$li->getName()}
 									</a>
 								<ul class="lg-list">
 						{foreach $li->getChildLinks() as $subli}
 							{if !empty($subli->getName())}
 							<li{if $subli->getIsActive() || ($checkLinkParents === true && isset($activeParents) && in_array($subli->getID(), $activeParents))} class="active"{/if}>
-								<a href="{$subli->getURL()}"{if $subli->getNoFollow()} rel="nofollow"{/if}{if !empty($subli->getTitle())} title="{$subli->getTitle()}"{/if}>
+								<a href="{$subli->getURL()}"{if $subli->getNoFollow()} rel="nofollow"{/if}{if !empty($subli->getTitle())} title="{$subli->getTitle()}"{/if} target="{$subli->getTarget()}">
 									{$subli->getName()}
 								</a>
 							</li>

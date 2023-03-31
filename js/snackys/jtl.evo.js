@@ -145,6 +145,14 @@
 			
         },
 
+        startSpinner: function (target) {
+			//nothing to do - with our performance we dont need a spinner! :-)
+        },
+
+        stopSpinner: function () {
+			//nothing to do - with our performance we dont need a spinner! :-)
+        },
+		
         initFilters: function (href) {
             var $wrapper = $('.js-collapse-filter');
             //$.evo.extended().startSpinner($wrapper);

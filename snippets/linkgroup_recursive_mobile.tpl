@@ -37,7 +37,7 @@
 						<ul class="dropdown-menu keepopen">
 							{if $snackyConfig.mmenu_link_clickable == 'N'}
 							<li class="title{if $li->getIsActive()} active{/if}">
-								<a href="{$li->getURL()}" class="mm-mainlink"{if $li->getNoFollow()} rel="nofollow"{/if}{if !empty($li->getTitle())} title="{$li->getTitle()}"{/if} data-ref="{$li->kLink}">
+								<a href="{$li->getURL()}" class="mm-mainlink"{if $li->getNoFollow()} rel="nofollow"{/if}{if !empty($li->getTitle())} title="{$li->getTitle()}"{/if} data-ref="{$li->kLink}" target="{$li->getTarget()}">
 									{lang key="showAll" section="global"}
 								</a>
 							</li>
