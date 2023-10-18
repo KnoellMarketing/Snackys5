@@ -24,12 +24,18 @@
 		{$navData = $oNavigationsinfo->getCharacteristicValue()}
     {/if}
     {include file="snippets/zonen.tpl" id="opc_before_heading"}
-    
+
+	{if isset($AktuelleKategorie) && isset($AktuelleKategorie->getCategoryAttributes())}
+    	{assign var="catAttributes" value=$AktuelleKategorie->getCategoryAttributes()}
+		{if isset($catAttributes.seo_name->cWert)}
+			{assign var="catSeoName" value=$catAttributes.seo_name->cWert}
+		{/if}
+	{/if}
     {if !isset($oNavigationsinfo)
     || (!$oNavigationsinfo->getManufacturer() && !$oNavigationsinfo->getCharacteristicValue() && !$oNavigationsinfo->getCategory())}
         <h1 class="title mb-small">{$Suchergebnisse->getSearchTermWrite()}</h1>
-    {elseif $oNavigationsinfo->getCategory() && !empty($oNavigationsinfo->getCategory()->categoryAttributes) && isset($oNavigationsinfo->getCategory()->categoryAttributes.seo_name) && $showTitle}
-        <h1 class="title mb-small">{$oNavigationsinfo->getCategory()->categoryAttributes.seo_name->cWert}</h1>
+    {elseif $oNavigationsinfo->getCategory() && isset($catSeoName) && $showTitle}
+        <h1 class="title mb-small">{$catSeoName}</h1>
     {elseif $oNavigationsinfo->getName() && $showTitle}
         <h1 class="title mb-small">{$oNavigationsinfo->getName()}</h1>
     {/if}

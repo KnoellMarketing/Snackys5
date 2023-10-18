@@ -12,7 +12,7 @@
     || $NaviFilter->getFilterCount() > 0 || (count($Suchergebnisse->getSortingOptions()) > 0 && $Suchergebnisse->getProductCount() >= 1)
      || (isset($oErweiterteDarstellung->nDarstellung) && $Suchergebnisse->getProductCount() >= 1
         && $Einstellungen.artikeluebersicht.artikeluebersicht_erw_darstellung === 'Y'
-        && empty($AktuelleKategorie->categoryFunctionAttributes['darstellung']))}
+        && empty($AktuelleKategorie->getCategoryFunctionAttribute('darstellung')))}
 {else}
     {assign var=show_filters value=(count($NaviFilter->getAvailableContentFilters()) > 0
     && ($Einstellungen.artikeluebersicht.suchfilter_anzeigen_ab == 0

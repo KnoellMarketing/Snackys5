@@ -24,7 +24,7 @@
     {/if}
 {/if}
  
-{foreach JTL\Session\Frontend::getCart()->PositionenArr as $oPosition}
+{foreach JTL\Session\Frontend::getCart()->PositionenArr as $oPosition name=positionen}
     {if !$oPosition->istKonfigKind()}
         <div class="type-{$oPosition->nPosTyp} c-it{if isset($isSidebar)} sb-it{/if}{if isset($isCheckout)} sb-it{/if}">
             <div class="row">

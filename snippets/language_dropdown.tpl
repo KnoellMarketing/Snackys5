@@ -6,7 +6,7 @@
         {else}
         <li class="dropdown{if isset($isMobileMenu) && $isMobileMenu}-style visible-xs{/if} lng-dd">
         {/if}
-            <a href="#" class="language-dropdown {if isset($isMobileMenu) && $isMobileMenu}mm-mainlink{else}dpflex-a-c{/if} {$dropdownClass|default:''}{if isset($isFooter) && $isFooter} btn btn-block btn-sm{/if}"{if !(isset($isMobileMenu) && $isMobileMenu)} data-toggle="dropdown"{/if} title="{lang key='selectLang'}">
+            <a href="#" class="language-dropdown {if isset($isMobileMenu) && $isMobileMenu}mm-mainlink l-full{else}dpflex-a-c{/if} {$dropdownClass|default:''}{if isset($isFooter) && $isFooter} btn btn-block btn-sm{/if}"{if !(isset($isMobileMenu) && $isMobileMenu)} data-toggle="dropdown"{/if} title="{lang key='selectLang'}">
                 {foreach $languages as $language}
                     {if $language->getId() === JTL\Shop::getLanguageID()}
                         {block name='snippets-language-dropdown-text'}

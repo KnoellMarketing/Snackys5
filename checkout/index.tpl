@@ -6,9 +6,8 @@
     {/if}
 {/block}
 
-{block name="content"}
-    
-            {include file="snippets/extension.tpl"}
+{block name="content"}   
+            
     <div id="result-wrapper">
         <div id="checkout">
             {include file="checkout/inc_steps.tpl"}
@@ -37,7 +36,7 @@
     {if (isset($nWarenkorb2PersMerge) && $nWarenkorb2PersMerge === 1)}
 	<div class="modal-dialog modal-lg">  <div class="modal-content">   <div class="modal-header"><h4 class="modal-title">{lang key="basket" section="global"}</h4></div>  <section class="tmp-modal-content">
 	<div class="modal-body">
-		{lang key="basket2PersMerge" section="login"}<div class="answer"><a href="{get_static_route id='bestellvorgang.php'}?basket2Pers=1&token={$smarty.session.jtl_token}">{lang key="yes" section="global"}</a><a href="javascript:void();" class="x">{lang key="no" section="global"}</a></div>
+		{lang key="basket2PersMerge" section="login"}<div class="answer"><a href="{get_static_route id='bestellvorgang.php'}?basket2Pers=1&token={$smarty.session.jtl_token}">{lang key="yes" section="global"}</a><a href="{get_static_route id='bestellvorgang.php'}?updatePersCart=1&token={$smarty.session.jtl_token}" class="x">{lang key="no" section="global"}</a></div>
 	</div>
 	</section></div> </div>
     {/if}

@@ -11,7 +11,6 @@
             <div class="panel-heading">
 				<div class="panel-title dpflex-a-center dpflex-j-between mb-spacer mb-xs">
                     <span class="h2 m0 block">{lang key="buyProductBundle" section="productDetails"}</span>
-                    {if $tplscope !== 'box'}
                     <div class="right">
                         {if !$isMobile}
                             <div class="ar-ct btn-group{if $Products|@count > $snackyConfig.css_listElmXl} show-xl{/if}{if $Products|@count > $snackyConfig.css_listElmLg} show-lg{/if}{if $Products|@count > $snackyConfig.css_listElmMd} show-md{/if}{if $Products|@count > $snackyConfig.css_listElmSm} show-sm{/if}{if $Products|@count > $snackyConfig.css_listElmXs} show-xs{/if}">
@@ -24,7 +23,6 @@
                             </div>
                         {/if}
                     </div>
-                    {/if}
 				</div>
             </div>
 			<div class="panel-body">

@@ -114,6 +114,7 @@
             {/if}
             {if $row['key'] === 'Merkmale'}
                 {foreach $oMerkmale_arr as $characteristic}
+					{$name = $characteristic->getName($languageID)|default:$characteristic->getName($fallback)}
                     <div class="row cpr-f dpflex-j-center {if isset($bAjaxRequest) && $bAjaxRequest}mt-sm{else}mt-lg{/if} title">
                     {foreach $oVergleichsliste->oArtikel_arr as $oArtikel}
                         <div class="col-">

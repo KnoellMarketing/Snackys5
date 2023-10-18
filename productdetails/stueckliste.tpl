@@ -1,9 +1,11 @@
 {block name='productdetails-stueckliste'}
+{if !isset($tplscope)}
+	{assign var="tplscope" value=0}
+{/if}
 <section class="panel-slider panel-default mb-spacer"{if isset($id) && $id|strlen > 0} id="{$id}"{/if}>
     <div class="panel-heading">
         <div class="panel-title dpflex-a-center dpflex-j-between mb-spacer mb-xs">
             <span class="h2 m0 block">{$title}</span>
-            {if $tplscope !== 'box'}
             <div class="right">
                 {if !$isMobile}
                     <div class="ar-ct btn-group{if $productlist|@count > $snackyConfig.css_listElmXl} show-xl{/if}{if $productlist|@count > $snackyConfig.css_listElmLg} show-lg{/if}{if $productlist|@count > $snackyConfig.css_listElmMd} show-md{/if}{if $productlist|@count > $snackyConfig.css_listElmSm} show-sm{/if}{if $productlist|@count > $snackyConfig.css_listElmXs} show-xs{/if}">
@@ -16,7 +18,6 @@
                     </div>
                 {/if}
             </div>
-            {/if}
         </div>
     </div>
 	<div class="panel-body">

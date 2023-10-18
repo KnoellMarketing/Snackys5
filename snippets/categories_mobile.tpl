@@ -186,7 +186,7 @@
             {block name="mobilemenu-currency"}
                 {if JTL\Session\Frontend::getCurrencies()|count > 1}
                     <li class="dropdown-style visible-xs">
-                        <a href="#" class="dropdown-toggle mm-mainlink" title="{lang key='selectCurrency'}">
+                        <a href="#" class="dropdown-toggle mm-mainlink l-full" title="{lang key='selectCurrency'}">
                             {JTL\Session\Frontend::getCurrency()->getName()} {include file='snippets/mobile-menu-arrow.tpl'}
                         </a>
                         <ul class="dropdown-menu">

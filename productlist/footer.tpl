@@ -100,10 +100,15 @@
 	</div>
 {/if}
 
-
-{if isset($oNavigationsinfo->getCategory()->categoryAttributes.seo_longtext)}
+{if isset($AktuelleKategorie) && isset($AktuelleKategorie->getCategoryAttributes())}
+	{assign var="catAttributes" value=$AktuelleKategorie->getCategoryAttributes()}
+	{if isset($catAttributes.seo_longtext->cWert)}
+		{assign var="catSeoName" value=$catAttributes.seo_longtext->cWert}
+	{/if}
+{/if}
+{if isset($catSeoLongtext)}
 	<div class="item_desc custom_content">
-		{if $snackyConfig.optimize_kategorie == "Y"}{$oNavigationsinfo->getCategory()->categoryAttributes.seo_longtext->cWert|optimize}{else}{$oNavigationsinfo->getCategory()->categoryAttributes.seo_longtext->cWert}{/if}
+		{if $snackyConfig.optimize_kategorie == "Y"}{$catSeoLongtext|optimize}{else}{$catSeoLongtext}{/if}
 	</div>
 {/if}
 {/block}

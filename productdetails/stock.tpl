@@ -32,12 +32,12 @@
                     data-placement="top"
                     data-content="{if $selectedCountry !== null}{lang key='shippingInformation' section='productDetails' assign=silv}{sprintf($silv, $selectedCountry->getName(), $oSpezialseiten_arr[$smarty.const.LINKTYP_VERSAND]->getURL(), $oSpezialseiten_arr[$smarty.const.LINKTYP_VERSAND]->getURL())}{/if}"
                     {/if}>
-                    {if $snackyConfig.deliveryDate == '1' && !$Artikel->nErscheinendesProdukt}
+                    {if $snackyConfig.deliveryDate == '1'}
                         {block name='productdetails-stock-snackys-deliverydate'}
                             <strong>{lang key="deliveryDate" section="custom"}:</strong>
-                            {getDeliveryDate days=$Artikel->nMinDeliveryDays saturday=$snackyConfig.deliveryDateSaturday state=$snackyConfig.deliveryDateState endTime=$snackyConfig.deliveryDateFinishTime format=$snackyConfig.deliveryDateFormat}
+                            {getDeliveryDate calculateDays=$snackyConfig.daysForDeliverCalculation days=$Artikel->nMinDeliveryDays saturday=$snackyConfig.deliveryDateSaturday state=$snackyConfig.deliveryDateState endTime=$snackyConfig.deliveryDateFinishTime format=$snackyConfig.deliveryDateFormat}
                             {if $Artikel->nMinDeliveryDays < $Artikel->nMaxDeliveryDays}
-                                - {getDeliveryDate days=$Artikel->nMaxDeliveryDays saturday=$snackyConfig.deliveryDateSaturday state=$snackyConfig.deliveryDateState endTime=$snackyConfig.deliveryDateFinishTime format=$snackyConfig.deliveryDateFormat}
+                                - {getDeliveryDate calculateDays=$snackyConfig.daysForDeliverCalculation days=$Artikel->nMaxDeliveryDays saturday=$snackyConfig.deliveryDateSaturday state=$snackyConfig.deliveryDateState endTime=$snackyConfig.deliveryDateFinishTime format=$snackyConfig.deliveryDateFormat}
                             {/if}
 							<span class="estimated-delivery-info">{lang key='shippingInfoIcon' section='productDetails' printf=$selectedCountry->getISO()}</span>
                         {/block}

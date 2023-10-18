@@ -1,5 +1,5 @@
 {block name='productdetails-price'}
-{if $smarty.session.Kundengruppe->mayViewPrices()}
+{if $Artikel->Preise !== null && $smarty.session.Kundengruppe->mayViewPrices()}
     <div class="price_wrapper{if $tplscope === 'detail'} mb-xxs{/if}">
     {block name="price-wrapper"}
     {if $Artikel->getOption('nShowOnlyOnSEORequest', 0) === 1}
@@ -24,10 +24,10 @@
 		{/block}
 		<strong class="price text-nowrap{if isset($Artikel->Preise->Sonderpreis_aktiv) && $Artikel->Preise->Sonderpreis_aktiv} special-price{/if}">
             {block name="snackys-del-price"}
-                {if $Artikel->Preise->Sonderpreis_aktiv && $Einstellungen.artikeldetails.artikeldetails_sonderpreisanzeige == 2 && $snackyConfig.oldPricePlace == '1'}
+                {if $Artikel->Preise->Sonderpreis_aktiv && $Einstellungen.artikeldetails.artikeldetails_sonderpreisanzeige == 2 && $snackyConfig.oldPricePlace == '1' && isset($Artikel->Preise->alterVKLocalized[$NettoPreise])}
                     <del class="old-price">{$Artikel->Preise->alterVKLocalized[$NettoPreise]}</del>
                 {elseif !$Artikel->Preise->Sonderpreis_aktiv && $Artikel->Preise->rabatt > 0}
-                    {if ($Einstellungen.artikeldetails.artikeldetails_rabattanzeige == 3 || $Einstellungen.artikeldetails.artikeldetails_rabattanzeige == 4) && $snackyConfig.oldPricePlace == '1'}
+                    {if ($Einstellungen.artikeldetails.artikeldetails_rabattanzeige == 3 || $Einstellungen.artikeldetails.artikeldetails_rabattanzeige == 4) && $snackyConfig.oldPricePlace == '1' && isset($Artikel->Preise->alterVKLocalized[$NettoPreise])}
                     <del class="old-price">{$Artikel->Preise->alterVKLocalized[$NettoPreise]}</del>
                     {/if}
                 {/if}
@@ -72,12 +72,12 @@
 				
 				
                 
-                {if $Artikel->Preise->Sonderpreis_aktiv && $Einstellungen.artikeldetails.artikeldetails_sonderpreisanzeige == 2 && $snackyConfig.oldPricePlace !== '1'}
+                {if $Artikel->Preise->Sonderpreis_aktiv && $Einstellungen.artikeldetails.artikeldetails_sonderpreisanzeige == 2 && $snackyConfig.oldPricePlace !== '1' && isset($Artikel->Preise->alterVKLocalized[$NettoPreise])}
                     <div class="instead_of old_price">{lang key="oldPrice" section="global"}:
                         <del class="value">{$Artikel->Preise->alterVKLocalized[$NettoPreise]}</del>
                     </div>
                 {elseif !$Artikel->Preise->Sonderpreis_aktiv && $Artikel->Preise->rabatt > 0}
-                    {if ($Einstellungen.artikeldetails.artikeldetails_rabattanzeige == 3 || $Einstellungen.artikeldetails.artikeldetails_rabattanzeige == 4) && $snackyConfig.oldPricePlace !== '1'}
+                    {if ($Einstellungen.artikeldetails.artikeldetails_rabattanzeige == 3 || $Einstellungen.artikeldetails.artikeldetails_rabattanzeige == 4) && $snackyConfig.oldPricePlace !== '1' && isset($Artikel->Preise->alterVKLocalized[$NettoPreise])}
                         <div class="old_price">{lang key="oldPrice"}:
                             <del class="value text-nowrap">{$Artikel->Preise->alterVKLocalized[$NettoPreise]}</del>
                         </div>
@@ -118,7 +118,7 @@
                 {/if}
                 
                 {if $Artikel->Preise->Sonderpreis_aktiv && isset($Einstellungen.artikeluebersicht) && $Einstellungen.artikeluebersicht.artikeluebersicht_sonderpreisanzeige == 2}
-					{if $snackyConfig.oldPricePlace !== '1'}
+					{if $snackyConfig.oldPricePlace !== '1' && isset($Artikel->Preise->alterVKLocalized[$NettoPreise])}
                     <div class="instead-of old-price">
                         <small class="text-muted">
                             {lang key="oldPrice"}: 
@@ -127,7 +127,7 @@
                     </div>
 					{/if}
                 {elseif !$Artikel->Preise->Sonderpreis_aktiv && $Artikel->Preise->rabatt > 0 && isset($Einstellungen.artikeluebersicht)}
-                    {if ($Einstellungen.artikeluebersicht.artikeluebersicht_rabattanzeige == 3 || $Einstellungen.artikeluebersicht.artikeluebersicht_rabattanzeige == 4) && $snackyConfig.oldPricePlace !== '1'}
+                    {if ($Einstellungen.artikeluebersicht.artikeluebersicht_rabattanzeige == 3 || $Einstellungen.artikeluebersicht.artikeluebersicht_rabattanzeige == 4) && $snackyConfig.oldPricePlace !== '1' && isset($Artikel->Preise->alterVKLocalized[$NettoPreise])}
                         <div class="old-price">
                             <small class="text-muted">
                                 {lang key="oldPrice"}: 

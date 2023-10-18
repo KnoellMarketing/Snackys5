@@ -165,8 +165,8 @@
             {/if}
             {/block}
 
-            {block name="head-icons"}
-            <link type="image/x-icon" href="{$shopFaviconURL}" rel="icon">
+			{block name='layout-header-head-icons'}
+            <link rel="shortcut icon" href="{$shopFaviconURL}" type="image/x-icon">
             {/block}
 
 			{createArray arr="cssArray"}
@@ -375,9 +375,9 @@
 {if \JTL\Shop::isAdmin(true)}
 {append var='cssArray' value='/templates/Snackys/themes/base/css/elements/admin.css'}
 {/if}
-{if ((!empty($AktuelleKategorie->categoryFunctionAttributes['darstellung'])
-&& $AktuelleKategorie->categoryFunctionAttributes['darstellung'] == 1)
-|| (empty($AktuelleKategorie->categoryFunctionAttributes['darstellung'])
+{if ((!empty($AktuelleKategorie->getCategoryFunctionAttribute('darstellung'))
+&& $AktuelleKategorie->getCategoryFunctionAttribute('darstellung') == 1)
+|| (empty($AktuelleKategorie->getCategoryFunctionAttribute('darstellung'))
 && ((!empty($oErweiterteDarstellung->nDarstellung) && $oErweiterteDarstellung->nDarstellung == 1)
 || (empty($oErweiterteDarstellung->nDarstellung)
 && isset($Einstellungen.artikeluebersicht.artikeluebersicht_erw_darstellung_stdansicht)
@@ -581,6 +581,7 @@ body-offcanvas{if isset($bSeiteNichtGefunden) && $bSeiteNichtGefunden} error404{
                         {/block}
                     </div>
                 </div>
+				{include file="snippets/extension.tpl"}
             {/if}
         {/block}
         {include file="snippets/zonen.tpl" id="after_mainmenu"}

@@ -14,7 +14,7 @@
         {else}
             <h2>{lang key="pagenotfound" section="breadcrumb"}</h2>
         {/if}
-		<a href="index.php" class="btn btn-primary btn-lg">{lang key="goToStartpage" section="checkout"}</a>
+		<a href="{$ShopURL}" class="btn btn-primary btn-lg">{lang key="goToStartpage" section="checkout"}</a>
 	</div>
 </div>
 {/block}

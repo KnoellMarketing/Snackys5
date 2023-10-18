@@ -37,7 +37,7 @@
                <form id="cart-form-xs" method="post" action="{get_static_route id='warenkorb.php'}">
                    {if isset($jtl_token)}{$jtl_token}{/if}
                        <input type="hidden" name="wka" value="1" />
-                        {foreach $cartPositions as $oPosition}
+                        {foreach $cartPositions as $oPosition name=positionen}
                             {if !$oPosition->istKonfigKind()}
                                 {if $oPosition->nPosTyp == $smarty.const.C_WARENKORBPOS_TYP_ARTIKEL
 				   				|| $oPosition->nPosTyp == $smarty.const.C_WARENKORBPOS_TYP_GRATISGESCHENK}

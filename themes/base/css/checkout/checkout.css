@@ -399,6 +399,32 @@ label.stc-radio{
 .sa-card .stc-input{
     margin-right: .75rem;
 }
+/* SEPA */
+#payment_debit .flex-column-reverse{
+	flex-direction: column-reverse;
+}
+#payment_debit .col-form-label{
+	padding: 0;
+}
+/* Mollie Creditcard */
+#mollie-components{
+	margin-bottom: 1.5rem;
+}
+#mollie-components .mollie-component{
+	border: 1px solid @defaultborder;
+	padding: .6rem 1.2rem;
+}
+#mollie-components .form-group .col-sm-10{
+	width: 100%;
+	padding: 0;
+}
+#order-additional-payment .skip-mollie-components{
+	margin: 0 0 1.5rem 0 !important;
+	justify-content: space-between;
+}
+#order-additional-payment .skip-mollie-components > .col{
+	padding: 0;
+}
 @media screen and (max-width: 1600px){
     body:not(.no-pd){
         padding-right: 25rem;

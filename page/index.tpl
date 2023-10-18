@@ -79,11 +79,11 @@
                 {/if}
                 <div class="row p-sl no-scrollbar dpflex-nowrap">
                     {foreach name=hersteller from=$manufacturers item=hst}
-                    {if !empty($hst->cBildpfad)}
+                    {if !empty($hst->getImage())}
                         <div class="col-lg-2 p-w">
                             <div class="p-c">
                                 <div class="img-w text-center">
-                                    <a href="{$hst->cSeo}" class="img-ct">
+                                    <a href="{$hst->getURL()}" class="img-ct">
                                         {image fluid=true lazy=true webp=true
                                         src=$hst->getImage(\JTL\Media\Image::SIZE_MD)
                                         alt=$hst->getName()|escape:'html'
@@ -91,11 +91,11 @@
                                     </a>
                                 </div>
                                 {if !$isMobile}
-                                    <a href="{$hst->cSeo}" class="caption text-center block">
+                                    <a href="{$hst->getURL()}" class="caption text-center block">
                                         <strong>{$hst->getName()}</strong>
-                                </a>
+                                	</a>
                                 {/if}
-                            </div>{* /category-wrapper *}
+                            </div>
                         </div>
                     {/if}
                     {/foreach}
