@@ -26,55 +26,56 @@
                 <div id="nav-ft">
                     <div class="row">
                         {foreach $contentFilters as $filter}
-                            {if count($filter->getFilterCollection()) > 0}
-                                {block name='productlist-result-options-'|cat:$filter->getNiceName()}
-                                    {foreach $filter->getOptions() as $subFilter}
-                                        {if $subFilter->getVisibility() !== \JTL\Filter\Visibility::SHOW_NEVER && $subFilter->getVisibility() !== \JTL\Filter\Visibility::SHOW_BOX}
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-3{/if}">
-                                            <div class="form-group dropdown filter-type-{$filter->getNiceName()}">
-                                                <a href="#" class="btn dropdown-toggle btn-block btn-default" data-toggle="dropdown" role="button" aria-expanded="false">
-                                                    <span class="name">{$subFilter->getFrontendName()}</span> <span class="caret"></span>
-                                                </a>
-                                                <div class="dropdown-menu">
-                                                    {include file='snippets/filter/characteristic.tpl' Merkmal=$subFilter}
+                                {if count($filter->getFilterCollection()) > 0}
+                                    {block name='productlist-result-options-'|cat:$filter->getNiceName()}
+                                        {foreach $filter->getOptions() as $subFilter}
+                                            {if $subFilter->getVisibility() !== \JTL\Filter\Visibility::SHOW_NEVER && $subFilter->getVisibility() !== \JTL\Filter\Visibility::SHOW_BOX}
+                                            <div class="col-12 col-sm-12 col-md-6 col-lg-4{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-3{/if}">
+                                                <div class="form-group dropdown filter-type-{$filter->getNiceName()}">
+                                                    <a href="#" class="btn dropdown-toggle btn-block btn-default" data-toggle="dropdown" role="button" aria-expanded="false">
+                                                        <span class="name">{$subFilter->getFrontendName()}</span> <span class="caret"></span>
+                                                    </a>
+                                                    <div class="dropdown-menu">
+                                                        {include file='snippets/filter/characteristic.tpl' Merkmal=$subFilter}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        {/if}
-                                    {/foreach}
-                                {/block}
-                            {else}
-                                {block name='productlist-result-options-'|cat:$filter->getNiceName()}
-                                {if $filter->getOptions()|@count > 0}
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-3{/if}">
-                                    {if $filter->getInputType() === \JTL\Filter\InputType::SELECT}
-                                        {assign var=outerClass value='form-group dropdown filter-type-'|cat:$filter->getNiceName()}
-                                        {assign var=innerClass value='dropdown-menu'}
-                                        {assign var=itemClass value=''}
-                                    {elseif $filter->getInputType() === \JTL\Filter\InputType::BUTTON}
-                                        {assign var=outerClass value='form-group no-dropdown filter-type-'|cat:$filter->getNiceName()}
-                                        {assign var=innerClass value='no-dropdown'}
-                                        {assign var=itemClass value='btn'}
-                                    {else}
-                                        {assign var=outerClass value='form-group no-dropdown filter-type-'|cat:$filter->getNiceName()}
-                                        {assign var=innerClass value='no-dropdown'}
-                                        {assign var=itemClass value=''}
-                                    {/if}
-                                    <div class="{$outerClass}">
+                                            {/if}
+                                        {/foreach}
+                                    {/block}
+                                {else}
+                                    {block name='productlist-result-options-'|cat:$filter->getNiceName()}
+                                    {if $filter->getOptions()|@count > 0}
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-3{/if}">
                                         {if $filter->getInputType() === \JTL\Filter\InputType::SELECT}
-                                            <a href="#" class="btn dropdown-toggle btn-block btn-default" data-toggle="dropdown" role="button" aria-expanded="false">
-                                                <span class="name">{$filter->getFrontendName()}</span> <span class="caret"></span>
-                                            </a>
+                                            {assign var=outerClass value='form-group dropdown filter-type-'|cat:$filter->getNiceName()}
+                                            {assign var=innerClass value='dropdown-menu'}
+                                            {assign var=itemClass value=''}
+                                        {elseif $filter->getInputType() === \JTL\Filter\InputType::BUTTON}
+                                            {assign var=outerClass value='form-group no-dropdown filter-type-'|cat:$filter->getNiceName()}
+                                            {assign var=innerClass value='no-dropdown'}
+                                            {assign var=itemClass value='btn'}
+                                        {else}
+                                            {assign var=outerClass value='form-group no-dropdown filter-type-'|cat:$filter->getNiceName()}
+                                            {assign var=innerClass value='no-dropdown'}
+                                            {assign var=itemClass value=''}
                                         {/if}
-                                        {if $innerClass == "dropdown-menu"}<div class="dropdown-menu">{/if}
-                                            {include file='snippets/filter/genericFilterItem.tpl' class=$innerClass itemClass=$itemClass filter=$filter}
-                                        {if $innerClass == "dropdown-menu"}</div>{/if}
+                                        <div class="{$outerClass}">
+                                            {if $filter->getInputType() === \JTL\Filter\InputType::SELECT}
+                                                <a href="#" class="btn dropdown-toggle btn-block btn-default" data-toggle="dropdown" role="button" aria-expanded="false">
+                                                    <span class="name">{$filter->getFrontendName()}</span> <span class="caret"></span>
+                                                </a>
+                                            {/if}
+                                            {if $innerClass == "dropdown-menu"}<div class="dropdown-menu">{/if}
+                                                {include file='snippets/filter/genericFilterItem.tpl' class=$innerClass itemClass=$itemClass filter=$filter}
+                                            {if $innerClass == "dropdown-menu"}</div>{/if}
+                                        </div>
                                     </div>
-                                </div>
+                                    {/if}
+                                    {/block}
                                 {/if}
-                                {/block}
-                            {/if}
                         {/foreach}
+                        
                         {if !$isMobile}
                             {include file="productlist/improve_search.tpl"} 
                             {has_boxes position='left' assign='hasLeftBox'}

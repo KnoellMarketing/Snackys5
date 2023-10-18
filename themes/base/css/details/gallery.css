@@ -27,6 +27,7 @@
 #gallery a{
     display: block; 
     cursor: zoom-in;
+    border-radius: 0.8rem;
 }
 #gallery a:not(.active){
     display: none;

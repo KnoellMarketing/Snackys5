@@ -487,7 +487,7 @@ body-offcanvas{if isset($bSeiteNichtGefunden) && $bSeiteNichtGefunden} error404{
 {/if}
 {/block}
     {if !$bExclusive}
-        {if $bAdminWartungsmodus === true}
+        {if $bAdminWartungsmodus}
             <div id="maintenance-mode" class="navbar navbar-inverse">
                 <div class="container">
                     <div class="navbar-text text-center">

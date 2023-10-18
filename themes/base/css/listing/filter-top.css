@@ -89,3 +89,97 @@
         padding: 0;
     }
 }
+
+.filter-type-PriceRange .ft-search { display: none; }
+#nav-ft ul.PRbtnSubmit li { padding: 15px 0 0 0 !important; }
+.PRwrapper .price-input {
+    width: 100%;
+    display: flex;
+    margin: 0;
+}
+.PRwrapper .price-input .field {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.PRwrapper .field input {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 7px 9px;
+    margin: 10px 0 0 0 !important;
+    outline: none;
+    font-size: .85rem;
+    margin-left: 12px;
+    border-radius: 5px !important;
+    text-align: center;
+    border: 1px solid #aaa;
+    -moz-appearance: textfield;
+}
+.PRwrapper .field input.input-min { text-align: left; }
+.PRwrapper .field input.input-max { text-align: right; }
+.PRwrapper input[type="number"]::-webkit-outer-spin-button, 
+.PRwrapper input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+.PRwrapper .price-input .separator {
+    width: 130px;
+    display: flex;
+    font-size: .85rem;
+    align-items: center;
+    justify-content: center;
+}
+.PRwrapper .slider {
+    height: 20px;
+    position: relative;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.PRwrapper .slider .progress {
+    height: 100%;
+    left: 0%;
+    right: 0%;
+    position: absolute;
+    border-radius: 10px;
+    background: #f96058;
+}
+.PRwrapper .range-input { position: relative; }
+.PRwrapper .range-input input {
+    position: absolute;
+    width: 100%;
+    top: -20px;
+    height: 20px;
+    margin: 0;
+    background: none;
+    pointer-events: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 0;
+    cursor: pointer;;
+}
+.PRwrapper input[type="range"]::-webkit-slider-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #FFF;
+    pointer-events: auto;
+    -webkit-appearance: none;
+    border:  1px solid #d1d6cf;
+}
+.PRwrapper input[type="range"]::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    border: none;
+    border-radius: 50%;
+    background: #FFF;
+    pointer-events: auto;
+    -moz-appearance: none;
+    border:  1px solid #d1d6cf;
+}
+.filter-type-PriceRange .alle-filtern {
+    justify-content: center !important;
+    background: #ddd !important;
+    color: #333;
+    font-weight: bold !important;
+}

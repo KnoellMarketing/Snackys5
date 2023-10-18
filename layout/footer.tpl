@@ -69,6 +69,8 @@
 	{/if}
     {/block}
 
+	{include file="snippets/zonen.tpl" id="before_footer" title="before_footer"}
+
     <footer id="footer" class="mt-md">
 
 		{block name="footer-boxes"}

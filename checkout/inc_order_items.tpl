@@ -25,6 +25,7 @@
 {/if}
  
 {foreach JTL\Session\Frontend::getCart()->PositionenArr as $oPosition name=positionen}
+    {if ($oPosition->nPosTyp == '3' || $oPosition->nPosTyp == '2') && $tplscope == 'cart'}{continue}{/if}
     {if !$oPosition->istKonfigKind()}
         <div class="type-{$oPosition->nPosTyp} c-it{if isset($isSidebar)} sb-it{/if}{if isset($isCheckout)} sb-it{/if}">
             <div class="row">
@@ -285,7 +286,9 @@
                                     <input name="anzahl[{$smarty.foreach.positionen.index}]" type="hidden" value="1" />
                                 {/if}
                             {else}
-                                <span class="qty">{$oPosition->nAnzahl|replace_delim} {if !empty($oPosition->Artikel->cEinheit)}{$oPosition->Artikel->cEinheit}{/if}</span>
+								{if $oPosition->nPosTyp != '3' && $oPosition->nPosTyp != '2'}
+									<span class="qty"><span class="badge">{$oPosition->nAnzahl|replace_delim} {if !empty($oPosition->Artikel->cEinheit)}{$oPosition->Artikel->cEinheit}{/if}</span></span>
+								{/if}
                             {/if}  
                             {if $tplscope === 'cart' && $oPosition->nPosTyp == 1}
                                 <button type="submit" class="droppos text-muted pr dpflex-a-center btn-flex" name="dropPos" value="{$smarty.foreach.positionen.index}" title="{lang key="delete" section="global"}">

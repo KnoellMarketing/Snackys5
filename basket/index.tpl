@@ -113,6 +113,18 @@
                             <strong class="price total-sum">{$WarensummeLocalized[$NettoPreise]}</strong>
                         </div>
                     {/if}
+                    {foreach $Warenkorb->PositionenArr as $Couponposition}
+                        {if $Couponposition->nPosTyp == '3' || $Couponposition->nPosTyp == '2'}
+                        <div class="coup dpflex-j-between mb-xxs">
+                            <span class="coup_label">
+                                {$Couponposition->cName|trans}:
+                            </span>
+                            <span class="coup_label">
+                                {$Couponposition->cEinzelpreisLocalized[$NettoPreise][$smarty.session.cWaehrungName]}
+                            </span>
+                        </div>
+                    	{/if}
+                    {/foreach}
                     {if $Einstellungen.global.global_steuerpos_anzeigen !== 'N' && $Steuerpositionen|count > 0}
                         {foreach name=steuerpositionen from=$Steuerpositionen item=Steuerposition}
                             <div class="tax dpflex-j-between">

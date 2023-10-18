@@ -151,3 +151,22 @@ body.edge a:hover .second-img{
         bottom: 3.5rem;
     }
 }
+
+.p-c .variations .var-it label.variation {
+    width: 100%;
+    margin-bottom: 4px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.p-c .variations .var-it label.variation .label-variation {
+    flex: 1;
+    text-align: left;
+}
+
+.p-c .variations .var-it label.variation.btn {
+    padding-right: 6px;
+    padding-left: 10px;
+}

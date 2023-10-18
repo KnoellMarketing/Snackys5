@@ -73,9 +73,10 @@ label[data-target="#create_account_data"]{
 .payship-option,
 .payship-option.col-12,
 #fieldset-payment #zahlung .list-group-item,
-.ppc-checkout-payment-method{
+.checkout-payment-method{
     padding: 1rem 0;
     border-top: 1px solid @lightborder;
+	border-bottom: 0 !important;
 }
 #fieldset-payment #zahlung .list-group-item:first-child{
     border-top: 0;
@@ -86,7 +87,8 @@ label[data-target="#create_account_data"]{
     cursor: pointer;
 }
 .payship-option .stc-input,
-#fieldset-payment #zahlung .list-group-item input[type="radio"]{
+#fieldset-payment #zahlung .list-group-item input[type="radio"],
+.checkout-payment-method label:before{
 	min-width: 16px;
     height: 16px;
 	margin-right: 1rem;
@@ -115,6 +117,19 @@ label[data-target="#create_account_data"]{
 }
 #fieldset-payment .card{
     margin: 1rem 0;
+}
+.checkout-payment-method .custom-control-label{
+	margin: 0;
+	cursor: pointer;
+	position: relative;
+	padding-left: calc(1rem + 16px);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+.checkout-payment-method .custom-control-label img{
+	max-width: 6rem;
+	margin-right: .8rem;
 }
 /* Amazon Pay */
 #checkout .lpa-alternate-checkout-snippet{
@@ -190,7 +205,7 @@ label.stc-radio{
 }
 .stc-radio input[type="radio"],
 .stc-checkbox input[type="checkbox"],
-.ppc-checkout-payment-method input[type="radio"]{
+.checkout-payment-method input[type="radio"]{
 	opacity: 0;
 	width: 0;
 	height: 0;
@@ -199,7 +214,8 @@ label.stc-radio{
 .stc-radio .stc-radio-btn,
 .stc-checkbox .stc-checkbox-btn,
 #checkout .lpa-alternate-checkout-snippet .panel-body:before,
-.ppc-checkout-payment-method label.d-flex:before{
+.checkout-payment-method .custom-control > label:before{
+	content: '';
 	width: 16px;
 	height: 16px;
 	display: inline-block;
@@ -207,13 +223,20 @@ label.stc-radio{
 	background: white;
 	border: 1px solid #ddd;
 	border-radius: 50%;
+	box-sizing: border-box;
+}
+.checkout-payment-method .custom-control > label:before{
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
 }
 .stc-checkbox .stc-checkbox-btn{
 	border-radius: 3px;
 }
 .stc-radio input:checked + .stc-radio-btn,
 #checkout .lpa-alternate-checkout-snippet .panel-body:hover:before,
-.ppc-checkout-payment-method input:checked + label.d-flex:before{
+.checkout-payment-method input:checked + label:before{
 	border: 5px solid @brand;
 }
 .stc-checkbox input:checked + .stc-checkbox-btn{
@@ -306,16 +329,7 @@ label.stc-radio{
     margin: 1rem 0 0 0; 
 }
 /* PayPal Checkout */
-.ppc-checkout-payment-method label.d-flex{
-    display: flex;
-}
-.ppc-checkout-payment-method label.d-flex:before{
-    content: '';
-    box-sizing: border-box;
-    min-width: 16px;
-    margin-right: 1rem;
-}
-.ppc-option-img{
+.ppc-option-img .paypal-marks{
     width: auto !important;
 }
 .paypal-buttons-label-buynow{

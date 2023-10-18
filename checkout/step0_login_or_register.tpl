@@ -136,7 +136,7 @@
                     {block name="checkout-register-body"}
                         {$jtl_token}
                         {include file='register/form/customer_account.tpl' checkout=1 step="formular"}
-                        <hr/>
+                        
                         {include file='checkout/inc_shipping_address.tpl'}
                     {/block}
                 </div>

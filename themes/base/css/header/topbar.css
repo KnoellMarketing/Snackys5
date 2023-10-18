@@ -9,3 +9,8 @@
 	font-size: 50%;
     opacity: .8;
 }
+#top-bar .dropdown-menu-right{
+	left: auto !important;
+	transform: none !important;
+	top: 100% !important;
+}

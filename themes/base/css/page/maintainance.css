@@ -118,3 +118,11 @@ body #bxt-w{
 		padding: 0;
 	}
 }
+.btn-link{
+	-webkit-appearance: inherit;
+	border: 0;
+	background: none;
+	color: @brand;
+	padding: 0;
+	text-decoration: underline;
+}

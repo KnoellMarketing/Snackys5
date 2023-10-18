@@ -81,7 +81,7 @@
 {block name="productlist-subcategories"}
 {if $Einstellungen.navigationsfilter.artikeluebersicht_bild_anzeigen !== 'N' && $oUnterKategorien_arr|count > 0}
 	{include file="snippets/zonen.tpl" id="opc_before_subcategories"}
-    <div class="row row-multi sc-w mb-spacer mb-small">
+    <div class="row row-multi sc-w mb-spacer mb-small XXX">
         {foreach $oUnterKategorien_arr as $Unterkat}
             <div class="col-6 col-sm-4 col-md-4 col-lg-3{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-2{/if}">
                 <div class="thumbnail">

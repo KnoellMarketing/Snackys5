@@ -69,7 +69,7 @@
                                                 {/if}
                                             </div>
                                             {if $snackyConfig.editSidebasket == 2}
-                                            <button class="editpos" type="button" data-toggle="collapse" data-target="#edit_{$oPosition@iteration}">
+                                            <button class="editpos" type="button" data-toggle="collapse" data-target="#edit_{$oPosition@iteration}_wrap">
                                                 <span class="img-ct icon icon">
                                                     <svg>
                                                       <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-edit"></use>
@@ -79,7 +79,8 @@
                                             {/if}
                                             </div>
                                             {if $snackyConfig.editSidebasket == 2}
-                                            <div class="edit-item" id="edit_{$oPosition@iteration}">
+                                            <div class="collapse" id="edit_{$oPosition@iteration}_wrap">
+                                            <div class="edit-item show" id="edit_{$oPosition@iteration}">
                                                 {if $oPosition->istKonfigVater()}
                                                     <div class="qty-wrapper modify">
                                                         <a class="btn btn-default configurepos btn-xs"
@@ -111,6 +112,7 @@
                                                         </svg>
                                                     </span>
                                                 </button>
+                                            </div>
                                             </div>
                                             {/if}
                                         </div>
