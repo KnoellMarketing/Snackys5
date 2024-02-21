@@ -5,7 +5,7 @@
         <section class="box box-wishlist box-normal panel small" id="sidebox{$oBox->getID()}">
             {block name='boxes-box-wishlist-content'}
                 {block name='boxes-box-wishlist-title'}
-                    <div class="h5 panel-heading dpflex-a-center">
+                    <div class="h5 panel-heading flx-ac">
                         {lang key='wishlist'}
                         {if ($snackyConfig.filterOpen == 1 && $oBox->getPosition() == 'left') || ($oBox->getPosition() == 'bottom' && $snackyConfig.footerBoxesOpen === '0')}<span class="caret"></span>{/if}
                     </div>
@@ -17,7 +17,7 @@
                         <ul class="nav">
                             {foreach $oBox->getItems() as $wishlistItem}
                                 {if $wishlistItem@iteration > $maxItems}{break}{/if}
-                            <li class="dpflex-a-center nav-it" data-id={$wishlistItem->getProductID()}>
+                            <li class="flx-ac nav-it" data-id={$wishlistItem->getProductID()}>
                                 {block name='boxes-box-wishlist-dropdown-products-image-title'}
                                         {if $oBox->getShowImages()}
                                             {block name='boxes-box-wishlist-dropdown-products-image'}

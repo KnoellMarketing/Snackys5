@@ -7,7 +7,7 @@
     {block name='snippets-filter-characteristic-include-search-in-items'}
         {include file='snippets/filter/search_in_items.tpl' itemCount=count($Merkmal->getOptions()) name=$Merkmal->getName()}
     {/block}*}
-    <ul class="nav nav-list blanklist{if $Merkmal->getData('cTyp') === 'BILD'} dpflex-wrap img-ftr{/if}">
+    <ul class="nav nav-list blanklist{if $Merkmal->getData('cTyp') === 'BILD'} flx-w img-ftr{/if}">
     {foreach $Merkmal->getOptions() as $attributeValue}
         {$attributeImageURL = null}
         {if ($Merkmal->getData('cTyp') === 'BILD' || $Merkmal->getData('cTyp') === 'BILD-TEXT')}
@@ -21,7 +21,7 @@
             {block name='snippets-filter-characteristics-dropdown'}
             <li class="nav-it">
                 {dropdownitem
-                    class="{if $attributeValue->isActive()}active{/if} filter-item dpflex-a-center"
+                    class="{if $attributeValue->isActive()}active{/if} filter-item flx-ac"
                     href="{if !empty($attributeValue->getURL())}{$attributeValue->getURL()}{else}#{/if}"
                     title="{if $Merkmal->getData('cTyp') === 'BILD'}{$attributeValue->getValue()|escape:'html'}{/if}"
                 }
@@ -46,7 +46,7 @@
                         {if $attributeValue->getCount() > 0}
                         <li class="nav-it">
                         {link
-                            class="{if $attributeValue->isActive()}active{/if} filter-item dpflex-a-center"
+                            class="{if $attributeValue->isActive()}active{/if} filter-item flx-ac"
                             href="{if !empty($attributeValue->getURL())}{$attributeValue->getURL()}{else}#{/if}"
                             title="{$attributeValue->getValue()|escape:'html'}"
 							rel="nofollow"
@@ -70,7 +70,7 @@
                     {block name='snippets-filter-characteristics-nav-image'}                        
                         <li class="nav-it">
                         {link href="{if !empty($attributeValue->getURL())}{$attributeValue->getURL()}{else}#{/if}"
-                            data=["toggle"=>"tooltip", "placement"=>"top", "boundary"=>"window"]
+                            title="{$attributeValue->getValue()|escape:'html'}" 
                             class="{if $attributeValue->isActive()}active{/if} filter-item" 
                             rel="nofollow"
                         }
@@ -89,7 +89,8 @@
                         {if $attributeValue->getCount() > 0}
                         <li class="nav-it">
                             {link href="{if !empty($attributeValue->getURL())}{$attributeValue->getURL()}{else}#{/if}"
-                                class="{if $attributeValue->isActive()}active{/if} filter-item dpflex-a-center" 
+                                class="{if $attributeValue->isActive()}active{/if} filter-item flx-ac" 
+                                title="{$attributeValue->getValue()|escape:'html'}" 
                                 rel="nofollow"
                             }
                             {if !empty($attributeImageURL)}

@@ -12,8 +12,14 @@
 }
 #nav-ft .btn:not(.active),
 .mobile .ftr-sort .btn:not(.active){
-    background: white;
-    border: 1px solid @lightborder;    
+    background: var(--drbtn-b);
+    border: 1px solid var(--drbtn-r);    
+    color: var(--drbtn-t);
+}
+#nav-ft .btn:hover{
+    background: var(--drbtn-b-h);
+    border: 1px solid var(--drbtn-r-h);    
+    color: var(--drbtn-t-h);
 }
 #nav-ft .form-group{
     margin: .25rem 0;
@@ -45,7 +51,6 @@
 }
 #nav-ft .dropdown > .dropdown-menu{
     padding: 1rem;
-    border: 1px solid @lightborder;
     border-radius: .3rem;
     margin-top: .5rem;
 	max-height: 50vh;
@@ -56,7 +61,8 @@
 }
 @media screen and (min-width: 992px){
     #ftr-tp{
-        background: #f6f6f6;
+        background: var(--pan-b);
+        border: 1px solid var(--pan-r);
         padding: 1.5rem;
         border-radius: .5rem;
         margin-top: -.3rem;
@@ -76,9 +82,9 @@
         right: 1px;
         max-height: 50vh;
         overflow: auto;
-        background-color: #fff;
+        background-color: var(--dro-b);
         box-shadow: 0 .25rem .5625rem -.0625rem rgba(0,0,0,.03),0 .275rem 1.25rem -.0625rem rgba(0,0,0,.05);
-        border: 1px solid #fff;
+        border: 1px solid var(--dro-r);
     }
     #nav-ft .more-ftr{
         display: none;

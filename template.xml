@@ -4,7 +4,7 @@
     <Author>eRock Marketing</Author>
     <URL>https://www.erock-marketing.de</URL>
     <MinShopVersion>5.2.0</MinShopVersion>
-    <Version>5.2.4</Version>
+    <Version>5.2.5</Version>
     <Preview>preview-snackys.png</Preview>
     <Description>Ultraschnelles responsive JTL Template von eRock Marketing</Description>
     <Framework>Bootstrap4</Framework>
@@ -30,8 +30,8 @@
 		</Section>
 		<Section Name="Theme" Key="theme">
 			<Setting Description="Theme" Key="theme_default" Type="select" Value="snackys" override="true">
-				<Option Value="snackys">Snackys - with <![CDATA[&hearts;]]> by Knoell Marketing</Option>
-				<Option Value="darkmode">Snackys Darkmode - with <![CDATA[&hearts;]]> by Knoell Marketing</Option>
+				<Option Value="snackys">Snackys - with <![CDATA[&hearts;]]> by eRock Marketing</Option>
+				<Option Value="darkmode">Snackys Darkmode - with <![CDATA[&hearts;]]> by eRock Marketing</Option>
 				<Option Value="custom">Custom - eigenes Theme</Option>
 			</Setting>
             <Setting Description="Favicon" Key="favicon" Type="upload" Value="favicon.ico" maxFileSize="123456" showPreview="false" allowedFileExtensions="['ico','png']" accept="image/*" target="" targetFileName="favicon.ico">
@@ -158,9 +158,6 @@
 			<File Path="/templates/Snackys/themes/base/css/elements/productslider.css"/>
 			<File Path="/templates/Snackys/themes/base/css/elements/accordeon.css"/>
 			<File Path="/templates/Snackys/themes/base/css/elements/pagination_critical.css"/>
-			<File Path="/templates/Snackys/themes/base/css/bootstrap/bootstrap-select_critical.css"/>
-			<File Path="/templates/Snackys/themes/base/css/basket/sidebasket_critical.css"/>
-			<File Path="/templates/Snackys/themes/base/css/boxes/boxes_critical.css"/>
 			<File Path="/templates/Snackys/themes/base/consent.css"/>
 			<File Path="/templates/Snackys/themes/base/css/elements/opc.css"/>
 	</CSSMain>

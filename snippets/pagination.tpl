@@ -31,7 +31,7 @@
                 </div>
                 {/if}
                 {if in_array('pagi', $parts)}
-                    <ul class="pagination btn-group blanklist dpflex-a-center dpflex-j-center list-inline">
+                    <ul class="pagination btn-group blanklist flx-ac flx-jc list-inline">
                         {if $oPagination->getPage() > 0}
                             <li>
                                 <a class="block text-center" href="{$cThisUrl}?{$oPagination->getId()}_nPage={$oPagination->getPrevPage()}{$cUrlAppend}{$cAnchor}">&laquo;</a>

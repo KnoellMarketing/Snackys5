@@ -6,7 +6,7 @@
         {else}
         <li class="dropdown{if isset($isMobileMenu) && $isMobileMenu}-style visible-xs{/if} lng-dd">
         {/if}
-            <a href="#" class="language-dropdown {if isset($isMobileMenu) && $isMobileMenu}mm-mainlink l-full{else}dpflex-a-c{/if} {$dropdownClass|default:''}{if isset($isFooter) && $isFooter} btn btn-block btn-sm{/if}"{if !(isset($isMobileMenu) && $isMobileMenu)} data-toggle="dropdown"{/if} title="{lang key='selectLang'}">
+            <a href="#" class="language-dropdown {if isset($isMobileMenu) && $isMobileMenu}mm-mainlink l-full{else}flx-ac{/if} {$dropdownClass|default:''}{if isset($isFooter) && $isFooter} btn btn-block btn-sm{/if}"{if !(isset($isMobileMenu) && $isMobileMenu)} data-toggle="dropdown"{/if} title="{lang key='selectLang'}">
                 {foreach $languages as $language}
                     {if $language->getId() === JTL\Shop::getLanguageID()}
                         {block name='snippets-language-dropdown-text'}
@@ -34,7 +34,7 @@
                 {block name='snippets-language-dropdown-item'}
                     {if $language->getId() != JTL\Shop::getLanguageID()}
                     <li>
-                        <a href="{$language->getUrl()}" class="link-lang dpflex-a-c"  data-iso="{$language->getIso()}" rel="nofollow">
+                        <a href="{$language->getUrl()}" class="link-lang flx-ac"  data-iso="{$language->getIso()}" rel="nofollow">
                             <span class="img-ct icon {if isset($isHeader) && $isHeader}ic-lg{/if} rt4x3 mr-xxs">
                                 {if $language->getIso639()|lower == 'de' || $language->getIso639()|lower == 'en'}
                                     <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">

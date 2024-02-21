@@ -1,6 +1,6 @@
 .c-it{
     padding: 1rem 0;
-    border-top: 1px solid @lightborder;
+    border-top: 1px solid var(--hr-li);
     overflow: hidden;
 }
 .c-it .row.first{
@@ -23,7 +23,7 @@
     max-width: 28rem;
 }
 #fileupload-wrapper:empty,
-fileupload-wrapper:blank{
+#fileupload-wrapper:blank{
     display: none;
 }
 .c-it input.quantity{
@@ -32,26 +32,21 @@ fileupload-wrapper:blank{
 .cart-sum .total{
     padding-top: .5rem;
     margin-top: .5rem;
-    border-top: 1px solid @defaultborder;
+    border-top: 1px solid var(--hr);
 }
-.cart-sum .dpflex-j-between > span:last-child{
+.cart-sum .flx-jb > span:last-child{
 	white-space: nowrap;
 }
 .c-it strong:not(.title):not(.price),
 .c-it .text-muted{
     font-weight: 400;
-    color: @defaulttext;
+    color: var(--bod-t);
 }
 .c-it .info-ul{
     margin: .8rem 0;
 }
 .c-it .info-ul li{
     padding: .1rem 0
-}
-.c-it input.qty{
-    border: 1px solid @defaultborder;
-    border-radius: .3rem;
-    padding: .5rem 1rem;
 }
 .c-it .inf-col .col-4{
     display: flex;
@@ -76,6 +71,9 @@ fileupload-wrapper:blank{
 }
 #ppc-cart-horizontal-container{
 	margin: 0;
+}
+.qty .badge{
+    background: var(--tag-df-b);
 }
 @media screen and (max-width: 991px){
     .basket-xsell{
@@ -180,12 +178,10 @@ fileupload-wrapper:blank{
 		scroll-snap-align: none;
 	}
 }
-
 #shipping-estimated table span.icon {
     float: left;
     margin-right: 1em;
 }
-
 #shipping-estimated table p {
     font-size: 1rem;
     margin: 0;

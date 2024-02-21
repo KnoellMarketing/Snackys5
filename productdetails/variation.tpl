@@ -106,7 +106,7 @@
                         {/if}
                     {/foreach}
                 {elseif $Variation->cTyp === 'IMGSWATCHES' || $Variation->cTyp === 'TEXTSWATCHES'}
-                    <div class="dpflex-wrap swatches {$Variation->cTyp|lower}">
+                    <div class="flx-w swatches {$Variation->cTyp|lower}">
                         {foreach name=Variationswerte from=$Variation->Werte key=y item=Variationswert}
                             {assign var="bSelected" value=false}
                             {if isset($oVariationKombi_arr[$Variationswert->kEigenschaft])}

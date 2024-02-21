@@ -4,7 +4,7 @@
         {input data=['id'=>'js-price-range-max'] type="hidden" value="{$priceRangeMax}"}
         {input data=['id'=>'js-price-range-id'] type="hidden" value="{$id}"}
         <div id="{$id}" class="price-range-slide mb-xs"></div>
-        <div class="dpflex-j-b text-center dpflex-a-c unit">
+        <div class="flx-jb text-center flx-ac unit">
             {input id="{$id}-from" class="rng-f rng" placeholder=0 aria=["label" => {lang key='differentialPriceFrom' section='productOverview'}]}
             <span class="block add">{JTL\Session\Frontend::getCurrency()->getName()}</span>
             {input id="{$id}-to" class="rng-l rng text-right"  placeholder=$priceRangeMax aria=["label" => {lang key='differentialPriceTo' section='productOverview'}]}

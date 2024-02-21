@@ -4,7 +4,7 @@
 <ul class="blanklist nav">
     {foreach name=artikel from=$Suchergebnisse->getProducts() item=Artikel}
         <li class="nav-it">
-			<a href="{$Artikel->getURL()}" class="dpflex-a-c">
+			<a href="{$Artikel->getURL()}" class="flx-ac">
 				<span class="img-ct">
 					{include file='snippets/image.tpl'
 						fluid=false

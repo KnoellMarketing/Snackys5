@@ -1,11 +1,15 @@
 {block name='account-shipping-address-form'}
-	<h1>{lang key="myShippingAddresses"}</h1>
+	{block name='account-shipping-address-form-headline'}
+		<h1>{lang key="myShippingAddresses"}</h1>
+	{/block}
     {block name='account-shipping-address-form-form'}
 		{if $Lieferadressen|count > 0 && !isset($smarty.get.editAddress)}
-		<a class="btn btn-primary" data-toggle="collapse" href="#newshipping" role="button" aria-expanded="false" aria-controls="newshipping">
-			{lang key="createNewShippingAdress" section="account data"}	
-	  	</a>
-		<div class="collapse" id="newshipping">
+			{block name='account-shipping-address-form-new-shipaddress'}
+				<a class="btn btn-primary" data-toggle="collapse" href="#newshipping" role="button" aria-expanded="false" aria-controls="newshipping">
+					{lang key="createNewShippingAdress" section="account data"}	
+				</a>
+			{/block}
+			<div class="collapse" id="newshipping">
 		{/if}
 		{form method="post" id='lieferadressen' action="{get_static_route params=['editLieferadresse' => 1]}" class="jtl-validate panel mt-sm"}
 			{block name='account-shipping-address-form-headline'}
@@ -56,65 +60,83 @@
 			{/block}
 		{/form}
 		{if $Lieferadressen|count > 0 && !isset($smarty.get.editAddress)}
-		</div>
+			</div>
 		{/if}
 		{block name='account-shipping-address-form-form-address-wrapper'}
 			{if !isset($smarty.get.fromCheckout) && $Lieferadressen|count > 0}
-			<div class="card mt-sm sa-card">
-				<div class="card-body">
-					{foreach $Lieferadressen as $address}
-						<div class="modal modal-dialog" id="shipadress{$address@iteration}" tabindex="-1">
-							<div class="modal-content">
-								<div class="modal-header">
-									<div class="modal-title h5">
-										{lang key="shippingAdress" section="account data"}
+				<div class="card mt-sm sa-card">
+					<div class="card-body">
+						{foreach $Lieferadressen as $address}
+							{block name='account-shipping-address-item'}
+								{block name='account-shipping-address-item-modal'}
+									<div class="modal modal-dialog" id="shipadress{$address@iteration}" tabindex="-1">
+										<div class="modal-content">
+											{block name='account-shipping-address-item-modal-header'}
+												<div class="modal-header">
+													<div class="modal-title h5">
+														{lang key="shippingAdress" section="account data"}
+													</div>
+													<button type="button" class="close-btn" data-dismiss="modal" aria-label="Close">
+													</button>
+												</div>
+											{/block}
+											{block name='account-shipping-address-item-modal-body'}
+												<div class="modal-body">
+													{if $address->cFirma}{$address->cFirma}<br />{/if}
+													<strong>{if $address->cTitel}{$address->cTitel}{/if} {$address->cVorname} {$address->cNachname}</strong><br />
+													{$address->cStrasse} {$address->cHausnummer}<br />
+													{$address->cPLZ} {$address->cOrt}<br />
+													{include file='checkout/inc_delivery_address.tpl' Lieferadresse=$address hideMainInfo=true}
+													{if $Einstellungen.kaufabwicklung.bestellvorgang_kaufabwicklungsmethode == 'N' && $address->nIstStandardLieferadresse !== 1}
+														<hr class="invisible hr-sm">
+														<a href="" class="btn btn-block">{lang key='setAsStandard' section='account data'}</a>
+													{/if}
+												</div>
+											{/block}
+										</div>
 									</div>
-									<button type="button" class="close-btn" data-dismiss="modal" aria-label="Close">
-									</button>
-								</div>
-								<div class="modal-body">
-									{if $address->cFirma}{$address->cFirma}<br />{/if}
-									<strong>{if $address->cTitel}{$address->cTitel}{/if} {$address->cVorname} {$address->cNachname}</strong><br />
-									{$address->cStrasse} {$address->cHausnummer}<br />
-									{$address->cPLZ} {$address->cOrt}<br />
-									{include file='checkout/inc_delivery_address.tpl' Lieferadresse=$address hideMainInfo=true}
-									{if $Einstellungen.kaufabwicklung.bestellvorgang_kaufabwicklungsmethode == 'N' && $address->nIstStandardLieferadresse !== 1}
-										<hr class="invisible hr-sm">
-										<a href="" class="btn btn-block">{lang key='setAsStandard' section='account data'}</a>
-									{/if}
-								</div>
-							</div>
-						</div>
-						<div class="d-flex df-a-c item">
-							<span class="w100">
-								<strong class="block">{if $address->cTitel}{$address->cTitel}{/if} {$address->cVorname} {$address->cNachname}</strong>
-								<small class="text-muted">{$address->cStrasse} {$address->cHausnummer}, {$address->cPLZ} {$address->cOrt}</small>
-							</span>	
-							<button class="btn btn-blank" data-toggle="modal" data-target="#shipadress{$address@iteration}">
-								<span class="img-ct icon">
-									<svg>
-									  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-info"></use>
-									</svg>
-								</span>		
-							</button>
-							<a class="btn btn-blank" href="{get_static_route id='jtl.php'}?editLieferadresse=1&editAddress={$address->kLieferadresse}">
-								<span class="img-ct icon">
-									<svg>
-									  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-edit"></use>
-									</svg>
-								</span>		
-							</a>
-							<a class="btn btn-blank" href="{get_static_route id='jtl.php'}?editLieferadresse=1&deleteAddress={$address->kLieferadresse}">
-								<span class="img-ct icon">
-									<svg>
-									  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-bin"></use>
-									</svg>
-								</span>
-							</a>
-						</div>
-					{/foreach}
+								{/block}
+								{block name='account-shipping-address-item-card'}
+									<div class="flx flx-ac item">
+										{block name='account-shipping-address-item-card-info'}
+											<span class="w100">
+												<strong class="block">{if $address->cTitel}{$address->cTitel}{/if} {$address->cVorname} {$address->cNachname}</strong>
+												<small class="text-muted">{$address->cStrasse} {$address->cHausnummer}, {$address->cPLZ} {$address->cOrt}</small>
+											</span>	
+										{/block}
+										{block name='account-shipping-address-item-card-popup'}
+											<button class="btn btn-blank" data-toggle="modal" data-target="#shipadress{$address@iteration}">
+												<span class="img-ct icon">
+													<svg>
+													  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-info"></use>
+													</svg>
+												</span>		
+											</button>
+										{/block}
+										{block name='account-shipping-address-item-card-edit'}
+											<a class="btn btn-blank" href="{get_static_route id='jtl.php'}?editLieferadresse=1&editAddress={$address->kLieferadresse}">
+												<span class="img-ct icon">
+													<svg>
+													  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-edit"></use>
+													</svg>
+												</span>		
+											</a>
+										{/block}
+										{block name='account-shipping-address-item-card-delete'}
+											<a class="btn btn-blank" href="{get_static_route id='jtl.php'}?editLieferadresse=1&deleteAddress={$address->kLieferadresse}">
+												<span class="img-ct icon">
+													<svg>
+													  <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-bin"></use>
+													</svg>
+												</span>
+											</a>
+										{/block}
+									</div>
+								{/block}
+							{/block}
+						{/foreach}
+					</div>
 				</div>
-			</div>
 			{/if}
 		{/block}
     {/block}

@@ -1,13 +1,20 @@
 #km_snackys_search{
 	position: absolute;
 	top: calc(100% + .5rem);
-	background: white;
+	background: var(--dro-b);
+	color: var(--dro-t);
 	padding: 2rem;
 	border-radius: .5rem;
 	z-index: 11;
 	box-shadow: 0 16px 16px rgba(0,0,0,.1);
 	max-height: 60vh;
 	overflow: auto;
+}
+#km_snackys_search a{
+	color: var(--dro-l);
+}
+#km_snackys_search a:hover{
+	color: var(--dro-l-h);
 }
 #km_snackys_search .img-ct{
 	width: 3rem;

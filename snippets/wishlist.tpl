@@ -7,7 +7,7 @@
         <div id="account" class="row">
             <div class="col-12 col-md-4 col-lg-3 al-wp">
                 {include file="snippets/zonen.tpl" id="opc_before_menu"}
-                <div class="panel mb-spacer mb-small" id="account-list">
+                <div class="panel mb-sm" id="account-list">
                     <div class="panel-heading">
                         <span class="panel-title h4 block">{lang key="myAccount"}</span>
                     </div>
@@ -15,7 +15,7 @@
                         {block name="my-account-menu-list"}
                             {block name="my-account-menu-meinkonto"}
                             <li class="nav-it">
-                                <a href="{get_static_route id='jtl.php'}" class="defaultlink dpflex-a-center dpflex-j-between{if $step === 'mein Konto'} active{/if}">
+                                <a href="{get_static_route id='jtl.php'}" class="defaultlink flx-ac flx-jb{if $step === 'mein Konto'} active{/if}">
                                     {lang key="accountOverview" section="account data"}
                                     <span class="img-ct icon icon-wt ic-md">
                                         <svg>
@@ -27,7 +27,7 @@
                             {/block}
                             {block name="my-account-menu-bestellungen"}
                             <li class="nav-it">
-                                <a href="{get_static_route id='jtl.php' params=['bestellungen' => 1]}" class="defaultlink dpflex-a-center dpflex-j-between{if $step === 'bestellung' || $step === 'bestellungen'} active{/if}">
+                                <a href="{get_static_route id='jtl.php' params=['bestellungen' => 1]}" class="defaultlink flx-ac flx-jb{if $step === 'bestellung' || $step === 'bestellungen'} active{/if}">
                                 {lang key="orders" section="account data"}
                                     <span class="img-ct icon icon-wt ic-md">
                                         <svg>
@@ -39,7 +39,7 @@
                             {/block}
                             {block name="my-account-menu-rechnungsadresse"}
                             <li class="nav-it">
-                                <a href="{get_static_route id='jtl.php' params=['editRechnungsadresse' => 1]}" class="defaultlink dpflex-a-center dpflex-j-between{if $step === 'rechnungsdaten'} active{/if}">
+                                <a href="{get_static_route id='jtl.php' params=['editRechnungsadresse' => 1]}" class="defaultlink flx-ac flx-jb{if $step === 'rechnungsdaten'} active{/if}">
                                 {lang key="billingAdress" section="account data"}
                                     <span class="img-ct icon icon-wt ic-md">
                                         <svg>
@@ -51,7 +51,7 @@
                             {/block}
                             {block name="my-account-menu-lieferadresse"}
                             <li class="nav-it">
-                                <a href="{get_static_route id='jtl.php' params=['editLieferadresse' => 1]}" class="defaultlink dpflex-a-center dpflex-j-between{if $step === 'rechnungsdaten'} active{/if}">
+                                <a href="{get_static_route id='jtl.php' params=['editLieferadresse' => 1]}" class="defaultlink flx-ac flx-jb{if $step === 'rechnungsdaten'} active{/if}">
                                 {lang key="myShippingAddresses" section="account data"}
                                     <span class="img-ct icon icon-wt ic-md">
                                         <svg>
@@ -64,7 +64,7 @@
                             {block name="my-account-menu-wunschliste"}
                             {if $Einstellungen.global.global_wunschliste_anzeigen === 'Y'}
                                 <li class="nav-it">
-                                    <a href="{get_static_route id='jtl.php' params=['wllist' => 1]}" class="defaultlink dpflex-a-center dpflex-j-between{if $step|substr:0:11 === 'wunschliste'} active{/if}">
+                                    <a href="{get_static_route id='jtl.php' params=['wllist' => 1]}" class="defaultlink flx-ac flx-jb{if $step|substr:0:11 === 'wunschliste'} active{/if}">
                                     <strong>
                                         {lang key="wishlists" section="account data"}
                                     </strong>
@@ -80,7 +80,7 @@
                             {block name="my-account-menu-vergleichsliste"}
                             {if $Einstellungen.vergleichsliste.vergleichsliste_anzeigen === 'Y' && !empty($smarty.session.Vergleichsliste->oArtikel_arr) && $smarty.session.Vergleichsliste->oArtikel_arr|count > 0}
                                 <li class="nav-it">
-                                    <a href="{get_static_route id='vergleichsliste.php'}" class="dpflex-a-center dpflex-j-between nav-it defaultlink">
+                                    <a href="{get_static_route id='vergleichsliste.php'}" class="flx-ac flx-jb nav-it defaultlink">
                                         {lang key="compare" sektion="global"}
                                         <span class="img-ct icon icon icon-wt ic-md">
                                             <svg>
@@ -94,7 +94,7 @@
                             {block name="my-account-menu-bewertungen"}
                             {if $Einstellungen.bewertung.bewertung_anzeigen === 'Y'}
                                 <li class="nav-it">
-                                    <a href="{get_static_route id='jtl.php' params=['bewertungen' => 1]}" class="defaultlink dpflex-a-center dpflex-j-between{if $step === 'bewertungen'} active{/if}">
+                                    <a href="{get_static_route id='jtl.php' params=['bewertungen' => 1]}" class="defaultlink flx-ac flx-jb{if $step === 'bewertungen'} active{/if}">
                                         {if $step === 'bewertungen'}<strong>{/if}
                                         {lang key='allRatings'}
                                         {if $step === 'bewertungen'}</strong>{/if}
@@ -124,7 +124,7 @@
                         {block name="account-wishlist-body"}
                             {if !empty($oWunschliste_arr[0]->kWunschliste)}
                                 {foreach name=wunschlisten from=$oWunschliste_arr item=Wunschliste}
-                                    <div class="dpflex-a-center item">
+                                    <div class="flx-ac item">
                                         <div class="w100">
                                             <a href="{$wishlistURL}?wl={$Wunschliste->getID()}">
                                                 <strong class="block">{$Wunschliste->getName()}</strong>
@@ -136,7 +136,7 @@
                                                 <input type="hidden" name="wl" value="{$Wunschliste->getID()}"/>
                                                 {$jtl_token}
                                                 <span class="btn-group btn-group-sm">
-                                                    <button class="btn-blank btn-sm btn dpflex-a-center" name="wls" value="{$Wunschliste->getID()}" title="{lang key="wishlistStandard" section="login"}">
+                                                    <button class="btn-blank btn-sm btn flx-ac" name="wls" value="{$Wunschliste->getID()}" title="{lang key="wishlistStandard" section="login"}">
                                                         <span class="img-ct icon {if $Wunschliste->isDefault() !== true}inactive{else}active{/if}">
                                                             <svg>
                                                               <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-circle"></use>
@@ -144,7 +144,7 @@
                                                         </span>
                                                     </button>
                                                     {if $Wunschliste->isPublic()}
-                                                        <button type="submit" class="btn-blank btn-sm btn dpflex-a-center" name="wlAction" value="setPrivate" title="{lang key='wishlistPrivat' section='login'}">
+                                                        <button type="submit" class="btn-blank btn-sm btn flx-ac" name="wlAction" value="setPrivate" title="{lang key='wishlistPrivat' section='login'}">
                                                             <span class="img-ct icon">
                                                                 <svg>
                                                                   <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-hide"></use>
@@ -153,7 +153,7 @@
                                                         </button>
                                                     {/if}
                                                     {if !$Wunschliste->isPublic()}
-                                                        <button type="submit" class="btn-blank btn-sm btn dpflex-a-center" name="wlAction" value="setPublic" title="{lang key='wishlistNotPrivat' section='login'}">
+                                                        <button type="submit" class="btn-blank btn-sm btn flx-ac" name="wlAction" value="setPublic" title="{lang key='wishlistNotPrivat' section='login'}">
                                                             <span class="img-ct icon">
                                                                 <svg>
                                                                   <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-show"></use>
@@ -161,7 +161,7 @@
                                                             </span>
                                                         </button>
                                                     {/if}
-                                                    <button type="submit" class="btn-blank btn-sm btn dpflex-a-center" name="wllo" value="{$Wunschliste->getID()}" title="{lang key='wishlisteDelete' section='login'}">
+                                                    <button type="submit" class="btn-blank btn-sm btn flx-ac" name="wllo" value="{$Wunschliste->getID()}" title="{lang key='wishlisteDelete' section='login'}">
                                                         <span class="img-ct icon">
                                                             <svg>
                                                               <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-bin"></use>
@@ -195,7 +195,7 @@
                     <form method="post" action="{$wishlistURL}{if $CWunschliste->isDefault() !== true}?wl={$CWunschliste->getID()}{/if}" name="Wunschliste" class="wl-wp basket_wrapper{if $hasItems === true} top15{/if}">
                         {$jtl_token}
                         {block name="wishlist"}
-                            <div class="dpflex-j-between dpflex-a-c mb-sm">
+                            <div class="flx-jb flx-ac mb-sm">
                                 <h1 class="h2 m0">{$CWunschliste->getName()} {if $isCurrenctCustomer === false && $CWunschliste->getCustomer() !== null}<span class="block h4 m0 text-muted">{lang key="from" section="product rating" alt_section="login,productDetails,productOverview,global,"} {$CWunschliste->oKunde->cVorname}</span>{/if}</h1>
                                 {if !isset($bAjaxRequest) || !$bAjaxRequest}
                                     <button type="submit" title="{lang key="wishlistUpdate" section="login"}" class="btn" name="action" value="update">
@@ -214,7 +214,7 @@
                                 <input type="hidden" name="cSuche" value="{$wlsearch}"/>
                             {/if}
                             {if !empty($CWunschliste->getItems())}
-                                <div class="row row-multi mb-spacer mb-xs">
+                                <div class="row row-multi mb-xs">
                                     {foreach name=wunschlistepos from=$CWunschliste->getItems() item=CWunschlistePos}
                                         <div class="col-6 col-sm-4 col-md-6 col-lg-4{if $snackyConfig.css_maxPageWidth >= 1600} col-xl-3{/if} wl-it">
                                             <div class="p-c">
@@ -305,7 +305,7 @@
                                 </div>
                                 {block name="wishlist-actions-block"}
                                     {if !isset($bAjaxRequest) || !$bAjaxRequest}
-                                        <div class="btn-group wl-ac dpflex-j-end">
+                                        <div class="btn-group wl-ac flx-je">
                                             {if $isCurrenctCustomer === true}
                                                 <button class="btn submit" name="action" value="addAllToCart">
                                                     <span class="-xs">{lang key="wishlistAddAllToCart" section="login"}</span>

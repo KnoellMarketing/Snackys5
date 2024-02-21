@@ -104,7 +104,7 @@
                 {include file="snippets/zonen.tpl" id="before_mobilemenu_additional_login" title="before_mobilemenu_additional_login"}
                 <li class="dropdown-style visible-xs{if $nSeitenTyp == 4} active{/if}">
                     <a href="{get_static_route id='jtl.php'}" title="{if JTL\Session\Frontend::getCustomer()->getID() == 0}{lang key='login'}{else}{lang key='hello'}{/if}" class="home-icon">
-                        <span class="dpflex-a-center">
+                        <span class="flx-ac">
                             <span class="img-ct icon icon-wt op1">
                                 <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
                                   <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-user"></use>
@@ -126,7 +126,7 @@
                     {include file="snippets/zonen.tpl" id="before_mobilemenu_additional_wishlist" title="before_mobilemenu_additional_wishlist"}
                     <li class="dropdown-style visible-xs{if $nSeitenTyp == 16} active{/if}">
                         <a href="{get_static_route id='wunschliste.php'}" title="{lang key="goToWishlist" sektion="global"}" class="home-icon">
-                            <span class="dpflex-a-center">
+                            <span class="flx-ac">
                                 <span class="img-ct icon icon-wt op1">
                                     <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
                                       <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-heart"></use>
@@ -145,7 +145,7 @@
                     {include file="snippets/zonen.tpl" id="before_mobilemenu_additional_comparelist" title="before_mobilemenu_additional_comparelist"}
                     <li class="dropdown-style visible-xs">
                         <a href="{get_static_route id='vergleichsliste.php'}" title="{lang key="compare" sektion="global"}"{if $Einstellungen.vergleichsliste.vergleichsliste_target === 'blank'} target="_blank"{/if} class="popup home-icon">
-                            <span class="dpflex-a-center">
+                            <span class="flx-ac">
                                 <span class="img-ct icon icon-wt op1">
                                     <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
                                       <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-compare"></use>
@@ -163,7 +163,7 @@
                 {include file="snippets/zonen.tpl" id="before_mobilemenu_additional_basket" title="before_mobilemenu_additional_basket"}
                 <li class="dropdown-style visible-xs{if $nSeitenTyp == 3} active{/if}">
                     <a href="{get_static_route id='warenkorb.php'}" title="{lang key='basket'}" class="home-icon">
-                        <span class="dpflex-a-center">
+                        <span class="flx-ac">
                             <span class="img-ct icon icon-wt op1">
                                 <svg class="{if $darkHead == 'true' || $darkMode == 'true'}icon-darkmode{/if}">
                                   <use xlink:href="{$ShopURL}/{if empty($parentTemplateDir)}{$currentTemplateDir}{else}{$parentTemplateDir}{/if}img/icons/icons.svg?v={$nTemplateVersion}#icon-{if $snackyConfig.basketType == 0}cart{else}shopping{/if}"></use>

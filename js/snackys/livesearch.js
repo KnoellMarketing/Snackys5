@@ -14,24 +14,23 @@ function closeKMLivesearch()
 
 if($('#km_snackys_search').length > 0)
 {
-	$('#search-header, #search-header-mobile-fixed').on('input',function(){
+	$('#search-header, #search-header-mobile-fixed').on('input', function() {
 		let search = $(this).val();
 		lastSearch = search;
 		searchOpen = true;
-			clearTimeout(activeSearch);
-			activeSearch = setTimeout(() => {
-				if(search)
-				{
-					$.evo.loadContent($('#km_snackys_search').data('url')+'/?livesearch&suchausdruck='+search, function(){
-						if($('#km_snackys_search').text() == '')
-							closeKMLivesearch();
-					}, function(){
+		clearTimeout(activeSearch);
+		activeSearch = setTimeout(() => {
+			if (search && !(search.startsWith('0') && search.length < 2)) {
+				$.evo.loadContent($('#km_snackys_search').data('url') + '/?livesearch&suchausdruck=' + search, function() {
+					if ($('#km_snackys_search').text() == '')
 						closeKMLivesearch();
-					}, false, '#km_snackys_search');
-				} else {
+				}, function() {
 					closeKMLivesearch();
-				}
-			},350);
+				}, false, '#km_snackys_search');
+			} else {
+				closeKMLivesearch();
+			}
+		}, 350);
 	});
 
 

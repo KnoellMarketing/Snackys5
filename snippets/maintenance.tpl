@@ -12,8 +12,8 @@
 
 {block name="content"}
     <div id="maintenance-notice" class="panel panel-info">
-		<span class="topbar dpflex-a-center dpflex-j-center">{lang key="maintainance" section="global"}</span>
-		<div class="row dpflex-a-center">
+		<span class="topbar flx-ac flx-jc">{lang key="maintainance" section="global"}</span>
+		<div class="row flx-ac">
 			<div class="col-3 col-sm-5 hidden-xs">
 				<div class="icon-container">
 					<span class="img-ct icon icon-xl">

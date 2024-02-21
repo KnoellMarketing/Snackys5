@@ -6,7 +6,7 @@
     right: 0;
     bottom: 0;
     z-index: 100000;
-    background: white;
+    background: var(--bod-b-l);
     width: 100%;
     padding: 0;
     display: flex;
@@ -78,7 +78,7 @@
     transition: margin .4s ease;
     border: 2rem solid transparent;
     height: auto;
-    background: white;
+    background:  var(--bod-b-l);
 }
 .lightbox-shown #gallery a:not(.active){
     margin-left: -100%;
